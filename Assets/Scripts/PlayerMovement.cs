@@ -13,6 +13,8 @@ public class PlayerMovement : MonoBehaviour
     private float verticalInput;
 
     public float groundDrag;
+    public Transform orientation;
+    Vector3 moveDirection;
 
     [Header("Ground Check")]
     public float playerHeight;
@@ -34,6 +36,7 @@ public class PlayerMovement : MonoBehaviour
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGrounded);
 
         MyInput();
+        SpeedControl();
 
         if (grounded)
         {
@@ -54,21 +57,21 @@ public class PlayerMovement : MonoBehaviour
     {
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
-
-        if(Input.GetKey(jumpKey) && readyToJump && grounded)
-        {
-            readyTojump = false;
-
-            Jump();
-
-            invoke(nameof(ResetJump), jump);
-        }
     }
     private void MovePlayer()
     {
-        moveDirection = orientation.forward * verticalInput + Orientation.right * horizontalInput;
-
+        moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
         rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+    }
 
+    private void SpeedControl()
+    {
+        Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+
+        if (flatVel.magnitude > moveSpeed)
+        {
+            Vector3 limitedVel = flatVel.normalized * moveSpeed;
+            rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
+        }
     }
 }
