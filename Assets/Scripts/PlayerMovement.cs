@@ -18,10 +18,6 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask whatIsGrounded;
     private bool grounded;
 
-
-    public Transform orientation;
-    private Vector3 moveDirection;
-
     private Rigidbody rb;
 
     // Start is called before the first frame update
@@ -55,13 +51,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void MyInput()
     {
-        horizontalInput = Input.GetAxisRaw("Horizontal");
-        verticalInput = Input.GetAxisRaw("Vertical");
+        horizontalInput = Input.GetAxis("Horizontal");
+        verticalInput = Input.GetAxis("Vertical");
     }
     private void MovePlayer()
     {
-        moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
-        rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+
 
     }
 }
