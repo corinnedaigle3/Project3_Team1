@@ -4,5 +4,20 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/MainHub.unity
+    guid: 9ce554573f6e7e64ba1a072b4a7206f2
+  - enabled: 1
+    path: Assets/Scenes/Elysium.unity
+    guid: dec217f3171c95a4483b3d94d7234469
+  - enabled: 1
+    path: Assets/Scenes/Asphodel.unity
+    guid: a64a0672fa134e043b2da7e04b7a61b7
+  - enabled: 1
+    path: Assets/Scenes/Tarturus.unity
+    guid: de33549b4957dc74ebda88e1d74ba21e
   m_configObjects: {}
