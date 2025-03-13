@@ -1,9 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using static UnityEngine.Tilemaps.Tilemap;
 
 public class PlayerMovement : MonoBehaviour
 {
