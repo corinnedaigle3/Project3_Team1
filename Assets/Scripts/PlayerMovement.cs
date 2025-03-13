@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using static UnityEngine.Tilemaps.Tilemap;
 
 public class PlayerMovement : MonoBehaviour
@@ -53,10 +54,21 @@ public class PlayerMovement : MonoBehaviour
     {
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
+
+        if(Input.GetKey(jumpKey) && readyToJump && grounded)
+        {
+            readyTojump = false;
+
+            Jump();
+
+            invoke(nameof(ResetJump), jump);
+        }
     }
     private void MovePlayer()
     {
+        moveDirection = orientation.forward * verticalInput + Orientation.right * horizontalInput;
 
+        rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
 
     }
 }
