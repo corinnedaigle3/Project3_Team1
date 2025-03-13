@@ -38,6 +38,9 @@ public class PlayerMovement : MonoBehaviour
         MyInput();
         SpeedControl();
 
+        Vector3 targetPosition = transform.position + moveDirection;
+        transform.LookAt(targetPosition);
+
         if (grounded)
         {
             rb.drag = groundDrag;
