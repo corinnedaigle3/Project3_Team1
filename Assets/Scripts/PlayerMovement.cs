@@ -9,17 +9,22 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed;
     private float horizontalInput;
     private float verticalInput;
-
-    public float groundDrag;
-    public Transform orientation;
     Vector3 moveDirection;
+
+    [Header("References")]
+    
+    public Transform orientation;
+    public Transform player;
+    public Transform playerObj;
+    
+    private Rigidbody rb;
 
     [Header("Ground Check")]
     public float playerHeight;
     public LayerMask whatIsGrounded;
     private bool grounded;
-
-    private Rigidbody rb;
+    public float groundDrag;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -35,9 +40,6 @@ public class PlayerMovement : MonoBehaviour
 
         MyInput();
         SpeedControl();
-
-        Vector3 targetPosition = transform.position + moveDirection;
-        transform.LookAt(targetPosition);
 
         if (grounded)
         {
