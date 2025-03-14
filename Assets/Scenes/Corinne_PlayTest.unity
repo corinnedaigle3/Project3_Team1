@@ -685,7 +685,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 229affda3c7ccde42b0306dd8e8a5b99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
+  moveSpeed: 8
   orientation: {fileID: 1914672184}
   player: {fileID: 808278003}
   playerObj: {fileID: 908002173}
@@ -693,7 +693,7 @@ MonoBehaviour:
   whatIsGrounded:
     serializedVersion: 2
     m_Bits: 64
-  groundDrag: 0
+  groundDrag: 2
 --- !u!1 &908002172
 GameObject:
   m_ObjectHideFlags: 0
