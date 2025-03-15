@@ -19,6 +19,10 @@ public class PlayerMovement : MonoBehaviour
     private float rollSpeed;
     private State state;
 
+    [Header("Parry")]
+    public Collider parryCollider;
+    private int parryFrameCount;
+
     [Header("References")]
     
     public Transform orientation;
@@ -149,6 +153,4 @@ public class PlayerMovement : MonoBehaviour
             state = State.Rolling;
         }
     }
-
-
 }
