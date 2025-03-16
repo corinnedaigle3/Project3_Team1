@@ -69,8 +69,7 @@ public class PlayerMovement : MonoBehaviour
                 MyInput();
 
                 //Speed Controll
-                rb.velocity = moveDirection * moveSpeed;
-
+                SpeedControl();
 
                 //check if player is on ground
                 if (grounded)
@@ -84,6 +83,7 @@ public class PlayerMovement : MonoBehaviour
 
                 DashPlayer();
                 DodgeEnemy();
+                StepClimb();
                 //Invisability();
                 //ThrowObj();
                 break;
@@ -111,10 +111,9 @@ public class PlayerMovement : MonoBehaviour
         {
             case State.Normal:
                 MovePlayer();
-                StepClimb();
+                
                 break;
             case State.Rolling:
-                StepClimb();
                 break;
         }
     }
