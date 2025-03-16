@@ -37,7 +37,11 @@ public class PlayerMovement : MonoBehaviour
     private bool grounded;
     public float groundDrag;
 
-   
+    [Header("Player Step Climb")]
+    [SerializeField] GameObject stepRayUpper;
+    [SerializeField] GameObject stepRayLower;
+    [SerializeField] float stepHeight = 0.3f;
+    [SerializeField] float stepSmooth = 0.1f;
 
     // Start is called before the first frame update
     void Start()
@@ -50,6 +54,8 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         state = State.Normal;
+
+        stepRayLower.transform.position = new Vector3(stepRayUpper.transform.position.x, stepHeight, stepRayUpper.transform.position.z);
     }
 
     // Update is called once per frame
@@ -95,6 +101,8 @@ public class PlayerMovement : MonoBehaviour
                 }
                 break;
                 }
+
+        
     }
 
     private void FixedUpdate()
@@ -103,8 +111,10 @@ public class PlayerMovement : MonoBehaviour
         {
             case State.Normal:
                 MovePlayer();
+                StepClimb();
                 break;
             case State.Rolling:
+                StepClimb();
                 break;
         }
     }
@@ -118,6 +128,7 @@ public class PlayerMovement : MonoBehaviour
     {
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
         rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+        transform.rotation = Quaternion.LookRotation(moveDirection);
     }
 
     private void SpeedControl()
@@ -151,6 +162,39 @@ public class PlayerMovement : MonoBehaviour
             rollDirection = moveDirection;
             rollSpeed = 24f;
             state = State.Rolling;
+        }
+    }
+
+    void StepClimb()
+    {
+        RaycastHit hitLower;
+        if (Physics.Raycast(stepRayLower.transform.position, transform.TransformDirection(Vector3.forward), out hitLower, 0.1f))
+        {
+            RaycastHit hitUpper;
+            if (!Physics.Raycast(stepRayUpper.transform.position, transform.TransformDirection(Vector3.forward), out hitUpper, 0.2f))
+            {
+                GetComponent<Rigidbody>().position -= new Vector3(0f, -stepSmooth, 0f);
+            }
+        }
+
+        RaycastHit hitLower45;
+        if (Physics.Raycast(stepRayLower.transform.position, transform.TransformDirection(1.5f, 0f, 1f), out hitLower45, 0.1f))
+        {
+            RaycastHit hitUpper45;
+            if (!Physics.Raycast(stepRayUpper.transform.position, transform.TransformDirection(1.5f, 0f, 1f), out hitUpper45, 0.2f))
+            {
+                GetComponent<Rigidbody>().position -= new Vector3(0f, -stepSmooth, 0f);
+            }
+        }
+
+        RaycastHit hitLowerMinus45;
+        if (Physics.Raycast(stepRayLower.transform.position, transform.TransformDirection(1.5f, 0f, 1f), out hitLowerMinus45, 0.1f))
+        {
+            RaycastHit hitUpperMinus45;
+            if (!Physics.Raycast(stepRayUpper.transform.position, transform.TransformDirection(1.5f, 0f, 1f), out hitUpperMinus45, 0.2f))
+            {
+                GetComponent<Rigidbody>().position -= new Vector3(0f, -stepSmooth, 0f);
+            }
         }
     }
 }
