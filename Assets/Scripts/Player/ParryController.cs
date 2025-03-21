@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ParryController : MonoBehaviour
 {
@@ -20,7 +21,7 @@ public class ParryController : MonoBehaviour
             }
             else
             {
-                // GameOver Screen
+                //SceneManager.SetActiveScene("LoseScene");
             }
         }
     }
@@ -41,13 +42,13 @@ public class ParryController : MonoBehaviour
     void Parry()
     {
         // Play parry animation
+
         Debug.Log("Parried!");
         // Deflect the attack
         // Disable the attack's collider or use a different method
-        // Optionally, stun or damage the enemy
+
         isParrying = true;
         parryTimer = 0f;
-        // Set a timer to reset parry state after a short time
         Invoke("ResetParry", 0.5f);
     }
 

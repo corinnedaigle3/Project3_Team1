@@ -24,7 +24,6 @@ public class PlayerMovement : MonoBehaviour
     private int parryFrameCount;
 
     [Header("References")]
-    
     public Transform orientation;
     public Transform player;
     public Transform playerObj;
@@ -37,11 +36,18 @@ public class PlayerMovement : MonoBehaviour
     private bool grounded;
     public float groundDrag;
 
-    [Header("Player Step Climb")]
-    [SerializeField] GameObject stepRayUpper;
-    [SerializeField] GameObject stepRayLower;
-    [SerializeField] float stepHeight = 0.3f;
-    [SerializeField] float stepSmooth = 0.1f;
+    [Header("Invisible")]
+    public float timeBetweenInvisibility = 6f;
+    private float invisibleTimer = 3f;
+    private bool alreadyInvisible;
+    private bool canDash;
+
+    [Header("Pickup and Throw")]
+
+    [Header("Collection")]
+    public bool asphodelCollectionItem;
+    public bool elysiumCollectionItem;
+    public bool tartarusCollectionItem;
 
     // Start is called before the first frame update
     void Start()
@@ -49,13 +55,15 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         moveSpeed = 8f;
+        canDash = false;
+        asphodelCollectionItem = false;
+        elysiumCollectionItem = false;
+        tartarusCollectionItem = false;
     }
 
     private void Awake()
     {
         state = State.Normal;
-
-        stepRayLower.transform.position = new Vector3(stepRayUpper.transform.position.x, stepHeight, stepRayUpper.transform.position.z);
     }
 
     // Update is called once per frame
@@ -67,8 +75,6 @@ public class PlayerMovement : MonoBehaviour
                 grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGrounded);
 
                 MyInput();
-
-                //Speed Controll
                 SpeedControl();
 
                 //check if player is on ground
@@ -83,9 +89,9 @@ public class PlayerMovement : MonoBehaviour
 
                 DashPlayer();
                 DodgeEnemy();
-                StepClimb();
-                //Invisability();
-                //ThrowObj();
+                Invisibility();
+                ThrowObj();
+                CollectObj();
                 break;
 
             case State.Rolling:
@@ -100,9 +106,7 @@ public class PlayerMovement : MonoBehaviour
                     state = State.Normal;
                 }
                 break;
-                }
-
-        
+        }
     }
 
     private void FixedUpdate()
@@ -111,8 +115,8 @@ public class PlayerMovement : MonoBehaviour
         {
             case State.Normal:
                 MovePlayer();
-                
                 break;
+
             case State.Rolling:
                 break;
         }
@@ -143,14 +147,17 @@ public class PlayerMovement : MonoBehaviour
 
     private void DashPlayer()
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (canDash == true)
         {
-            moveSpeed = 12f;
-        }
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                moveSpeed = 12f;
+            }
 
-        if (Input.GetKeyUp(KeyCode.LeftShift))
-        {
-            moveSpeed = 8f;
+            if (Input.GetKeyUp(KeyCode.LeftShift))
+            {
+                moveSpeed = 8f;
+            }
         }
     }
 
@@ -164,36 +171,47 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void StepClimb()
+    private void Invisibility()
     {
-        RaycastHit hitLower;
-        if (Physics.Raycast(stepRayLower.transform.position, transform.TransformDirection(Vector3.forward), out hitLower, 0.1f))
-        {
-            RaycastHit hitUpper;
-            if (!Physics.Raycast(stepRayUpper.transform.position, transform.TransformDirection(Vector3.forward), out hitUpper, 0.2f))
-            {
-                GetComponent<Rigidbody>().position -= new Vector3(0f, -stepSmooth, 0f);
-            }
-        }
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        { 
+            invisibleTimer -= Time.deltaTime;
+            canDash = true;
+            //enemies cannot track player
 
-        RaycastHit hitLower45;
-        if (Physics.Raycast(stepRayLower.transform.position, transform.TransformDirection(1.5f, 0f, 1f), out hitLower45, 0.1f))
-        {
-            RaycastHit hitUpper45;
-            if (!Physics.Raycast(stepRayUpper.transform.position, transform.TransformDirection(1.5f, 0f, 1f), out hitUpper45, 0.2f))
+            if (!alreadyInvisible)
             {
-                GetComponent<Rigidbody>().position -= new Vector3(0f, -stepSmooth, 0f);
+                if (invisibleTimer <= 0)
+                {
+                    alreadyInvisible = true;
+                    canDash = false;
+                    Invoke(nameof(ResetInvisible), timeBetweenInvisibility);
+                }
             }
         }
+    }
 
-        RaycastHit hitLowerMinus45;
-        if (Physics.Raycast(stepRayLower.transform.position, transform.TransformDirection(1.5f, 0f, 1f), out hitLowerMinus45, 0.1f))
+    private void ResetInvisible()
+    {
+        alreadyInvisible = false;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "EnemyTakeDown")
         {
-            RaycastHit hitUpperMinus45;
-            if (!Physics.Raycast(stepRayUpper.transform.position, transform.TransformDirection(1.5f, 0f, 1f), out hitUpperMinus45, 0.2f))
-            {
-                GetComponent<Rigidbody>().position -= new Vector3(0f, -stepSmooth, 0f);
-            }
+            //play take down animation
+            //Enemy becomes immobile
         }
+    }
+
+    private void ThrowObj()
+    {
+        //Pick up and throw object to distract enemy
+    }
+
+    private void CollectObj()
+    {
+        //collect the collection item of the level
     }
 }
