@@ -30,7 +30,7 @@ public class EnemyBehavior : MonoBehaviour
         // chose a new random waypoint when reach destination
        if (agent.remainingDistance < 0.5)
         {
-            Debug.Log("moving");
+            //Debug.Log("moving");
             waypointIdnex = Random.Range(0, Waypoints.Length);
 
             agent.SetDestination(Waypoints[waypointIdnex].position);

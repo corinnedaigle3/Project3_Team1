@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.EventSystems;
 
 public class PlayerMovement : MonoBehaviour
@@ -54,7 +55,7 @@ public class PlayerMovement : MonoBehaviour
     public bool fury2;
     public bool fury3;
 
-
+    public GameObject currentEnemy;
     // Start is called before the first frame update
     void Start()
     {
@@ -210,16 +211,17 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Catch")
+        if (other.tag == "Behind")
         {
             //take down enemy text
             takeDowntext.SetActive(true);
 
             if (Input.GetKeyDown(KeyCode.Q))
             {
-                //play take down animation
-                //enemy nav mesh agent = null
-                enemyBehavior.agent = null;
+                Debug.Log(" YOU PRESSED Q");
+                currentEnemy = other.gameObject;
+                currentEnemy.GetComponentInParent<NavMeshAgent>().isStopped = true;
+               //Destroy(currentEnemy);
             }
             
         }
@@ -227,7 +229,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Catch")
+        if (other.tag == "Behind")
         {
             //take down enemy text
             takeDowntext.SetActive(false);
