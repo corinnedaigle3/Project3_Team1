@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2613297477755052593}
   - component: {fileID: 6221972652944143682}
   - component: {fileID: 1354992011803675724}
-  - component: {fileID: 5826583622840046995}
+  - component: {fileID: 1822645083752579047}
   m_Layer: 5
   m_Name: InventoryItem
   m_TagString: Untagged
@@ -76,7 +76,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &5826583622840046995
+--- !u!114 &1822645083752579047
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -85,10 +85,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 6114062294616172552}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4bef9e2e88b46ad4cb031dd0962caa94, type: 3}
+  m_Script: {fileID: 11500000, guid: 9b905e1947adb064bb9c85a8fb4ca54d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  image: {fileID: 1354992011803675724}
   parentAfterDrag: {fileID: 0}
+  item: {fileID: 11400000, guid: 8be25cc8fbca3bf49b5a5b07a4cde9be, type: 2}
 --- !u!1 &7730900084830496455
 GameObject:
   m_ObjectHideFlags: 0
@@ -101,6 +103,7 @@ GameObject:
   - component: {fileID: 4844589419808676630}
   - component: {fileID: 9020515895685048747}
   - component: {fileID: 987101208223227546}
+  - component: {fileID: 4590700760829541845}
   m_Layer: 5
   m_Name: InventorySlot
   m_TagString: Untagged
@@ -187,6 +190,21 @@ MonoBehaviour:
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 70, y: 70}
-  m_Spacing: {x: 10, y: 10}
+  m_Spacing: {x: 0, y: 0}
   m_Constraint: 0
   m_ConstraintCount: 2
+--- !u!114 &4590700760829541845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7730900084830496455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68c2a2d77898e7f4bafd26b580c8aaec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  image: {fileID: 9020515895685048747}
+  selectedColor: {r: 0.8616352, g: 0.41456026, b: 0.770876, a: 1}
+  notSelectedColor: {r: 0.8431373, g: 0.34117648, b: 0.34117648, a: 1}
