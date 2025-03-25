@@ -19,10 +19,6 @@ public class PlayerMovement : MonoBehaviour
     private float rollSpeed;
     private State state;
 
-    [Header("Parry")]
-    public Collider parryCollider;
-    private int parryFrameCount;
-
     [Header("References")]
     public Transform orientation;
     public Transform player;
@@ -205,7 +201,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "EnemyTakeDown")
+        if (other.tag == "Catch")
         {
             //take down enemy text
             takeDowntext.SetActive(true);
@@ -222,7 +218,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "EnemyTakeDown")
+        if (other.tag == "Catch")
         {
             //take down enemy text
             takeDowntext.SetActive(false);
