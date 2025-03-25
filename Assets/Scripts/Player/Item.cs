@@ -9,12 +9,11 @@ public class Item : ScriptableObject
 {
     [Header("Only gamplay")]
     public TileBase tile;
-    
-    public ToolboxItemFilterType type;
-    public ItemType itemType;
+    public ItemType type;
     public Vector2Int range = new Vector2Int(5, 4);
 
     [Header("Only UI")]
+    public bool stackable = true;
 
     [Header("Both")]
     public Sprite image;
