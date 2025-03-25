@@ -39,7 +39,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Invisible")]
     public float timeBetweenInvisibility = 6f;
     private float invisibleTimer = 3f;
-    private bool alreadyInvisible;
+    public bool alreadyInvisible;
     private bool canDash;
 
     [Header("Pickup and Throw")]
