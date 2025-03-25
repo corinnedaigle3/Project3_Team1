@@ -50,6 +50,11 @@ public class PlayerMovement : MonoBehaviour
     EnemyBehavior enemyBehavior;
     public GameObject takeDowntext;
 
+    public bool fury1;
+    public bool fury2;
+    public bool fury3;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -62,6 +67,10 @@ public class PlayerMovement : MonoBehaviour
         elysiumCollectionItem = false;
         tartarusCollectionItem = false;
         takeDowntext.SetActive(false);
+
+        fury1 = false;
+        fury2 = false;
+        fury3 = false;
     }
 
     private void Awake()
