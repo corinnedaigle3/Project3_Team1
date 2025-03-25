@@ -7,7 +7,7 @@ public class EnemyBehavior : MonoBehaviour
 {
 
     [SerializeField] Transform[] Waypoints;
-    NavMeshAgent agent;
+    public NavMeshAgent agent;
 
     int waypointIdnex;
 
