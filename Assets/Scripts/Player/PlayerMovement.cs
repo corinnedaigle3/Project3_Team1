@@ -49,16 +49,23 @@ public class PlayerMovement : MonoBehaviour
     public bool elysiumCollectionItem;
     public bool tartarusCollectionItem;
 
+    [Header("TakeDown")]
+    public GameObject fury;
+    EnemyBehavior enemyBehavior;
+    public GameObject takeDowntext;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        fury = GameObject.Find("Enemy");
         rb.freezeRotation = true;
         moveSpeed = 8f;
         canDash = false;
         asphodelCollectionItem = false;
         elysiumCollectionItem = false;
         tartarusCollectionItem = false;
+        takeDowntext.SetActive(false);
     }
 
     private void Awake()
@@ -87,11 +94,11 @@ public class PlayerMovement : MonoBehaviour
                     rb.drag = 0;
                 }
 
+                enemyBehavior = GetComponent<EnemyBehavior>();
+
                 DashPlayer();
                 DodgeEnemy();
                 Invisibility();
-                ThrowObj();
-                CollectObj();
                 break;
 
             case State.Rolling:
@@ -200,18 +207,25 @@ public class PlayerMovement : MonoBehaviour
     {
         if (other.tag == "EnemyTakeDown")
         {
-            //play take down animation
-            //Enemy becomes immobile
+            //take down enemy text
+            takeDowntext.SetActive(true);
+
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                //play take down animation
+                //enemy nav mesh agent = null
+                enemyBehavior.agent = null;
+            }
+            
         }
     }
 
-    private void ThrowObj()
+    private void OnTriggerExit(Collider other)
     {
-        //Pick up and throw object to distract enemy
-    }
-
-    private void CollectObj()
-    {
-        //collect the collection item of the level
+        if (other.tag == "EnemyTakeDown")
+        {
+            //take down enemy text
+            takeDowntext.SetActive(false);
+        }
     }
 }

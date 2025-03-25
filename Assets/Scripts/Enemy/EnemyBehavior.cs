@@ -7,9 +7,13 @@ public class EnemyBehavior : MonoBehaviour
 {
 
     [SerializeField] Transform[] Waypoints;
-    NavMeshAgent agent;
+    public NavMeshAgent agent;
 
     int waypointIdnex;
+
+    [SerializeField] GameObject bullet;
+    [SerializeField] GameObject spawnPt;
+    private int waitTime = 3;
 
     // Start is called before the first frame update
     void Start()
@@ -17,6 +21,8 @@ public class EnemyBehavior : MonoBehaviour
         waypointIdnex = Random.Range(0, Waypoints.Length);
         agent = GetComponent<NavMeshAgent>();
         agent.SetDestination(Waypoints[waypointIdnex].position);
+
+        StartCoroutine(TimeShoot());
     }
 
     // Update is called once per frame
@@ -35,5 +41,17 @@ public class EnemyBehavior : MonoBehaviour
 
             agent.SetDestination(Waypoints[waypointIdnex].position);
         }
+    }
+
+    void Shoot()
+    {
+        Instantiate(bullet, spawnPt.transform.position, spawnPt.transform.rotation);
+        StartCoroutine(TimeShoot());
+    }
+
+    IEnumerator TimeShoot()
+    {
+        yield return new WaitForSeconds(waitTime);
+        Shoot();
     }
 }

@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: ff33c7fce672541f095331a057da80f0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1135,10 +1135,12 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   groundDrag: 4
-  stepRayUpper: {fileID: 0}
-  stepRayLower: {fileID: 0}
-  stepHeight: 0.3
-  stepSmooth: 0.1
+  timeBetweenInvisibility: 6
+  asphodelCollectionItem: 0
+  elysiumCollectionItem: 0
+  tartarusCollectionItem: 0
+  fury: {fileID: 0}
+  takeDowntext: {fileID: 0}
 --- !u!1 &8884167056205058104
 GameObject:
   m_ObjectHideFlags: 0
