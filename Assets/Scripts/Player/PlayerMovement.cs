@@ -51,6 +51,8 @@ public class PlayerMovement : MonoBehaviour
     public GameObject fury;
     EnemyBehavior enemyBehavior;
     public GameObject takeDowntext;
+    TakeDown takeDown;
+    public bool dead;
 
     public bool fury1;
     public bool fury2;
@@ -105,6 +107,7 @@ public class PlayerMovement : MonoBehaviour
                 }
 
                 enemyBehavior = GetComponent<EnemyBehavior>();
+                takeDown = GetComponent<TakeDown>();
 
                 DashPlayer();
                 DodgeEnemy();
@@ -227,7 +230,11 @@ public class PlayerMovement : MonoBehaviour
             takeDowntext.SetActive(true);
             canKill = true;
             currentEnemy = other.gameObject;
-            
+
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                takeDown.dead = true;
+            }
         }
 
         if (other.CompareTag("Enemy") || other.CompareTag( "Fury"))
