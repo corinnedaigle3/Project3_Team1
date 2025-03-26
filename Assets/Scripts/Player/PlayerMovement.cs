@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -228,6 +229,13 @@ public class PlayerMovement : MonoBehaviour
             currentEnemy = other.gameObject;
             
         }
+
+        if (other.CompareTag("Enemy") || other.CompareTag( "Fury"))
+        {
+            other.gameObject.GetComponentInParent<EnemyBehavior>().playerLose = true;
+            transform.LookAt(other.transform.position);
+            gameObject.GetComponent<PlayerMovement>().enabled = false;
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -241,4 +249,6 @@ public class PlayerMovement : MonoBehaviour
 
         }
     }
+
+    
 }
