@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 8916667992691364273}
   - component: {fileID: 1847052860119057821}
   - component: {fileID: 4720131709456149520}
-  - component: {fileID: 2233053345486324493}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -149,26 +148,7 @@ MonoBehaviour:
   Waypoints:
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   agent: {fileID: 0}
---- !u!114 &2233053345486324493
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 367192780633537303}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4aa5258bf316fc24b9aa7c315234532f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  theCatch: {fileID: 4960235521528684001}
 --- !u!1 &4867679921555613429
 GameObject:
   m_ObjectHideFlags: 0
@@ -179,9 +159,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5229895223516063774}
   - component: {fileID: 775209519086808912}
+  - component: {fileID: 8914603405870952620}
   m_Layer: 0
   m_Name: BehindEnemy
-  m_TagString: Enemy
+  m_TagString: Behind
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -222,6 +203,21 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 2, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8914603405870952620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4867679921555613429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bab0b1a152a2ca44925c78a83d98da5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parent: {fileID: 367192780633537303}
+  eAgent: {fileID: 0}
+  dead: 0
 --- !u!1 &4960235521528684001
 GameObject:
   m_ObjectHideFlags: 0

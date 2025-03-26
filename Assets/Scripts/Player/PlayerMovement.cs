@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.EventSystems;
 
 public class PlayerMovement : MonoBehaviour
@@ -54,6 +55,9 @@ public class PlayerMovement : MonoBehaviour
     public bool fury2;
     public bool fury3;
 
+    [Header("Take down behavior")]
+    public bool canKill;
+    public GameObject currentEnemy;
 
     // Start is called before the first frame update
     void Start()
@@ -132,6 +136,12 @@ public class PlayerMovement : MonoBehaviour
             case State.Rolling:
                 break;
         }
+
+        // makes the enemy stop and destroys the collider when pressing Q
+        if (canKill && currentEnemy != null && Input.GetKeyDown(KeyCode.Q)) 
+        {
+            currentEnemy.GetComponent<TakeDown>().dead = true;
+        }
     }
 
     private void MyInput()
@@ -157,7 +167,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void DashPlayer()
+    private void DashPlayer() // are we using this ?????
     {
         if (canDash == true)
         {
@@ -173,7 +183,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void DodgeEnemy()
+    private void DodgeEnemy() 
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -210,27 +220,25 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Catch")
+        if (other.tag == "Behind")
         {
             //take down enemy text
             takeDowntext.SetActive(true);
-
-            if (Input.GetKeyDown(KeyCode.Q))
-            {
-                //play take down animation
-                //enemy nav mesh agent = null
-                enemyBehavior.agent = null;
-            }
+            canKill = true;
+            currentEnemy = other.gameObject;
             
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Catch")
+        if (other.tag == "Behind")
         {
             //take down enemy text
             takeDowntext.SetActive(false);
+            canKill = false;
+            currentEnemy = null;
+
         }
     }
 }
