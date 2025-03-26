@@ -60,13 +60,21 @@ public class InventoryManager : MonoBehaviour
         inventoryItem.InitialiseItem(item);
     }
 
-    public Item GetSelectedItem()
+    public Item GetSelectedItem(bool use)
     {
         InventorySlot slot = inventorySlots[selectedSlot];
         InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
         if(itemInSlot != null)
         {
-            return itemInSlot.item;
+            Item item = itemInSlot.item;
+
+            if (use == true)
+            {
+                itemInSlot.count--;
+
+            }
+
+            return item;
         }
 
         return null;
