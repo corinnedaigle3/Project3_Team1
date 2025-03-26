@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
 
-public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class InventoryItem : MonoBehaviour
 {
     [Header("UI")]
     public Image image;
@@ -13,7 +13,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     [HideInInspector] public Transform parentAfterDrag;
     [HideInInspector] public int count = 1;
-    [HideInInspector]public Item item;
+    [HideInInspector] public Item item;
 
     /*public void Start()
     {
@@ -34,21 +34,4 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         countText.gameObject.SetActive(textActive);
     }
 
-    public void OnBeginDrag(PointerEventData eventData)
-    {
-        image.raycastTarget = false;
-        parentAfterDrag = transform.parent;
-        transform.SetParent(transform.root);
-    }
-
-    public void OnDrag(PointerEventData eventData)
-    {
-        transform.position = Input.mousePosition;
-    }
-
-    public void OnEndDrag(PointerEventData eventData) 
-    {
-        image.raycastTarget = true;
-        transform.SetParent(parentAfterDrag);
-    }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
 {
-    public int maxStackeditems = 4;
+    public int maxStackeditems = 3;
     public InventorySlot[] inventorySlots;
     public GameObject inventoryItemPrefab;
 
@@ -45,9 +45,13 @@ public class InventoryManager : MonoBehaviour
         { 
             InventorySlot slot = inventorySlots[i];
             InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
-            if (itemInSlot != null && itemInSlot.item == item && itemInSlot.count < maxStackeditems && itemInSlot.item.stackable == true)
+            if (itemInSlot != null && 
+                itemInSlot.item == item && 
+                itemInSlot.count < maxStackeditems && 
+                itemInSlot.item.stackable == true)
             {
-                SpawnNewItem(item, slot);
+                itemInSlot.count++;
+                itemInSlot.RefreshCount();
                 return true;
             }
         }
@@ -59,8 +63,7 @@ public class InventoryManager : MonoBehaviour
             InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
             if (itemInSlot == null)
             {
-                itemInSlot.count++;
-                itemInSlot.RefreshCount();
+                SpawnNewItem(item, slot);
                 return true;
             }
         }
@@ -86,10 +89,18 @@ public class InventoryManager : MonoBehaviour
             if (use == true)
             {
                 itemInSlot.count--;
+                if (itemInSlot.count <= 0) 
+                {
+                    Destroy(itemInSlot.gameObject);
+                }
+                else
+                {
+                    itemInSlot.RefreshCount();
+                }
 
             }
 
-            return item;
+            return itemInSlot.item;
         }
 
         return null;
