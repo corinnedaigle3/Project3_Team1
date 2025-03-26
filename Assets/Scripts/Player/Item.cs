@@ -10,6 +10,7 @@ public class Item : ScriptableObject
     [Header("Only gamplay")]
     public TileBase tile;
     public ItemType type;
+    public ActionType actionType;
     public Vector2Int range = new Vector2Int(5, 4);
 
     [Header("Only UI")]
@@ -25,4 +26,10 @@ public enum ItemType
     Asphodel,
     Tartarus,
     Helm
+}
+
+public enum ActionType
+{
+    Invisiblity,
+    None
 }
