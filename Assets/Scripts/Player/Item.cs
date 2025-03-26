@@ -23,6 +23,6 @@ public enum ItemType
 {
     Elysium,
     Asphodel,
-    Tartarus
+    Tartarus,
+    Helm
 }
-
