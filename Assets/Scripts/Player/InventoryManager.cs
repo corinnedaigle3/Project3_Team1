@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Globalization;
 using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
 {
+    public int maxStackeditems = 4;
     public InventorySlot[] inventorySlots;
     public GameObject inventoryItemPrefab;
 
@@ -38,19 +38,34 @@ public class InventoryManager : MonoBehaviour
         selectedSlot = newValue;
     }
 
-    public void AddItem(Item item)
+    public bool AddItem(Item item)
     {
-        //Find any empty slot
+        //Check if any slot has the same item with cound lower than max
         for (int i = 0; i < inventorySlots.Length; i++) 
         { 
             InventorySlot slot = inventorySlots[i];
-            InventoryItem itemSlot = slot.GetComponentInChildren<InventoryItem>();
-            if (itemSlot != null)
+            InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
+            if (itemInSlot != null && itemInSlot.item == item && itemInSlot.count < maxStackeditems && itemInSlot.item.stackable == true)
             {
                 SpawnNewItem(item, slot);
-                return;
+                return true;
             }
         }
+
+        //Find Empty Slot
+        for (int i = 0; i < inventorySlots.Length; i++)
+        {
+            InventorySlot slot = inventorySlots[i];
+            InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
+            if (itemInSlot == null)
+            {
+                itemInSlot.count++;
+                itemInSlot.RefreshCount();
+                return true;
+            }
+        }
+
+        return false;
     }
 
     void SpawnNewItem(Item item, InventorySlot slot)
