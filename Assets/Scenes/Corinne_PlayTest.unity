@@ -956,38 +956,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!1 &705877987 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 367192780633537303, guid: 3ca6a1471fcadbe46995ec7d1079e9db, type: 3}
-  m_PrefabInstance: {fileID: 1980337337}
-  m_PrefabAsset: {fileID: 0}
---- !u!195 &705877989 stripped
-NavMeshAgent:
-  m_CorrespondingSourceObject: {fileID: 1847052860119057821, guid: 3ca6a1471fcadbe46995ec7d1079e9db, type: 3}
-  m_PrefabInstance: {fileID: 1980337337}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &705877993 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1144247894434008006, guid: 3ca6a1471fcadbe46995ec7d1079e9db, type: 3}
-  m_PrefabInstance: {fileID: 1980337337}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &705877994
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 705877987}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1bab0b1a152a2ca44925c78a83d98da5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parent: {fileID: 705877987}
-  eAgent: {fileID: 705877989}
-  dead: 0
-  dropItemPoint: {fileID: 2073123868}
-  fury1Gem: {fileID: 737216655}
 --- !u!1001 &726497614
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1700,10 +1668,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4720131709456149520, guid: 3ca6a1471fcadbe46995ec7d1079e9db, type: 3}
-      propertyPath: agent
-      value: 
-      objectReference: {fileID: 705877989}
-    - target: {fileID: 4720131709456149520, guid: 3ca6a1471fcadbe46995ec7d1079e9db, type: 3}
       propertyPath: Waypoints.Array.data[0]
       value: 
       objectReference: {fileID: 516893449}
@@ -1711,48 +1675,15 @@ PrefabInstance:
       propertyPath: Waypoints.Array.data[1]
       value: 
       objectReference: {fileID: 1613572492}
+    - target: {fileID: 7511083729390318373, guid: 3ca6a1471fcadbe46995ec7d1079e9db, type: 3}
+      propertyPath: fury1Gem
+      value: 
+      objectReference: {fileID: 737216655}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 1144247894434008006, guid: 3ca6a1471fcadbe46995ec7d1079e9db, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2073123868}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 367192780633537303, guid: 3ca6a1471fcadbe46995ec7d1079e9db, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 705877994}
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3ca6a1471fcadbe46995ec7d1079e9db, type: 3}
---- !u!1 &2073123867
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2073123868}
-  m_Layer: 0
-  m_Name: DropItemPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2073123868
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2073123867}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -1.5}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 705877993}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2604748384143424201
 PrefabInstance:
   m_ObjectHideFlags: 0
