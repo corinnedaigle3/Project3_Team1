@@ -10,9 +10,8 @@ public class TakeDown : MonoBehaviour
     public bool dead;
     private GameObject dropItemInstance;
     public  Transform dropItemPoint;
-    public GameObject fury1Gem;
 
-    [SerializeField] private GameObject lootPrefab;
+    [SerializeField] private GameObject fury1Gem;
 
     // Start is called before the first frame update
     void Start()
