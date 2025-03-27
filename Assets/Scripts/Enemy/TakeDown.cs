@@ -26,8 +26,8 @@ public class TakeDown : MonoBehaviour
         if (dead)
         {
             eAgent.isStopped = true;
-            gameObject.SetActive(false);
             dropItemInstance = Instantiate(fury1Gem, dropItemPoint.transform.position, dropItemPoint.rotation);
+            gameObject.SetActive(false);
         }
     }
 
