@@ -230,11 +230,6 @@ public class PlayerMovement : MonoBehaviour
             takeDowntext.SetActive(true);
             canKill = true;
             currentEnemy = other.gameObject;
-
-            if (Input.GetKeyDown(KeyCode.Q))
-            {
-                takeDown.dead = true;
-            }
         }
 
         if (other.CompareTag("Enemy") || other.CompareTag( "Fury"))
