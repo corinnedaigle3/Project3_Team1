@@ -128,6 +128,12 @@ public class PlayerMovement : MonoBehaviour
                 rollSpeed -= rollSpeed * rollSpeedDropMultiplier * Time.deltaTime;
 
                 float rollSpeedMin = 15f;
+
+                DashPlayer();
+                DodgeEnemy();
+                Invisibility();
+                invisibleTimer -= Time.deltaTime;
+
                 if (rollSpeed < rollSpeedMin)
                 {
                     state = State.Normal;
@@ -193,7 +199,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             rollDirection = moveDirection;
-            rollSpeed = 14f;
+            rollSpeed = 18f;
             state = State.Rolling;
         }
     }
@@ -211,7 +217,6 @@ public class PlayerMovement : MonoBehaviour
         if (invisibleTimer <= 0)
         {
             canDash = false;
-            Debug.Log("Can dash false!");
             Invisible = false;
             moveSpeed = 8f;
         }
