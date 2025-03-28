@@ -35,9 +35,8 @@ public class PlayerMovement : MonoBehaviour
     public float groundDrag;
 
     [Header("Invisible")]
-    public float timeBetweenInvisibility = 6f;
-    private float invisibleTimer = 1f;
-    public bool alreadyInvisible;
+    private float invisibleTimer = 0;
+    public bool Invisible;
     private bool canDash;
 
     [Header("Pickup and Throw")]
@@ -48,7 +47,6 @@ public class PlayerMovement : MonoBehaviour
     public bool tartarusCollectionItem;
 
     [Header("TakeDown")]
-    public GameObject fury;
     EnemyBehavior enemyBehavior;
     public GameObject takeDowntext;
     TakeDown takeDown;
@@ -66,11 +64,10 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        fury = GameObject.Find("Enemy");
         rb.freezeRotation = true;
         moveSpeed = 8f;
         canDash = false;
-        alreadyInvisible = false;
+        Invisible = false;
         asphodelCollectionItem = false;
         elysiumCollectionItem = false;
         tartarusCollectionItem = false;
@@ -113,6 +110,7 @@ public class PlayerMovement : MonoBehaviour
                 DashPlayer();
                 DodgeEnemy();
                 Invisibility();
+                invisibleTimer -= Time.deltaTime;
 
                 // makes the enemy stop and destroys the collider when pressing Q
                 if (canKill && currentEnemy != null && Input.GetKeyDown(KeyCode.Q)) 
@@ -203,27 +201,20 @@ public class PlayerMovement : MonoBehaviour
     private void Invisibility()
     {
         if (Input.GetKeyDown(KeyCode.LeftControl))
-        { 
-            invisibleTimer -= Time.deltaTime;
-            canDash = true;
+        {  
             //enemies cannot track player
+            Invisible = true;
+            invisibleTimer = 3f;
+            canDash = true;
+        } 
 
-            if (invisibleTimer <= 0)
-            {
-                alreadyInvisible = true;
-                canDash = false;
-
-                if (alreadyInvisible == true)
-                {
-                 //Invoke(nameof(ResetInvisible), timeBetweenInvisibility);
-                }
-            }
+        if (invisibleTimer <= 0)
+        {
+            canDash = false;
+            Debug.Log("Can dash false!");
+            Invisible = false;
+            moveSpeed = 8f;
         }
-    }
-
-    private void ResetInvisible()
-    {
-        alreadyInvisible = false;
     }
 
     private void OnTriggerEnter(Collider other)
