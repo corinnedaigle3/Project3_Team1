@@ -17,7 +17,6 @@ public class CatchBehave : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         if (p.alreadyInvisible)
         {
             theCatch.SetActive(false);

@@ -32,8 +32,6 @@ public class EnemyBehavior : MonoBehaviour
         {
             StartCoroutine(LoseGame(1f));
             agent.isStopped = true;
-
-
         }
     }
 

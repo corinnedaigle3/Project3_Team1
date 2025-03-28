@@ -36,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Invisible")]
     public float timeBetweenInvisibility = 6f;
-    private float invisibleTimer = 3f;
+    private float invisibleTimer = 1f;
     public bool alreadyInvisible;
     private bool canDash;
 
@@ -70,6 +70,7 @@ public class PlayerMovement : MonoBehaviour
         rb.freezeRotation = true;
         moveSpeed = 8f;
         canDash = false;
+        alreadyInvisible = false;
         asphodelCollectionItem = false;
         elysiumCollectionItem = false;
         tartarusCollectionItem = false;
@@ -112,6 +113,14 @@ public class PlayerMovement : MonoBehaviour
                 DashPlayer();
                 DodgeEnemy();
                 Invisibility();
+
+                // makes the enemy stop and destroys the collider when pressing Q
+                if (canKill && currentEnemy != null && Input.GetKeyDown(KeyCode.Q)) 
+        
+                {
+                    currentEnemy.GetComponent<TakeDown>();
+                    takeDown.dead = true;
+                }
                 break;
 
             case State.Rolling:
@@ -139,12 +148,6 @@ public class PlayerMovement : MonoBehaviour
 
             case State.Rolling:
                 break;
-        }
-
-        // makes the enemy stop and destroys the collider when pressing Q
-        if (canKill && currentEnemy != null && Input.GetKeyDown(KeyCode.Q)) 
-        {
-            currentEnemy.GetComponent<TakeDown>().dead = true;
         }
     }
 
@@ -192,7 +195,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             rollDirection = moveDirection;
-            rollSpeed = 24f;
+            rollSpeed = 14f;
             state = State.Rolling;
         }
     }
@@ -205,13 +208,14 @@ public class PlayerMovement : MonoBehaviour
             canDash = true;
             //enemies cannot track player
 
-            if (!alreadyInvisible)
+            if (invisibleTimer <= 0)
             {
-                if (invisibleTimer <= 0)
+                alreadyInvisible = true;
+                canDash = false;
+
+                if (alreadyInvisible == true)
                 {
-                    alreadyInvisible = true;
-                    canDash = false;
-                    Invoke(nameof(ResetInvisible), timeBetweenInvisibility);
+                 //Invoke(nameof(ResetInvisible), timeBetweenInvisibility);
                 }
             }
         }
@@ -248,9 +252,6 @@ public class PlayerMovement : MonoBehaviour
             takeDowntext.SetActive(false);
             canKill = false;
             currentEnemy = null;
-
         }
     }
-
-    
 }
