@@ -76,8 +76,21 @@ PrefabInstance:
       propertyPath: fury1Gem
       value: 
       objectReference: {fileID: 7511243202593895564, guid: 97230342e7bae114e841e99092425185, type: 3}
+    - target: {fileID: 8914603405870952620, guid: 3ca6a1471fcadbe46995ec7d1079e9db, type: 3}
+      propertyPath: fury1Gem
+      value: 
+      objectReference: {fileID: 7511243202593895564, guid: 97230342e7bae114e841e99092425185, type: 3}
+    - target: {fileID: 8914603405870952620, guid: 3ca6a1471fcadbe46995ec7d1079e9db, type: 3}
+      propertyPath: dropItemPoint
+      value: 
+      objectReference: {fileID: 2696537949354340350}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3ca6a1471fcadbe46995ec7d1079e9db, type: 3}
+--- !u!4 &2696537949354340350 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4580884906535031233, guid: 3ca6a1471fcadbe46995ec7d1079e9db, type: 3}
+  m_PrefabInstance: {fileID: 1945155328569523775}
+  m_PrefabAsset: {fileID: 0}

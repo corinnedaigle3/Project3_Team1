@@ -49,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("TakeDown")]
     EnemyBehavior enemyBehavior;
     public GameObject takeDowntext;
-    TakeDown takeDown;
+    public TakeDown takeDown;
     public bool dead;
 
     public bool fury1;
@@ -89,6 +89,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+       
         switch (state)
         {
             case State.Normal:
@@ -107,8 +108,7 @@ public class PlayerMovement : MonoBehaviour
                     rb.drag = 0;
                 }
 
-                enemyBehavior = GetComponent<EnemyBehavior>();
-                takeDown = GetComponent<TakeDown>();
+
 
                 DashPlayer();
                 DodgeEnemy();
@@ -116,11 +116,20 @@ public class PlayerMovement : MonoBehaviour
                 invisibleTimer -= Time.deltaTime;
 
                 // makes the enemy stop and destroys the collider when pressing Q
-                if (canKill == true && currentEnemy != null && Input.GetKeyDown(KeyCode.Q)) 
+                if (canKill == true && currentEnemy != null && Input.GetKeyDown(KeyCode.Q))
                 {
-                    currentEnemy.GetComponent<TakeDown>();
-                    takeDown.dead = true;
+                    Debug.Log("Q is pressed");
+                    takeDown = currentEnemy.GetComponent<TakeDown>();
+                    if (takeDown != null) // Add a null check
+                    {
+                        takeDown.dead = true;
+                    }
+                    else
+                    {
+                        Debug.LogWarning("TakeDown component not found on currentEnemy!");
+                    }
                 }
+
                 break;
 
             case State.Rolling:

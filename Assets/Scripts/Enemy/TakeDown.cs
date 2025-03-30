@@ -8,7 +8,7 @@ public class TakeDown : MonoBehaviour
 {
     public GameObject parent;
     public NavMeshAgent eAgent;
-    public bool dead;
+    public bool dead = false;
     public  Transform dropItemPoint;
 
     public GameObject fury1Gem;
@@ -18,7 +18,7 @@ public class TakeDown : MonoBehaviour
     void Start()
     {
        eAgent = parent.GetComponent<NavMeshAgent>();
-        name = gameObject.name;
+        name = parent.name;
     }
 
     // Update is called once per frame
@@ -39,7 +39,7 @@ public class TakeDown : MonoBehaviour
         }
     }
 
-    IEnumerator furyTakeDown(float waitTime)
+    IEnumerator furyTakeDown(float waitTime) // stop fury for waitTime seconds 
     {
         eAgent.isStopped = true;
         Instantiate(fury1Gem, dropItemPoint.transform.position, Quaternion.identity);
