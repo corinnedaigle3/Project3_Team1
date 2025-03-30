@@ -14,6 +14,7 @@ public class InventoryObject : ScriptableObject, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        Debug.Log("Left Click");
         if (eventData.button == PointerEventData.InputButton.Left && hasItem == true)
         {
             Destroy(item);

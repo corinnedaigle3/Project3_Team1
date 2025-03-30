@@ -14,6 +14,9 @@ public class TakeDown : MonoBehaviour
     public GameObject fury1Gem;
     public string name;
 
+
+    int gemCount = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,7 +33,9 @@ public class TakeDown : MonoBehaviour
             //gameObject.SetActive(false);
         } else if (dead == true)
         {
-            StartCoroutine(furyTakeDown(3f));
+         
+                StartCoroutine(furyTakeDown(3f));
+
         }
         else if(dead == false)
         {
@@ -42,7 +47,11 @@ public class TakeDown : MonoBehaviour
     IEnumerator furyTakeDown(float waitTime) // stop fury for waitTime seconds 
     {
         eAgent.isStopped = true;
-        Instantiate(fury1Gem, dropItemPoint.transform.position, Quaternion.identity);
+        if (gemCount < 1)
+        {
+            Instantiate(fury1Gem, dropItemPoint.transform.position, Quaternion.identity);
+            gemCount++;
+        }
         yield return new WaitForSeconds(waitTime);
         eAgent.isStopped = false;
     }
