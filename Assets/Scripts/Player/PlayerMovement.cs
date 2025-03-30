@@ -60,6 +60,9 @@ public class PlayerMovement : MonoBehaviour
     public bool canKill;
     public GameObject currentEnemy;
 
+    [Header("Inventory")]
+    public InventoryObject inventory;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -113,8 +116,7 @@ public class PlayerMovement : MonoBehaviour
                 invisibleTimer -= Time.deltaTime;
 
                 // makes the enemy stop and destroys the collider when pressing Q
-                if (canKill && currentEnemy != null && Input.GetKeyDown(KeyCode.Q)) 
-        
+                if (canKill == true && currentEnemy != null && Input.GetKeyDown(KeyCode.Q)) 
                 {
                     currentEnemy.GetComponent<TakeDown>();
                     takeDown.dead = true;
@@ -178,7 +180,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void DashPlayer() // are we using this ?????
+    private void DashPlayer() // are we using this ????? Player can dash when Invisable
     {
         if (canDash == true)
         {
@@ -237,6 +239,13 @@ public class PlayerMovement : MonoBehaviour
             other.gameObject.GetComponentInParent<EnemyBehavior>().playerLose = true;
             transform.LookAt(other.transform.position);
             gameObject.GetComponent<PlayerMovement>().enabled = false;
+        }
+
+        var item = other.GetComponent<Item>();
+        if (item)
+        {
+            inventory.AddItem(item.item, 1);
+            Destroy(other.gameObject);
         }
     }
 

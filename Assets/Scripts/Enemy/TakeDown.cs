@@ -8,10 +8,9 @@ public class TakeDown : MonoBehaviour
     public GameObject parent;
     public NavMeshAgent eAgent;
     public bool dead;
-    [HideInInspector] public GameObject dropItemInstance;
     public  Transform dropItemPoint;
 
-    [SerializeField] private GameObject fury1Gem;
+    public GameObject fury1Gem;
 
     // Start is called before the first frame update
     void Start()
@@ -25,7 +24,7 @@ public class TakeDown : MonoBehaviour
         if (dead == true)
         {
             eAgent.isStopped = true;
-            dropItemInstance = Instantiate(fury1Gem, dropItemPoint.transform.position, dropItemPoint.rotation);
+            Instantiate(fury1Gem, dropItemPoint.transform.position, Quaternion.identity);
             gameObject.SetActive(false);
         }
         else if(dead == false)
