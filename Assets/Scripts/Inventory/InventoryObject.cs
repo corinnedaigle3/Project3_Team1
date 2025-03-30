@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Inventory", menuName = "Inventory System/Inventory")]
@@ -24,6 +25,25 @@ public class InventoryObject : ScriptableObject
             Container.Add(new InventorySlot(_item, _amount));
         }
     }
+
+   /* void OnMouseDown(ItemObject _item, int _amount)
+    {
+        bool hasItem = true;
+
+        for (int i = 0; i < Container.Count; i--)
+        {
+            if (Container[i].item == _item)
+            {
+                Container[i].AddAmount(_amount);
+                hasItem = false;
+                break;
+            }
+        }
+        if (!hasItem)
+        {
+           Container.Destroy(InventorySlot(_item, _amount));
+        }
+    } */
 }
 
 [System.Serializable]
@@ -40,5 +60,10 @@ public class InventorySlot
     public void AddAmount(int value)
     {
         amount += value;
+    }
+
+    public void RemoveAmount(int value) 
+    { 
+        amount -= value;
     }
 }

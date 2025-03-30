@@ -90,8 +90,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5495471296991496917, guid: 127933acd6d37e74fa83939eb918adc2, type: 3}
       propertyPath: m_Name
-      value: Image Variant
+      value: Image Variant 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6706218773550030509, guid: 127933acd6d37e74fa83939eb918adc2, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: bab824ad76f5ac14cb61b11f3253f3fe, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -259,4 +259,9 @@ public class PlayerMovement : MonoBehaviour
             currentEnemy = null;
         }
     }
+
+    private void OnApplicationQuit()
+    {
+        inventory.Container.Clear();
+    }
 }
