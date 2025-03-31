@@ -10,20 +10,21 @@ public class CatchBehave : MonoBehaviour
     
     void Start()
     {
-        p = GameObject.Find("Player").GetComponent<PlayerMovement>();
+        p = GetComponent<PlayerMovement>();
      
     }
 
     // Update is called once per frame
     void Update()
     {
+        GameObject.Find("Player");
 
-        if (p.alreadyInvisible)
+        if (p.Invisible)
         {
             theCatch.SetActive(false);
           
         }
-        else if (!p.alreadyInvisible)
+        else if (!p.Invisible)
         {
             theCatch.SetActive(true);
         }

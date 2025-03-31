@@ -35,9 +35,8 @@ public class PlayerMovement : MonoBehaviour
     public float groundDrag;
 
     [Header("Invisible")]
-    public float timeBetweenInvisibility = 6f;
-    private float invisibleTimer = 3f;
-    public bool alreadyInvisible;
+    private float invisibleTimer = 0;
+    public bool Invisible;
     private bool canDash;
 
     [Header("Pickup and Throw")]
@@ -48,9 +47,10 @@ public class PlayerMovement : MonoBehaviour
     public bool tartarusCollectionItem;
 
     [Header("TakeDown")]
-    public GameObject fury;
     EnemyBehavior enemyBehavior;
     public GameObject takeDowntext;
+    public TakeDown takeDown;
+    public bool dead;
 
     public bool fury1;
     public bool fury2;
@@ -60,14 +60,17 @@ public class PlayerMovement : MonoBehaviour
     public bool canKill;
     public GameObject currentEnemy;
 
+    [Header("Inventory")]
+    public InventoryObject inventory;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        fury = GameObject.Find("Enemy");
         rb.freezeRotation = true;
         moveSpeed = 8f;
         canDash = false;
+        Invisible = false;
         asphodelCollectionItem = false;
         elysiumCollectionItem = false;
         tartarusCollectionItem = false;
@@ -86,6 +89,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+       
         switch (state)
         {
             case State.Normal:
@@ -104,11 +108,28 @@ public class PlayerMovement : MonoBehaviour
                     rb.drag = 0;
                 }
 
-                enemyBehavior = GetComponent<EnemyBehavior>();
+
 
                 DashPlayer();
                 DodgeEnemy();
                 Invisibility();
+                invisibleTimer -= Time.deltaTime;
+
+                // makes the enemy stop and destroys the collider when pressing Q
+                if (canKill == true && currentEnemy != null && Input.GetKeyDown(KeyCode.Q))
+                {
+                    Debug.Log("Q is pressed");
+                    takeDown = currentEnemy.GetComponent<TakeDown>();
+                    if (takeDown != null) // Add a null check
+                    {
+                        takeDown.dead = true;
+                    }
+                    else
+                    {
+                        Debug.LogWarning("TakeDown component not found on currentEnemy!");
+                    }
+                }
+
                 break;
 
             case State.Rolling:
@@ -118,6 +139,12 @@ public class PlayerMovement : MonoBehaviour
                 rollSpeed -= rollSpeed * rollSpeedDropMultiplier * Time.deltaTime;
 
                 float rollSpeedMin = 15f;
+
+                DashPlayer();
+                DodgeEnemy();
+                Invisibility();
+                invisibleTimer -= Time.deltaTime;
+
                 if (rollSpeed < rollSpeedMin)
                 {
                     state = State.Normal;
@@ -136,12 +163,6 @@ public class PlayerMovement : MonoBehaviour
 
             case State.Rolling:
                 break;
-        }
-
-        // makes the enemy stop and destroys the collider when pressing Q
-        if (canKill && currentEnemy != null && Input.GetKeyDown(KeyCode.Q)) 
-        {
-            currentEnemy.GetComponent<TakeDown>().dead = true;
         }
     }
 
@@ -168,7 +189,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void DashPlayer() // are we using this ?????
+    private void DashPlayer() // are we using this ????? Player can dash when Invisable
     {
         if (canDash == true)
         {
@@ -189,7 +210,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             rollDirection = moveDirection;
-            rollSpeed = 24f;
+            rollSpeed = 18f;
             state = State.Rolling;
         }
     }
@@ -197,26 +218,19 @@ public class PlayerMovement : MonoBehaviour
     private void Invisibility()
     {
         if (Input.GetKeyDown(KeyCode.LeftControl))
-        { 
-            invisibleTimer -= Time.deltaTime;
-            canDash = true;
+        {  
             //enemies cannot track player
+            Invisible = true;
+            invisibleTimer = 3f;
+            canDash = true;
+        } 
 
-            if (!alreadyInvisible)
-            {
-                if (invisibleTimer <= 0)
-                {
-                    alreadyInvisible = true;
-                    canDash = false;
-                    Invoke(nameof(ResetInvisible), timeBetweenInvisibility);
-                }
-            }
+        if (invisibleTimer <= 0)
+        {
+            canDash = false;
+            Invisible = false;
+            moveSpeed = 8f;
         }
-    }
-
-    private void ResetInvisible()
-    {
-        alreadyInvisible = false;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -227,7 +241,6 @@ public class PlayerMovement : MonoBehaviour
             takeDowntext.SetActive(true);
             canKill = true;
             currentEnemy = other.gameObject;
-            
         }
 
         if (other.CompareTag("Enemy") || other.CompareTag( "Fury"))
@@ -235,6 +248,13 @@ public class PlayerMovement : MonoBehaviour
             other.gameObject.GetComponentInParent<EnemyBehavior>().playerLose = true;
             transform.LookAt(other.transform.position);
             gameObject.GetComponent<PlayerMovement>().enabled = false;
+        }
+
+        var item = other.GetComponent<Item>();
+        if (item)
+        {
+            inventory.AddItem(item.item, 1);
+            Destroy(other.gameObject);
         }
     }
 
@@ -246,9 +266,11 @@ public class PlayerMovement : MonoBehaviour
             takeDowntext.SetActive(false);
             canKill = false;
             currentEnemy = null;
-
         }
     }
 
-    
+    private void OnApplicationQuit()
+    {
+        inventory.Container.Clear();
+    }
 }
