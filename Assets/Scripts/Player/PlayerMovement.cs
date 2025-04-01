@@ -228,14 +228,18 @@ public class PlayerMovement : MonoBehaviour
         {
             Invisible = true;
             canDash = true;
-            invisibleTimer = 3f;
+            //invisibleTimer = 3f;
+        }
+
+        if (invisibleTime == false) 
+        { 
+            canDash = false;
+            Invisible = false;
+            moveSpeed = 8f;
         }
 
         if (invisibleTimer <= 0)
         {
-            canDash = false;
-            Invisible = false;
-            moveSpeed = 8f;
             invisibleTime = false;
         }
     }
@@ -312,8 +316,8 @@ public class PlayerMovement : MonoBehaviour
         switch (item.itemType)
         {
             case Item.ItemType.Helm:
-                invisibleTime = true; 
-                Invisibility();
+                invisibleTime = true;
+                invisibleTimer = 10f;
                 inventory.RemoveItem(new Item { itemType = Item.ItemType.Helm, amount = 1 });
                 break;
             case Item.ItemType.Gem1:
