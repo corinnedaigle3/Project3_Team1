@@ -7,7 +7,8 @@ using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
-   private enum State {
+   private enum State 
+    {
         Normal,
         Rolling,
     }
@@ -38,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
     private float invisibleTimer = 0;
     public bool Invisible;
     private bool canDash;
+    private bool invisibleTime;
 
     [Header("Pickup and Throw")]
 
@@ -49,7 +51,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("TakeDown")]
     EnemyBehavior enemyBehavior;
     public GameObject takeDowntext;
-    public TakeDown takeDown;
+    [HideInInspector] public TakeDown takeDown;
     public bool dead;
 
     public bool fury1;
@@ -61,7 +63,8 @@ public class PlayerMovement : MonoBehaviour
     public GameObject currentEnemy;
 
     [Header("Inventory")]
-    public InventoryObject inventory;
+    private Inventory inventory;
+    [SerializeField] private UI_Inventory uiInventory;
 
     // Start is called before the first frame update
     void Start()
@@ -74,6 +77,7 @@ public class PlayerMovement : MonoBehaviour
         asphodelCollectionItem = false;
         elysiumCollectionItem = false;
         tartarusCollectionItem = false;
+        invisibleTime = false;
         takeDowntext.SetActive(false);
 
         fury1 = false;
@@ -84,6 +88,8 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         state = State.Normal;
+        inventory = new Inventory(UseItem);
+        uiInventory.SetInventory(inventory);
     }
 
     // Update is called once per frame
@@ -107,8 +113,6 @@ public class PlayerMovement : MonoBehaviour
                 {
                     rb.drag = 0;
                 }
-
-
 
                 DashPlayer();
                 DodgeEnemy();
@@ -217,19 +221,19 @@ public class PlayerMovement : MonoBehaviour
 
     private void Invisibility()
     {
-        if (Input.GetKeyDown(KeyCode.LeftControl))
-        {  
-            //enemies cannot track player
+        if (invisibleTime == true)
+        {
             Invisible = true;
-            invisibleTimer = 3f;
             canDash = true;
-        } 
+            invisibleTimer = 3f;
+        }
 
         if (invisibleTimer <= 0)
         {
             canDash = false;
             Invisible = false;
             moveSpeed = 8f;
+            invisibleTime = false;
         }
     }
 
@@ -250,11 +254,80 @@ public class PlayerMovement : MonoBehaviour
             gameObject.GetComponent<PlayerMovement>().enabled = false;
         }
 
-        var item = other.GetComponent<Item>();
-        if (item)
+        //ItemWorld itemWorld = GetComponent<ItemWorld>();
+        //itemWorld.GetComponent<Collider>();
+
+        if (other.tag == "TakeDownItemE")
         {
-            inventory.AddItem(item.item, 1);
             Destroy(other.gameObject);
+            inventory.AddItem(new Item { itemType = Item.ItemType.TakeDownItemE, amount = 1});
+        }
+
+        if (other.tag == "TakeDownItemA")
+        {
+            inventory.AddItem(new Item { itemType = Item.ItemType.TakeDownItemA, amount = 1});
+            Destroy(other.gameObject);
+        }
+
+        if (other.tag == "TakeDownItemT")
+        {
+            inventory.AddItem(new Item { itemType = Item.ItemType.TakeDownItemT, amount = 1});
+            Destroy(other.gameObject);
+        }
+
+        if (other.tag == "GemE")
+        {
+            inventory.AddItem(new Item { itemType = Item.ItemType.Gem1, amount = 1});
+            Destroy(other.gameObject);
+        }
+
+        if (other.tag == "GemA")
+        {
+            inventory.AddItem(new Item { itemType = Item.ItemType.Gem2, amount = 1});
+            Destroy(other.gameObject);
+        }
+
+        if (other.tag == "GemT")
+        {
+            inventory.AddItem(new Item { itemType = Item.ItemType.Gem3, amount = 1});
+            Destroy(other.gameObject);
+        }
+
+        if (other.tag == "Helm")
+        {
+            Destroy(other.gameObject);
+            inventory.AddItem(new Item { itemType = Item.ItemType.Helm, amount = 1});
+        }
+
+    }
+
+    private void UseItem(Item item)
+    {
+        switch (item.itemType)
+        {
+            case Item.ItemType.Helm:
+                invisibleTime = true; 
+                Invisibility();
+                inventory.RemoveItem(new Item { itemType = Item.ItemType.Helm, amount = 1 });
+                break;
+            case Item.ItemType.Gem1:
+                inventory.RemoveItem(new Item { itemType = Item.ItemType.Gem1, amount = 1 });
+                break;
+            case Item.ItemType.Gem2:
+                inventory.RemoveItem(new Item { itemType = Item.ItemType.Gem2, amount = 1 });
+                break;
+            case Item.ItemType.Gem3:
+                inventory.RemoveItem(new Item { itemType = Item.ItemType.Gem3, amount = 1 });
+                break;
+            case Item.ItemType.TakeDownItemE:
+                inventory.RemoveItem(new Item { itemType = Item.ItemType.TakeDownItemE, amount = 1 });
+                break;
+            case Item.ItemType.TakeDownItemA:
+                inventory.RemoveItem(new Item { itemType = Item.ItemType.TakeDownItemA, amount = 1 });
+                break;
+            case Item.ItemType.TakeDownItemT:
+                inventory.RemoveItem(new Item { itemType = Item.ItemType.TakeDownItemT, amount = 1 });
+                break;
         }
     }
 
@@ -267,10 +340,5 @@ public class PlayerMovement : MonoBehaviour
             canKill = false;
             currentEnemy = null;
         }
-    }
-
-    private void OnApplicationQuit()
-    {
-        inventory.Container.Clear();
     }
 }
