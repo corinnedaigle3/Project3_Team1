@@ -13,6 +13,11 @@ public class PlayerMovement : MonoBehaviour
         Rolling,
     }
 
+    [Header("BeatTheGame")]
+    public int gemE; // just counter for how many fury gems we have 
+    public int gemA; // just counter for how many fury gems we have 
+    public int gemT; // just counter for how many fury gems we have 
+
     [Header("Movement")]
     public float moveSpeed;
     private float horizontalInput;
@@ -225,14 +230,18 @@ public class PlayerMovement : MonoBehaviour
         {
             Invisible = true;
             canDash = true;
-            invisibleTimer = 3f;
+            //invisibleTimer = 3f;
+        }
+
+        if (invisibleTime == false) 
+        { 
+            canDash = false;
+            Invisible = false;
+            moveSpeed = 8f;
         }
 
         if (invisibleTimer <= 0)
         {
-            canDash = false;
-            Invisible = false;
-            moveSpeed = 8f;
             invisibleTime = false;
         }
     }
@@ -277,18 +286,21 @@ public class PlayerMovement : MonoBehaviour
 
         if (other.tag == "GemE")
         {
+            gemE++;
             inventory.AddItem(new Item { itemType = Item.ItemType.Gem1, amount = 1});
             Destroy(other.gameObject);
         }
 
         if (other.tag == "GemA")
         {
+            gemA++;
             inventory.AddItem(new Item { itemType = Item.ItemType.Gem2, amount = 1});
             Destroy(other.gameObject);
         }
 
         if (other.tag == "GemT")
         {
+            gemT++;
             inventory.AddItem(new Item { itemType = Item.ItemType.Gem3, amount = 1});
             Destroy(other.gameObject);
         }
@@ -306,8 +318,8 @@ public class PlayerMovement : MonoBehaviour
         switch (item.itemType)
         {
             case Item.ItemType.Helm:
-                invisibleTime = true; 
-                Invisibility();
+                invisibleTime = true;
+                invisibleTimer = 10f;
                 inventory.RemoveItem(new Item { itemType = Item.ItemType.Helm, amount = 1 });
                 break;
             case Item.ItemType.Gem1:
