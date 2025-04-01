@@ -14,7 +14,9 @@ public class PlayerMovement : MonoBehaviour
     }
 
     [Header("BeatTheGame")]
-    public int gems; // just counter for how many fury gems we have 
+    public int gemE; // just counter for how many fury gems we have 
+    public int gemA; // just counter for how many fury gems we have 
+    public int gemT; // just counter for how many fury gems we have 
 
     [Header("Movement")]
     public float moveSpeed;
@@ -280,21 +282,21 @@ public class PlayerMovement : MonoBehaviour
 
         if (other.tag == "GemE")
         {
-            gems++;
+            gemE++;
             inventory.AddItem(new Item { itemType = Item.ItemType.Gem1, amount = 1});
             Destroy(other.gameObject);
         }
 
         if (other.tag == "GemA")
         {
-            gems++;
+            gemA++;
             inventory.AddItem(new Item { itemType = Item.ItemType.Gem2, amount = 1});
             Destroy(other.gameObject);
         }
 
         if (other.tag == "GemT")
         {
-            gems++;
+            gemT++;
             inventory.AddItem(new Item { itemType = Item.ItemType.Gem3, amount = 1});
             Destroy(other.gameObject);
         }
