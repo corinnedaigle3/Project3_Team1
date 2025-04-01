@@ -8,6 +8,7 @@ public class gemsChecker : MonoBehaviour
     // The intention of this scripts is to check how many gems player have and enable 
 
     public GameObject Player;
+    private bool canPressE = false;
 
     [Header("UI pop up")]
     public GameObject useEpopUp;
@@ -20,15 +21,37 @@ public class gemsChecker : MonoBehaviour
     private void Start()
     {
         Player = GameObject.FindWithTag("Player");
+
     }
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
         Debug.Log("It IS COLLIDING ");
-        
-        if(useEpopUp != null)
-            useEpopUp.SetActive(true);
 
-        if (Input.GetKeyDown(KeyCode.E))
+        if (useEpopUp != null)
+        {
+            useEpopUp.SetActive(true);
+        }
+
+        canPressE = true;
+
+
+       
+
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        canPressE = false;
+        if (useEpopUp != null)
+        {
+            useEpopUp.SetActive(false);
+        }
+
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.E) && canPressE)
         {
             Debug.Log("E is being pressed");
             if (Player.GetComponent<PlayerMovement>().gemE == 1 && !furyStatueE.activeSelf)
@@ -47,15 +70,9 @@ public class gemsChecker : MonoBehaviour
                 furyStatueT.SetActive(true);
 
             }
-
         }
     }
 
-    private void OnCollisionExit(Collision collision)
-    {
-        useEpopUp.SetActive(false);
 
-    }
-    
 
 }

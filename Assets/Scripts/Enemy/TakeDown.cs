@@ -56,8 +56,5 @@ public class TakeDown : MonoBehaviour
         eAgent.isStopped = false;
     }
 
-    private void Drop()
-    {
-        //remove the iten from inventory
-    }
+  
 }
