@@ -13,7 +13,17 @@ public class UI_Inventory : MonoBehaviour
     private void Awake()
     {
         itemSlotContainer = transform.Find("itemSlotContainer");
+        if (itemSlotContainer == null)
+        {
+            Debug.LogError("itemSlotContainer not found!");
+            return;
+        }
         itemSlotTemplate = itemSlotContainer.Find("itemSlotTemplate");
+        if (itemSlotTemplate == null)
+        {
+            Debug.LogError("itemSlotTemplate not found!");
+            return;
+        }
     }
 
     public void SetInventory(Inventory inventory)
@@ -31,10 +41,19 @@ public class UI_Inventory : MonoBehaviour
 
     private void RefreshInventoryItems()
     {
+        itemSlotContainer = transform.Find("itemSlotContainer");
+        itemSlotTemplate = itemSlotContainer.Find("itemSlotTemplate");
+
+        if (itemSlotContainer == null)
+        {
+            Debug.LogError("itemSlotContainer is null!");
+            return;
+        }
+
         foreach (Transform child in itemSlotContainer)
         {
-            if (child == itemSlotTemplate) continue;
-            Destroy(child.gameObject);
+           if (child == itemSlotTemplate) continue;
+           Destroy(child.gameObject);
         }
 
         float x = -1.5f;
