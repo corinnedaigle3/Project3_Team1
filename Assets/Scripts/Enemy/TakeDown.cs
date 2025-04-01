@@ -11,8 +11,8 @@ public class TakeDown : MonoBehaviour
     public bool dead = false;
     public  Transform dropItemPoint;
 
-    public GameObject fury1Gem;
-    public string name;
+    public GameObject gem1;
+    public string named;
 
 
     int gemCount = 0;
@@ -21,13 +21,13 @@ public class TakeDown : MonoBehaviour
     void Start()
     {
        eAgent = parent.GetComponent<NavMeshAgent>();
-        name = parent.name;
+        named = parent.name;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (dead == true && name == "Enemy")
+        if (dead == true && named == "Enemy")
         {
             eAgent.isStopped = true;
             //gameObject.SetActive(false);
@@ -49,7 +49,7 @@ public class TakeDown : MonoBehaviour
         eAgent.isStopped = true;
         if (gemCount < 1)
         {
-            Instantiate(fury1Gem, dropItemPoint.transform.position, Quaternion.identity);
+            Instantiate(gem1, dropItemPoint.transform.position, Quaternion.identity);
             gemCount++;
         }
         yield return new WaitForSeconds(waitTime);

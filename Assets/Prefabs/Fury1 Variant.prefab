@@ -30,15 +30,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1144247894434008006, guid: 3ca6a1471fcadbe46995ec7d1079e9db, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 11.62
+      value: 3.699316
       objectReference: {fileID: 0}
     - target: {fileID: 1144247894434008006, guid: 3ca6a1471fcadbe46995ec7d1079e9db, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.85
+      value: 4.96
       objectReference: {fileID: 0}
     - target: {fileID: 1144247894434008006, guid: 3ca6a1471fcadbe46995ec7d1079e9db, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 15.08
+      value: 4.8365245
       objectReference: {fileID: 0}
     - target: {fileID: 1144247894434008006, guid: 3ca6a1471fcadbe46995ec7d1079e9db, type: 3}
       propertyPath: m_LocalRotation.w
@@ -68,14 +68,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4580884906535031233, guid: 3ca6a1471fcadbe46995ec7d1079e9db, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.864
+      objectReference: {fileID: 0}
+    - target: {fileID: 4580884906535031233, guid: 3ca6a1471fcadbe46995ec7d1079e9db, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.298
+      objectReference: {fileID: 0}
     - target: {fileID: 4720131709456149520, guid: 3ca6a1471fcadbe46995ec7d1079e9db, type: 3}
       propertyPath: Waypoints.Array.size
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7511083729390318373, guid: 3ca6a1471fcadbe46995ec7d1079e9db, type: 3}
       propertyPath: fury1Gem
       value: 
       objectReference: {fileID: 7511243202593895564, guid: 97230342e7bae114e841e99092425185, type: 3}
+    - target: {fileID: 8914603405870952620, guid: 3ca6a1471fcadbe46995ec7d1079e9db, type: 3}
+      propertyPath: gem1
+      value: 
+      objectReference: {fileID: 1063064011511139428, guid: 97230342e7bae114e841e99092425185, type: 3}
     - target: {fileID: 8914603405870952620, guid: 3ca6a1471fcadbe46995ec7d1079e9db, type: 3}
       propertyPath: fury1Gem
       value: 
