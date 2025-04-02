@@ -133,7 +133,7 @@ Transform:
   m_GameObject: {fileID: 1320433425411089120}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.97726, y: 2, z: 0.5637746}
+  m_LocalPosition: {x: 0, y: 2, z: -7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -325,8 +325,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2186827231534179622}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.012935227, y: 0.73489654, z: -0.014022573, w: 0.67791086}
-  m_LocalPosition: {x: 0.00000047683716, y: 0, z: 0.0000076293945}
+  m_LocalRotation: {x: 0.01907755, y: 0, z: 0, w: 0.999818}
+  m_LocalPosition: {x: 0.00000011920929, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -692,8 +692,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6958530857180636268}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.030463075, y: 0.7342881, z: -0.033023827, w: 0.6773496}
-  m_LocalPosition: {x: -6.97726, y: 2, z: 0.5637746}
+  m_LocalRotation: {x: 0.04492854, y: -0.000000029772233, z: 0.0000000013389749, w: 0.99899024}
+  m_LocalPosition: {x: 0, y: 2, z: -7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -992,8 +992,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7164578818880537884}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.09404417, y: 0.7279257, z: -0.1019496, w: 0.67148054}
-  m_LocalPosition: {x: 0.00000047683716, y: 0, z: 0.0000076293945}
+  m_LocalRotation: {x: 0.13870122, y: 0, z: 0, w: 0.9903343}
+  m_LocalPosition: {x: 0.00000011920929, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1150,7 +1150,9 @@ MonoBehaviour:
   fury3: 0
   canKill: 0
   currentEnemy: {fileID: 0}
-  uiInventory: {fileID: 0}
+  inventoryManager: {fileID: 5920624093863450929, guid: d0197d588056b9647b4828df4dc39000, type: 3}
+  helmInInventory: 0
+  amount: 0
 --- !u!136 &2031590590646486855
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1304,8 +1306,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8991229797031448730}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.030463068, y: 0.7342881, z: -0.033023816, w: 0.67734957}
-  m_LocalPosition: {x: 0.00000047683716, y: 0, z: 0.0000076293945}
+  m_LocalRotation: {x: 0.04492852, y: 0, z: 0, w: 0.99899024}
+  m_LocalPosition: {x: 0.00000011920929, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
