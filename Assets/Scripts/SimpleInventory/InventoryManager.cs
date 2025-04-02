@@ -1,14 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using static UnityEditor.Progress;
+using UnityEngine.UI;
 
-public class InventoryManager : MonoBehaviour, IPointerClickHandler
+public class InventoryManager : MonoBehaviour
 {
-    public GameObject blankApple;
+   public GameObject blankApple;
     public GameObject spriteApple;
 
     public GameObject blankSkull;
@@ -28,7 +26,7 @@ public class InventoryManager : MonoBehaviour, IPointerClickHandler
 
     public GameObject blankHelm;
     public GameObject spriteHelm;
-    public TextMeshProUGUI helmTextBlank;
+    public TextMeshProUGUI helmText1;
     public TextMeshProUGUI helmText2;
     public TextMeshProUGUI helmText3;
 
@@ -45,25 +43,32 @@ public class InventoryManager : MonoBehaviour, IPointerClickHandler
     {
         hasApple = false;
         spriteApple.SetActive(false);
+        blankApple.SetActive(true);
 
         hasSkull = false;
         spriteSkull.SetActive(false);
+        blankSkull.SetActive(true);
 
         hasFireFlower = false;
         spriteFireFlower.SetActive(false);
+        blankFireFlower.SetActive(true);
 
         hasGem1 = false;
         spriteGem1.SetActive(false);
+        blankGem1.SetActive(true);
 
         hasGem2 = false;
         spriteGem2.SetActive(false);
+        blankGem2.SetActive(true);
 
         hasGem3 = false;
         spriteGem3.SetActive(false);
+        blankGem3.SetActive(true);
 
         hasHelm = false;
         spriteHelm.SetActive(false);
-        //helmTextBlank.text = false;
+        blankHelm.SetActive(true);
+        //helmText1.SetActive(false);
     }
 
     // Update is called once per frame
@@ -137,25 +142,6 @@ public class InventoryManager : MonoBehaviour, IPointerClickHandler
         else if (hasHelm == false)
         {
             spriteHelm.SetActive(false);
-        }
-    }
-
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        Debug.Log("Left Click");
-        if (eventData.button == PointerEventData.InputButton.Left && hasApple == true)
-        {
-            Destroy(this);
-        }
-
-        if (eventData.button == PointerEventData.InputButton.Left && hasSkull == true)
-        {
-            Destroy(this);
-        }
-
-        if (eventData.button == PointerEventData.InputButton.Left && hasFireFlower == true)
-        {
-            Destroy(this);
         }
     }
 }

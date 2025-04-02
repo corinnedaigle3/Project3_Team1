@@ -86,7 +86,7 @@ public class UI_Inventory : MonoBehaviour
             }
 
             x++;
-            if(x > 5)
+            if(x > 8)
             {
                 x = 0;
                 y++;

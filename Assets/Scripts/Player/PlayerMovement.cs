@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using static UnityEditor.Progress;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -44,7 +45,7 @@ public class PlayerMovement : MonoBehaviour
     private float invisibleTimer = 0;
     public bool Invisible;
     private bool canDash;
-    private bool invisibleTime;
+    //private bool invisibleTime;
 
     [Header("Pickup and Throw")]
 
@@ -68,8 +69,12 @@ public class PlayerMovement : MonoBehaviour
     public GameObject currentEnemy;
 
     [Header("Inventory")]
-    private Inventory inventory;
-    [SerializeField] private UI_Inventory uiInventory;
+    //private Inventory inventory;
+    //[SerializeField] private UI_Inventory uiInventory;
+
+    public InventoryManager inventoryManager;
+
+    public bool helmInInventory;
 
     // Start is called before the first frame update
     void Start()
@@ -82,8 +87,10 @@ public class PlayerMovement : MonoBehaviour
         asphodelCollectionItem = false;
         elysiumCollectionItem = false;
         tartarusCollectionItem = false;
-        invisibleTime = false;
+        //invisibleTime = false;
         takeDowntext.SetActive(false);
+
+        helmInInventory = false;
 
         fury1 = false;
         fury2 = false;
@@ -93,8 +100,8 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         state = State.Normal;
-        inventory = new Inventory(UseItem);
-        uiInventory.SetInventory(inventory);
+        //inventory = new Inventory(UseItem);
+        //uiInventory.SetInventory(inventory);
     }
 
     // Update is called once per frame
@@ -105,6 +112,7 @@ public class PlayerMovement : MonoBehaviour
         {
             case State.Normal:
                 grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGrounded);
+                inventoryManager = GetComponent<InventoryManager>();
 
                 MyInput();
                 SpeedControl();
@@ -226,14 +234,15 @@ public class PlayerMovement : MonoBehaviour
 
     private void Invisibility()
     {
-        if (invisibleTime == true)
+        if (Input.GetKeyDown(KeyCode.LeftControl) && helmInInventory == true)
         {
             Invisible = true;
             canDash = true;
-            //invisibleTimer = 3f;
+            invisibleTimer = 30f;
+            Debug.Log("Timer Set");
         }
 
-        if (invisibleTime == false) 
+        if (helmInInventory == false) 
         { 
             canDash = false;
             Invisible = false;
@@ -242,7 +251,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (invisibleTimer <= 0)
         {
-            invisibleTime = false;
+            helmInInventory = false;
         }
     }
 
@@ -263,63 +272,53 @@ public class PlayerMovement : MonoBehaviour
             gameObject.GetComponent<PlayerMovement>().enabled = false;
         }
 
-        //ItemWorld itemWorld = GetComponent<ItemWorld>();
-        //itemWorld.GetComponent<Collider>();
-
         if (other.tag == "TakeDownItemE")
         {
             Destroy(other.gameObject);
-            inventory.AddItem(new Item { itemType = Item.ItemType.TakeDownItemE, amount = 1});
         }
 
         if (other.tag == "TakeDownItemA")
         {
-            inventory.AddItem(new Item { itemType = Item.ItemType.TakeDownItemA, amount = 1});
-            Destroy(other.gameObject);
+          Destroy(other.gameObject);
         }
 
         if (other.tag == "TakeDownItemT")
         {
-            inventory.AddItem(new Item { itemType = Item.ItemType.TakeDownItemT, amount = 1});
             Destroy(other.gameObject);
         }
 
         if (other.tag == "GemE")
         {
-            gemE++;
-            inventory.AddItem(new Item { itemType = Item.ItemType.Gem1, amount = 1});
-            Destroy(other.gameObject);
+           Destroy(other.gameObject);
         }
 
         if (other.tag == "GemA")
         {
-            gemA++;
-            inventory.AddItem(new Item { itemType = Item.ItemType.Gem2, amount = 1});
             Destroy(other.gameObject);
         }
 
         if (other.tag == "GemT")
         {
-            gemT++;
-            inventory.AddItem(new Item { itemType = Item.ItemType.Gem3, amount = 1});
             Destroy(other.gameObject);
         }
 
         if (other.tag == "Helm")
         {
+            inventoryManager.hasHelm = true;
+            //inventoryManger.helmtext = true;
             Destroy(other.gameObject);
-            inventory.AddItem(new Item { itemType = Item.ItemType.Helm, amount = 1});
+           
         }
 
     }
 
-    private void UseItem(Item item)
+    
+    /*private void UseItem(Item item)
     {
         switch (item.itemType)
         {
             case Item.ItemType.Helm:
-                invisibleTime = true;
-                invisibleTimer = 10f;
+                helmIn();
                 inventory.RemoveItem(new Item { itemType = Item.ItemType.Helm, amount = 1 });
                 break;
             case Item.ItemType.Gem1:
@@ -341,7 +340,8 @@ public class PlayerMovement : MonoBehaviour
                 inventory.RemoveItem(new Item { itemType = Item.ItemType.TakeDownItemT, amount = 1 });
                 break;
         }
-    }
+    }*/
+    
 
     private void OnTriggerExit(Collider other)
     {
