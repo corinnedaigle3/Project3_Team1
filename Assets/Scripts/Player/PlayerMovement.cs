@@ -286,6 +286,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("colliding ");
         if (other.tag == "Behind")
         {
             if (inventoryManager.hasApple == true)
@@ -296,7 +297,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        if (other.CompareTag("Enemy") || other.CompareTag( "Fury"))
+        if (other.CompareTag("EnemyE") || other.CompareTag( "Fury") || other.CompareTag("EnemyA") || other.CompareTag("EnemyA"))
         {
             other.gameObject.GetComponentInParent<EnemyBehavior>().playerLose = true;
             transform.LookAt(other.transform.position);
@@ -307,10 +308,11 @@ public class PlayerMovement : MonoBehaviour
         {
             case "TakeDownItemE":
 
-                if (hasPickedUpItem)
+                if (!hasPickedUpItem)
                 {
                     hasPickedUpItem = true;
                     inventoryManager.hasApple = true;
+                    Debug.Log("tekdown should execute ");
 
                     inventoryManager.TakeDownItemEcounter++;
                     inventoryManager.ShowAmount(inventoryManager.TakeDownItemEText, inventoryManager.TakeDownItemEcounter);
@@ -321,7 +323,7 @@ public class PlayerMovement : MonoBehaviour
 
             case "TakeDownItemA":
 
-                if (hasPickedUpItem)
+                if (!hasPickedUpItem)
                 {
                     hasPickedUpItem = true;
                     inventoryManager.hasSkull = true;
@@ -335,7 +337,7 @@ public class PlayerMovement : MonoBehaviour
 
             case "TakeDownItemT":
 
-                if (hasPickedUpItem)
+                if (!hasPickedUpItem)
                 {
                     hasPickedUpItem = true;
                     inventoryManager.hasFireFlower = true;
@@ -349,7 +351,7 @@ public class PlayerMovement : MonoBehaviour
 
             case "GemE":
 
-                if (hasPickedUpItem)
+                if (!hasPickedUpItem)
                 {
                     hasPickedUpItem = true;
                     inventoryManager.hasGemE = true;
@@ -363,7 +365,7 @@ public class PlayerMovement : MonoBehaviour
 
             case "GemA":
 
-                if (hasPickedUpItem)
+                if (!hasPickedUpItem)
                 {
                     hasPickedUpItem = true;
                     inventoryManager.hasGemA = true;
@@ -377,7 +379,7 @@ public class PlayerMovement : MonoBehaviour
 
             case "GemT":
 
-                if (hasPickedUpItem)
+                if (!hasPickedUpItem)
                 {
                     hasPickedUpItem = true;
                     inventoryManager.hasGemT = true;
@@ -476,10 +478,9 @@ public class PlayerMovement : MonoBehaviour
             currentEnemy = null;
         }
 
-        if (other.tag != null)
-        {
+       
             hasPickedUpItem = false; // Reset flag when leaving
-        }
+        
 
         /*
         if (other.tag == "Helm")

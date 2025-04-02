@@ -6,6 +6,7 @@ using UnityEngine.Rendering;
 
 public class TakeDown : MonoBehaviour
 {
+    public InventoryManager inventory;
     public GameObject parent;
     public NavMeshAgent eAgent;
     public bool dead = false;
@@ -20,6 +21,7 @@ public class TakeDown : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        inventory = GameObject.FindWithTag("UI").GetComponent<InventoryManager>();
        eAgent = parent.GetComponent<NavMeshAgent>();
         named = parent.name;
     }
@@ -27,21 +29,71 @@ public class TakeDown : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (dead == true && named == "Enemy")
+        switch (named) // depending on the neame 
         {
-            eAgent.isStopped = true;
-            //gameObject.SetActive(false);
-        } else if (dead == true)
-        {
-         
-                StartCoroutine(furyTakeDown(3f));
+            case "FuryE":
+
+                if (dead == true && inventory.TakeDownItemEcounter >=1)
+                {
+                   StartCoroutine(furyTakeDown(3f));
+
+                }
+                break;  
+
+            case "FuryA":
+                if (dead == true && inventory.TakeDownItemAcounter >= 1)
+                {
+                    StartCoroutine(furyTakeDown(3f));
+
+                }
+                break; 
+
+            case "FuryT":
+
+                if (dead == true && inventory.TakeDownItemTcounter >= 1)
+                {
+                    StartCoroutine(furyTakeDown(3f));
+                }
+                break;
+
+        
+
+            default:
+                break;
 
         }
-        else if(dead == false)
+
+        switch (gameObject.tag) // deoending on the tag
         {
-            eAgent.isStopped = false;
-            gameObject.SetActive(true);
+            case "EnemyE":
+
+                if (dead == true && inventory.TakeDownItemEcounter >= 1)
+                {
+                    eAgent.isStopped = true;
+                }
+                break;
+
+            case "EnemyA":
+
+                if (dead == true && inventory.TakeDownItemAcounter >= 1)
+                {
+                    eAgent.isStopped = true;
+                }
+                break;
+
+            case "EnemyT":
+
+                if (dead == true && inventory.TakeDownItemTcounter >= 1)
+                {
+                    eAgent.isStopped = true;
+                }
+                break;
+
+
+            default:
+                break;
         }
+
     }
 
     IEnumerator furyTakeDown(float waitTime) // stop fury for waitTime seconds 

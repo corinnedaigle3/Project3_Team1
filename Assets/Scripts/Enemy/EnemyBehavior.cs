@@ -38,11 +38,9 @@ public class EnemyBehavior : MonoBehaviour
     private void Patrol()
     {
         // chose a new random waypoint when reach destination
-       if (agent.remainingDistance <= 0.5)
+       if (agent.remainingDistance == 0.5)
         {
-            waypointIdnex = Random.Range(0, Waypoints.Length);
-
-            agent.SetDestination(Waypoints[waypointIdnex].position);
+            StartCoroutine(NewDesitnation(1f));
         }
     }
 

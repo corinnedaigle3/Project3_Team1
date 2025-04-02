@@ -15,14 +15,14 @@ public class InventoryManager : MonoBehaviour
     public GameObject blankFireFlower;
     public GameObject spriteFireFlower;
 
-    public GameObject blankGem1;
-    public GameObject spriteGem1;
+    public GameObject blankGemT;
+    public GameObject spriteGemT;
 
-    public GameObject blankGem2;
-    public GameObject spriteGem2;
+    public GameObject blankGemA;
+    public GameObject spriteGemA;
 
-    public GameObject blankGem3;
-    public GameObject spriteGem3;
+    public GameObject blankGemE;
+    public GameObject spriteGemE;
 
     public GameObject blankHelm;
     public GameObject spriteHelm;
@@ -69,16 +69,16 @@ public class InventoryManager : MonoBehaviour
         blankFireFlower.SetActive(true);
 
         hasGemE = false;
-        spriteGem1.SetActive(false);
-        blankGem1.SetActive(true);
+        spriteGemT.SetActive(false);
+        blankGemT.SetActive(true);
 
         hasGemA = false;
-        spriteGem2.SetActive(false);
-        blankGem2.SetActive(true);
+        spriteGemA.SetActive(false);
+        blankGemA.SetActive(true);
 
         hasGemT = false;
-        spriteGem3.SetActive(false);
-        blankGem3.SetActive(true);
+        spriteGemE.SetActive(false);
+        blankGemE.SetActive(true);
 
         hasHelm = false;
         spriteHelm.SetActive(false);
@@ -122,31 +122,31 @@ public class InventoryManager : MonoBehaviour
         //Gem1
         if (hasGemE == true)
         {
-            spriteGem1.SetActive(true);
+            spriteGemT.SetActive(true);
         }
         else if (hasGemE == false)
         {
-            spriteGem1.SetActive(false);
+            spriteGemT.SetActive(false);
         }
 
         //Gem2
         if (hasGemA == true)
         {
-            spriteGem2.SetActive(true);
+            spriteGemA.SetActive(true);
         }
         else if (hasGemA == false)
         {
-            spriteGem2.SetActive(false);
+            spriteGemA.SetActive(false);
         }
 
         //Gem3
         if (hasGemT == true)
         {
-            spriteGem3.SetActive(true);
+            spriteGemE.SetActive(true);
         }
         else if (hasGemT == false)
         {
-            spriteGem3.SetActive(false);
+            spriteGemE.SetActive(false);
         }
 
         //helm
