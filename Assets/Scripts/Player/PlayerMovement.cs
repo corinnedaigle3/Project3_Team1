@@ -72,6 +72,7 @@ public class PlayerMovement : MonoBehaviour
     public InventoryManager inventoryManager;
     public bool helmInInventory;
     public int amount;
+    private bool triggerEnter;
 
     // Start is called before the first frame update
     void Start()
@@ -114,6 +115,10 @@ public class PlayerMovement : MonoBehaviour
 
                 MyInput();
                 SpeedControl();
+                DashPlayer();
+                DodgeEnemy();
+                Invisibility();
+                ShowAmount();
 
                 //check if player is on ground
                 if (grounded)
@@ -125,9 +130,6 @@ public class PlayerMovement : MonoBehaviour
                     rb.drag = 0;
                 }
 
-                DashPlayer();
-                DodgeEnemy();
-                Invisibility();
                 invisibleTimer -= Time.deltaTime;
 
                 // makes the enemy stop and destroys the collider when pressing Q
@@ -152,18 +154,14 @@ public class PlayerMovement : MonoBehaviour
 
                 float rollSpeedDropMultiplier = 5f;
                 rollSpeed -= rollSpeed * rollSpeedDropMultiplier * Time.deltaTime;
-
                 float rollSpeedMin = 15f;
-
-                DashPlayer();
-                DodgeEnemy();
-                Invisibility();
-                invisibleTimer -= Time.deltaTime;
 
                 if (rollSpeed < rollSpeedMin)
                 {
                     state = State.Normal;
                 }
+
+                invisibleTimer -= Time.deltaTime;
                 break;
         }
     }
@@ -237,8 +235,7 @@ public class PlayerMovement : MonoBehaviour
             Invisible = true;
             canDash = true;
             invisibleTimer = 6f;
-            inventoryManager.hasHelm = false;
-            amount =- 1;
+            amount -= 1;
         }
 
         if (invisibleTimer <= 0)
@@ -246,6 +243,40 @@ public class PlayerMovement : MonoBehaviour
             canDash = false;
             Invisible = false;
             moveSpeed = 8f;
+        }
+    }
+
+    private void ShowAmount()
+    {
+        if (amount == 0)
+        {
+            inventoryManager.hasHelm = false;
+            inventoryManager.helmText1.gameObject.SetActive(false);
+            inventoryManager.helmText2.gameObject.SetActive(false);
+            inventoryManager.helmText3.gameObject.SetActive(false);
+        }
+        else if (amount == 1)
+        {
+            inventoryManager.helmText1.gameObject.SetActive(true);
+            inventoryManager.helmText2.gameObject.SetActive(false);
+            inventoryManager.helmText3.gameObject.SetActive(false);
+        }
+        else if (amount == 2)
+        {
+            inventoryManager.helmText1.gameObject.SetActive(false);
+            inventoryManager.helmText2.gameObject.SetActive(true);
+        }
+        else if (amount == 3)
+        {
+            inventoryManager.helmText2.gameObject.SetActive(false);
+            inventoryManager.helmText3.gameObject.SetActive(true);
+            inventoryManager.helmText3.gameObject.SetActive(false);
+        }
+        else
+        {
+            inventoryManager.helmText1.gameObject.SetActive(false);
+            inventoryManager.helmText2.gameObject.SetActive(false);
+            inventoryManager.helmText3.gameObject.SetActive(false);
         }
     }
 
@@ -307,30 +338,11 @@ public class PlayerMovement : MonoBehaviour
         if (other.tag == "Helm")
         {
             inventoryManager.hasHelm = true;
-            amount += 1;
-
-            if (amount == 1)
+            if (!triggerEnter && amount <= 3)
             {
-               inventoryManager.helmText1.gameObject.SetActive(true);
+                amount += 1;
+                triggerEnter = true;
             }
-            else if (amount == 2)
-            {
-                inventoryManager.helmText1.gameObject.SetActive(false);
-                inventoryManager.helmText2.gameObject.SetActive(true);
-            }
-            else if(amount == 3)
-            {
-                inventoryManager.helmText2.gameObject.SetActive(false);
-                inventoryManager.helmText3.gameObject.SetActive(true);
-            }
-            else
-            {
-                inventoryManager.helmText1.gameObject.SetActive(false);
-                inventoryManager.helmText2.gameObject.SetActive(false);
-                inventoryManager.helmText3.gameObject.SetActive(false);
-            }
-
-            Destroy(other.gameObject);
         }
 
     }
@@ -343,6 +355,12 @@ public class PlayerMovement : MonoBehaviour
             takeDowntext.SetActive(false);
             canKill = false;
             currentEnemy = null;
+        }
+
+        if (other.tag == "Helm")
+        {
+            triggerEnter = false;
+            Destroy(other.gameObject);
         }
     }
 }
