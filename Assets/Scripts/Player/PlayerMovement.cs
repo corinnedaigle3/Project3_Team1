@@ -69,12 +69,9 @@ public class PlayerMovement : MonoBehaviour
     public GameObject currentEnemy;
 
     [Header("Inventory")]
-    //private Inventory inventory;
-    //[SerializeField] private UI_Inventory uiInventory;
-
     public InventoryManager inventoryManager;
-
     public bool helmInInventory;
+    public int amount;
 
     // Start is called before the first frame update
     void Start()
@@ -112,7 +109,8 @@ public class PlayerMovement : MonoBehaviour
         {
             case State.Normal:
                 grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGrounded);
-                inventoryManager = GetComponent<InventoryManager>();
+
+                //inventoryManager = GetComponent<InventoryManager>();
 
                 MyInput();
                 SpeedControl();
@@ -234,24 +232,20 @@ public class PlayerMovement : MonoBehaviour
 
     private void Invisibility()
     {
-        if (Input.GetKeyDown(KeyCode.LeftControl) && helmInInventory == true)
+        if (Input.GetKeyDown(KeyCode.LeftControl) && inventoryManager.hasHelm == true)
         {
             Invisible = true;
             canDash = true;
-            invisibleTimer = 30f;
-            Debug.Log("Timer Set");
-        }
-
-        if (helmInInventory == false) 
-        { 
-            canDash = false;
-            Invisible = false;
-            moveSpeed = 8f;
+            invisibleTimer = 6f;
+            inventoryManager.hasHelm = false;
+            amount--;
         }
 
         if (invisibleTimer <= 0)
         {
-            helmInInventory = false;
+            canDash = false;
+            Invisible = false;
+            moveSpeed = 8f;
         }
     }
 
@@ -259,10 +253,12 @@ public class PlayerMovement : MonoBehaviour
     {
         if (other.tag == "Behind")
         {
-            //take down enemy text
-            takeDowntext.SetActive(true);
-            canKill = true;
-            currentEnemy = other.gameObject;
+            if (inventoryManager.hasApple == true)
+            {
+                takeDowntext.SetActive(true);
+                canKill = true;
+                currentEnemy = other.gameObject;
+            }
         }
 
         if (other.CompareTag("Enemy") || other.CompareTag( "Fury"))
@@ -274,74 +270,70 @@ public class PlayerMovement : MonoBehaviour
 
         if (other.tag == "TakeDownItemE")
         {
+            inventoryManager.hasApple = true;
             Destroy(other.gameObject);
         }
 
         if (other.tag == "TakeDownItemA")
         {
-          Destroy(other.gameObject);
+            inventoryManager.hasSkull = true;
+            Destroy(other.gameObject);
         }
 
         if (other.tag == "TakeDownItemT")
         {
+            inventoryManager.hasFireFlower = true;
             Destroy(other.gameObject);
         }
 
         if (other.tag == "GemE")
         {
-           Destroy(other.gameObject);
+            inventoryManager.hasGem1 = true;
+            Destroy(other.gameObject);
         }
 
         if (other.tag == "GemA")
         {
+            inventoryManager.hasGem2 = true;
             Destroy(other.gameObject);
         }
 
         if (other.tag == "GemT")
         {
+            inventoryManager.hasGem3 = true;
             Destroy(other.gameObject);
         }
 
         if (other.tag == "Helm")
         {
             inventoryManager.hasHelm = true;
-            //inventoryManger.helmtext = true;
+            amount++;
+
+            if (amount == 1)
+            {
+               inventoryManager.helmText1.gameObject.SetActive(true);
+            }
+            else if (amount == 2)
+            {
+                inventoryManager.helmText1.gameObject.SetActive(false);
+                inventoryManager.helmText2.gameObject.SetActive(true);
+            }
+            else if(amount == 3)
+            {
+                inventoryManager.helmText2.gameObject.SetActive(false);
+                inventoryManager.helmText3.gameObject.SetActive(true);
+            }
+            else
+            {
+                inventoryManager.helmText1.gameObject.SetActive(false);
+                inventoryManager.helmText2.gameObject.SetActive(false);
+                inventoryManager.helmText3.gameObject.SetActive(false);
+            }
+
             Destroy(other.gameObject);
-           
         }
 
     }
-
-    
-    /*private void UseItem(Item item)
-    {
-        switch (item.itemType)
-        {
-            case Item.ItemType.Helm:
-                helmIn();
-                inventory.RemoveItem(new Item { itemType = Item.ItemType.Helm, amount = 1 });
-                break;
-            case Item.ItemType.Gem1:
-                inventory.RemoveItem(new Item { itemType = Item.ItemType.Gem1, amount = 1 });
-                break;
-            case Item.ItemType.Gem2:
-                inventory.RemoveItem(new Item { itemType = Item.ItemType.Gem2, amount = 1 });
-                break;
-            case Item.ItemType.Gem3:
-                inventory.RemoveItem(new Item { itemType = Item.ItemType.Gem3, amount = 1 });
-                break;
-            case Item.ItemType.TakeDownItemE:
-                inventory.RemoveItem(new Item { itemType = Item.ItemType.TakeDownItemE, amount = 1 });
-                break;
-            case Item.ItemType.TakeDownItemA:
-                inventory.RemoveItem(new Item { itemType = Item.ItemType.TakeDownItemA, amount = 1 });
-                break;
-            case Item.ItemType.TakeDownItemT:
-                inventory.RemoveItem(new Item { itemType = Item.ItemType.TakeDownItemT, amount = 1 });
-                break;
-        }
-    }*/
-    
 
     private void OnTriggerExit(Collider other)
     {

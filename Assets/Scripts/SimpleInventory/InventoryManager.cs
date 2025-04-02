@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class InventoryManager : MonoBehaviour
 {
-   public GameObject blankApple;
+    public GameObject blankApple;
     public GameObject spriteApple;
 
     public GameObject blankSkull;
@@ -38,6 +38,9 @@ public class InventoryManager : MonoBehaviour
     public bool hasGem3;
     public bool hasHelm;
 
+    public int amount;
+    public PlayerMovement playerMovement;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -68,7 +71,9 @@ public class InventoryManager : MonoBehaviour
         hasHelm = false;
         spriteHelm.SetActive(false);
         blankHelm.SetActive(true);
-        //helmText1.SetActive(false);
+        helmText1.gameObject.SetActive(false);
+        helmText2.gameObject.SetActive(false);
+        helmText3.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
