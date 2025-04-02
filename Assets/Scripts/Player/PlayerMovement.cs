@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
-using static UnityEditor.Progress;
+
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -73,6 +73,7 @@ public class PlayerMovement : MonoBehaviour
     public bool helmInInventory;
     public int amount;
     private bool triggerEnter;
+    private bool hasPickedUpItem = false;
 
     // Start is called before the first frame update
     void Start()
@@ -118,7 +119,7 @@ public class PlayerMovement : MonoBehaviour
                 DashPlayer();
                 DodgeEnemy();
                 Invisibility();
-                ShowAmount();
+               // ShowAmount();
 
                 //check if player is on ground
                 if (grounded)
@@ -245,7 +246,7 @@ public class PlayerMovement : MonoBehaviour
             moveSpeed = 8f;
         }
     }
-
+    /*
     private void ShowAmount()
     {
         if (amount == 0)
@@ -280,6 +281,8 @@ public class PlayerMovement : MonoBehaviour
             inventoryManager.helmText3.gameObject.SetActive(false);
         }
     }
+*/
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -300,6 +303,120 @@ public class PlayerMovement : MonoBehaviour
             gameObject.GetComponent<PlayerMovement>().enabled = false;
         }
 
+        switch (other.tag)
+        {
+            case "TakeDownItemE":
+
+                if (hasPickedUpItem)
+                {
+                    hasPickedUpItem = true;
+                    inventoryManager.hasApple = true;
+
+                    inventoryManager.TakeDownItemEcounter++;
+                    inventoryManager.ShowAmount(inventoryManager.TakeDownItemEText, inventoryManager.TakeDownItemEcounter);
+                    Destroy(other.gameObject);
+                }
+               
+                break;
+
+            case "TakeDownItemA":
+
+                if (hasPickedUpItem)
+                {
+                    hasPickedUpItem = true;
+                    inventoryManager.hasSkull = true;
+
+                    inventoryManager.TakeDownItemAcounter++;
+                    inventoryManager.ShowAmount(inventoryManager.TakeDownItemAText, inventoryManager.TakeDownItemAcounter);
+                    Destroy(other.gameObject);
+                }
+               
+                break;
+
+            case "TakeDownItemT":
+
+                if (hasPickedUpItem)
+                {
+                    hasPickedUpItem = true;
+                    inventoryManager.hasFireFlower = true;
+
+                    inventoryManager.TakeDownItemTcounter++;
+                    inventoryManager.ShowAmount(inventoryManager.TakeDownItemTText, inventoryManager.TakeDownItemTcounter);
+                    Destroy(other.gameObject);
+                }
+               
+                break;
+
+            case "GemE":
+
+                if (hasPickedUpItem)
+                {
+                    hasPickedUpItem = true;
+                    inventoryManager.hasGemE = true;
+
+                    inventoryManager.GemEcounter++;
+                    inventoryManager.ShowAmount(inventoryManager.gemEText, inventoryManager.GemEcounter);
+                    Destroy(other.gameObject);
+                }
+               
+                break;
+
+            case "GemA":
+
+                if (hasPickedUpItem)
+                {
+                    hasPickedUpItem = true;
+                    inventoryManager.hasGemA = true;
+
+                    inventoryManager.GemAcounter++;
+                    inventoryManager.ShowAmount(inventoryManager.gemAText, inventoryManager.GemAcounter);
+                    Destroy(other.gameObject);
+                }
+              
+                break;
+
+            case "GemT":
+
+                if (hasPickedUpItem)
+                {
+                    hasPickedUpItem = true;
+                    inventoryManager.hasGemT = true;
+
+                    inventoryManager.GemTcounter++;
+                    inventoryManager.ShowAmount(inventoryManager.gemTText, inventoryManager.GemTcounter);
+                    Destroy(other.gameObject);
+                }
+               
+                break;
+
+            case "Helm":
+
+                if (!hasPickedUpItem) // Check if the Helm was already picked up
+                {
+                    hasPickedUpItem = true;
+                    Debug.Log("Helm Is picked up");
+                    inventoryManager.hasHelm = true;
+                    inventoryManager.helmcounter++;
+                    inventoryManager.ShowAmount(inventoryManager.helmText, inventoryManager.helmcounter);
+                    Destroy(other.gameObject);
+                }
+                
+
+                /*
+                if (!triggerEnter && amount <= 3)
+                {
+                    amount += 1;
+                    triggerEnter = true;
+                }
+
+                */
+                break;
+
+             default:
+                break;
+            
+        }
+        /*
         if (other.tag == "TakeDownItemE")
         {
             inventoryManager.hasApple = true;
@@ -345,6 +462,7 @@ public class PlayerMovement : MonoBehaviour
                 triggerEnter = true;
             }
         }
+        */
 
     }
 
@@ -358,10 +476,17 @@ public class PlayerMovement : MonoBehaviour
             currentEnemy = null;
         }
 
+        if (other.tag != null)
+        {
+            hasPickedUpItem = false; // Reset flag when leaving
+        }
+
+        /*
         if (other.tag == "Helm")
         {
             triggerEnter = false;
             Destroy(other.gameObject);
         }
+        */
     }
 }

@@ -26,17 +26,29 @@ public class InventoryManager : MonoBehaviour
 
     public GameObject blankHelm;
     public GameObject spriteHelm;
-    public TextMeshProUGUI helmText1;
-    public TextMeshProUGUI helmText2;
-    public TextMeshProUGUI helmText3;
+    public TextMeshProUGUI helmText;
+    public TextMeshProUGUI TakeDownItemEText;
+    public TextMeshProUGUI TakeDownItemAText; // replace with proper names 
+    public TextMeshProUGUI TakeDownItemTText;
+    public TextMeshProUGUI gemEText;
+    public TextMeshProUGUI gemAText;
+    public TextMeshProUGUI gemTText;
 
     public bool hasApple;
     public bool hasSkull;
     public bool hasFireFlower;
-    public bool hasGem1;
-    public bool hasGem2;
-    public bool hasGem3;
+    public bool hasGemE;
+    public bool hasGemA;
+    public bool hasGemT;
     public bool hasHelm;
+
+    public int TakeDownItemEcounter = 0;
+    public int TakeDownItemAcounter = 0;
+    public int TakeDownItemTcounter = 0;
+    public int GemEcounter = 0;
+    public int GemAcounter = 0;
+    public int GemTcounter = 0;
+    public int helmcounter = 0;
 
     //public int amount;
     public PlayerMovement playerMovement;
@@ -56,24 +68,22 @@ public class InventoryManager : MonoBehaviour
         spriteFireFlower.SetActive(false);
         blankFireFlower.SetActive(true);
 
-        hasGem1 = false;
+        hasGemE = false;
         spriteGem1.SetActive(false);
         blankGem1.SetActive(true);
 
-        hasGem2 = false;
+        hasGemA = false;
         spriteGem2.SetActive(false);
         blankGem2.SetActive(true);
 
-        hasGem3 = false;
+        hasGemT = false;
         spriteGem3.SetActive(false);
         blankGem3.SetActive(true);
 
         hasHelm = false;
         spriteHelm.SetActive(false);
         blankHelm.SetActive(true);
-        helmText1.gameObject.SetActive(false);
-        helmText2.gameObject.SetActive(false);
-        helmText3.gameObject.SetActive(false);
+     
     }
 
     // Update is called once per frame
@@ -110,31 +120,31 @@ public class InventoryManager : MonoBehaviour
         }
 
         //Gem1
-        if (hasGem1 == true)
+        if (hasGemE == true)
         {
             spriteGem1.SetActive(true);
         }
-        else if (hasGem1 == false)
+        else if (hasGemE == false)
         {
             spriteGem1.SetActive(false);
         }
 
         //Gem2
-        if (hasGem2 == true)
+        if (hasGemA == true)
         {
             spriteGem2.SetActive(true);
         }
-        else if (hasGem2 == false)
+        else if (hasGemA == false)
         {
             spriteGem2.SetActive(false);
         }
 
         //Gem3
-        if (hasGem3 == true)
+        if (hasGemT == true)
         {
             spriteGem3.SetActive(true);
         }
-        else if (hasGem3 == false)
+        else if (hasGemT == false)
         {
             spriteGem3.SetActive(false);
         }
@@ -148,5 +158,29 @@ public class InventoryManager : MonoBehaviour
         {
             spriteHelm.SetActive(false);
         }
+    }
+
+    public void ShowAmount(TextMeshProUGUI textChange, int amount)
+    {
+        if (amount == 0)
+        {
+            textChange.gameObject.SetActive(false);
+        }
+        else if (amount == 1)
+        {            
+            textChange.text = "" + amount;
+            textChange.gameObject.SetActive(true);
+        }
+        else if (amount == 2)
+        {        
+            textChange.text = "" + amount;
+            textChange.gameObject.SetActive(true);
+        }
+        else if (amount == 3)
+        {
+            textChange.text = "" + amount;
+            textChange.gameObject.SetActive(true);
+        }
+       
     }
 }
