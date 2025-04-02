@@ -265,6 +265,7 @@ public class PlayerMovement : MonoBehaviour
         {
             inventoryManager.helmText1.gameObject.SetActive(false);
             inventoryManager.helmText2.gameObject.SetActive(true);
+            inventoryManager.helmText3.gameObject.SetActive(false);
         }
         else if (amount == 3)
         {
