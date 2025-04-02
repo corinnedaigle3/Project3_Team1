@@ -137,10 +137,10 @@ public class PlayerMovement : MonoBehaviour
                 if (canKill == true && currentEnemy != null && Input.GetKeyDown(KeyCode.Q))
                 {
                     Debug.Log("Q is pressed");
-                    takeDown = currentEnemy.GetComponent<TakeDown>();
                     if (takeDown != null) // Add a null check
                     {
                         takeDown.dead = true;
+                        Debug.Log("is it dead " +  takeDown.dead);
                     }
                     else
                     {
@@ -289,12 +289,13 @@ public class PlayerMovement : MonoBehaviour
         Debug.Log("colliding ");
         if (other.tag == "Behind")
         {
-            if (inventoryManager.hasApple == true)
-            {
-                takeDowntext.SetActive(true);
-                canKill = true;
-                currentEnemy = other.gameObject;
-            }
+
+             takeDowntext.SetActive(true);
+             canKill = true;
+             currentEnemy = other.gameObject;
+            takeDown = currentEnemy.GetComponent<TakeDown>();
+
+
         }
 
         if (other.CompareTag("EnemyE") || other.CompareTag( "Fury") || other.CompareTag("EnemyA") || other.CompareTag("EnemyA"))

@@ -11,6 +11,7 @@ public class TakeDown : MonoBehaviour
     public NavMeshAgent eAgent;
     public bool dead = false;
     public  Transform dropItemPoint;
+    public Collider c;
 
     public GameObject gem1;
     public string named;
@@ -27,7 +28,7 @@ public class TakeDown : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         switch (named) // depending on the neame 
         {
@@ -35,7 +36,7 @@ public class TakeDown : MonoBehaviour
 
                 if (dead == true && inventory.TakeDownItemEcounter >=1)
                 {
-                   StartCoroutine(furyTakeDown(3f));
+                   StartCoroutine(furyTakeDown(1f));
 
                 }
                 break;  
@@ -43,7 +44,7 @@ public class TakeDown : MonoBehaviour
             case "FuryA":
                 if (dead == true && inventory.TakeDownItemAcounter >= 1)
                 {
-                    StartCoroutine(furyTakeDown(3f));
+                    StartCoroutine(furyTakeDown(1f));
 
                 }
                 break; 
@@ -52,7 +53,7 @@ public class TakeDown : MonoBehaviour
 
                 if (dead == true && inventory.TakeDownItemTcounter >= 1)
                 {
-                    StartCoroutine(furyTakeDown(3f));
+                    StartCoroutine(furyTakeDown(1f));
                 }
                 break;
 
@@ -63,13 +64,16 @@ public class TakeDown : MonoBehaviour
 
         }
 
-        switch (gameObject.tag) // deoending on the tag
+       // Debug.Log("the tag " + gameObject.tag);
+        switch (parent.tag) // deoending on the tag
         {
             case "EnemyE":
 
+                Debug.Log( "how much is in it " + inventory.TakeDownItemEcounter);
                 if (dead == true && inventory.TakeDownItemEcounter >= 1)
                 {
                     eAgent.isStopped = true;
+                    c.enabled = false;
                 }
                 break;
 
@@ -78,14 +82,16 @@ public class TakeDown : MonoBehaviour
                 if (dead == true && inventory.TakeDownItemAcounter >= 1)
                 {
                     eAgent.isStopped = true;
+                    c.enabled = false;
                 }
                 break;
 
-            case "EnemyT":
+            case "EnemyT": // tartarus 
 
                 if (dead == true && inventory.TakeDownItemTcounter >= 1)
                 {
                     eAgent.isStopped = true;
+                    c.enabled = false;
                 }
                 break;
 
@@ -99,6 +105,7 @@ public class TakeDown : MonoBehaviour
     IEnumerator furyTakeDown(float waitTime) // stop fury for waitTime seconds 
     {
         eAgent.isStopped = true;
+        c.enabled = false;
         if (gemCount < 1)
         {
             Instantiate(gem1, dropItemPoint.transform.position, Quaternion.identity);
@@ -106,6 +113,7 @@ public class TakeDown : MonoBehaviour
         }
         yield return new WaitForSeconds(waitTime);
         eAgent.isStopped = false;
+        c.enabled = true;
     }
 
   
