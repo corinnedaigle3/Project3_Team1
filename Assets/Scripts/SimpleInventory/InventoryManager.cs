@@ -38,7 +38,7 @@ public class InventoryManager : MonoBehaviour
     public bool hasGem3;
     public bool hasHelm;
 
-    public int amount;
+    //public int amount;
     public PlayerMovement playerMovement;
 
     // Start is called before the first frame update

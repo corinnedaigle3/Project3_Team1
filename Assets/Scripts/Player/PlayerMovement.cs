@@ -87,7 +87,7 @@ public class PlayerMovement : MonoBehaviour
         //invisibleTime = false;
         takeDowntext.SetActive(false);
 
-        helmInInventory = false;
+        amount = 0;
 
         fury1 = false;
         fury2 = false;
@@ -238,7 +238,7 @@ public class PlayerMovement : MonoBehaviour
             canDash = true;
             invisibleTimer = 6f;
             inventoryManager.hasHelm = false;
-            amount--;
+            amount =- 1;
         }
 
         if (invisibleTimer <= 0)
@@ -307,7 +307,7 @@ public class PlayerMovement : MonoBehaviour
         if (other.tag == "Helm")
         {
             inventoryManager.hasHelm = true;
-            amount++;
+            amount += 1;
 
             if (amount == 1)
             {
