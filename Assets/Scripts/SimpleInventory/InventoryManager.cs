@@ -50,8 +50,8 @@ public class InventoryManager : MonoBehaviour
     public int GemTcounter = 0;
     public int helmcounter = 0;
 
-    UI ui;
-    public bool inventory;
+    //UI ui;
+   // public bool inventory;
 
     //public int amount;
     public PlayerMovement playerMovement;
@@ -59,8 +59,7 @@ public class InventoryManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (ui.inventory == true)
-        {
+      
             hasApple = false;
             spriteApple.SetActive(false);
             blankApple.SetActive(true);
@@ -89,7 +88,7 @@ public class InventoryManager : MonoBehaviour
             spriteHelm.SetActive(false);
             blankHelm.SetActive(true);
 
-        }
+        
 
     }
 
