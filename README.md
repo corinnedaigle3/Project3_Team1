@@ -29,12 +29,16 @@ GITHUB: https://github.com/corinnedaigle3/Project3_Team1
 -RELEASE NOTES-
 
 Game Project: Fate of the Fallen
+
 Creators: Ghost Knights - Zachary Ball, Andres Benavente, Corinne Daigle, Kim Thao Nguyen, Miguel Pineda, Sze Hiu Yeung
 
 Version: 0.1
+
 Date: 4/2/2025
 
 New features: 
+
+
 Take Down: When the player has a take down item in their inventory (found in random locations on each level) and has successfully sneaked behind an enemy, they can press Q to freeze the enemy in place. If the enemy is a Fury, the freeze is temporary, and a gem will be dropped.
 
 
