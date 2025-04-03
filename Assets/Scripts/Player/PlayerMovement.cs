@@ -14,6 +14,8 @@ public class PlayerMovement : MonoBehaviour
         Rolling,
     }
 
+    public static GameObject playerInstance;
+
     [Header("BeatTheGame")]
     public int gemE; // just counter for how many fury gems we have 
     public int gemA; // just counter for how many fury gems we have 
