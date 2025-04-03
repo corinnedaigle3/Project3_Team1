@@ -5,13 +5,21 @@ using UnityEngine;
 public class pSpawn : MonoBehaviour
 {
     public GameObject player;
+    bool playerIsHere = false;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         player = GameObject.FindWithTag("Player");
-        player.transform.position = gameObject.transform.position;
+        player.transform.position = transform.position;
     }
 
- 
+    private void Update()
+    {
+        if (!playerIsHere)
+        {
+            playerIsHere = true;
+            player.transform.position = transform.position;
+        }
+    }
+
 }

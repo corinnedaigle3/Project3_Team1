@@ -80,6 +80,8 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        inventoryManager = GameObject.Find("Canvas").GetComponent<InventoryManager>();
+        takeDowntext = GameObject.Find("TakeDownText");
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         moveSpeed = 8f;
@@ -89,7 +91,7 @@ public class PlayerMovement : MonoBehaviour
         elysiumCollectionItem = false;
         tartarusCollectionItem = false;
         //invisibleTime = false;
-        takeDowntext.SetActive(false);
+        //takeDowntext.SetActive(false);
 
         amount = 0;
 
@@ -100,6 +102,15 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
+        if (playerInstance != null && playerInstance != this.gameObject)
+        {
+            Destroy(gameObject); // Destroy duplicate instance
+        }
+        else
+        {
+            playerInstance = this.gameObject;
+            DontDestroyOnLoad(gameObject); // Persist across scenes
+        }
         state = State.Normal;
         //inventory = new Inventory(UseItem);
         //uiInventory.SetInventory(inventory);
@@ -138,6 +149,7 @@ public class PlayerMovement : MonoBehaviour
                 // makes the enemy stop and destroys the collider when pressing Q
                 if (canKill == true && currentEnemy != null && Input.GetKeyDown(KeyCode.Q))
                 {
+
                     Debug.Log("Q is pressed");
                     if (takeDown != null) // Add a null check
                     {
