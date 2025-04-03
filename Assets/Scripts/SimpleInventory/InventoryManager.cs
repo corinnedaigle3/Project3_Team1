@@ -50,40 +50,47 @@ public class InventoryManager : MonoBehaviour
     public int GemTcounter = 0;
     public int helmcounter = 0;
 
+    UI ui;
+    public bool inventory;
+
     //public int amount;
     public PlayerMovement playerMovement;
 
     // Start is called before the first frame update
     void Start()
     {
-        hasApple = false;
-        spriteApple.SetActive(false);
-        blankApple.SetActive(true);
+        if (ui.inventory == true)
+        {
+            hasApple = false;
+            spriteApple.SetActive(false);
+            blankApple.SetActive(true);
 
-        hasSkull = false;
-        spriteSkull.SetActive(false);
-        blankSkull.SetActive(true);
+            hasSkull = false;
+            spriteSkull.SetActive(false);
+            blankSkull.SetActive(true);
 
-        hasFireFlower = false;
-        spriteFireFlower.SetActive(false);
-        blankFireFlower.SetActive(true);
+            hasFireFlower = false;
+            spriteFireFlower.SetActive(false);
+            blankFireFlower.SetActive(true);
 
-        hasGemE = false;
-        spriteGemT.SetActive(false);
-        blankGemT.SetActive(true);
+            hasGemE = false;
+            spriteGemT.SetActive(false);
+            blankGemT.SetActive(true);
 
-        hasGemA = false;
-        spriteGemA.SetActive(false);
-        blankGemA.SetActive(true);
+            hasGemA = false;
+            spriteGemA.SetActive(false);
+            blankGemA.SetActive(true);
 
-        hasGemT = false;
-        spriteGemE.SetActive(false);
-        blankGemE.SetActive(true);
+            hasGemT = false;
+            spriteGemE.SetActive(false);
+            blankGemE.SetActive(true);
 
-        hasHelm = false;
-        spriteHelm.SetActive(false);
-        blankHelm.SetActive(true);
-     
+            hasHelm = false;
+            spriteHelm.SetActive(false);
+            blankHelm.SetActive(true);
+
+        }
+
     }
 
     // Update is called once per frame
