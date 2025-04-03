@@ -59,8 +59,6 @@ public class InventoryManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (ui.inventory == true)
-        {
             hasApple = false;
             spriteApple.SetActive(false);
             blankApple.SetActive(true);
@@ -88,8 +86,6 @@ public class InventoryManager : MonoBehaviour
             hasHelm = false;
             spriteHelm.SetActive(false);
             blankHelm.SetActive(true);
-
-        }
 
     }
 
