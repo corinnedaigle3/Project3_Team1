@@ -5,108 +5,88 @@ using UnityEngine.SceneManagement;
 
 public class UI : MonoBehaviour
 {
-    public GameObject credits;
-    public GameObject start;
-    public GameObject quit;
-    public GameObject back;
-    public GameObject resume;
-    public GameObject mainMenu;
-    public GameObject creditsMenu;
-    public GameObject winMenu;
-    public GameObject loseMenu;
+    private static UI instance;
+
+    private bool isPaused;
     public GameObject pauseMenu;
 
-    public InventoryManager inventoryManager;
+    [Header("Scene Based screen references ")]
+    public GameObject mainMenu;
+    public GameObject Levels;
 
-    public bool levels;
-    public bool main;
-    public bool pause;
-    public bool lose;
-    public bool win;
-    public static bool isPaused;
-    public bool inventory;
 
-    // Start is called before the first frame update
+    // not sure yet 
+   // public InventoryManager inventoryManager;
+
+    private void Awake()
+    {
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject); // Destroy duplicate instance
+        }
+        else
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject); // Persist across scenes
+        }
+    }
+
+
     void Start()
     {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
-        //inventory manager
-        inventory = false;
-
-        //Buttons
-        credits.gameObject.SetActive(true);
-        start.gameObject.SetActive(true);
-        quit.gameObject.SetActive(true);
-        back.gameObject.SetActive(false);
-        pauseMenu.SetActive(false);
-
-        //Backgrounds for Main
-        mainMenu.gameObject.SetActive(true);
-        creditsMenu.gameObject.SetActive(false);
-
-        //Backgound for Lose
-
-        //background for Win
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+        if(SceneManager.GetActiveScene().name == "MainMenu")
         {
-            if (isPaused)
+            mainMenu.SetActive(true);
+            Levels.SetActive(false);
+        }
+        else
+        {
+            mainMenu.SetActive(false);
+            Levels.SetActive(true);
+
+            if (Input.GetKeyDown(KeyCode.P))
             {
-                ResumeGame();
+                if (isPaused)
+                {
+                    ResumeGame();
+                }
+                else
+                {
+                    PauseGame();
+                }
             }
-            else
-            {
-                PauseGame();
-            }
+        }
+       
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
         }
 
     }
 
     public void Play()
     {
-        SceneManager.LoadScene("Game");
+        ResumeGame();
+        SceneManager.LoadScene("MainHub");
     }
 
-    public void BackToMenu()
+    public void LoadMain()
     {
-        credits.gameObject.SetActive(true);
-        start.gameObject.SetActive(true);
-        quit.gameObject.SetActive(true);
-        back.gameObject.SetActive(false);
+        SceneManager.LoadScene("MainMenu");
 
-        mainMenu.gameObject.SetActive(true);
-        creditsMenu.gameObject.SetActive(false);
-    }
-
-
-    public void Esc()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Application.Quit();
-        }
     }
 
     public void Quit()
     {
         Application.Quit();
-    }
-
-    public void Credits()
-    {
-        credits.gameObject.SetActive(false);
-        start.gameObject.SetActive(false);
-        quit.gameObject.SetActive(false);
-        back.gameObject.SetActive(true);
-
-        mainMenu.gameObject.SetActive(false);
-        creditsMenu.gameObject.SetActive(true);
     }
 
     public void PauseGame()
