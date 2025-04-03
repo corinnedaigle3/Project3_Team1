@@ -12,14 +12,18 @@ public class pSpawn : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         player.transform.position = transform.position;
     }
+  
 
-    private void Update()
+ 
+    private void FixedUpdate()
     {
+
         if (!playerIsHere)
         {
             playerIsHere = true;
             player.transform.position = transform.position;
         }
     }
+   
 
 }
