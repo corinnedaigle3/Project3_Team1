@@ -73,4 +73,6 @@ Not all menus are hooked up
 
 Not all graphics/designs are fully complete
 
+The take-down item does not work
+
 
