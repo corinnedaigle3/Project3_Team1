@@ -34,6 +34,7 @@ public class UI : MonoBehaviour
 
     void Start()
     {
+        Screen.SetResolution(1920, 1080, true);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 

@@ -9,7 +9,7 @@ public class pSpawn : MonoBehaviour
 
     private void Awake()
     {
-        player = GameObject.FindWithTag("Player");
+        player = GameObject.Find("Player");
         player.transform.position = transform.position;
     }
   

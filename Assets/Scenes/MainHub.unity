@@ -5707,6 +5707,10 @@ PrefabInstance:
       propertyPath: m_LocalRotation.x
       value: 0.04492852
       objectReference: {fileID: 0}
+    - target: {fileID: 7397353598842548885, guid: 8fc9ade81a39dc649bf971248c13cd18, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 2f31f4440de60444b8dd94d4d64b3c00, type: 2}
     - target: {fileID: 7603475639761628685, guid: 8fc9ade81a39dc649bf971248c13cd18, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.9903343
@@ -5715,6 +5719,10 @@ PrefabInstance:
       propertyPath: m_LocalRotation.x
       value: 0.13870122
       objectReference: {fileID: 0}
+    - target: {fileID: 7670792152509252832, guid: 8fc9ade81a39dc649bf971248c13cd18, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: bfe0cbb8b308b4a40a8f309f516eede2, type: 2}
     - target: {fileID: 8734909886117522096, guid: 8fc9ade81a39dc649bf971248c13cd18, type: 3}
       propertyPath: m_Name
       value: Player
@@ -25697,7 +25705,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 7730399dac4d1894c923673db003bad9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -76725,7 +76733,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25e3cd331e6a373489d19be6fb893ff0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  writeNameOfScene: ArtistTest
+  writeNameOfScene: Elysium
 --- !u!135 &1710506681
 SphereCollider:
   m_ObjectHideFlags: 0
