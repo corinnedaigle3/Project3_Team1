@@ -139,6 +139,7 @@ GameObject:
   - component: {fileID: 3076144792195246523}
   - component: {fileID: 4291802521388584259}
   - component: {fileID: 5920624093863450929}
+  - component: {fileID: 1599710050399771826}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: UI
@@ -280,7 +281,16 @@ MonoBehaviour:
   GemAcounter: 0
   GemTcounter: 0
   helmcounter: 0
+  inventory: 0
   playerMovement: {fileID: 0}
+--- !u!81 &1599710050399771826
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4049853550577067466}
+  m_Enabled: 1
 --- !u!1 &4470311239207018039
 GameObject:
   m_ObjectHideFlags: 0
