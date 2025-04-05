@@ -107,8 +107,7 @@ public class PlayerMovement : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-       
+    {  
         switch (state)
         {
             case State.Normal:
@@ -119,7 +118,6 @@ public class PlayerMovement : MonoBehaviour
                 DashPlayer();
                 DodgeEnemy();
                 Invisibility();
-               // ShowAmount();
 
                 //check if player is on ground
                 if (grounded)
@@ -210,7 +208,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.LeftShift))
             {
-                moveSpeed = 12f;
+                moveSpeed = 26f;
             }
 
             if (Input.GetKeyUp(KeyCode.LeftShift))
@@ -225,7 +223,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             rollDirection = moveDirection;
-            rollSpeed = 18f;
+            rollSpeed = 16f;
             state = State.Rolling;
         }
     }
@@ -247,56 +245,16 @@ public class PlayerMovement : MonoBehaviour
             moveSpeed = 20f;
         }
     }
-    /*
-    private void ShowAmount()
-    {
-        if (amount == 0)
-        {
-            inventoryManager.hasHelm = false;
-            inventoryManager.helmText1.gameObject.SetActive(false);
-            inventoryManager.helmText2.gameObject.SetActive(false);
-            inventoryManager.helmText3.gameObject.SetActive(false);
-        }
-        else if (amount == 1)
-        {
-            inventoryManager.helmText1.gameObject.SetActive(true);
-            inventoryManager.helmText2.gameObject.SetActive(false);
-            inventoryManager.helmText3.gameObject.SetActive(false);
-        }
-        else if (amount == 2)
-        {
-            inventoryManager.helmText1.gameObject.SetActive(false);
-            inventoryManager.helmText2.gameObject.SetActive(true);
-            inventoryManager.helmText3.gameObject.SetActive(false);
-        }
-        else if (amount == 3)
-        {
-            inventoryManager.helmText2.gameObject.SetActive(false);
-            inventoryManager.helmText3.gameObject.SetActive(true);
-            inventoryManager.helmText3.gameObject.SetActive(false);
-        }
-        else
-        {
-            inventoryManager.helmText1.gameObject.SetActive(false);
-            inventoryManager.helmText2.gameObject.SetActive(false);
-            inventoryManager.helmText3.gameObject.SetActive(false);
-        }
-    }
-*/
-
 
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("colliding ");
         if (other.tag == "Behind")
         {
-
             inventoryManager.takeDowntext.SetActive(true);
             canKill = true;
             currentEnemy = other.gameObject;
             takeDown = currentEnemy.GetComponent<TakeDown>();
-
-
         }
 
         if (other.CompareTag("EnemyE") || other.CompareTag( "Fury") || other.CompareTag("EnemyA") || other.CompareTag("EnemyA"))

@@ -247,59 +247,6 @@ MonoBehaviour:
   - {fileID: 4081225279023255465}
   - {fileID: 8919680326698483036}
   - {fileID: 277310707758360086}
---- !u!1 &1990254570245131253
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6605912517815661755}
-  - component: {fileID: 2029336024473228943}
-  m_Layer: 0
-  m_Name: ParryCollider
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6605912517815661755
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1990254570245131253}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.25, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 62298554178782356}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &2029336024473228943
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1990254570245131253}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 2, y: 2.5, z: 2}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2186827231534179622
 GameObject:
   m_ObjectHideFlags: 3
@@ -1003,6 +950,51 @@ MonoBehaviour:
   m_BiasX: 0
   m_BiasY: 0
   m_CenterOnActivate: 1
+--- !u!1 &7097811042428180148
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8806683453194809537}
+  - component: {fileID: 4427586963335213198}
+  m_Layer: 0
+  m_Name: LookAtPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8806683453194809537
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7097811042428180148}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1, y: 0, z: 12}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 62298554178782356}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4427586963335213198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7097811042428180148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ba11490331bd23438eeda432ea09aa8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distanceFromCamera: 7
 --- !u!1 &7164578818880537884
 GameObject:
   m_ObjectHideFlags: 3
@@ -1120,7 +1112,7 @@ Transform:
   - {fileID: 5585089818437385820}
   - {fileID: 20847424059600980}
   - {fileID: 2495073212101858428}
-  - {fileID: 6605912517815661755}
+  - {fileID: 8806683453194809537}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &5462403002250607093
@@ -1162,7 +1154,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 229affda3c7ccde42b0306dd8e8a5b99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInstanceObj: {fileID: 8734909886117522096}
   gemE: 0
   gemA: 0
   gemT: 0
@@ -1179,15 +1170,14 @@ MonoBehaviour:
   asphodelCollectionItem: 0
   elysiumCollectionItem: 0
   tartarusCollectionItem: 0
-  takeDowntext: {fileID: 7737311235509381891, guid: 1fc8a78fc50f15c44adc818fa13470f7, type: 3}
   takeDown: {fileID: 0}
   dead: 0
   fury1: 0
   fury2: 0
-  fury3: 0
+  fury3: 1
   canKill: 0
   currentEnemy: {fileID: 0}
-  inventoryManager: {fileID: 5920624093863450929, guid: d0197d588056b9647b4828df4dc39000, type: 3}
+  inventoryManager: {fileID: 0}
   helmInInventory: 0
   amount: 0
 --- !u!136 &2031590590646486855
