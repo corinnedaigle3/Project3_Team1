@@ -24,6 +24,8 @@ public class InventoryManager : MonoBehaviour
     public GameObject blankGemE;
     public GameObject spriteGemE;
 
+    public GameObject takeDowntext;
+
     public GameObject blankHelm;
     public GameObject spriteHelm;
     public TextMeshProUGUI helmText;
@@ -72,21 +74,22 @@ public class InventoryManager : MonoBehaviour
             blankFireFlower.SetActive(true);
 
             hasGemE = false;
-            spriteGemT.SetActive(false);
-            blankGemT.SetActive(true);
+            spriteGemE.SetActive(false);
+            blankGemE.SetActive(true);
 
             hasGemA = false;
             spriteGemA.SetActive(false);
             blankGemA.SetActive(true);
 
             hasGemT = false;
-            spriteGemE.SetActive(false);
-            blankGemE.SetActive(true);
+            spriteGemT.SetActive(false);
+            blankGemT.SetActive(true);
 
             hasHelm = false;
             spriteHelm.SetActive(false);
             blankHelm.SetActive(true);
 
+            takeDowntext.SetActive(false);
     }
 
     // Update is called once per frame
@@ -125,11 +128,11 @@ public class InventoryManager : MonoBehaviour
         //Gem1
         if (hasGemE == true)
         {
-            spriteGemT.SetActive(true);
+            spriteGemE.SetActive(true);
         }
         else if (hasGemE == false)
         {
-            spriteGemT.SetActive(false);
+            spriteGemE.SetActive(false);
         }
 
         //Gem2
@@ -145,11 +148,11 @@ public class InventoryManager : MonoBehaviour
         //Gem3
         if (hasGemT == true)
         {
-            spriteGemE.SetActive(true);
+            spriteGemT.SetActive(true);
         }
         else if (hasGemT == false)
         {
-            spriteGemE.SetActive(false);
+            spriteGemT.SetActive(false);
         }
 
         //helm

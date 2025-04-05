@@ -187,6 +187,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 852f599124894c748b09d0867bbe876b, type: 3}
+--- !u!1 &340443601 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1170453099180257885, guid: d0197d588056b9647b4828df4dc39000, type: 3}
+  m_PrefabInstance: {fileID: 1583631137010137458}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &380659671
 GameObject:
   m_ObjectHideFlags: 0
@@ -325,11 +330,6 @@ MonoBehaviour:
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: 8509d36c99977c24db5d9e84d94f7105, type: 2}
   m_BuildHeightMesh: 0
---- !u!1 &427333513 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6178358434233442286, guid: d0197d588056b9647b4828df4dc39000, type: 3}
-  m_PrefabInstance: {fileID: 1583631137010137458}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &482143927
 GameObject:
   m_ObjectHideFlags: 0
@@ -359,13 +359,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d9cdf3ad595e69499f56a67b4abd592, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  appleSprite: {fileID: 21300000, guid: 04ba4cbc0c9b3214c969da6a57f3ce18, type: 3}
-  skullSprite: {fileID: 21300000, guid: 76d23bb09e24f10448150ddd5d642fd4, type: 3}
-  fireFlowerSprite: {fileID: 21300000, guid: 1ad53cf8dc82d1142af803fde1afac2d, type: 3}
-  gemSprite1: {fileID: 21300000, guid: 885af3bd6700e9b4193f37a5662f3a6e, type: 3}
-  gemSprite2: {fileID: 21300000, guid: bab824ad76f5ac14cb61b11f3253f3fe, type: 3}
-  gemSprite3: {fileID: 21300000, guid: e2aff9a583622884c8ae7b653228af49, type: 3}
-  helmSprite: {fileID: 21300000, guid: 1bebf70b3cb567f459c2058d0180ecf9, type: 3}
 --- !u!224 &482143929
 RectTransform:
   m_ObjectHideFlags: 0
@@ -913,6 +906,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 249267539593715883, guid: d0197d588056b9647b4828df4dc39000, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1170453099180257885, guid: d0197d588056b9647b4828df4dc39000, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2442927289122053348, guid: d0197d588056b9647b4828df4dc39000, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2442927289122053348, guid: d0197d588056b9647b4828df4dc39000, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2442927289122053348, guid: d0197d588056b9647b4828df4dc39000, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2756047434866829334, guid: d0197d588056b9647b4828df4dc39000, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -998,9 +1011,33 @@ PrefabInstance:
       value: Canvas
       objectReference: {fileID: 0}
     - target: {fileID: 5920624093863450929, guid: d0197d588056b9647b4828df4dc39000, type: 3}
+      propertyPath: takeDowntext
+      value: 
+      objectReference: {fileID: 340443601}
+    - target: {fileID: 5920624093863450929, guid: d0197d588056b9647b4828df4dc39000, type: 3}
       propertyPath: playerMovement
       value: 
       objectReference: {fileID: 1047440103}
+    - target: {fileID: 6294261503515661329, guid: d0197d588056b9647b4828df4dc39000, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6294261503515661329, guid: d0197d588056b9647b4828df4dc39000, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 960
+      objectReference: {fileID: 0}
+    - target: {fileID: 6294261503515661329, guid: d0197d588056b9647b4828df4dc39000, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 984
+      objectReference: {fileID: 0}
+    - target: {fileID: 6757525757366351534, guid: d0197d588056b9647b4828df4dc39000, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6806372642077823913, guid: d0197d588056b9647b4828df4dc39000, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1109,7 +1146,7 @@ PrefabInstance:
     - target: {fileID: 232546778840802439, guid: 8fc9ade81a39dc649bf971248c13cd18, type: 3}
       propertyPath: takeDowntext
       value: 
-      objectReference: {fileID: 427333513}
+      objectReference: {fileID: 0}
     - target: {fileID: 232546778840802439, guid: 8fc9ade81a39dc649bf971248c13cd18, type: 3}
       propertyPath: inventoryManager
       value: 

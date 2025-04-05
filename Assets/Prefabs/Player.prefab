@@ -1131,7 +1131,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8734909886117522096}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 5
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -1162,6 +1162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 229affda3c7ccde42b0306dd8e8a5b99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerInstanceObj: {fileID: 8734909886117522096}
   gemE: 0
   gemA: 0
   gemT: 0
@@ -1178,7 +1179,7 @@ MonoBehaviour:
   asphodelCollectionItem: 0
   elysiumCollectionItem: 0
   tartarusCollectionItem: 0
-  takeDowntext: {fileID: 0}
+  takeDowntext: {fileID: 7737311235509381891, guid: 1fc8a78fc50f15c44adc818fa13470f7, type: 3}
   takeDown: {fileID: 0}
   dead: 0
   fury1: 0
