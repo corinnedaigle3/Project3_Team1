@@ -713,6 +713,7 @@ MonoBehaviour:
   player: {fileID: 62298554178782356}
   playerObj: {fileID: 6139329196204200669}
   rb: {fileID: 5462403002250607093}
+  PlayerControls: {fileID: -944628639613478452, guid: 10e1e28a7180b0e40884719f91c8f76c, type: 3}
   rotationSpeed: 7
 --- !u!114 &2224062214001679923
 MonoBehaviour:
@@ -950,52 +951,6 @@ MonoBehaviour:
   m_BiasX: 0
   m_BiasY: 0
   m_CenterOnActivate: 1
---- !u!1 &7097811042428180148
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8806683453194809537}
-  - component: {fileID: 4427586963335213198}
-  m_Layer: 0
-  m_Name: LookAtPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8806683453194809537
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7097811042428180148}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1, y: 0, z: 12}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 62298554178782356}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4427586963335213198
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7097811042428180148}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ba11490331bd23438eeda432ea09aa8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cam: {fileID: 0}
-  distanceFromCamera: 7
 --- !u!1 &7164578818880537884
 GameObject:
   m_ObjectHideFlags: 3
@@ -1113,7 +1068,6 @@ Transform:
   - {fileID: 5585089818437385820}
   - {fileID: 20847424059600980}
   - {fileID: 2495073212101858428}
-  - {fileID: 8806683453194809537}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &5462403002250607093
@@ -1155,14 +1109,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 229affda3c7ccde42b0306dd8e8a5b99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lose: 0
+  orientation: {fileID: 3834313450476296114}
+  player: {fileID: 62298554178782356}
+  playerObj: {fileID: 6139329196204200669}
+  PlayerControls: {fileID: -944628639613478452, guid: 10e1e28a7180b0e40884719f91c8f76c, type: 3}
   gemE: 0
   gemA: 0
   gemT: 0
   moveSpeed: 8
-  orientation: {fileID: 3834313450476296114}
-  player: {fileID: 62298554178782356}
-  playerObj: {fileID: 6139329196204200669}
   playerHeight: 2
   whatIsGrounded:
     serializedVersion: 2
@@ -1179,9 +1133,9 @@ MonoBehaviour:
   fury3: 1
   canKill: 0
   currentEnemy: {fileID: 0}
-  inventoryManager: {fileID: 0}
+  inventoryManager: {fileID: 5920624093863450929, guid: d0197d588056b9647b4828df4dc39000, type: 3}
   helmInInventory: 0
-  amount: 0
+  lose: 0
 --- !u!136 &2031590590646486855
 CapsuleCollider:
   m_ObjectHideFlags: 0

@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -10,9 +9,19 @@ public class PlayerMovement : MonoBehaviour
         Rolling,
     }
 
+
+    [Header("References")]
+    public Transform orientation;
+    public Transform player;
+    public Transform playerObj;
+    private Rigidbody rb;
     public static GameObject playerInstance;
 
-    public bool lose;
+    [Header("Input Actions")]
+    [SerializeField] private InputActionAsset PlayerControls;
+    private InputAction moveAction;
+    private InputAction dashAction;
+    private Vector2 moveInput;
 
     [Header("BeatTheGame")]
     public int gemE; // just counter for how many fury gems we have 
@@ -28,13 +37,6 @@ public class PlayerMovement : MonoBehaviour
     private float rollSpeed;
     private State state;
 
-    [Header("References")]
-    public Transform orientation;
-    public Transform player;
-    public Transform playerObj;
-    
-    private Rigidbody rb;
-
     [Header("Ground Check")]
     public float playerHeight;
     public LayerMask whatIsGrounded;
@@ -45,8 +47,6 @@ public class PlayerMovement : MonoBehaviour
     private float invisibleTimer = 0;
     public bool Invisible;
     private bool canDash;
-
-    [Header("Pickup and Throw")]
 
     [Header("Collection")]
     public bool asphodelCollectionItem;
@@ -71,6 +71,9 @@ public class PlayerMovement : MonoBehaviour
     public bool helmInInventory;
     private bool triggerEnter;
     private bool hasPickedUpItem = false;
+
+    [Header("Other")]
+    public bool lose;
 
     // Start is called before the first frame update
     void Start()
@@ -101,8 +104,28 @@ public class PlayerMovement : MonoBehaviour
             playerInstance = this.gameObject;
             DontDestroyOnLoad(gameObject); // Persist across scenes
         }
+
+        moveAction = PlayerControls.FindActionMap("Player").FindAction("Move");
+        dashAction = PlayerControls.FindActionMap("Player").FindAction("Dash");
+
+        moveAction.performed += context => moveInput = context.ReadValue<Vector2>();
+        moveAction.canceled += context => moveInput = Vector2.zero;
+
         state = State.Normal;
     }
+
+    private void OnEnable()
+    {
+        moveAction.Enable();
+        dashAction.Enable();
+    }
+
+    private void OnDisable()
+    {
+        moveAction.Disable();
+        dashAction.Disable();
+    }
+
 
     // Update is called once per frame
     void Update()
@@ -184,6 +207,7 @@ public class PlayerMovement : MonoBehaviour
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
     }
+
     private void MovePlayer()
     {
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
@@ -202,7 +226,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void DashPlayer() // are we using this ????? Player can dash when Invisable
+    private void DashPlayer()
     {
         if (canDash == true)
         {
