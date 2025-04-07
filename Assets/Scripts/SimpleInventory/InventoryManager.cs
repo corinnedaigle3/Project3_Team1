@@ -52,7 +52,7 @@ public class InventoryManager : MonoBehaviour
     public int GemTcounter = 0;
     public int helmcounter = 0;
 
-    UI ui;
+   // UI ui;
     public bool inventory;
 
     //public int amount;

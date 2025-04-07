@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Build.Content;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,8 +8,11 @@ public class UI : MonoBehaviour
 {
     private static UI instance;
 
+    public string goToScene;
     private bool isPaused;
     public GameObject pauseMenu;
+    public GameManger gameManager;
+
 
     [Header("Scene Based screen references ")]
     public GameObject mainMenu;
@@ -37,6 +41,8 @@ public class UI : MonoBehaviour
         Screen.SetResolution(1920, 1080, true);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManger>();
+
 
     }
 
@@ -76,11 +82,14 @@ public class UI : MonoBehaviour
     public void Play()
     {
         ResumeGame();
-        SceneManager.LoadScene("MainHub");
+        SceneManager.LoadScene(goToScene);
+        gameManager.playerEnable();
+
     }
 
     public void LoadMain()
     {
+        gameManager.playerDisable();
         SceneManager.LoadScene("MainMenu");
 
     }
