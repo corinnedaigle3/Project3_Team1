@@ -69,7 +69,6 @@ public class PlayerMovement : MonoBehaviour
     [Header("Inventory")]
     public InventoryManager inventoryManager;
     public bool helmInInventory;
-    public int amount;
     private bool triggerEnter;
     private bool hasPickedUpItem = false;
 
@@ -85,8 +84,6 @@ public class PlayerMovement : MonoBehaviour
         asphodelCollectionItem = false;
         elysiumCollectionItem = false;
         tartarusCollectionItem = false;
-
-        amount = 0;
 
         fury1 = false;
         fury2 = false;
@@ -136,11 +133,12 @@ public class PlayerMovement : MonoBehaviour
                 // makes the enemy stop and destroys the collider when pressing Q
                 if (canKill == true && currentEnemy != null && Input.GetKeyDown(KeyCode.Q))
                 {
-
                     Debug.Log("Q is pressed");
                     if (takeDown != null) // Add a null check
                     {
                         takeDown.dead = true;
+                        inventoryManager.TakeDownItemEcounter++;
+                        inventoryManager.ShowAmount(inventoryManager.TakeDownItemEText, inventoryManager.TakeDownItemEcounter);
                         Debug.Log("is it dead " +  takeDown.dead);
                     }
                     else
@@ -237,7 +235,8 @@ public class PlayerMovement : MonoBehaviour
             Invisible = true;
             canDash = true;
             invisibleTimer = 6f;
-            amount -= 1;
+            inventoryManager.helmcounter--;
+            inventoryManager.ShowAmount(inventoryManager.helmText, inventoryManager.helmcounter);
         }
 
         if (invisibleTimer <= 0)
@@ -276,7 +275,6 @@ public class PlayerMovement : MonoBehaviour
                     hasPickedUpItem = true;
                     inventoryManager.hasApple = true;
                     Debug.Log("tekdown should execute ");
-
                     inventoryManager.TakeDownItemEcounter++;
                     inventoryManager.ShowAmount(inventoryManager.TakeDownItemEText, inventoryManager.TakeDownItemEcounter);
                     Destroy(other.gameObject);
