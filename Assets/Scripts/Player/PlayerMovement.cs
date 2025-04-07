@@ -12,6 +12,8 @@ public class PlayerMovement : MonoBehaviour
 
     public static GameObject playerInstance;
 
+    public bool lose;
+
     [Header("BeatTheGame")]
     public int gemE; // just counter for how many fury gems we have 
     public int gemA; // just counter for how many fury gems we have 
@@ -259,6 +261,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (other.CompareTag("EnemyE") || other.CompareTag( "Fury") || other.CompareTag("EnemyA") || other.CompareTag("EnemyA"))
         {
+            lose = true;
             other.gameObject.GetComponentInParent<EnemyBehavior>().playerLose = true;
             transform.LookAt(other.transform.position);
             gameObject.GetComponent<PlayerMovement>().enabled = false;

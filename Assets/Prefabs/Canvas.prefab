@@ -1126,7 +1126,6 @@ GameObject:
   - component: {fileID: 4291802521388584259}
   - component: {fileID: 5920624093863450929}
   - component: {fileID: 3667455227767001859}
-  - component: {fileID: 8475953616120443012}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: UI
@@ -1281,17 +1280,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76d5bbb43d1882f4aabbc43a55417d4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  goToScene: 
   pauseMenu: {fileID: 683132090280226554}
+  gameManager: {fileID: 0}
   mainMenu: {fileID: 3054719319982561044}
   Levels: {fileID: 4470311239207018039}
---- !u!81 &8475953616120443012
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4049853550577067466}
-  m_Enabled: 1
 --- !u!1 &4059335513052924903
 GameObject:
   m_ObjectHideFlags: 0

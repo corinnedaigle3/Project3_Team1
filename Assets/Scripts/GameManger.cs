@@ -16,6 +16,11 @@ public class GameManger : MonoBehaviour
     public bool portalUsed;
     public GameObject spawnPoint;
 
+    [Header("ConsumedG Gems")]
+    public bool furyE;
+    public bool furyA;
+    public bool furyT;
+
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -41,7 +46,7 @@ public class GameManger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (player == null)
+        if (player == null) // look for player when player is not around
         {
             player = GameObject.Find("Player");
         }
@@ -51,6 +56,11 @@ public class GameManger : MonoBehaviour
         ui.goToScene = data.LevelNameNew;
         Debug.Log("Scene name " + ui.goToScene);
 
+        // This is reseting the information so when you lose you have to start all over again from the sstart  
+        if (player.GetComponent<PlayerMovement>().lose)
+        {
+            data.LoadFromSafeFile();
+        }
 
     }
 
