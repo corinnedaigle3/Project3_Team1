@@ -140,6 +140,7 @@ public class SavingData : MonoBehaviour
         inventoryManager.GemTcounter = loadedData.GemTcounter;
         inventoryManager.helmcounter = loadedData.helmcounter;
 
+        SaveData();
         // Debug.Log($"JSON Loaded: {playerName}, {LevelNameNew}");
 
     }
@@ -207,6 +208,7 @@ public class SavingData : MonoBehaviour
         inventoryManager.GemTcounter = loadedData.GemTcounter;
         inventoryManager.helmcounter = loadedData.helmcounter;
 
+        SaveData();
         Debug.Log("Game reset to safe file.");
     }
 }

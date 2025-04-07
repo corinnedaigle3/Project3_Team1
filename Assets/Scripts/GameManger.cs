@@ -53,23 +53,27 @@ public class GameManger : MonoBehaviour
         else
             Debug.Log("No Player Found");
 
+
         ui.goToScene = data.LevelNameNew;
         Debug.Log("Scene name " + ui.goToScene);
 
         // This is reseting the information so when you lose you have to start all over again from the sstart  
-        if (player.GetComponent<PlayerMovement>().lose)
+        if (player != null && player.GetComponent<PlayerMovement>().lose)
         {
             data.LoadFromSafeFile();
         }
 
     }
 
-    public void playerEnable()
+    public void playerEnable()  // self explanatory 
     {
         if (player == null)
         {
             player = GameObject.Find("Player");
-        }else if (player != null)
+            player.SetActive(true);
+
+        }
+        else if (player != null)
         {
             player.SetActive(true);
         }
@@ -82,6 +86,8 @@ public class GameManger : MonoBehaviour
         if (player == null)
         {
             player = GameObject.Find("Player");
+            player.SetActive(false);
+
 
         }
         else if (player != null)
@@ -91,6 +97,11 @@ public class GameManger : MonoBehaviour
         else
             Debug.Log("No Player Found");
 
+    }
+
+    public void resetData() // can be called 
+    {
+        data.LoadFromSafeFile();
     }
 
    

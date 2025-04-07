@@ -80,6 +80,7 @@ public class UI : MonoBehaviour
 
     public void Play()
     {
+
         ResumeGame();
         SceneManager.LoadScene(goToScene);
         gameManager.playerEnable();
@@ -118,5 +119,13 @@ public class UI : MonoBehaviour
         // Locks cursor
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+    }
+
+    public void ResetGame()
+    {
+        gameManager.resetData();
+        LoadMain();
+        gameManager.resetData();
+
     }
 }

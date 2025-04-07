@@ -173,6 +173,9 @@ MonoBehaviour:
   ui: {fileID: 0}
   portalUsed: 0
   spawnPoint: {fileID: 0}
+  furyE: 0
+  furyA: 0
+  furyT: 0
 --- !u!114 &424529455
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -486,9 +489,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2820717821580908617, guid: d0197d588056b9647b4828df4dc39000, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -133
+      objectReference: {fileID: 0}
+    - target: {fileID: 2954769378418645156, guid: d0197d588056b9647b4828df4dc39000, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -335.88702
+      objectReference: {fileID: 0}
+    - target: {fileID: 2968777975841655849, guid: d0197d588056b9647b4828df4dc39000, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -270.88702
+      objectReference: {fileID: 0}
+    - target: {fileID: 3792283637222644778, guid: d0197d588056b9647b4828df4dc39000, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -60
+      objectReference: {fileID: 0}
     - target: {fileID: 4049853550577067466, guid: d0197d588056b9647b4828df4dc39000, type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 6101785968168505118, guid: d0197d588056b9647b4828df4dc39000, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -207
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
