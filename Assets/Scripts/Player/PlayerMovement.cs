@@ -70,6 +70,7 @@ public class PlayerMovement : MonoBehaviour
     public bool helmInInventory;
     private bool triggerEnter;
     private bool hasPickedUpItem = false;
+    public bool helmUsed;
 
     [Header("Other")]
     public bool lose;
@@ -83,6 +84,7 @@ public class PlayerMovement : MonoBehaviour
         moveSpeed = 20f;
         canDash = false;
         Invisible = false;
+        helmUsed = false;
         asphodelCollectionItem = false;
         elysiumCollectionItem = false;
         tartarusCollectionItem = false;
@@ -108,13 +110,18 @@ public class PlayerMovement : MonoBehaviour
 
         inputSystem = new InputSystem();
         inputSystem.Player.Enable();
+        inputSystem.Player.Dash.performed += DashPlayer;
+        inputSystem.Player.Dash.canceled += DashPlayer;
+        inputSystem.Player.Invisible.started += Invisibility;
+        inputSystem.Player.Dodge.performed += DodgeEnemy;
+        inputSystem.Player.TakeDown.performed += TakeDownAction;
 
         state = State.Normal;
     }
 
     // Update is called once per frame
     void Update()
-    {  
+    {
         switch (state)
         {
             case State.Normal:
@@ -122,9 +129,14 @@ public class PlayerMovement : MonoBehaviour
 
                 MyInput();
                 SpeedControl();
-                DashPlayer();
-                DodgeEnemy();
-                Invisibility();
+
+                if (invisibleTimer <= 0)
+                {
+                    canDash = false;
+                    Invisible = false;
+                    helmUsed = false;
+                    moveSpeed = 20f;
+                }
 
                 //check if player is on ground
                 if (grounded)
@@ -137,23 +149,6 @@ public class PlayerMovement : MonoBehaviour
                 }
 
                 invisibleTimer -= Time.deltaTime;
-
-                // makes the enemy stop and destroys the collider when pressing Q
-                if (canKill == true && currentEnemy != null && Input.GetKeyDown(KeyCode.Q))
-                {
-                    Debug.Log("Q is pressed");
-                    if (takeDown != null) // Add a null check
-                    {
-                        takeDown.dead = true;
-                        inventoryManager.TakeDownItemEcounter++;
-                        inventoryManager.ShowAmount(inventoryManager.TakeDownItemEText, inventoryManager.TakeDownItemEcounter);
-                        Debug.Log("is it dead " +  takeDown.dead);
-                    }
-                    else
-                    {
-                        Debug.LogWarning("TakeDown component not found on currentEnemy!");
-                    }
-                }
 
                 break;
 
@@ -170,6 +165,14 @@ public class PlayerMovement : MonoBehaviour
                 }
 
                 invisibleTimer -= Time.deltaTime;
+
+                if (invisibleTimer <= 0)
+                {
+                    canDash = false;
+                    Invisible = false;
+                    helmUsed = false;
+                    moveSpeed = 20f;
+                }
                 break;
         }
     }
@@ -179,6 +182,7 @@ public class PlayerMovement : MonoBehaviour
         switch (state)
         {
             case State.Normal:
+                //move player
                 Vector2 inputVector = inputSystem.Player.Move.ReadValue<Vector2>();
                 moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
                 rb.AddForce(new Vector3(inputVector.x, 0, inputVector.y) * moveSpeed * 10f, ForceMode.Force);
@@ -188,6 +192,26 @@ public class PlayerMovement : MonoBehaviour
 
             case State.Rolling:
                 break;
+        }
+    }
+
+    public void TakeDownAction(InputAction.CallbackContext context)
+    {
+        // makes the enemy stop and destroys the collider when pressing Q
+        if (canKill == true && currentEnemy != null && context.performed)
+        {
+            Debug.Log("Q is pressed");
+            if (takeDown != null) // Add a null check
+            {
+                takeDown.dead = true;
+                inventoryManager.TakeDownItemEcounter -= 1;
+                inventoryManager.ShowAmount(inventoryManager.TakeDownItemEText, inventoryManager.TakeDownItemEcounter);
+                Debug.Log("is it dead " + takeDown.dead);
+            }
+            else
+            {
+                Debug.LogWarning("TakeDown component not found on currentEnemy!");
+            }
         }
     }
 
@@ -208,25 +232,25 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void DashPlayer()
+    private void DashPlayer(InputAction.CallbackContext context)
     {
         if (canDash == true)
         {
-            if (Input.GetKeyDown(KeyCode.LeftShift))
+            if (context.performed)
             {
                 moveSpeed = 26f;
             }
 
-            if (Input.GetKeyUp(KeyCode.LeftShift))
+            if (context.canceled)
             {
                 moveSpeed = 20f;
             }
         }
     }
 
-    private void DodgeEnemy() 
+    private void DodgeEnemy(InputAction.CallbackContext context) 
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (context.performed)
         {
             rollDirection = moveDirection;
             rollSpeed = 16f;
@@ -234,24 +258,28 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void Invisibility(/*InputAction.CallbackContext context*/)
+    private void Invisibility(InputAction.CallbackContext context)
     {
-        if (Input.GetKeyDown(KeyCode.LeftControl) && inventoryManager.hasHelm == true)
+        if (context.started && inventoryManager.hasHelm == true)
         {
             Invisible = true;
             canDash = true;
             invisibleTimer = 6f;
+            helmUsed = true;
+            inventoryManager.helmcounter -= 1;
+            inventoryManager.ShowAmount(inventoryManager.helmText, inventoryManager.helmcounter);
+        }
+    }
+
+   /* public void UseHelm()
+    {
+        if (helmUsed == true)
+        {
             inventoryManager.helmcounter--;
             inventoryManager.ShowAmount(inventoryManager.helmText, inventoryManager.helmcounter);
         }
-
-        if (invisibleTimer <= 0)
-        {
-            canDash = false;
-            Invisible = false;
-            moveSpeed = 20f;
-        }
-    }
+        
+    }*/
 
     private void OnTriggerEnter(Collider other)
     {
