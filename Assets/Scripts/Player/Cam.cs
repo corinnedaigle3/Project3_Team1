@@ -9,9 +9,6 @@ public class Cam : MonoBehaviour
     public Transform playerObj;
     public Rigidbody rb;
 
-    [SerializeField] private InputActionAsset PlayerControls;
-    private InputAction lookAction;
-    //private Vector2 lookInput;
     private Vector3 inputDir;
     private Vector3 viewDir;
 
@@ -26,27 +23,6 @@ public class Cam : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
-    }
-
-    void Awake()
-    {
-        lookAction = PlayerControls.FindActionMap("Player").FindAction("Look");
-
-        lookAction.performed += context => inputDir = context.ReadValue<Vector2>();
-        lookAction.canceled += context => inputDir = Vector2.zero;
-
-        lookAction.performed += context => viewDir = context.ReadValue<Vector2>();
-        lookAction.canceled += context => viewDir = Vector2.zero;
-    }
-
-    private void OnEnable()
-    {
-        lookAction.Enable();
-    }
-
-    private void OnDisable()
-    {
-        lookAction.Disable();
     }
 
     private void MyInput()

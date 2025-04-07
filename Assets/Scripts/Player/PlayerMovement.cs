@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
@@ -18,10 +19,8 @@ public class PlayerMovement : MonoBehaviour
     public static GameObject playerInstance;
 
     [Header("Input Actions")]
-    [SerializeField] private InputActionAsset PlayerControls;
-    private InputAction moveAction;
-    private InputAction dashAction;
-    private Vector2 moveInput;
+    private PlayerInput playerInput;
+    private InputSystem inputSystem;
 
     [Header("BeatTheGame")]
     public int gemE; // just counter for how many fury gems we have 
@@ -105,27 +104,13 @@ public class PlayerMovement : MonoBehaviour
             DontDestroyOnLoad(gameObject); // Persist across scenes
         }
 
-        moveAction = PlayerControls.FindActionMap("Player").FindAction("Move");
-        dashAction = PlayerControls.FindActionMap("Player").FindAction("Dash");
+        playerInput = GetComponent<PlayerInput>();
 
-        moveAction.performed += context => moveInput = context.ReadValue<Vector2>();
-        moveAction.canceled += context => moveInput = Vector2.zero;
+        inputSystem = new InputSystem();
+        inputSystem.Player.Enable();
 
         state = State.Normal;
     }
-
-    private void OnEnable()
-    {
-        moveAction.Enable();
-        dashAction.Enable();
-    }
-
-    private void OnDisable()
-    {
-        moveAction.Disable();
-        dashAction.Disable();
-    }
-
 
     // Update is called once per frame
     void Update()
@@ -194,7 +179,11 @@ public class PlayerMovement : MonoBehaviour
         switch (state)
         {
             case State.Normal:
-                MovePlayer();
+                Vector2 inputVector = inputSystem.Player.Move.ReadValue<Vector2>();
+                moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+                rb.AddForce(new Vector3(inputVector.x, 0, inputVector.y) * moveSpeed * 10f, ForceMode.Force);
+                transform.rotation = Quaternion.LookRotation(moveDirection);
+                //MovePlayer();
                 break;
 
             case State.Rolling:
@@ -206,13 +195,6 @@ public class PlayerMovement : MonoBehaviour
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
-    }
-
-    private void MovePlayer()
-    {
-        moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
-        rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
-        transform.rotation = Quaternion.LookRotation(moveDirection);
     }
 
     private void SpeedControl()
@@ -252,7 +234,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void Invisibility()
+    private void Invisibility(/*InputAction.CallbackContext context*/)
     {
         if (Input.GetKeyDown(KeyCode.LeftControl) && inventoryManager.hasHelm == true)
         {
