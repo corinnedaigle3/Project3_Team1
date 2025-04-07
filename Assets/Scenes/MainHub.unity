@@ -4728,31 +4728,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 108211567}
-  - component: {fileID: 108211566}
   m_Layer: 0
-  m_Name: StatueLoction2
+  m_Name: StatueA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
---- !u!114 &108211566
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 108211565}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c240b2734125464fa8e1a6a302669b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Player: {fileID: 0}
-  useEpopUp: {fileID: 0}
-  furyStatueE: {fileID: 0}
-  furyStatueA: {fileID: 0}
-  furyStatueT: {fileID: 0}
 --- !u!4 &108211567
 Transform:
   m_ObjectHideFlags: 0
@@ -6307,7 +6289,7 @@ GameObject:
   - component: {fileID: 167231514}
   - component: {fileID: 167231513}
   m_Layer: 0
-  m_Name: GemCheck
+  m_Name: GemCheckE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6346,7 +6328,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c240b2734125464fa8e1a6a302669b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 0}
+  playerInventory: {fileID: 0}
   useEpopUp: {fileID: 0}
   furyStatueE: {fileID: 2138595035}
   furyStatueA: {fileID: 108211565}
@@ -11456,6 +11438,77 @@ Transform:
   m_Children: []
   m_Father: {fileID: 976047644}
   m_LocalEulerAnglesHint: {x: 0, y: -88.735, z: 0}
+--- !u!1 &239613251
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 239613254}
+  - component: {fileID: 239613253}
+  - component: {fileID: 239613252}
+  m_Layer: 0
+  m_Name: GemCheckA
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &239613252
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 239613251}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &239613253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 239613251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c240b2734125464fa8e1a6a302669b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerInventory: {fileID: 0}
+  useEpopUp: {fileID: 0}
+  furyStatueE: {fileID: 2138595035}
+  furyStatueA: {fileID: 108211565}
+  furyStatueT: {fileID: 1341108361}
+--- !u!4 &239613254
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 239613251}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -19.61, y: 2.307, z: -0.07}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &245293181
 GameObject:
   m_ObjectHideFlags: 0
@@ -12235,6 +12288,77 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 22473357175fd4a40a2ffb78b56d626b, type: 3}
+--- !u!1 &254891266
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 254891269}
+  - component: {fileID: 254891268}
+  - component: {fileID: 254891267}
+  m_Layer: 0
+  m_Name: GemCheckT
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &254891267
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 254891266}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &254891268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 254891266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c240b2734125464fa8e1a6a302669b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerInventory: {fileID: 0}
+  useEpopUp: {fileID: 0}
+  furyStatueE: {fileID: 2138595035}
+  furyStatueA: {fileID: 108211565}
+  furyStatueT: {fileID: 1341108361}
+--- !u!4 &254891269
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 254891266}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -16.23, y: 2.307, z: -11.065}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &265121594
 Mesh:
   m_ObjectHideFlags: 0
@@ -55397,31 +55521,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1341108363}
-  - component: {fileID: 1341108362}
   m_Layer: 0
-  m_Name: StatueLoction3
+  m_Name: StatueT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
---- !u!114 &1341108362
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1341108361}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c240b2734125464fa8e1a6a302669b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Player: {fileID: 0}
-  useEpopUp: {fileID: 0}
-  furyStatueE: {fileID: 0}
-  furyStatueA: {fileID: 0}
-  furyStatueT: {fileID: 0}
 --- !u!4 &1341108363
 Transform:
   m_ObjectHideFlags: 0
@@ -100716,31 +100822,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2138595037}
-  - component: {fileID: 2138595036}
   m_Layer: 0
-  m_Name: StatueLoction1
+  m_Name: StatueE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
---- !u!114 &2138595036
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2138595035}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c240b2734125464fa8e1a6a302669b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Player: {fileID: 0}
-  useEpopUp: {fileID: 0}
-  furyStatueE: {fileID: 0}
-  furyStatueA: {fileID: 0}
-  furyStatueT: {fileID: 0}
 --- !u!4 &2138595037
 Transform:
   m_ObjectHideFlags: 0
@@ -100767,6 +100855,8 @@ SceneRoots:
   - {fileID: 640164494}
   - {fileID: 976047644}
   - {fileID: 167231515}
+  - {fileID: 239613254}
+  - {fileID: 254891269}
   - {fileID: 2138595037}
   - {fileID: 108211567}
   - {fileID: 1341108363}

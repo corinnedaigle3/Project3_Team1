@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,6 +13,9 @@ public class UI : MonoBehaviour
     private bool isPaused;
     public GameObject pauseMenu;
     public GameManger gameManager;
+
+    public TextMeshProUGUI txt;
+    public string textForPopUp;
 
 
     [Header("Scene Based screen references ")]
