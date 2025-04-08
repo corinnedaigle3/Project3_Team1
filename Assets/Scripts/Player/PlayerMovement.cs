@@ -112,11 +112,20 @@ public class PlayerMovement : MonoBehaviour
         inputSystem.Player.Enable();
         inputSystem.Player.Dash.performed += DashPlayer;
         inputSystem.Player.Dash.canceled += DashPlayer;
-        inputSystem.Player.Invisible.started += Invisibility;
+        inputSystem.Player.Invisible.performed += Invisibility;
         inputSystem.Player.Dodge.performed += DodgeEnemy;
         inputSystem.Player.TakeDown.performed += TakeDownAction;
 
+        //inputSystem.Player.Disable();
+        //inputSystem.Player.Dash.PerformInteractiveRebinding().OnComplete(callback => { callback.Dispose(); inputSystem.Player.Enable(); }).Start();
+        
+
         state = State.Normal;
+    }
+
+    private void OnDisable()
+    {
+        inputSystem.Player.Disable();
     }
 
     // Update is called once per frame
@@ -129,6 +138,7 @@ public class PlayerMovement : MonoBehaviour
 
                 MyInput();
                 SpeedControl();
+                
 
                 if (invisibleTimer <= 0)
                 {
@@ -260,7 +270,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Invisibility(InputAction.CallbackContext context)
     {
-        if (context.started && inventoryManager.hasHelm == true)
+        if (context.performed && inventoryManager.hasHelm == true)
         {
             Invisible = true;
             canDash = true;
