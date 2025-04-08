@@ -116,10 +116,6 @@ public class PlayerMovement : MonoBehaviour
         inputSystem.Player.Dodge.performed += DodgeEnemy;
         inputSystem.Player.TakeDown.performed += TakeDownAction;
 
-        //inputSystem.Player.Disable();
-        //inputSystem.Player.Dash.PerformInteractiveRebinding().OnComplete(callback => { callback.Dispose(); inputSystem.Player.Enable(); }).Start();
-        
-
         state = State.Normal;
     }
 
