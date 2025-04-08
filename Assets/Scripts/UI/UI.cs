@@ -4,13 +4,15 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class UI : MonoBehaviour
 {
+  
     private static UI instance;
 
     public string goToScene;
-    private bool isPaused;
+    public bool isPaused;
     public GameObject pauseMenu;
     public GameManger gameManager;
 
@@ -21,6 +23,13 @@ public class UI : MonoBehaviour
     [Header("Scene Based screen references ")]
     public GameObject mainMenu;
     public GameObject Levels;
+
+    public GameObject EventSystemM;
+    [Header("First For each menu")]
+    public GameObject mainMenuFirst;
+    public GameObject pauseFirst;
+    public GameObject controlsFirst;
+    public GameObject creditsFirst;
 
 
     // not sure yet 
@@ -47,6 +56,7 @@ public class UI : MonoBehaviour
         Cursor.visible = true;
         gameManager = GameObject.Find("GameManager").GetComponent<GameManger>();
 
+        EventSystemM.GetComponent<EventSystem>().SetSelectedGameObject(mainMenu);
 
     }
 
@@ -56,6 +66,7 @@ public class UI : MonoBehaviour
         if(SceneManager.GetActiveScene().name == "MainMenu")
         {
             mainMenu.SetActive(true);
+
             Levels.SetActive(false);
         }
         else
@@ -63,6 +74,10 @@ public class UI : MonoBehaviour
             mainMenu.SetActive(false);
             Levels.SetActive(true);
 
+
+            // Moved this logic to the UI_Input script
+
+            /*
             if (Input.GetKeyDown(KeyCode.P))
             {
                 if (isPaused)
@@ -73,7 +88,7 @@ public class UI : MonoBehaviour
                 {
                     PauseGame();
                 }
-            }
+            }*/
         }
        
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -95,6 +110,7 @@ public class UI : MonoBehaviour
     public void LoadMain()
     {
         gameManager.playerDisable();
+        EventSystemM.GetComponent<EventSystem>().SetSelectedGameObject(mainMenu);
         SceneManager.LoadScene("MainMenu");
 
     }
@@ -111,8 +127,11 @@ public class UI : MonoBehaviour
         isPaused = true;
 
         //Unlocks cursor
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+       // Cursor.lockState = CursorLockMode.None;
+      //  Cursor.visible = true;
+    
+
+
     }
 
     public void ResumeGame()
