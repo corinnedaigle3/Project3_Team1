@@ -90,20 +90,20 @@ public class SavingData : MonoBehaviour
             levelName = LevelNameNew,
 
             // save all the information from inventroy manager
-            hasApple = inventoryManager.hasApple,
-            hasSkull = inventoryManager.hasSkull,
-            hasFireFlower = inventoryManager.hasFireFlower,
+            hasApple = inventoryManager.hasE,
+            hasSkull = inventoryManager.hasA,
+            hasFireFlower = inventoryManager.hasT,
             hasGemE = inventoryManager.hasGemE,
             hasGemA = inventoryManager.hasGemA,
             hasGemT = inventoryManager.hasGemT,
             hasHelm = inventoryManager.hasHelm,
 
-            TakeDownItemEcounter = inventoryManager.TakeDownItemEcounter,
-            TakeDownItemAcounter = inventoryManager.TakeDownItemAcounter,
-            TakeDownItemTcounter = inventoryManager.TakeDownItemTcounter,
-            GemEcounter = inventoryManager.GemEcounter,
-            GemAcounter = inventoryManager.GemAcounter,
-            GemTcounter = inventoryManager.GemTcounter,
+            TakeDownItemEcounter = inventoryManager.takeDownItemCounterE,
+            TakeDownItemAcounter = inventoryManager.takeDownItemCounterA,
+            TakeDownItemTcounter = inventoryManager.takeDownItemCounterT,
+            GemEcounter = inventoryManager.gemCounterE,
+            GemAcounter = inventoryManager.gemCounterA,
+            GemTcounter = inventoryManager.gemCounterT,
             helmcounter = inventoryManager.helmcounter
         };
         string json = JsonUtility.ToJson(saveData);
@@ -124,20 +124,20 @@ public class SavingData : MonoBehaviour
         inventoryManager = FindObjectOfType<InventoryManager>();
 
         // load all the inventory information saved 
-        inventoryManager.hasApple = loadedData.hasApple;
-        inventoryManager.hasSkull = loadedData.hasSkull;
-        inventoryManager.hasFireFlower = loadedData.hasFireFlower;
+        inventoryManager.hasE = loadedData.hasApple;
+        inventoryManager.hasA = loadedData.hasSkull;
+        inventoryManager.hasT = loadedData.hasFireFlower;
         inventoryManager.hasGemE = loadedData.hasGemE;
         inventoryManager.hasGemA = loadedData.hasGemA;
         inventoryManager.hasGemT = loadedData.hasGemT;
         inventoryManager.hasHelm = loadedData.hasHelm;
 
-        inventoryManager.TakeDownItemEcounter = loadedData.TakeDownItemEcounter;
-        inventoryManager.TakeDownItemAcounter = loadedData.TakeDownItemAcounter;
-        inventoryManager.TakeDownItemTcounter = loadedData.TakeDownItemTcounter;
-        inventoryManager.GemEcounter = loadedData.GemEcounter;
-        inventoryManager.GemAcounter = loadedData.GemAcounter;
-        inventoryManager.GemTcounter = loadedData.GemTcounter;
+        inventoryManager.takeDownItemCounterE = loadedData.TakeDownItemEcounter;
+        inventoryManager.takeDownItemCounterA = loadedData.TakeDownItemAcounter;
+        inventoryManager.takeDownItemCounterT = loadedData.TakeDownItemTcounter;
+        inventoryManager.gemCounterE = loadedData.GemEcounter;
+        inventoryManager.gemCounterA = loadedData.GemAcounter;
+        inventoryManager.gemCounterT = loadedData.GemTcounter;
         inventoryManager.helmcounter = loadedData.helmcounter;
 
         SaveData();
@@ -192,20 +192,20 @@ public class SavingData : MonoBehaviour
         if (inventoryManager == null)
             inventoryManager = FindObjectOfType<InventoryManager>();
 
-        inventoryManager.hasApple = loadedData.hasApple;
-        inventoryManager.hasSkull = loadedData.hasSkull;
-        inventoryManager.hasFireFlower = loadedData.hasFireFlower;
+        inventoryManager.hasE = loadedData.hasApple;
+        inventoryManager.hasA = loadedData.hasSkull;
+        inventoryManager.hasT = loadedData.hasFireFlower;
         inventoryManager.hasGemE = loadedData.hasGemE;
         inventoryManager.hasGemA = loadedData.hasGemA;
         inventoryManager.hasGemT = loadedData.hasGemT;
         inventoryManager.hasHelm = loadedData.hasHelm;
 
-        inventoryManager.TakeDownItemEcounter = loadedData.TakeDownItemEcounter;
-        inventoryManager.TakeDownItemAcounter = loadedData.TakeDownItemAcounter;
-        inventoryManager.TakeDownItemTcounter = loadedData.TakeDownItemTcounter;
-        inventoryManager.GemEcounter = loadedData.GemEcounter;
-        inventoryManager.GemAcounter = loadedData.GemAcounter;
-        inventoryManager.GemTcounter = loadedData.GemTcounter;
+        inventoryManager.takeDownItemCounterE = loadedData.TakeDownItemEcounter;
+        inventoryManager.takeDownItemCounterA = loadedData.TakeDownItemAcounter;
+        inventoryManager.takeDownItemCounterT = loadedData.TakeDownItemTcounter;
+        inventoryManager.gemCounterE = loadedData.GemEcounter;
+        inventoryManager.gemCounterA = loadedData.GemAcounter;
+        inventoryManager.gemCounterT = loadedData.GemTcounter;
         inventoryManager.helmcounter = loadedData.helmcounter;
 
         SaveData();

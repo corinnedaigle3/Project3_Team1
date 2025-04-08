@@ -25,6 +25,8 @@ public class TakeDown : MonoBehaviour
         inventory = GameObject.FindWithTag("UI").GetComponent<InventoryManager>();
        eAgent = parent.GetComponent<NavMeshAgent>();
         named = parent.name;
+
+        
     }
 
     // Update is called once per frame
@@ -34,16 +36,21 @@ public class TakeDown : MonoBehaviour
         {
             case "FuryE":
 
-                if (dead == true && inventory.TakeDownItemEcounter >=1)
+                if (dead == true && inventory.takeDownItemCounterE >=1)
                 {
-                   StartCoroutine(furyTakeDown(1f));
+                    inventory.takeDownItemCounterE -= 1;
+                    inventory.ShowAmount(inventory.takeDownItemTextE, inventory.takeDownItemCounterE, ref inventory.hasE);
+                    StartCoroutine(furyTakeDown(1f));
+                  
 
                 }
                 break;  
 
             case "FuryA":
-                if (dead == true && inventory.TakeDownItemAcounter >= 1)
+                if (dead == true && inventory.takeDownItemCounterA >= 1)
                 {
+                    inventory.takeDownItemCounterA -= 1;
+                    inventory.ShowAmount(inventory.takeDownItemTextA, inventory.takeDownItemCounterA, ref inventory.hasA);
                     StartCoroutine(furyTakeDown(1f));
 
                 }
@@ -51,8 +58,10 @@ public class TakeDown : MonoBehaviour
 
             case "FuryT":
 
-                if (dead == true && inventory.TakeDownItemTcounter >= 1)
+                if (dead == true && inventory.takeDownItemCounterT >= 1)
                 {
+                    inventory.takeDownItemCounterT -= 1;
+                    inventory.ShowAmount(inventory.takeDownItemTextT, inventory.takeDownItemCounterT,ref inventory.hasT);
                     StartCoroutine(furyTakeDown(1f));
                 }
                 break;
@@ -69,9 +78,10 @@ public class TakeDown : MonoBehaviour
         {
             case "EnemyE":
 
-                Debug.Log( "how much is in it " + inventory.TakeDownItemEcounter);
-                if (dead == true && inventory.TakeDownItemEcounter >= 1)
+                if (dead == true && inventory.takeDownItemCounterE >= 1)
                 {
+                    Debug.Log("how much is in it " + inventory.takeDownItemCounterE);
+
                     eAgent.isStopped = true;
                     c.enabled = false;
                 }
@@ -79,7 +89,7 @@ public class TakeDown : MonoBehaviour
 
             case "EnemyA":
 
-                if (dead == true && inventory.TakeDownItemAcounter >= 1)
+                if (dead == true && inventory.takeDownItemCounterA >= 1)
                 {
                     eAgent.isStopped = true;
                     c.enabled = false;
@@ -88,7 +98,7 @@ public class TakeDown : MonoBehaviour
 
             case "EnemyT": // tartarus 
 
-                if (dead == true && inventory.TakeDownItemTcounter >= 1)
+                if (dead == true && inventory.takeDownItemCounterT >= 1)
                 {
                     eAgent.isStopped = true;
                     c.enabled = false;
@@ -106,6 +116,7 @@ public class TakeDown : MonoBehaviour
     {
         eAgent.isStopped = true;
         c.enabled = false;
+       
         if (gemCount < 1)
         {
             Instantiate(gem1, dropItemPoint.transform.position, Quaternion.identity);

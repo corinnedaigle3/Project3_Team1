@@ -221,8 +221,7 @@ public class PlayerMovement : MonoBehaviour
             if (takeDown != null) // Add a null check
             {
                 takeDown.dead = true;
-                inventoryManager.TakeDownItemEcounter -= 1;
-                inventoryManager.ShowAmount(inventoryManager.TakeDownItemEText, inventoryManager.TakeDownItemEcounter);
+                
                 Debug.Log("is it dead " + takeDown.dead);
             }
             else
@@ -285,7 +284,7 @@ public class PlayerMovement : MonoBehaviour
             invisibleTimer = 6f;
             helmUsed = true;
             inventoryManager.helmcounter -= 1;
-            inventoryManager.ShowAmount(inventoryManager.helmText, inventoryManager.helmcounter);
+            inventoryManager.ShowAmount(inventoryManager.helmText, inventoryManager.helmcounter, ref inventoryManager.hasHelm);
         }
     }
 
@@ -325,10 +324,12 @@ public class PlayerMovement : MonoBehaviour
                 if (!hasPickedUpItem)
                 {
                     hasPickedUpItem = true;
-                    inventoryManager.hasApple = true;
-                    Debug.Log("tekdown should execute ");
-                    inventoryManager.TakeDownItemEcounter++;
-                    inventoryManager.ShowAmount(inventoryManager.TakeDownItemEText, inventoryManager.TakeDownItemEcounter);
+                    inventoryManager.hasE = true;
+                    Debug.Log("Take down item picked up");
+                    inventoryManager.takeDownItemTextE.gameObject.SetActive(true);
+                    inventoryManager.takeDownItemCounterE++;
+                    inventoryManager.ShowAmount(inventoryManager.takeDownItemTextE, inventoryManager.takeDownItemCounterE, ref inventoryManager.hasE);
+
                     Destroy(other.gameObject);
                 }
                
@@ -339,10 +340,10 @@ public class PlayerMovement : MonoBehaviour
                 if (!hasPickedUpItem)
                 {
                     hasPickedUpItem = true;
-                    inventoryManager.hasSkull = true;
+                    inventoryManager.hasA = true;
 
-                    inventoryManager.TakeDownItemAcounter++;
-                    inventoryManager.ShowAmount(inventoryManager.TakeDownItemAText, inventoryManager.TakeDownItemAcounter);
+                    inventoryManager.takeDownItemCounterA++;
+                    inventoryManager.ShowAmount(inventoryManager.takeDownItemTextA, inventoryManager.takeDownItemCounterA, ref inventoryManager.hasA);
                     Destroy(other.gameObject);
                 }
                
@@ -353,10 +354,10 @@ public class PlayerMovement : MonoBehaviour
                 if (!hasPickedUpItem)
                 {
                     hasPickedUpItem = true;
-                    inventoryManager.hasFireFlower = true;
+                    inventoryManager.hasT = true;
 
-                    inventoryManager.TakeDownItemTcounter++;
-                    inventoryManager.ShowAmount(inventoryManager.TakeDownItemTText, inventoryManager.TakeDownItemTcounter);
+                    inventoryManager.takeDownItemCounterT++;
+                    inventoryManager.ShowAmount(inventoryManager.takeDownItemTextT, inventoryManager.takeDownItemCounterT, ref inventoryManager.hasT);
                     Destroy(other.gameObject);
                 }
                
@@ -369,8 +370,8 @@ public class PlayerMovement : MonoBehaviour
                     hasPickedUpItem = true;
                     inventoryManager.hasGemE = true;
 
-                    inventoryManager.GemEcounter++;
-                    inventoryManager.ShowAmount(inventoryManager.gemEText, inventoryManager.GemEcounter);
+                    inventoryManager.gemCounterE++;
+                    inventoryManager.ShowAmount(inventoryManager.gemTextE, inventoryManager.gemCounterE, ref inventoryManager.hasGemE);
                     Destroy(other.gameObject);
                 }
                
@@ -383,8 +384,8 @@ public class PlayerMovement : MonoBehaviour
                     hasPickedUpItem = true;
                     inventoryManager.hasGemA = true;
 
-                    inventoryManager.GemAcounter++;
-                    inventoryManager.ShowAmount(inventoryManager.gemAText, inventoryManager.GemAcounter);
+                    inventoryManager.gemCounterA++;
+                    inventoryManager.ShowAmount(inventoryManager.gemTextA, inventoryManager.gemCounterA, ref inventoryManager.hasGemA);
                     Destroy(other.gameObject);
                 }
               
@@ -397,8 +398,8 @@ public class PlayerMovement : MonoBehaviour
                     hasPickedUpItem = true;
                     inventoryManager.hasGemT = true;
 
-                    inventoryManager.GemTcounter++;
-                    inventoryManager.ShowAmount(inventoryManager.gemTText, inventoryManager.GemTcounter);
+                    inventoryManager.gemCounterT++;
+                    inventoryManager.ShowAmount(inventoryManager.gemTextT, inventoryManager.gemCounterT, ref inventoryManager.hasGemT);
                     Destroy(other.gameObject);
                 }
                
@@ -412,7 +413,7 @@ public class PlayerMovement : MonoBehaviour
                     Debug.Log("Helm Is picked up");
                     inventoryManager.hasHelm = true;
                     inventoryManager.helmcounter++;
-                    inventoryManager.ShowAmount(inventoryManager.helmText, inventoryManager.helmcounter);
+                    inventoryManager.ShowAmount(inventoryManager.helmText, inventoryManager.helmcounter, ref inventoryManager.hasHelm);
                     Destroy(other.gameObject);
                 }
                 break;
@@ -430,9 +431,13 @@ public class PlayerMovement : MonoBehaviour
             //take down enemy text
             inventoryManager.takeDowntext.SetActive(false);
             canKill = false;
+            takeDown.dead = false;
             currentEnemy = null;
+        }else if (other.tag != "Enemy")
+        {
+            hasPickedUpItem = false; // Reset flag when leaving
+            Destroy(other.gameObject);
         }
        
-            hasPickedUpItem = false; // Reset flag when leaving
     }
 }

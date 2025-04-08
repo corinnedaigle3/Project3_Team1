@@ -56,7 +56,7 @@ public class gemsChecker : MonoBehaviour
                 // need to add some kind of logic for pop up here 
 
                 // enables the statue if it is true
-                if (playerInventory.GemTcounter == 1 && Input.GetKeyDown(KeyCode.Q) && canPressQ)
+                if (playerInventory.gemCounterT == 1 && Input.GetKeyDown(KeyCode.Q) && canPressQ)
                 {
                     manger.furyT = true; // when ture, fury on said level will not spawn anymore 
                     furyStatueT.SetActive(true);
@@ -66,14 +66,14 @@ public class gemsChecker : MonoBehaviour
                 // need to add some kind of logic for pop up here 
 
                 // enables the statue if it is true
-                if (playerInventory.GemEcounter == 1 && Input.GetKeyDown(KeyCode.Q) && canPressQ)
+                if (playerInventory.gemCounterE == 1 && Input.GetKeyDown(KeyCode.Q) && canPressQ)
                 {
                     manger.furyE = true;
                     furyStatueE.SetActive(true);
                 }
                 break;
             case "GemCheckA":
-                if (playerInventory.GemAcounter == 1 && Input.GetKeyDown(KeyCode.Q) && canPressQ)
+                if (playerInventory.gemCounterA == 1 && Input.GetKeyDown(KeyCode.Q) && canPressQ)
                 {
                     manger.furyA = true; // when ture, fury on said level will not spawn anymore 
 
