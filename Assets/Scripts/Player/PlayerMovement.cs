@@ -136,7 +136,7 @@ public class PlayerMovement : MonoBehaviour
             case State.Normal:
                 grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGrounded);
 
-                MyInput();
+             //   MyInput();
                 SpeedControl();
                 
 
@@ -192,10 +192,17 @@ public class PlayerMovement : MonoBehaviour
         switch (state)
         {
             case State.Normal:
-                //move player
+                //read controller input for player
                 Vector2 inputVector = inputSystem.Player.Move.ReadValue<Vector2>();
-                moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
-                rb.AddForce(new Vector3(inputVector.x, 0, inputVector.y) * moveSpeed * 10f, ForceMode.Force);
+
+                // Convert it to camera-relative movement
+                Vector3 camRelativeMove = orientation.forward * inputVector.y + orientation.right * inputVector.x;
+                camRelativeMove.y = 0; // Ensure movement stays on the ground
+
+                //saving the vector info
+                moveDirection = camRelativeMove;
+
+                rb.AddForce(camRelativeMove.normalized * moveSpeed * 10f, ForceMode.Force);
                 transform.rotation = Quaternion.LookRotation(moveDirection);
                 //MovePlayer();
                 break;
@@ -225,12 +232,13 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    /*
     private void MyInput()
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
     }
-
+    */
     private void SpeedControl()
     {
         Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
