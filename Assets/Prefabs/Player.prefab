@@ -117,6 +117,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2495073212101858428}
   - component: {fileID: 7299380666101373793}
+  - component: {fileID: 3975184833799378825}
   m_Layer: 0
   m_Name: ThirdPersonCam
   m_TagString: Untagged
@@ -247,6 +248,36 @@ MonoBehaviour:
   - {fileID: 4081225279023255465}
   - {fileID: 8919680326698483036}
   - {fileID: 277310707758360086}
+--- !u!114 &3975184833799378825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1320433425411089120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e501d18bb52cf8c40b1853ca4904654f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_CollideAgainst:
+    serializedVersion: 2
+    m_Bits: 577
+  m_IgnoreTag: Player
+  m_TransparentLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_MinimumDistanceFromTarget: 0.1
+  m_AvoidObstacles: 1
+  m_DistanceLimit: 0
+  m_MinimumOcclusionTime: 0
+  m_CameraRadius: 0.1
+  m_Strategy: 1
+  m_MaximumEffort: 1
+  m_SmoothingTime: 0
+  m_Damping: 0
+  m_DampingWhenOccluded: 0
+  m_OptimalTargetDistance: 0
 --- !u!1 &2186827231534179622
 GameObject:
   m_ObjectHideFlags: 3
@@ -656,7 +687,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -713,7 +744,6 @@ MonoBehaviour:
   player: {fileID: 62298554178782356}
   playerObj: {fileID: 6139329196204200669}
   rb: {fileID: 5462403002250607093}
-  PlayerControls: {fileID: -944628639613478452, guid: 10e1e28a7180b0e40884719f91c8f76c, type: 3}
   rotationSpeed: 7
 --- !u!114 &2224062214001679923
 MonoBehaviour:
@@ -1112,7 +1142,6 @@ MonoBehaviour:
   orientation: {fileID: 3834313450476296114}
   player: {fileID: 62298554178782356}
   playerObj: {fileID: 6139329196204200669}
-  PlayerControls: {fileID: -944628639613478452, guid: 10e1e28a7180b0e40884719f91c8f76c, type: 3}
   gemE: 0
   gemA: 0
   gemT: 0
@@ -1133,8 +1162,9 @@ MonoBehaviour:
   fury3: 1
   canKill: 0
   currentEnemy: {fileID: 0}
-  inventoryManager: {fileID: 5920624093863450929, guid: d0197d588056b9647b4828df4dc39000, type: 3}
+  inventoryManager: {fileID: 0}
   helmInInventory: 0
+  helmUsed: 0
   lose: 0
 --- !u!136 &2031590590646486855
 CapsuleCollider:
