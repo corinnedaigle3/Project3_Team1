@@ -122,6 +122,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &127207457 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3667455227767001859, guid: d0197d588056b9647b4828df4dc39000, type: 3}
+  m_PrefabInstance: {fileID: 5662718790070558989}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76d5bbb43d1882f4aabbc43a55417d4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &424529452
 GameObject:
   m_ObjectHideFlags: 0
@@ -409,6 +420,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1490715037602082107, guid: d0197d588056b9647b4828df4dc39000, type: 3}
+      propertyPath: ui
+      value: 
+      objectReference: {fileID: 127207457}
     - target: {fileID: 2756047434866829334, guid: d0197d588056b9647b4828df4dc39000, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -489,29 +504,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2820717821580908617, guid: d0197d588056b9647b4828df4dc39000, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -133
-      objectReference: {fileID: 0}
-    - target: {fileID: 2954769378418645156, guid: d0197d588056b9647b4828df4dc39000, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -335.88702
-      objectReference: {fileID: 0}
-    - target: {fileID: 2968777975841655849, guid: d0197d588056b9647b4828df4dc39000, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -270.88702
-      objectReference: {fileID: 0}
-    - target: {fileID: 3792283637222644778, guid: d0197d588056b9647b4828df4dc39000, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -60
-      objectReference: {fileID: 0}
     - target: {fileID: 4049853550577067466, guid: d0197d588056b9647b4828df4dc39000, type: 3}
       propertyPath: m_Name
       value: Canvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 6101785968168505118, guid: d0197d588056b9647b4828df4dc39000, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -207
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
