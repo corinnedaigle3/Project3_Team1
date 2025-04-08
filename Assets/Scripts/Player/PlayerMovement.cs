@@ -1,10 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 using UnityEngine.EventSystems;
-using UnityEngine.SceneManagement;
-
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -13,6 +9,18 @@ public class PlayerMovement : MonoBehaviour
         Normal,
         Rolling,
     }
+
+
+    [Header("References")]
+    public Transform orientation;
+    public Transform player;
+    public Transform playerObj;
+    private Rigidbody rb;
+    public static GameObject playerInstance;
+
+    [Header("Input Actions")]
+    private PlayerInput playerInput;
+    private InputSystem inputSystem;
 
     [Header("BeatTheGame")]
     public int gemE; // just counter for how many fury gems we have 
@@ -28,13 +36,6 @@ public class PlayerMovement : MonoBehaviour
     private float rollSpeed;
     private State state;
 
-    [Header("References")]
-    public Transform orientation;
-    public Transform player;
-    public Transform playerObj;
-    
-    private Rigidbody rb;
-
     [Header("Ground Check")]
     public float playerHeight;
     public LayerMask whatIsGrounded;
@@ -45,9 +46,6 @@ public class PlayerMovement : MonoBehaviour
     private float invisibleTimer = 0;
     public bool Invisible;
     private bool canDash;
-    //private bool invisibleTime;
-
-    [Header("Pickup and Throw")]
 
     [Header("Collection")]
     public bool asphodelCollectionItem;
@@ -56,7 +54,6 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("TakeDown")]
     EnemyBehavior enemyBehavior;
-    public GameObject takeDowntext;
     [HideInInspector] public TakeDown takeDown;
     public bool dead;
 
@@ -71,25 +68,26 @@ public class PlayerMovement : MonoBehaviour
     [Header("Inventory")]
     public InventoryManager inventoryManager;
     public bool helmInInventory;
-    public int amount;
     private bool triggerEnter;
     private bool hasPickedUpItem = false;
+    public bool helmUsed;
+
+    [Header("Other")]
+    public bool lose;
 
     // Start is called before the first frame update
     void Start()
     {
+        inventoryManager = GameObject.Find("Canvas").GetComponent<InventoryManager>();
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
-        moveSpeed = 8f;
+        moveSpeed = 20f;
         canDash = false;
         Invisible = false;
+        helmUsed = false;
         asphodelCollectionItem = false;
         elysiumCollectionItem = false;
         tartarusCollectionItem = false;
-        //invisibleTime = false;
-        takeDowntext.SetActive(false);
-
-        amount = 0;
 
         fury1 = false;
         fury2 = false;
@@ -98,28 +96,57 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
+        if (playerInstance != null && playerInstance != this.gameObject)
+        {
+            Destroy(gameObject); // Destroy duplicate instance
+        }
+        else
+        {
+            playerInstance = this.gameObject;
+            DontDestroyOnLoad(gameObject); // Persist across scenes
+        }
+
+        playerInput = GetComponent<PlayerInput>();
+
+        inputSystem = new InputSystem();
+        inputSystem.Player.Enable();
+        inputSystem.Player.Dash.performed += DashPlayer;
+        inputSystem.Player.Dash.canceled += DashPlayer;
+        inputSystem.Player.Invisible.performed += Invisibility;
+        inputSystem.Player.Dodge.performed += DodgeEnemy;
+        inputSystem.Player.TakeDown.performed += TakeDownAction;
+
+        //inputSystem.Player.Disable();
+        //inputSystem.Player.Dash.PerformInteractiveRebinding().OnComplete(callback => { callback.Dispose(); inputSystem.Player.Enable(); }).Start();
+        
+
         state = State.Normal;
-        //inventory = new Inventory(UseItem);
-        //uiInventory.SetInventory(inventory);
+    }
+
+    private void OnDisable()
+    {
+        inputSystem.Player.Disable();
     }
 
     // Update is called once per frame
     void Update()
     {
-       
         switch (state)
         {
             case State.Normal:
                 grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGrounded);
 
-                //inventoryManager = GetComponent<InventoryManager>();
-
-                MyInput();
+             //   MyInput();
                 SpeedControl();
-                DashPlayer();
-                DodgeEnemy();
-                Invisibility();
-               // ShowAmount();
+                
+
+                if (invisibleTimer <= 0)
+                {
+                    canDash = false;
+                    Invisible = false;
+                    helmUsed = false;
+                    moveSpeed = 20f;
+                }
 
                 //check if player is on ground
                 if (grounded)
@@ -132,21 +159,6 @@ public class PlayerMovement : MonoBehaviour
                 }
 
                 invisibleTimer -= Time.deltaTime;
-
-                // makes the enemy stop and destroys the collider when pressing Q
-                if (canKill == true && currentEnemy != null && Input.GetKeyDown(KeyCode.Q))
-                {
-                    Debug.Log("Q is pressed");
-                    if (takeDown != null) // Add a null check
-                    {
-                        takeDown.dead = true;
-                        Debug.Log("is it dead " +  takeDown.dead);
-                    }
-                    else
-                    {
-                        Debug.LogWarning("TakeDown component not found on currentEnemy!");
-                    }
-                }
 
                 break;
 
@@ -163,6 +175,14 @@ public class PlayerMovement : MonoBehaviour
                 }
 
                 invisibleTimer -= Time.deltaTime;
+
+                if (invisibleTimer <= 0)
+                {
+                    canDash = false;
+                    Invisible = false;
+                    helmUsed = false;
+                    moveSpeed = 20f;
+                }
                 break;
         }
     }
@@ -172,7 +192,19 @@ public class PlayerMovement : MonoBehaviour
         switch (state)
         {
             case State.Normal:
-                MovePlayer();
+                //read controller input for player
+                Vector2 inputVector = inputSystem.Player.Move.ReadValue<Vector2>();
+
+                // Convert it to camera-relative movement
+                Vector3 camRelativeMove = orientation.forward * inputVector.y + orientation.right * inputVector.x;
+                camRelativeMove.y = 0; // Ensure movement stays on the ground
+
+                //saving the vector info
+                moveDirection = camRelativeMove;
+
+                rb.AddForce(camRelativeMove.normalized * moveSpeed * 10f, ForceMode.Force);
+                transform.rotation = Quaternion.LookRotation(moveDirection);
+                //MovePlayer();
                 break;
 
             case State.Rolling:
@@ -180,18 +212,33 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    public void TakeDownAction(InputAction.CallbackContext context)
+    {
+        // makes the enemy stop and destroys the collider when pressing Q
+        if (canKill == true && currentEnemy != null && context.performed)
+        {
+            Debug.Log("Q is pressed");
+            if (takeDown != null) // Add a null check
+            {
+                takeDown.dead = true;
+                inventoryManager.TakeDownItemEcounter -= 1;
+                inventoryManager.ShowAmount(inventoryManager.TakeDownItemEText, inventoryManager.TakeDownItemEcounter);
+                Debug.Log("is it dead " + takeDown.dead);
+            }
+            else
+            {
+                Debug.LogWarning("TakeDown component not found on currentEnemy!");
+            }
+        }
+    }
+
+    /*
     private void MyInput()
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
     }
-    private void MovePlayer()
-    {
-        moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
-        rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
-        transform.rotation = Quaternion.LookRotation(moveDirection);
-    }
-
+    */
     private void SpeedControl()
     {
         Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
@@ -203,103 +250,69 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void DashPlayer() // are we using this ????? Player can dash when Invisable
+    private void DashPlayer(InputAction.CallbackContext context)
     {
         if (canDash == true)
         {
-            if (Input.GetKeyDown(KeyCode.LeftShift))
+            if (context.performed)
             {
-                moveSpeed = 12f;
+                moveSpeed = 26f;
             }
 
-            if (Input.GetKeyUp(KeyCode.LeftShift))
+            if (context.canceled)
             {
-                moveSpeed = 8f;
+                moveSpeed = 20f;
             }
         }
     }
 
-    private void DodgeEnemy() 
+    private void DodgeEnemy(InputAction.CallbackContext context) 
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (context.performed)
         {
             rollDirection = moveDirection;
-            rollSpeed = 18f;
+            rollSpeed = 16f;
             state = State.Rolling;
         }
     }
 
-    private void Invisibility()
+    private void Invisibility(InputAction.CallbackContext context)
     {
-        if (Input.GetKeyDown(KeyCode.LeftControl) && inventoryManager.hasHelm == true)
+        if (context.performed && inventoryManager.hasHelm == true)
         {
             Invisible = true;
             canDash = true;
             invisibleTimer = 6f;
-            amount -= 1;
-        }
-
-        if (invisibleTimer <= 0)
-        {
-            canDash = false;
-            Invisible = false;
-            moveSpeed = 8f;
+            helmUsed = true;
+            inventoryManager.helmcounter -= 1;
+            inventoryManager.ShowAmount(inventoryManager.helmText, inventoryManager.helmcounter);
         }
     }
-    /*
-    private void ShowAmount()
+
+   /* public void UseHelm()
     {
-        if (amount == 0)
+        if (helmUsed == true)
         {
-            inventoryManager.hasHelm = false;
-            inventoryManager.helmText1.gameObject.SetActive(false);
-            inventoryManager.helmText2.gameObject.SetActive(false);
-            inventoryManager.helmText3.gameObject.SetActive(false);
+            inventoryManager.helmcounter--;
+            inventoryManager.ShowAmount(inventoryManager.helmText, inventoryManager.helmcounter);
         }
-        else if (amount == 1)
-        {
-            inventoryManager.helmText1.gameObject.SetActive(true);
-            inventoryManager.helmText2.gameObject.SetActive(false);
-            inventoryManager.helmText3.gameObject.SetActive(false);
-        }
-        else if (amount == 2)
-        {
-            inventoryManager.helmText1.gameObject.SetActive(false);
-            inventoryManager.helmText2.gameObject.SetActive(true);
-            inventoryManager.helmText3.gameObject.SetActive(false);
-        }
-        else if (amount == 3)
-        {
-            inventoryManager.helmText2.gameObject.SetActive(false);
-            inventoryManager.helmText3.gameObject.SetActive(true);
-            inventoryManager.helmText3.gameObject.SetActive(false);
-        }
-        else
-        {
-            inventoryManager.helmText1.gameObject.SetActive(false);
-            inventoryManager.helmText2.gameObject.SetActive(false);
-            inventoryManager.helmText3.gameObject.SetActive(false);
-        }
-    }
-*/
-
+        
+    }*/
 
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("colliding ");
         if (other.tag == "Behind")
         {
-
-             takeDowntext.SetActive(true);
-             canKill = true;
-             currentEnemy = other.gameObject;
+            inventoryManager.takeDowntext.SetActive(true);
+            canKill = true;
+            currentEnemy = other.gameObject;
             takeDown = currentEnemy.GetComponent<TakeDown>();
-
-
         }
 
         if (other.CompareTag("EnemyE") || other.CompareTag( "Fury") || other.CompareTag("EnemyA") || other.CompareTag("EnemyA"))
         {
+            lose = true;
             other.gameObject.GetComponentInParent<EnemyBehavior>().playerLose = true;
             transform.LookAt(other.transform.position);
             gameObject.GetComponent<PlayerMovement>().enabled = false;
@@ -314,7 +327,6 @@ public class PlayerMovement : MonoBehaviour
                     hasPickedUpItem = true;
                     inventoryManager.hasApple = true;
                     Debug.Log("tekdown should execute ");
-
                     inventoryManager.TakeDownItemEcounter++;
                     inventoryManager.ShowAmount(inventoryManager.TakeDownItemEText, inventoryManager.TakeDownItemEcounter);
                     Destroy(other.gameObject);
@@ -403,70 +415,12 @@ public class PlayerMovement : MonoBehaviour
                     inventoryManager.ShowAmount(inventoryManager.helmText, inventoryManager.helmcounter);
                     Destroy(other.gameObject);
                 }
-                
-
-                /*
-                if (!triggerEnter && amount <= 3)
-                {
-                    amount += 1;
-                    triggerEnter = true;
-                }
-
-                */
                 break;
 
              default:
                 break;
             
         }
-        /*
-        if (other.tag == "TakeDownItemE")
-        {
-            inventoryManager.hasApple = true;
-            Destroy(other.gameObject);
-        }
-
-        if (other.tag == "TakeDownItemA")
-        {
-            inventoryManager.hasSkull = true;
-            Destroy(other.gameObject);
-        }
-
-        if (other.tag == "TakeDownItemT")
-        {
-            inventoryManager.hasFireFlower = true;
-            Destroy(other.gameObject);
-        }
-
-        if (other.tag == "GemE")
-        {
-            inventoryManager.hasGem1 = true;
-            Destroy(other.gameObject);
-        }
-
-        if (other.tag == "GemA")
-        {
-            inventoryManager.hasGem2 = true;
-            Destroy(other.gameObject);
-        }
-
-        if (other.tag == "GemT")
-        {
-            inventoryManager.hasGem3 = true;
-            Destroy(other.gameObject);
-        }
-
-        if (other.tag == "Helm")
-        {
-            inventoryManager.hasHelm = true;
-            if (!triggerEnter && amount <= 3)
-            {
-                amount += 1;
-                triggerEnter = true;
-            }
-        }
-        */
-
     }
 
     private void OnTriggerExit(Collider other)
@@ -474,21 +428,11 @@ public class PlayerMovement : MonoBehaviour
         if (other.tag == "Behind")
         {
             //take down enemy text
-            takeDowntext.SetActive(false);
+            inventoryManager.takeDowntext.SetActive(false);
             canKill = false;
             currentEnemy = null;
         }
-
        
             hasPickedUpItem = false; // Reset flag when leaving
-        
-
-        /*
-        if (other.tag == "Helm")
-        {
-            triggerEnter = false;
-            Destroy(other.gameObject);
-        }
-        */
     }
 }

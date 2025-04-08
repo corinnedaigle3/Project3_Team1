@@ -7,8 +7,10 @@ public class gemsChecker : MonoBehaviour
 {
     // The intention of this scripts is to check how many gems player have and enable 
 
-    public GameObject Player;
-    private bool canPressE = false;
+    public InventoryManager playerInventory;
+    public GameManger manger;
+    private bool canPressQ = false;
+    string gemCheckerName;
 
     [Header("UI pop up")]
     public GameObject useEpopUp;
@@ -20,8 +22,9 @@ public class gemsChecker : MonoBehaviour
 
     private void Start()
     {
-        Player = GameObject.FindWithTag("Player");
-
+        playerInventory = GameObject.Find("Canvas").GetComponent<InventoryManager>();
+        gemCheckerName = gameObject.name;
+        manger =  GameObject.Find("GameManager").GetComponent<GameManger>();
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -32,16 +35,12 @@ public class gemsChecker : MonoBehaviour
             useEpopUp.SetActive(true);
         }
 
-        canPressE = true;
-
-
-       
-
+        canPressQ = true;
     }
 
     private void OnTriggerExit(Collider other)
     {
-        canPressE = false;
+        canPressQ = false;
         if (useEpopUp != null)
         {
             useEpopUp.SetActive(false);
@@ -51,28 +50,41 @@ public class gemsChecker : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && canPressE)
+        switch (gemCheckerName)
         {
-            Debug.Log("E is being pressed");
-            if (Player.GetComponent<PlayerMovement>().gemE == 1 && !furyStatueE.activeSelf)
-            {
-                furyStatueE.SetActive(true);
-                Debug.Log(" Statue E is being showcased");
+            case "GemCheckT":
+                // need to add some kind of logic for pop up here 
 
-            }
-            if (Player.GetComponent<PlayerMovement>().gemA == 1 && !furyStatueA.activeSelf)
-            {
-                furyStatueA.SetActive(true);
+                // enables the statue if it is true
+                if (playerInventory.GemTcounter == 1 && Input.GetKeyDown(KeyCode.Q) && canPressQ)
+                {
+                    manger.furyT = true; // when ture, fury on said level will not spawn anymore 
+                    furyStatueT.SetActive(true);
+                }
+                break; 
+            case "GemCheckE":
+                // need to add some kind of logic for pop up here 
 
-            }
-            if (Player.GetComponent<PlayerMovement>().gemT == 1 && !furyStatueT.activeSelf)
-            {
-                furyStatueT.SetActive(true);
+                // enables the statue if it is true
+                if (playerInventory.GemEcounter == 1 && Input.GetKeyDown(KeyCode.Q) && canPressQ)
+                {
+                    manger.furyE = true;
+                    furyStatueE.SetActive(true);
+                }
+                break;
+            case "GemCheckA":
+                if (playerInventory.GemAcounter == 1 && Input.GetKeyDown(KeyCode.Q) && canPressQ)
+                {
+                    manger.furyA = true; // when ture, fury on said level will not spawn anymore 
 
+                    furyStatueA.SetActive(true);
+                }
+                break;
+            default:
+                break;
             }
         }
     }
 
 
 
-}

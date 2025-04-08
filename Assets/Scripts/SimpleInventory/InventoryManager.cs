@@ -24,6 +24,8 @@ public class InventoryManager : MonoBehaviour
     public GameObject blankGemE;
     public GameObject spriteGemE;
 
+    public GameObject takeDowntext;
+
     public GameObject blankHelm;
     public GameObject spriteHelm;
     public TextMeshProUGUI helmText;
@@ -50,40 +52,44 @@ public class InventoryManager : MonoBehaviour
     public int GemTcounter = 0;
     public int helmcounter = 0;
 
+   // UI ui;
+    public bool inventory;
+
     //public int amount;
     public PlayerMovement playerMovement;
 
     // Start is called before the first frame update
     void Start()
     {
-        hasApple = false;
-        spriteApple.SetActive(false);
-        blankApple.SetActive(true);
+            hasApple = false;
+            spriteApple.SetActive(false);
+            blankApple.SetActive(true);
 
-        hasSkull = false;
-        spriteSkull.SetActive(false);
-        blankSkull.SetActive(true);
+            hasSkull = false;
+            spriteSkull.SetActive(false);
+            blankSkull.SetActive(true);
 
-        hasFireFlower = false;
-        spriteFireFlower.SetActive(false);
-        blankFireFlower.SetActive(true);
+            hasFireFlower = false;
+            spriteFireFlower.SetActive(false);
+            blankFireFlower.SetActive(true);
 
-        hasGemE = false;
-        spriteGemT.SetActive(false);
-        blankGemT.SetActive(true);
+            hasGemE = false;
+            spriteGemE.SetActive(false);
+            blankGemE.SetActive(true);
 
-        hasGemA = false;
-        spriteGemA.SetActive(false);
-        blankGemA.SetActive(true);
+            hasGemA = false;
+            spriteGemA.SetActive(false);
+            blankGemA.SetActive(true);
 
-        hasGemT = false;
-        spriteGemE.SetActive(false);
-        blankGemE.SetActive(true);
+            hasGemT = false;
+            spriteGemT.SetActive(false);
+            blankGemT.SetActive(true);
 
-        hasHelm = false;
-        spriteHelm.SetActive(false);
-        blankHelm.SetActive(true);
-     
+            hasHelm = false;
+            spriteHelm.SetActive(false);
+            blankHelm.SetActive(true);
+
+            takeDowntext.SetActive(false);
     }
 
     // Update is called once per frame
@@ -122,11 +128,11 @@ public class InventoryManager : MonoBehaviour
         //Gem1
         if (hasGemE == true)
         {
-            spriteGemT.SetActive(true);
+            spriteGemE.SetActive(true);
         }
         else if (hasGemE == false)
         {
-            spriteGemT.SetActive(false);
+            spriteGemE.SetActive(false);
         }
 
         //Gem2
@@ -142,11 +148,11 @@ public class InventoryManager : MonoBehaviour
         //Gem3
         if (hasGemT == true)
         {
-            spriteGemE.SetActive(true);
+            spriteGemT.SetActive(true);
         }
         else if (hasGemT == false)
         {
-            spriteGemE.SetActive(false);
+            spriteGemT.SetActive(false);
         }
 
         //helm

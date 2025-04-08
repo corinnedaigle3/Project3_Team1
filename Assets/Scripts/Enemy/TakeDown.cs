@@ -10,7 +10,7 @@ public class TakeDown : MonoBehaviour
     public GameObject parent;
     public NavMeshAgent eAgent;
     public bool dead = false;
-    public  Transform dropItemPoint;
+    public Transform dropItemPoint;
     public Collider c;
 
     public GameObject gem1;
