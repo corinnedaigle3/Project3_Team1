@@ -1045,13 +1045,21 @@ PrefabInstance:
       propertyPath: inventoryManager
       value: 
       objectReference: {fileID: 716796983}
+    - target: {fileID: 4543109889500700425, guid: 8fc9ade81a39dc649bf971248c13cd18, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4543109889500700425, guid: 8fc9ade81a39dc649bf971248c13cd18, type: 3}
+      propertyPath: PlayerControls
+      value: 
+      objectReference: {fileID: -944628639613478452, guid: 10e1e28a7180b0e40884719f91c8f76c, type: 3}
     - target: {fileID: 7603475639761628685, guid: 8fc9ade81a39dc649bf971248c13cd18, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.9903343
       objectReference: {fileID: 0}
     - target: {fileID: 7603475639761628685, guid: 8fc9ade81a39dc649bf971248c13cd18, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: 0.13870122
       objectReference: {fileID: 0}
     - target: {fileID: 8734909886117522096, guid: 8fc9ade81a39dc649bf971248c13cd18, type: 3}
       propertyPath: m_Name
