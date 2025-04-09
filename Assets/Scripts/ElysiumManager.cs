@@ -6,7 +6,7 @@ public class ElysiumManager : MonoBehaviour
 {
     public GameObject TakeDownItemE;
     public GameObject Helm;
-    public GameObject Player;
+    //public GameObject Player;
 
 
     // Start is called before the first frame update
