@@ -21,6 +21,8 @@ public class InventoryManager : MonoBehaviour
 
     public GameObject takeDowntext;
 
+    public GameObject invisText;
+
     public GameObject spriteHelm;
     public TextMeshProUGUI helmText;
     public TextMeshProUGUI takeDownItemTextE;
@@ -77,6 +79,8 @@ public class InventoryManager : MonoBehaviour
             spriteHelm.SetActive(false);
 
             takeDowntext.SetActive(false);
+
+            invisText.SetActive(false);
     }
 
     // Update is called once per frame
