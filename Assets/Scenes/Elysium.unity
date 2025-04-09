@@ -7291,33 +7291,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4859266048609132334, guid: f63aa99548f8d04458a01ff060b7415c, type: 3}
   m_PrefabInstance: {fileID: 119575407}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &123207311 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 583683135260040673, guid: 2f0c374d5d2963740bbc6cb16726483f, type: 3}
-  m_PrefabInstance: {fileID: 872823783}
-  m_PrefabAsset: {fileID: 0}
---- !u!64 &123207315
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 123207311}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -6248355615793121914, guid: 455fa9e07d9ed4d4b984443b5a4f2acf, type: 3}
 --- !u!1 &124572373
 GameObject:
   m_ObjectHideFlags: 0
@@ -31695,10 +31668,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 583683135260040673, guid: 2f0c374d5d2963740bbc6cb16726483f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 760178678}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f0c374d5d2963740bbc6cb16726483f, type: 3}
 --- !u!4 &345726875 stripped
 Transform:
@@ -77500,33 +77470,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1048048054}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &760178674 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 583683135260040673, guid: 2f0c374d5d2963740bbc6cb16726483f, type: 3}
-  m_PrefabInstance: {fileID: 345726874}
-  m_PrefabAsset: {fileID: 0}
---- !u!64 &760178678
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 760178674}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -6248355615793121914, guid: 455fa9e07d9ed4d4b984443b5a4f2acf, type: 3}
 --- !u!1001 &766195272
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -90671,10 +90614,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 583683135260040673, guid: 2f0c374d5d2963740bbc6cb16726483f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 123207315}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f0c374d5d2963740bbc6cb16726483f, type: 3}
 --- !u!4 &872823784 stripped
 Transform:
@@ -93129,33 +93069,6 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
---- !u!1 &943199614 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 583683135260040673, guid: 2f0c374d5d2963740bbc6cb16726483f, type: 3}
-  m_PrefabInstance: {fileID: 2005706604}
-  m_PrefabAsset: {fileID: 0}
---- !u!64 &943199618
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 943199614}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -6248355615793121914, guid: 455fa9e07d9ed4d4b984443b5a4f2acf, type: 3}
 --- !u!1 &943488928
 GameObject:
   m_ObjectHideFlags: 0
@@ -156886,6 +156799,38 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1158526487}
     m_Modifications:
+    - target: {fileID: 6593220097868354095, guid: 852f599124894c748b09d0867bbe876b, type: 3}
+      propertyPath: Waypoints.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6593220097868354095, guid: 852f599124894c748b09d0867bbe876b, type: 3}
+      propertyPath: Waypoints.Array.data[0]
+      value: 
+      objectReference: {fileID: 751391108}
+    - target: {fileID: 6593220097868354095, guid: 852f599124894c748b09d0867bbe876b, type: 3}
+      propertyPath: Waypoints.Array.data[1]
+      value: 
+      objectReference: {fileID: 1679458967}
+    - target: {fileID: 6593220097868354095, guid: 852f599124894c748b09d0867bbe876b, type: 3}
+      propertyPath: Waypoints.Array.data[2]
+      value: 
+      objectReference: {fileID: 352713203}
+    - target: {fileID: 6593220097868354095, guid: 852f599124894c748b09d0867bbe876b, type: 3}
+      propertyPath: Waypoints.Array.data[3]
+      value: 
+      objectReference: {fileID: 982115879}
+    - target: {fileID: 6593220097868354095, guid: 852f599124894c748b09d0867bbe876b, type: 3}
+      propertyPath: Waypoints.Array.data[4]
+      value: 
+      objectReference: {fileID: 1597277861}
+    - target: {fileID: 6593220097868354095, guid: 852f599124894c748b09d0867bbe876b, type: 3}
+      propertyPath: Waypoints.Array.data[5]
+      value: 
+      objectReference: {fileID: 719270067}
+    - target: {fileID: 367192780633537303, guid: 3d8ae66616a6dbb4fa231885ab318656, type: 3}
+      propertyPath: m_Name
+      value: FuryE
+      objectReference: {fileID: 0}
     - target: {fileID: 1144247894434008006, guid: 3d8ae66616a6dbb4fa231885ab318656, type: 3}
       propertyPath: m_LocalScale.x
       value: 2.2261233
@@ -156938,35 +156883,31 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 367192780633537303, guid: 3d8ae66616a6dbb4fa231885ab318656, type: 3}
-      propertyPath: m_Name
-      value: FuryE
-      objectReference: {fileID: 0}
-    - target: {fileID: 6593220097868354095, guid: 852f599124894c748b09d0867bbe876b, type: 3}
+    - target: {fileID: 4720131709456149520, guid: 3d8ae66616a6dbb4fa231885ab318656, type: 3}
       propertyPath: Waypoints.Array.size
       value: 6
       objectReference: {fileID: 0}
-    - target: {fileID: 6593220097868354095, guid: 852f599124894c748b09d0867bbe876b, type: 3}
+    - target: {fileID: 4720131709456149520, guid: 3d8ae66616a6dbb4fa231885ab318656, type: 3}
       propertyPath: Waypoints.Array.data[0]
       value: 
       objectReference: {fileID: 751391108}
-    - target: {fileID: 6593220097868354095, guid: 852f599124894c748b09d0867bbe876b, type: 3}
+    - target: {fileID: 4720131709456149520, guid: 3d8ae66616a6dbb4fa231885ab318656, type: 3}
       propertyPath: Waypoints.Array.data[1]
       value: 
       objectReference: {fileID: 1679458967}
-    - target: {fileID: 6593220097868354095, guid: 852f599124894c748b09d0867bbe876b, type: 3}
+    - target: {fileID: 4720131709456149520, guid: 3d8ae66616a6dbb4fa231885ab318656, type: 3}
       propertyPath: Waypoints.Array.data[2]
       value: 
       objectReference: {fileID: 352713203}
-    - target: {fileID: 6593220097868354095, guid: 852f599124894c748b09d0867bbe876b, type: 3}
+    - target: {fileID: 4720131709456149520, guid: 3d8ae66616a6dbb4fa231885ab318656, type: 3}
       propertyPath: Waypoints.Array.data[3]
       value: 
       objectReference: {fileID: 982115879}
-    - target: {fileID: 6593220097868354095, guid: 852f599124894c748b09d0867bbe876b, type: 3}
+    - target: {fileID: 4720131709456149520, guid: 3d8ae66616a6dbb4fa231885ab318656, type: 3}
       propertyPath: Waypoints.Array.data[4]
       value: 
       objectReference: {fileID: 1597277861}
-    - target: {fileID: 6593220097868354095, guid: 852f599124894c748b09d0867bbe876b, type: 3}
+    - target: {fileID: 4720131709456149520, guid: 3d8ae66616a6dbb4fa231885ab318656, type: 3}
       propertyPath: Waypoints.Array.data[5]
       value: 
       objectReference: {fileID: 719270067}
@@ -161115,33 +161056,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!1 &1306691436 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 583683135260040673, guid: 2f0c374d5d2963740bbc6cb16726483f, type: 3}
-  m_PrefabInstance: {fileID: 1921061949}
-  m_PrefabAsset: {fileID: 0}
---- !u!64 &1306691440
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1306691436}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -6248355615793121914, guid: 455fa9e07d9ed4d4b984443b5a4f2acf, type: 3}
 --- !u!1 &1312554080
 GameObject:
   m_ObjectHideFlags: 0
@@ -184526,7 +184440,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: -3.37, y: -8.05, z: -8.44}
+  m_Size: {x: 3, y: 8, z: 8}
   m_Center: {x: 0.0000076293945, y: 0, z: 0}
 --- !u!1 &1472820628
 GameObject:
@@ -216356,10 +216270,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 583683135260040673, guid: 2f0c374d5d2963740bbc6cb16726483f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1306691440}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f0c374d5d2963740bbc6cb16726483f, type: 3}
 --- !u!4 &1921061950 stripped
 Transform:
@@ -225673,9 +225584,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2808857136818097476, guid: 2f0c374d5d2963740bbc6cb16726483f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1566931660}
-    - targetCorrespondingSourceObject: {fileID: 583683135260040673, guid: 2f0c374d5d2963740bbc6cb16726483f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 943199618}
   m_SourcePrefab: {fileID: 100100000, guid: 2f0c374d5d2963740bbc6cb16726483f, type: 3}
 --- !u!43 &2007572660
 Mesh:
