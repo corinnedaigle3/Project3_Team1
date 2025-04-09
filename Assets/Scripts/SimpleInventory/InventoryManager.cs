@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.ProBuilder.MeshOperations;
 using UnityEngine.UI;
 
 public class InventoryManager : MonoBehaviour
@@ -29,27 +30,27 @@ public class InventoryManager : MonoBehaviour
     public GameObject blankHelm;
     public GameObject spriteHelm;
     public TextMeshProUGUI helmText;
-    public TextMeshProUGUI TakeDownItemEText;
-    public TextMeshProUGUI TakeDownItemAText; // replace with proper names 
-    public TextMeshProUGUI TakeDownItemTText;
-    public TextMeshProUGUI gemEText;
-    public TextMeshProUGUI gemAText;
-    public TextMeshProUGUI gemTText;
+    public TextMeshProUGUI takeDownItemTextE;
+    public TextMeshProUGUI takeDownItemTextA; // replace with proper names 
+    public TextMeshProUGUI takeDownItemTextT;
+    public TextMeshProUGUI gemTextE;
+    public TextMeshProUGUI gemTextA;
+    public TextMeshProUGUI gemTextT;
 
-    public bool hasApple;
-    public bool hasSkull;
-    public bool hasFireFlower;
+    public bool hasE;
+    public bool hasA;
+    public bool hasT;
     public bool hasGemE;
     public bool hasGemA;
     public bool hasGemT;
     public bool hasHelm;
 
-    public int TakeDownItemEcounter = 0;
-    public int TakeDownItemAcounter = 0;
-    public int TakeDownItemTcounter = 0;
-    public int GemEcounter = 0;
-    public int GemAcounter = 0;
-    public int GemTcounter = 0;
+    public int takeDownItemCounterE = 0;
+    public int takeDownItemCounterA = 0;
+    public int takeDownItemCounterT = 0;
+    public int gemCounterE = 0;
+    public int gemCounterA = 0;
+    public int gemCounterT = 0;
     public int helmcounter = 0;
 
    // UI ui;
@@ -61,15 +62,15 @@ public class InventoryManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-            hasApple = false;
+            hasE = false;
             spriteApple.SetActive(false);
             blankApple.SetActive(true);
 
-            hasSkull = false;
+            hasA = false;
             spriteSkull.SetActive(false);
             blankSkull.SetActive(true);
 
-            hasFireFlower = false;
+            hasT = false;
             spriteFireFlower.SetActive(false);
             blankFireFlower.SetActive(true);
 
@@ -93,100 +94,52 @@ public class InventoryManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
+
         //apple
-        if (hasApple == true)
-        {
-            spriteApple.SetActive(true);
-        }
-        else if (hasApple == false)
-        {
-            spriteApple.SetActive(false);
-        }
+        spriteApple.SetActive(hasE);
 
         //skull
-        if (hasSkull == true)
-        {
-            spriteSkull.SetActive(true);
-        }
-        else if (hasSkull == false)
-        {
-            spriteSkull.SetActive(false);
-        }
+        spriteSkull.SetActive(hasA);
 
         //fireFlower
-        if (hasFireFlower == true)
-        {
-            spriteFireFlower.SetActive(true);
-        }
-        else if (hasFireFlower == false)
-        {
-            spriteFireFlower.SetActive(false);
-        }
+        spriteFireFlower.SetActive(hasT);
 
         //Gem1
-        if (hasGemE == true)
-        {
-            spriteGemE.SetActive(true);
-        }
-        else if (hasGemE == false)
-        {
-            spriteGemE.SetActive(false);
-        }
+        spriteGemE.SetActive(hasGemE);
 
         //Gem2
-        if (hasGemA == true)
-        {
-            spriteGemA.SetActive(true);
-        }
-        else if (hasGemA == false)
-        {
-            spriteGemA.SetActive(false);
-        }
+        spriteGemA.SetActive(hasGemA);
 
         //Gem3
-        if (hasGemT == true)
-        {
-            spriteGemT.SetActive(true);
-        }
-        else if (hasGemT == false)
-        {
-            spriteGemT.SetActive(false);
-        }
+        spriteGemT.SetActive(hasGemT);
 
         //helm
-        if (hasHelm == true)
-        {
-            spriteHelm.SetActive(true);
-        }
-        else if (hasHelm == false)
-        {
-            spriteHelm.SetActive(false);
-        }
+        spriteHelm.SetActive(hasHelm);
+
+    }
+    void Update()
+    {
     }
 
-    public void ShowAmount(TextMeshProUGUI textChange, int amount)
+    public void ShowAmount(TextMeshProUGUI textChange, int amount, ref bool hasItemName)
     {
-        if (amount == 0)
+        Debug.Log(textChange.text);
+        Debug.Log(amount);
+        Debug.Log(hasItemName); 
+        if (amount < 1)
         {
             textChange.gameObject.SetActive(false);
+            hasItemName = false;
+            Debug.Log("Apple disappeared, variable is now " + hasItemName);
         }
-        else if (amount == 1)
-        {            
-            textChange.text = "" + amount;
-            textChange.gameObject.SetActive(true);
-        }
-        else if (amount == 2)
-        {        
-            textChange.text = "" + amount;
-            textChange.gameObject.SetActive(true);
-        }
-        else if (amount == 3)
+        else
         {
-            textChange.text = "" + amount;
             textChange.gameObject.SetActive(true);
+            textChange.text = "" + amount;
+            hasItemName = true;
         }
-       
+
     }
 }
