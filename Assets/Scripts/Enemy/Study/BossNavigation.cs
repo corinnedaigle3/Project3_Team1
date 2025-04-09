@@ -46,7 +46,7 @@ public class BossNavigation : MonoBehaviour
             agent.isStopped = true;
             enemyWalk.SetActive(false);
             catchAnim.SetActive(true);
-            player.GetComponent<Player>().noMove = true;
+            //player.GetComponent<Player>().noMove = true;
             playerCaught = true;
             transform.LookAt(player.transform.position);
             enemyCatch.clip = catchSound;
@@ -112,7 +112,7 @@ public class BossNavigation : MonoBehaviour
 
     private void Patroling()
     {
-        gameMusic.GetComponent<MusicControlelr>().ResumeMusic();
+        //gameMusic.GetComponent<MusicControlelr>().ResumeMusic();
         pSprite.SetBool("isChased", false);
         Debug.Log("this is not chased");
         // Chose a random waypoint to move next
@@ -128,7 +128,7 @@ public class BossNavigation : MonoBehaviour
     {
         if (player != null)
         {
-            gameMusic.GetComponent<MusicControlelr>().PChaseMusic();
+            //gameMusic.GetComponent<MusicControlelr>().PChaseMusic();
             pSprite.SetBool("isChased", true);
             // Chase Player
             agent.SetDestination(player.transform.position);
@@ -153,11 +153,11 @@ public class BossNavigation : MonoBehaviour
     private void endGame()
     {
         // need to add more things for when 
-        gameMusic.GetComponent<MusicControlelr>().GameOver(); // calls and executes 
+        //gameMusic.GetComponent<MusicControlelr>().GameOver(); // calls and executes 
 
         pSprite.SetBool("dead", true);
       
-        levelUI.GetComponent<MainMenu>().TheGameOverUI();
+        //levelUI.GetComponent<MainMenu>().TheGameOverUI();
         this.gameObject.SetActive(false);
        
     }

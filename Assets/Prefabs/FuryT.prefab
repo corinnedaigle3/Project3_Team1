@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 367192780633537303, guid: 3ca6a1471fcadbe46995ec7d1079e9db, type: 3}
       propertyPath: m_Name
-      value: FuryE
+      value: FuryT
       objectReference: {fileID: 0}
     - target: {fileID: 367192780633537303, guid: 3ca6a1471fcadbe46995ec7d1079e9db, type: 3}
       propertyPath: m_TagString
@@ -68,6 +68,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1847052860119057821, guid: 3ca6a1471fcadbe46995ec7d1079e9db, type: 3}
+      propertyPath: m_Speed
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 4580884906535031233, guid: 3ca6a1471fcadbe46995ec7d1079e9db, type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.864
@@ -96,7 +100,8 @@ PrefabInstance:
       propertyPath: dropItemPoint
       value: 
       objectReference: {fileID: 2696537949354340350}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1076616841925010735, guid: 3ca6a1471fcadbe46995ec7d1079e9db, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

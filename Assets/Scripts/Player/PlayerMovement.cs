@@ -307,7 +307,7 @@ public class PlayerMovement : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("colliding ");
-        if (other.tag == "Behind")
+        if (other.tag == "Behind" && inventoryManager.hasE == true)
         {
             inventoryManager.takeDowntext.SetActive(true);
             canKill = true;

@@ -15,6 +15,7 @@ public class EnemyBehavior : MonoBehaviour
     public GameManger gameManager;
     public UI ui;
     int waypointIdnex;
+    public AudioSource caught;
 
     // Start is called before the first frame update
     void Start()
@@ -24,7 +25,7 @@ public class EnemyBehavior : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         agent.SetDestination(Waypoints[waypointIdnex].position);
         gameManager = GameObject.Find("GameManager").GetComponent<GameManger>();
-        ui = GameObject.Find("Canvas").GetComponent<UI>();  
+        ui = GameObject.Find("Canvas").GetComponent<UI>();
     }
 
     // Update is called once per frame
@@ -65,7 +66,7 @@ public class EnemyBehavior : MonoBehaviour
     IEnumerator LoseGame(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
-       
+        caught.Play();
         ui.LoadLose();
 
     }
