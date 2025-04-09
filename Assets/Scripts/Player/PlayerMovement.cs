@@ -429,7 +429,8 @@ public class PlayerMovement : MonoBehaviour
             canKill = false;
             takeDown.dead = false;
             currentEnemy = null;
-        }else if (other.tag != "Enemy")
+        }
+        if(other.gameObject.layer == LayerMask.NameToLayer("Item"))
         {
             hasPickedUpItem = false; // Reset flag when leaving
             Destroy(other.gameObject);
