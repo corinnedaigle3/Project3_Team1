@@ -1,6 +1,8 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -327,8 +329,11 @@ public class PlayerMovement : MonoBehaviour
                     inventoryManager.takeDownItemTextE.gameObject.SetActive(true);
                     inventoryManager.ShowAmount(inventoryManager.takeDownItemTextE, inventoryManager.takeDownItemCounterE, ref inventoryManager.hasE);
                     Destroy(other.gameObject);
+                    StartCoroutine(waitToFalse(0.5f));
+
+                    Debug.Log("Has picked up item " + hasPickedUpItem);
                 }
-               
+
                 break;
 
             case "TakeDownItemA":
@@ -341,8 +346,11 @@ public class PlayerMovement : MonoBehaviour
                     inventoryManager.takeDownItemCounterA++;
                     inventoryManager.ShowAmount(inventoryManager.takeDownItemTextA, inventoryManager.takeDownItemCounterA, ref inventoryManager.hasA);
                     Destroy(other.gameObject);
+                    StartCoroutine(waitToFalse(0.5f));
+
+
                 }
-               
+
                 break;
 
             case "TakeDownItemT":
@@ -355,8 +363,11 @@ public class PlayerMovement : MonoBehaviour
                     inventoryManager.takeDownItemCounterT++;
                     inventoryManager.ShowAmount(inventoryManager.takeDownItemTextT, inventoryManager.takeDownItemCounterT, ref inventoryManager.hasT);
                     Destroy(other.gameObject);
+                    StartCoroutine(waitToFalse(0.5f));
+
+
                 }
-               
+
                 break;
 
             case "GemE":
@@ -369,8 +380,11 @@ public class PlayerMovement : MonoBehaviour
                     inventoryManager.gemCounterE++;
                     inventoryManager.ShowAmount(inventoryManager.gemTextE, inventoryManager.gemCounterE, ref inventoryManager.hasGemE);
                     Destroy(other.gameObject);
+                    
+                    StartCoroutine(waitToFalse(0.5f));
+
                 }
-               
+
                 break;
 
             case "GemA":
@@ -383,8 +397,11 @@ public class PlayerMovement : MonoBehaviour
                     inventoryManager.gemCounterA++;
                     inventoryManager.ShowAmount(inventoryManager.gemTextA, inventoryManager.gemCounterA, ref inventoryManager.hasGemA);
                     Destroy(other.gameObject);
+                   
+                    StartCoroutine(waitToFalse(0.5f));
+
                 }
-              
+
                 break;
 
             case "GemT":
@@ -397,8 +414,11 @@ public class PlayerMovement : MonoBehaviour
                     inventoryManager.gemCounterT++;
                     inventoryManager.ShowAmount(inventoryManager.gemTextT, inventoryManager.gemCounterT, ref inventoryManager.hasGemT);
                     Destroy(other.gameObject);
+                   
+                    StartCoroutine(waitToFalse(0.5f));
+
                 }
-               
+
                 break;
 
             case "Helm":
@@ -411,6 +431,8 @@ public class PlayerMovement : MonoBehaviour
                     inventoryManager.helmcounter++;
                     inventoryManager.ShowAmount(inventoryManager.helmText, inventoryManager.helmcounter, ref inventoryManager.hasHelm);
                     Destroy(other.gameObject);
+                   
+                    StartCoroutine(waitToFalse(0.5f));
                 }
                 break;
 
@@ -442,5 +464,12 @@ public class PlayerMovement : MonoBehaviour
             //teleport player back to beginning of level
         }
        
+    }
+
+
+    IEnumerator waitToFalse(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        hasPickedUpItem = false ;
     }
 }
