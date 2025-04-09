@@ -96,7 +96,6 @@ public class InventoryManager : MonoBehaviour
     // Update is called once per frame
     private void FixedUpdate()
     {
-
         //apple
         spriteApple.SetActive(hasE);
 
@@ -117,8 +116,8 @@ public class InventoryManager : MonoBehaviour
 
         //helm
         spriteHelm.SetActive(hasHelm);
-
     }
+
     void Update()
     {
     }

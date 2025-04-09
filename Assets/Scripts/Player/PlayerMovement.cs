@@ -321,11 +321,11 @@ public class PlayerMovement : MonoBehaviour
                 {
                     hasPickedUpItem = true;
                     inventoryManager.hasE = true;
-                    Debug.Log("Take down item picked up");
-                    inventoryManager.takeDownItemTextE.gameObject.SetActive(true);
-                    inventoryManager.takeDownItemCounterE++;
-                    inventoryManager.ShowAmount(inventoryManager.takeDownItemTextE, inventoryManager.takeDownItemCounterE, ref inventoryManager.hasE);
 
+                    Debug.Log("Take down item picked up");
+                    inventoryManager.takeDownItemCounterE++;
+                    inventoryManager.takeDownItemTextE.gameObject.SetActive(true);
+                    inventoryManager.ShowAmount(inventoryManager.takeDownItemTextE, inventoryManager.takeDownItemCounterE, ref inventoryManager.hasE);
                     Destroy(other.gameObject);
                 }
                
@@ -406,8 +406,8 @@ public class PlayerMovement : MonoBehaviour
                 if (!hasPickedUpItem) // Check if the Helm was already picked up
                 {
                     hasPickedUpItem = true;
-                    Debug.Log("Helm Is picked up");
                     inventoryManager.hasHelm = true;
+
                     inventoryManager.helmcounter++;
                     inventoryManager.ShowAmount(inventoryManager.helmText, inventoryManager.helmcounter, ref inventoryManager.hasHelm);
                     Destroy(other.gameObject);
@@ -430,10 +430,16 @@ public class PlayerMovement : MonoBehaviour
             takeDown.dead = false;
             currentEnemy = null;
         }
+
         if(other.gameObject.layer == LayerMask.NameToLayer("Item"))
         {
             hasPickedUpItem = false; // Reset flag when leaving
             Destroy(other.gameObject);
+        }
+
+        if(other.tag == "WaterE")
+        {
+            //teleport player back to beginning of level
         }
        
     }
