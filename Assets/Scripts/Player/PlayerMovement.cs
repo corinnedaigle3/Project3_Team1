@@ -150,7 +150,7 @@ public class PlayerMovement : MonoBehaviour
                     canDash = false;
                     Invisible = false;
                     helmUsed = false;
-                    moveSpeed = 10f;
+                    moveSpeed = 20f;
                 }
 
                 //check if player is on ground
@@ -188,7 +188,7 @@ public class PlayerMovement : MonoBehaviour
                     canDash = false;
                     Invisible = false;
                     helmUsed = false;
-                    moveSpeed = 10f;
+                    moveSpeed = 20f;
                 }
                 //check if player is on ground
                 if (grounded)
@@ -274,12 +274,12 @@ public class PlayerMovement : MonoBehaviour
         {
             if (context.performed)
             {
-                moveSpeed = 16f;
+                moveSpeed = 26f;
             }
 
             if (context.canceled)
             {
-                moveSpeed = 10f;
+                moveSpeed = 20f;
             }
         }
     }
@@ -289,7 +289,7 @@ public class PlayerMovement : MonoBehaviour
         if (context.performed && canDodge == true && dashUnlocked == true)
         {
             rollDirection = moveDirection;
-            rollSpeed = 16f;
+            rollSpeed = 17f;
             state = State.Rolling;
         }
     }

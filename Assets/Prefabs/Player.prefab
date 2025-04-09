@@ -303,7 +303,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2186827231534179622}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.01907755, y: -0.0000018467, z: 0.000000035236912, w: 0.999818}
+  m_LocalRotation: {x: 0.01907755, y: 0, z: 0, w: 0.999818}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -670,8 +670,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6958530857180636268}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.036175624, y: -0.0000000037228525, z: 1.3476471e-10, w: 0.9993455}
-  m_LocalPosition: {x: -81.09642, y: 15.1, z: -61.099014}
+  m_LocalRotation: {x: 0.04492854, y: -0.000000029772233, z: 0.0000000013389749, w: 0.99899024}
+  m_LocalPosition: {x: 0, y: 2, z: -21.33}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1006,7 +1006,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7164578818880537884}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.13870122, y: -0, z: -0, w: 0.99033433}
+  m_LocalRotation: {x: 0.13870122, y: 0, z: 0, w: 0.9903343}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1108,8 +1108,8 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8734909886117522096}
   serializedVersion: 4
-  m_Mass: 6
-  m_Drag: 10
+  m_Mass: 5
+  m_Drag: 4
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -1145,12 +1145,12 @@ MonoBehaviour:
   gemE: 0
   gemA: 0
   gemT: 0
-  moveSpeed: 10
+  moveSpeed: 20
   playerHeight: 2
   whatIsGrounded:
     serializedVersion: 2
     m_Bits: 64
-  groundDrag: 10
+  groundDrag: 4
   Invisible: 0
   asphodelCollectionItem: 0
   elysiumCollectionItem: 0
@@ -1321,7 +1321,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8991229797031448730}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.044928525, y: -0.0000018419706, z: 0.000000082840664, w: 0.99899024}
+  m_LocalRotation: {x: 0.04492852, y: 0, z: 0, w: 0.99899024}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
