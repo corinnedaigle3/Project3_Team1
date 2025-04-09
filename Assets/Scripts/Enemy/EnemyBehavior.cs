@@ -31,7 +31,7 @@ public class EnemyBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        DieIfGemUsed();
+        //DieIfGemUsed();
 
 
         Patrol();
@@ -70,7 +70,7 @@ public class EnemyBehavior : MonoBehaviour
         ui.LoadLose();
 
     }
-
+    /*
     void DieIfGemUsed()
     {
         // if enemy is one of the 3 fury and their respective gem is used they will no longer spawn. 
@@ -99,4 +99,5 @@ public class EnemyBehavior : MonoBehaviour
 
         }
     }
+    */
 }
