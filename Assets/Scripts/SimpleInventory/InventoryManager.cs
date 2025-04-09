@@ -118,9 +118,7 @@ public class InventoryManager : MonoBehaviour
         spriteHelm.SetActive(hasHelm);
     }
 
-    void Update()
-    {
-    }
+    
 
     public void ShowAmount(TextMeshProUGUI textChange, int amount, ref bool hasItemName)
     {

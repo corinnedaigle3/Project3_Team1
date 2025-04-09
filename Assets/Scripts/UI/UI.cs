@@ -11,6 +11,7 @@ public class UI : MonoBehaviour
   
     private static UI instance;
 
+    public string currentScene;
     public string goToScene;
     public bool isPaused;
     public GameObject pauseMenu;
@@ -23,10 +24,14 @@ public class UI : MonoBehaviour
     [Header("Scene Based screen references ")]
     public GameObject mainMenu;
     public GameObject Levels;
+    public GameObject win;
+    public GameObject lose;
 
     public GameObject EventSystemM;
     [Header("First For each menu")]
     public GameObject mainMenuFirst;
+    public GameObject loseFirst;
+    public GameObject winFirst;
     public GameObject pauseFirst;
     public GameObject controlsFirst;
     public GameObject creditsFirst;
@@ -69,34 +74,67 @@ public class UI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(SceneManager.GetActiveScene().name == "MainMenu")
+        currentScene = SceneManager.GetActiveScene().name;
+        switch (currentScene)
         {
-            mainMenu.SetActive(true);
+            case "MainMenu":
+                mainMenu.SetActive(true);
+                lose.SetActive(false);
+                Levels.SetActive(false);
+                win.SetActive(false);
+                break;
+            case "Lose":
+               // EventSystem.current.SetSelectedGameObject(loseFirst);
 
-            Levels.SetActive(false);
+                mainMenu.SetActive(false);
+                lose.SetActive(true);
+                Levels.SetActive(false);
+                win.SetActive(false);
+                break;
+            case "Win":
+            //    EventSystem.current.SetSelectedGameObject(winFirst);
+
+                mainMenu.SetActive(false);
+                lose.SetActive(false);
+                Levels.SetActive(false);
+                win.SetActive(true);
+                break ;
+            default:
+                mainMenu.SetActive(false);
+                lose.SetActive(false);
+                Levels.SetActive(true);
+                win.SetActive(false);
+                break;
+
         }
-        else
-        {
-            mainMenu.SetActive(false);
-            Levels.SetActive(true);
+        /*
+       if(SceneManager.GetActiveScene().name == "MainMenu")
+       {
+
+       }
+       else
+       {
+           mainMenu.SetActive(false);
+           Levels.SetActive(true);
 
 
-            // Moved this logic to the UI_Input script
+           // Moved this logic to the UI_Input script
 
-            /*
-            if (Input.GetKeyDown(KeyCode.P))
-            {
-                if (isPaused)
-                {
-                    ResumeGame();
-                }
-                else
-                {
-                    PauseGame();
-                }
-            }*/
-        }
-       
+
+           if (Input.GetKeyDown(KeyCode.P))
+           {
+               if (isPaused)
+               {
+                   ResumeGame();
+               }
+               else
+               {
+                   PauseGame();
+               }
+           }
+    }
+        */
+
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Application.Quit();
@@ -120,8 +158,29 @@ public class UI : MonoBehaviour
 
         SceneManager.LoadScene("MainMenu");
 
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
+
+    public void LoadWin()
+    {
+        gameManager.playerDisable();
+        EventSystem.current.SetSelectedGameObject(winFirst);
+
+        SceneManager.LoadScene("Win");
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }  
+    public void LoadLose()
+    {
+        gameManager.playerDisable();
+        EventSystem.current.SetSelectedGameObject(loseFirst);
+
+        SceneManager.LoadScene("Lose");
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
     public void Quit()
     {
         Application.Quit();
@@ -135,8 +194,8 @@ public class UI : MonoBehaviour
         isPaused = true;
 
         //Unlocks cursor
-        // Cursor.lockState = CursorLockMode.None;
-        //  Cursor.visible = true;
+         Cursor.lockState = CursorLockMode.None;
+         Cursor.visible = true;
 
 
 
