@@ -7,27 +7,20 @@ using UnityEngine.UI;
 
 public class InventoryManager : MonoBehaviour
 {
-    public GameObject blankApple;
     public GameObject spriteApple;
 
-    public GameObject blankSkull;
     public GameObject spriteSkull;
 
-    public GameObject blankFireFlower;
     public GameObject spriteFireFlower;
 
-    public GameObject blankGemT;
     public GameObject spriteGemT;
 
-    public GameObject blankGemA;
     public GameObject spriteGemA;
 
-    public GameObject blankGemE;
     public GameObject spriteGemE;
 
     public GameObject takeDowntext;
 
-    public GameObject blankHelm;
     public GameObject spriteHelm;
     public TextMeshProUGUI helmText;
     public TextMeshProUGUI takeDownItemTextE;
@@ -64,31 +57,24 @@ public class InventoryManager : MonoBehaviour
     {
             hasE = false;
             spriteApple.SetActive(false);
-            blankApple.SetActive(true);
 
             hasA = false;
             spriteSkull.SetActive(false);
-            blankSkull.SetActive(true);
 
             hasT = false;
             spriteFireFlower.SetActive(false);
-            blankFireFlower.SetActive(true);
 
             hasGemE = false;
             spriteGemE.SetActive(false);
-            blankGemE.SetActive(true);
 
             hasGemA = false;
             spriteGemA.SetActive(false);
-            blankGemA.SetActive(true);
 
             hasGemT = false;
             spriteGemT.SetActive(false);
-            blankGemT.SetActive(true);
 
             hasHelm = false;
             spriteHelm.SetActive(false);
-            blankHelm.SetActive(true);
 
             takeDowntext.SetActive(false);
     }
