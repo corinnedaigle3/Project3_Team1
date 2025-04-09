@@ -56,10 +56,16 @@ public class UI : MonoBehaviour
         Cursor.visible = true;
         gameManager = GameObject.Find("GameManager").GetComponent<GameManger>();
 
-        EventSystemM.GetComponent<EventSystem>().SetSelectedGameObject(mainMenu);
+
+        Debug.Log("Selecting mainMenuFirst: " + mainMenuFirst);
+        StartCoroutine(waitSomeTime(1f));
+    }
+    IEnumerator waitSomeTime(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        EventSystem.current.SetSelectedGameObject(mainMenuFirst);
 
     }
-
     // Update is called once per frame
     void Update()
     {
@@ -110,7 +116,8 @@ public class UI : MonoBehaviour
     public void LoadMain()
     {
         gameManager.playerDisable();
-        EventSystemM.GetComponent<EventSystem>().SetSelectedGameObject(mainMenu);
+        EventSystem.current.SetSelectedGameObject(mainMenuFirst);
+
         SceneManager.LoadScene("MainMenu");
 
     }
@@ -124,12 +131,13 @@ public class UI : MonoBehaviour
     {
         pauseMenu.SetActive(true);
         Time.timeScale = 0f;
+        EventSystem.current.SetSelectedGameObject(pauseFirst);
         isPaused = true;
 
         //Unlocks cursor
-       // Cursor.lockState = CursorLockMode.None;
-      //  Cursor.visible = true;
-    
+        // Cursor.lockState = CursorLockMode.None;
+        //  Cursor.visible = true;
+
 
 
     }
@@ -139,6 +147,7 @@ public class UI : MonoBehaviour
         pauseMenu.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
+     
 
         // Locks cursor
         Cursor.lockState = CursorLockMode.Locked;
