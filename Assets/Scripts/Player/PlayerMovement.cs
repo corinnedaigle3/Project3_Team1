@@ -311,8 +311,8 @@ public class PlayerMovement : MonoBehaviour
         {
             lose = true;
             other.gameObject.GetComponentInParent<EnemyBehavior>().playerLose = true;
-            transform.LookAt(other.transform.position);
-            gameObject.GetComponent<PlayerMovement>().enabled = false;
+            transform.LookAt(other.transform.position); // might remvoe it 
+            gameObject.SetActive(false);
         }
 
         switch (other.tag)

@@ -20,6 +20,7 @@ public class GameManger : MonoBehaviour
     public bool furyE;
     public bool furyA;
     public bool furyT;
+    public bool win;
 
     private void Awake()
     {
@@ -63,6 +64,10 @@ public class GameManger : MonoBehaviour
             data.LoadFromSafeFile();
         }
 
+        if (furyA && furyE && furyT)
+        {
+            win = true;
+        }
     }
 
     public void playerEnable()  // self explanatory 

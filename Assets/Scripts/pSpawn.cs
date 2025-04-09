@@ -11,6 +11,7 @@ public class pSpawn : MonoBehaviour
     {
         player = GameObject.Find("Player");
         player.transform.position = transform.position;
+       
     }
   
 

@@ -13,7 +13,7 @@ public class EnemyBehavior : MonoBehaviour
     public string enemyType;
     public bool playerLose = false;
     public GameManger gameManager;
-
+    public UI ui;
     int waypointIdnex;
 
     // Start is called before the first frame update
@@ -24,12 +24,13 @@ public class EnemyBehavior : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         agent.SetDestination(Waypoints[waypointIdnex].position);
         gameManager = GameObject.Find("GameManager").GetComponent<GameManger>();
+        ui = GameObject.Find("Canvas").GetComponent<UI>();  
     }
 
     // Update is called once per frame
     void Update()
     {
-        dieIfGemUsed();
+        DieIfGemUsed();
 
 
         Patrol();
@@ -37,6 +38,7 @@ public class EnemyBehavior : MonoBehaviour
         if (playerLose) // add all the logic for ending the game    
         {
             StartCoroutine(LoseGame(1f));
+            
             agent.isStopped = true;
         }
     }
@@ -63,11 +65,12 @@ public class EnemyBehavior : MonoBehaviour
     IEnumerator LoseGame(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
-        SceneManager.LoadScene("LOSE");
+       
+        ui.LoadLose();
 
     }
 
-    void dieIfGemUsed()
+    void DieIfGemUsed()
     {
         // if enemy is one of the 3 fury and their respective gem is used they will no longer spawn. 
         switch (enemyType)
