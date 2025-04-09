@@ -108,8 +108,6 @@ public class BossNavigation : MonoBehaviour
         }
     }
 
- 
-
     private void Patroling()
     {
         //gameMusic.GetComponent<MusicControlelr>().ResumeMusic();
