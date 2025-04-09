@@ -153,6 +153,7 @@ public class PlayerMovement : MonoBehaviour
                     Invisible = false;
                     helmUsed = false;
                     moveSpeed = 20f;
+                    inventoryManager.invisText.SetActive(false);
                 }
 
                 //check if player is on ground
@@ -191,7 +192,9 @@ public class PlayerMovement : MonoBehaviour
                     Invisible = false;
                     helmUsed = false;
                     moveSpeed = 20f;
+                    inventoryManager.invisText.SetActive(false);
                 }
+
                 //check if player is on ground
                 if (grounded)
                 {
@@ -303,6 +306,7 @@ public class PlayerMovement : MonoBehaviour
         {
             Invisible = true;
             canDash = true;
+            inventoryManager.invisText.SetActive(true);
             invisibleTimer = 6f;
             helmUsed = true;
             inventoryManager.helmcounter -= 1;
