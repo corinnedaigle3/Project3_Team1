@@ -79,6 +79,8 @@ public class PlayerMovement : MonoBehaviour
     public gemsChecker theGemChecker;
     private bool canDodge;
     public bool dashUnlocked;
+    public AudioSource takeDownSound;
+    public AudioSource pickupSound;
 
     // Start is called before the first frame update
     void Start()
@@ -240,7 +242,8 @@ public class PlayerMovement : MonoBehaviour
             if (takeDown != null) // Add a null check
             {
                 takeDown.dead = true;
-                
+                takeDownSound.Play();
+
                 Debug.Log("is it dead " + takeDown.dead);
             }
             else
@@ -309,7 +312,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("colliding ");
+        Debug.Log("colliding");
         if (other.tag == "Behind" && inventoryManager.hasE == true)
         {
             inventoryManager.takeDowntext.SetActive(true);
@@ -340,6 +343,7 @@ public class PlayerMovement : MonoBehaviour
                 {
                     hasPickedUpItem = true;
                     inventoryManager.hasE = true;
+                    pickupSound.Play();
 
                     Debug.Log("Take down item picked up");
                     inventoryManager.takeDownItemCounterE++;
@@ -359,6 +363,7 @@ public class PlayerMovement : MonoBehaviour
                 {
                     hasPickedUpItem = true;
                     inventoryManager.hasA = true;
+                    pickupSound.Play();
 
                     inventoryManager.takeDownItemCounterA++;
                     inventoryManager.ShowAmount(inventoryManager.takeDownItemTextA, inventoryManager.takeDownItemCounterA, ref inventoryManager.hasA);
@@ -376,6 +381,7 @@ public class PlayerMovement : MonoBehaviour
                 {
                     hasPickedUpItem = true;
                     inventoryManager.hasT = true;
+                    pickupSound.Play();
 
                     inventoryManager.takeDownItemCounterT++;
                     inventoryManager.ShowAmount(inventoryManager.takeDownItemTextT, inventoryManager.takeDownItemCounterT, ref inventoryManager.hasT);
@@ -393,6 +399,7 @@ public class PlayerMovement : MonoBehaviour
                 {
                     hasPickedUpItem = true;
                     inventoryManager.hasGemE = true;
+                    pickupSound.Play();
 
                     inventoryManager.gemCounterE++;
                     inventoryManager.ShowAmount(inventoryManager.gemTextE, inventoryManager.gemCounterE, ref inventoryManager.hasGemE);
@@ -410,6 +417,7 @@ public class PlayerMovement : MonoBehaviour
                 {
                     hasPickedUpItem = true;
                     inventoryManager.hasGemA = true;
+                    pickupSound.Play();
 
                     inventoryManager.gemCounterA++;
                     inventoryManager.ShowAmount(inventoryManager.gemTextA, inventoryManager.gemCounterA, ref inventoryManager.hasGemA);
@@ -427,6 +435,7 @@ public class PlayerMovement : MonoBehaviour
                 {
                     hasPickedUpItem = true;
                     inventoryManager.hasGemT = true;
+                    pickupSound.Play();
 
                     inventoryManager.gemCounterT++;
                     inventoryManager.ShowAmount(inventoryManager.gemTextT, inventoryManager.gemCounterT, ref inventoryManager.hasGemT);
@@ -444,6 +453,7 @@ public class PlayerMovement : MonoBehaviour
                 {
                     hasPickedUpItem = true;
                     inventoryManager.hasHelm = true;
+                    pickupSound.Play();
 
                     inventoryManager.helmcounter++;
                     inventoryManager.ShowAmount(inventoryManager.helmText, inventoryManager.helmcounter, ref inventoryManager.hasHelm);
@@ -474,11 +484,6 @@ public class PlayerMovement : MonoBehaviour
         {
             hasPickedUpItem = false; // Reset flag when leaving
             Destroy(other.gameObject);
-        }
-
-        if(other.tag == "WaterE")
-        {
-            //teleport player back to beginning of level
         }
 
         if (other.tag == "DashUnlocked")
