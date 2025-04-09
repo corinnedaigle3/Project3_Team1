@@ -77,6 +77,8 @@ public class PlayerMovement : MonoBehaviour
     [Header("Other")]
     public bool lose;
     public gemsChecker theGemChecker;
+    private bool canDodge;
+    public bool dashUnlocked;
 
     // Start is called before the first frame update
     void Start()
@@ -91,6 +93,10 @@ public class PlayerMovement : MonoBehaviour
         asphodelCollectionItem = false;
         elysiumCollectionItem = false;
         tartarusCollectionItem = false;
+        canDodge = false;
+        dashUnlocked = false;
+
+        rb.drag = groundDrag;
 
         fury1 = false;
         fury2 = false;
@@ -144,17 +150,19 @@ public class PlayerMovement : MonoBehaviour
                     canDash = false;
                     Invisible = false;
                     helmUsed = false;
-                    moveSpeed = 20f;
+                    moveSpeed = 10f;
                 }
 
                 //check if player is on ground
-                if (grounded)
+                if (grounded && dashUnlocked == true)
                 {
                     rb.drag = groundDrag;
+                    canDodge = true;
                 }
                 else
                 {
                     rb.drag = 0;
+                    canDodge = false;   
                 }
 
                 invisibleTimer -= Time.deltaTime;
@@ -180,8 +188,20 @@ public class PlayerMovement : MonoBehaviour
                     canDash = false;
                     Invisible = false;
                     helmUsed = false;
-                    moveSpeed = 20f;
+                    moveSpeed = 10f;
                 }
+                //check if player is on ground
+                if (grounded)
+                {
+                    rb.drag = groundDrag;
+                    canDodge = true;
+                }
+                else
+                {
+                    rb.drag = 0;
+                    canDodge = false;
+                }
+
                 break;
         }
     }
@@ -237,13 +257,6 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    /*
-    private void MyInput()
-    {
-        horizontalInput = Input.GetAxisRaw("Horizontal");
-        verticalInput = Input.GetAxisRaw("Vertical");
-    }
-    */
     private void SpeedControl()
     {
         Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
@@ -261,19 +274,19 @@ public class PlayerMovement : MonoBehaviour
         {
             if (context.performed)
             {
-                moveSpeed = 26f;
+                moveSpeed = 16f;
             }
 
             if (context.canceled)
             {
-                moveSpeed = 20f;
+                moveSpeed = 10f;
             }
         }
     }
 
     private void DodgeEnemy(InputAction.CallbackContext context) 
     {
-        if (context.performed)
+        if (context.performed && canDodge == true && dashUnlocked == true)
         {
             rollDirection = moveDirection;
             rollSpeed = 16f;
@@ -294,16 +307,6 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-   /* public void UseHelm()
-    {
-        if (helmUsed == true)
-        {
-            inventoryManager.helmcounter--;
-            inventoryManager.ShowAmount(inventoryManager.helmText, inventoryManager.helmcounter);
-        }
-        
-    }*/
-
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("colliding ");
@@ -321,6 +324,12 @@ public class PlayerMovement : MonoBehaviour
             other.gameObject.GetComponentInParent<EnemyBehavior>().playerLose = true;
             transform.LookAt(other.transform.position); // might remvoe it 
             gameObject.SetActive(false);
+        }
+
+        if (other.tag == "DashUnlocked")
+        {
+            canDodge = true;
+            dashUnlocked = true;
         }
 
         switch (other.tag)
@@ -471,7 +480,12 @@ public class PlayerMovement : MonoBehaviour
         {
             //teleport player back to beginning of level
         }
-       
+
+        if (other.tag == "DashUnlocked")
+        {
+            canDodge = false;
+            dashUnlocked = false;
+        }
     }
 
 
