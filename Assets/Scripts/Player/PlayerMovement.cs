@@ -76,6 +76,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Other")]
     public bool lose;
+    public gemsChecker theGemChecker;
 
     // Start is called before the first frame update
     void Start()
@@ -226,6 +227,13 @@ public class PlayerMovement : MonoBehaviour
             {
                 Debug.LogWarning("TakeDown component not found on currentEnemy!");
             }
+        }
+
+        // this is enabling to consume the item.
+        // it is tied to the same game keybinds as take down 
+        if (theGemChecker.canPressQ)
+        {
+            theGemChecker.qPressed = true; // tje rest will happen in gemsCheker script 
         }
     }
 
