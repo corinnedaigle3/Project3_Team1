@@ -10,6 +10,7 @@ public class DirectionLight : MonoBehaviour
     private void Start()
     {
         RenderSettings.fogColor = new Color(1f, 0.7450980392156863f, 0.35294117647058826f);
+        RenderSettings.fog = enabled;
     }
 
     private void OnTriggerEnter(Collider other)
