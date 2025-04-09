@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Water
+  m_Name: Water2
   m_Shader: {fileID: -6465566751694194690, guid: cd986cab80fbae54faae69c81e90821d, type: 3}
   m_Parent: {fileID: -876546973899608171, guid: cd986cab80fbae54faae69c81e90821d, type: 3}
   m_ModifiedSerializedProperties: 2
@@ -32,8 +32,8 @@ Material:
     - _RefractionStreght: 2
     - _waterdepth: 4
     m_Colors:
-    - _DeepWater: {r: 0, g: 0.2959672, b: 0.972549, a: 0.7294118}
-    - _LightWater: {r: 0, g: 0.8649993, b: 1, a: 0.5803922}
+    - _DeepWater: {r: 0.31132078, g: 0.012837972, b: 0, a: 0.7294118}
+    - _LightWater: {r: 1, g: 0, b: 0.05751417, a: 0.84313726}
   m_BuildTextureStacks: []
 --- !u!114 &6600456423733317936
 MonoBehaviour:
