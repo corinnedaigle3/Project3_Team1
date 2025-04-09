@@ -336339,6 +336339,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1094821151}
     m_Modifications:
+    - target: {fileID: 2056488646744547120, guid: 2f0c374d5d2963740bbc6cb16726483f, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 44a612cbb80254a4b902dac770e3b56d, type: 2}
     - target: {fileID: 2808857136818097476, guid: 2f0c374d5d2963740bbc6cb16726483f, type: 3}
       propertyPath: m_Name
       value: Temple_Roof
