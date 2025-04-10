@@ -3,6 +3,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using TMPro;
+using Unity.VisualScripting;
+using System.Runtime.CompilerServices;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -11,7 +13,6 @@ public class PlayerMovement : MonoBehaviour
         Normal,
         Rolling,
     }
-
 
     [Header("References")]
     public Transform orientation;
@@ -74,15 +75,22 @@ public class PlayerMovement : MonoBehaviour
     private bool hasPickedUpItem = false;
     public bool helmUsed;
 
+    [Header("Music")] 
+    public AudioSource takeDownSound;
+    public AudioSource pickupSound;
+    public AudioSource caughtSound;
+
+    [Header("Slope Handling")]
+    public float maxSlopeAngle;
+    public float minSlopeAngle;
+    public RaycastHit slopeHit;
+
     [Header("Other")]
     public bool lose;
     public gemsChecker theGemChecker;
     private bool canDodge;
     public bool dashUnlocked;
-    public AudioSource takeDownSound;
-    public AudioSource pickupSound;
-    public AudioSource caughtSound;
-
+   
     // Start is called before the first frame update
     void Start()
     {
@@ -98,6 +106,8 @@ public class PlayerMovement : MonoBehaviour
         tartarusCollectionItem = false;
         canDodge = false;
         dashUnlocked = false;
+        maxSlopeAngle = 50f;
+        minSlopeAngle = 30f;
 
         rb.drag = groundDrag;
 
@@ -159,6 +169,12 @@ public class PlayerMovement : MonoBehaviour
                 //   MyInput();
                 SpeedControl();
 
+                if (OnSlope())
+                {
+                    rb.AddForce(GetSlopeMoveDirection() * moveSpeed * 20f, ForceMode.Force);
+                }
+
+                //rb.useGravity = !OnSlope();
 
                 if (invisibleTimer <= 0)
                 {
@@ -298,6 +314,22 @@ public class PlayerMovement : MonoBehaviour
             inventoryManager.helmcounter -= 1;
             inventoryManager.ShowAmount(inventoryManager.helmText, inventoryManager.helmcounter, ref inventoryManager.hasHelm);
         }
+    }
+
+    public bool OnSlope()
+    {
+        if (Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight * 0.5f + 0.3f))
+        {
+            float angle = Vector3.Angle (Vector3.up, slopeHit.normal);
+            return angle < maxSlopeAngle && angle > minSlopeAngle && angle != 0;
+        }
+
+        return false;
+    }
+
+    public Vector3 GetSlopeMoveDirection()
+    {
+        return Vector3.ProjectOnPlane(moveDirection, slopeHit.normal).normalized;
     }
 
     private void OnTriggerEnter(Collider other)
