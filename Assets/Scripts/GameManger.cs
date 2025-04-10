@@ -90,7 +90,7 @@ public class GameManger : MonoBehaviour
         }
         else if (player != null)
         {
-            player.SetActive(false);
+            Destroy(player);
         }
         else
             Debug.Log("No Player Found");
