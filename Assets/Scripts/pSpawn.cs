@@ -11,6 +11,8 @@ public class pSpawn : MonoBehaviour
     {
         player = GameObject.Find("Player");
         player.transform.position = transform.position;
+        player.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+        player.GetComponent<Rigidbody>().velocity = Vector3.zero;
        
     }
   

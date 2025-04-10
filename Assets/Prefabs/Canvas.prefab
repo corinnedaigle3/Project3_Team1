@@ -255,7 +255,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5123287566474693697
 Transform:
   m_ObjectHideFlags: 0
@@ -276,8 +276,8 @@ Transform:
   - {fileID: 3050403996955448117}
   - {fileID: 3960824027394243676}
   - {fileID: 7055704470133165742}
-  - {fileID: 6054245745250831412}
   - {fileID: 4028980538065370640}
+  - {fileID: 6054245745250831412}
   m_Father: {fileID: 9108081544034897633}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &722131486933431474
@@ -1417,10 +1417,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Yo need to defeat the 3 furies that roam the Underworld. You need to find
-    their wekness item on their realm so you cand extract their gem from their backs.
-    After acquaring the 3 gems use them in the hub area to trap furies and use theirs
-    powers to escape the underworld  '
+  m_text: 'You need to defeat the 3 furies that roam the Underworld. You need to
+    find their weakness item on their realm so you can extract their gem from their
+    backs. After acquiring the 3 gems use them in the hub area to trap furies and
+    use theirs powers to escape the underworld  '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2005,9 +2005,9 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.25244746, g: 0.37685087, b: 0.8773585, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 0.27189392, g: 0.2953689, b: 0.8867924, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
