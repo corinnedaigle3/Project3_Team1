@@ -291,6 +291,7 @@ public class PlayerMovement : MonoBehaviour
         {
             Invisible = true;
             canDash = true;
+            inventoryManager.helmUseText.SetActive(false);
             inventoryManager.invisText.SetActive(true);
             invisibleTimer = 6f;
             helmUsed = true;
@@ -304,6 +305,8 @@ public class PlayerMovement : MonoBehaviour
         Debug.Log("colliding");
         if (other.tag == "Behind" && inventoryManager.hasE == true)
         {
+            inventoryManager.helmUseText.SetActive(false);
+            inventoryManager.invisText.SetActive(false);
             inventoryManager.takeDowntext.SetActive(true);
             canKill = true;
             currentEnemy = other.gameObject;
@@ -323,6 +326,7 @@ public class PlayerMovement : MonoBehaviour
         {
             canDodge = true;
             dashUnlocked = true;
+            inventoryManager.dodgeText.SetActive(true);
         }
 
         switch (other.tag)
@@ -359,8 +363,6 @@ public class PlayerMovement : MonoBehaviour
                     inventoryManager.ShowAmount(inventoryManager.takeDownItemTextA, inventoryManager.takeDownItemCounterA, ref inventoryManager.hasA);
                     Destroy(other.gameObject);
                     StartCoroutine(waitToFalse(0.5f));
-
-
                 }
 
                 break;
@@ -441,6 +443,7 @@ public class PlayerMovement : MonoBehaviour
                     hasPickedUpItem = true;
                     inventoryManager.hasHelm = true;
                     pickupSound.Play();
+                    inventoryManager.helmUseText.SetActive(true);
 
                     inventoryManager.helmcounter++;
                     inventoryManager.ShowAmount(inventoryManager.helmText, inventoryManager.helmcounter, ref inventoryManager.hasHelm);
@@ -477,6 +480,7 @@ public class PlayerMovement : MonoBehaviour
         {
             canDodge = false;
             dashUnlocked = false;
+            inventoryManager.dodgeText.SetActive(false);
         }
     }
 

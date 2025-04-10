@@ -8,20 +8,15 @@ using UnityEngine.UI;
 public class InventoryManager : MonoBehaviour
 {
     public GameObject spriteApple;
-
     public GameObject spriteSkull;
-
     public GameObject spriteFireFlower;
-
     public GameObject spriteGemT;
-
     public GameObject spriteGemA;
-
     public GameObject spriteGemE;
-
     public GameObject takeDowntext;
-
     public GameObject invisText;
+    public GameObject dodgeText;
+    public GameObject helmUseText;
 
     public GameObject spriteHelm;
     public TextMeshProUGUI helmText;
@@ -57,30 +52,34 @@ public class InventoryManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-            hasE = false;
-            spriteApple.SetActive(false);
+        hasE = false;
+        spriteApple.SetActive(false);
 
-            hasA = false;
-            spriteSkull.SetActive(false);
+        hasA = false;
+        spriteSkull.SetActive(false);
 
-            hasT = false;
-            spriteFireFlower.SetActive(false);
+        hasT = false;
+        spriteFireFlower.SetActive(false);
 
-            hasGemE = false;
-            spriteGemE.SetActive(false);
+        hasGemE = false;
+        spriteGemE.SetActive(false);
 
-            hasGemA = false;
-            spriteGemA.SetActive(false);
+        hasGemA = false;
+        spriteGemA.SetActive(false);
 
-            hasGemT = false;
-            spriteGemT.SetActive(false);
+        hasGemT = false;
+        spriteGemT.SetActive(false);
 
-            hasHelm = false;
-            spriteHelm.SetActive(false);
+        hasHelm = false;
+        spriteHelm.SetActive(false);
 
-            takeDowntext.SetActive(false);
+        takeDowntext.SetActive(false);
 
-            invisText.SetActive(false);
+        invisText.SetActive(false);
+
+        dodgeText.SetActive(false);
+
+        helmUseText.SetActive(false);
     }
 
     // Update is called once per frame
