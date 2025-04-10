@@ -15,7 +15,6 @@ public class EnemyBehavior : MonoBehaviour
     public GameManger gameManager;
     public UI ui;
     int waypointIdnex;
-    public AudioSource caught;
 
     // Start is called before the first frame update
     void Start()
@@ -66,7 +65,6 @@ public class EnemyBehavior : MonoBehaviour
     IEnumerator LoseGame(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
-        caught.Play();
         ui.LoadLose();
 
     }

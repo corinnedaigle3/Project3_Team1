@@ -81,6 +81,7 @@ public class PlayerMovement : MonoBehaviour
     public bool dashUnlocked;
     public AudioSource takeDownSound;
     public AudioSource pickupSound;
+    public AudioSource caughtSound;
 
     // Start is called before the first frame update
     void Start()
@@ -311,6 +312,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (other.CompareTag("EnemyE") || other.CompareTag( "Fury") || other.CompareTag("EnemyA") || other.CompareTag("EnemyA"))
         {
+            caughtSound.Play();
             lose = true;
             other.gameObject.GetComponentInParent<EnemyBehavior>().playerLose = true;
             transform.LookAt(other.transform.position); // might remvoe it 
@@ -375,8 +377,6 @@ public class PlayerMovement : MonoBehaviour
                     inventoryManager.ShowAmount(inventoryManager.takeDownItemTextT, inventoryManager.takeDownItemCounterT, ref inventoryManager.hasT);
                     Destroy(other.gameObject);
                     StartCoroutine(waitToFalse(0.5f));
-
-
                 }
 
                 break;
@@ -412,7 +412,6 @@ public class PlayerMovement : MonoBehaviour
                     Destroy(other.gameObject);
                    
                     StartCoroutine(waitToFalse(0.5f));
-
                 }
 
                 break;
@@ -430,13 +429,13 @@ public class PlayerMovement : MonoBehaviour
                     Destroy(other.gameObject);
                    
                     StartCoroutine(waitToFalse(0.5f));
-
                 }
 
                 break;
 
             case "Helm":
 
+                if (!hasPickedUpItem) // Check if the Helm was already picked up
                 if (!hasPickedUpItem) // Check if the Helm was already picked up
                 {
                     hasPickedUpItem = true;
