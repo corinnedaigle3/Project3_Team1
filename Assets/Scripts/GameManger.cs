@@ -24,6 +24,8 @@ public class GameManger : MonoBehaviour
 
     private void Awake()
     {
+        player = GameObject.Find("Player");
+        
         if (instance != null && instance != this)
         {
             Destroy(gameObject); // Destroy duplicate instance
@@ -40,8 +42,8 @@ public class GameManger : MonoBehaviour
         player = GameObject.Find("Player");
         data = GetComponent<SavingData>();
         ui = GameObject.Find("Canvas").GetComponent<UI>();
-       
-    
+        player.SetActive(false);
+
     }
 
     // Update is called once per frame
@@ -72,18 +74,9 @@ public class GameManger : MonoBehaviour
 
     public void playerEnable()  // self explanatory 
     {
-        if (player == null)
-        {
-            player = GameObject.Find("Player");
+      
             player.SetActive(true);
-
-        }
-        else if (player != null)
-        {
-            player.SetActive(true);
-        }
-        else
-            Debug.Log("No Player Found");
+        
 
     }
     public void playerDisable()
