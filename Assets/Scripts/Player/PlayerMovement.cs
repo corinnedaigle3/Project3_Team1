@@ -317,6 +317,10 @@ public class PlayerMovement : MonoBehaviour
         {
             caughtSound.Play();
             lose = true;
+            inventoryManager.takeDowntext.SetActive(false);
+            inventoryManager.invisText.SetActive(false);
+            inventoryManager.dodgeText.SetActive(false);
+            inventoryManager.helmUseText.SetActive(false);
             other.gameObject.GetComponentInParent<EnemyBehavior>().playerLose = true;
             transform.LookAt(other.transform.position); // might remvoe it 
             gameObject.SetActive(false);
