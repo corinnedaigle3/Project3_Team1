@@ -171,7 +171,8 @@ public class PlayerMovement : MonoBehaviour
 
                 if (OnSlope())
                 {
-                    rb.AddForce(GetSlopeMoveDirection() * moveSpeed * 20f, ForceMode.Force);
+                    rb.MovePosition(rb.position + moveDirection * moveSpeed * Time.fixedDeltaTime);
+                    //rb.AddForce(GetSlopeMoveDirection() * moveSpeed * 20f, ForceMode.Force);
                 }
 
                 //rb.useGravity = !OnSlope();
