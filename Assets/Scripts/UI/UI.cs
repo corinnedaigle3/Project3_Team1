@@ -79,26 +79,39 @@ public class UI : MonoBehaviour
         switch (currentScene)
         {
             case "MainMenu":
+             //   EventSystem.current.SetSelectedGameObject(mainMenuFirst);
+
                 mainMenu.SetActive(true);
                 lose.SetActive(false);
                 Levels.SetActive(false);
                 win.SetActive(false);
+
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
                 break;
             case "Lose":
-               // EventSystem.current.SetSelectedGameObject(loseFirst);
+                // EventSystem.current.SetSelectedGameObject(loseFirst);
+          
 
                 mainMenu.SetActive(false);
                 lose.SetActive(true);
                 Levels.SetActive(false);
                 win.SetActive(false);
+
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
                 break;
             case "LOSE":
-               // EventSystem.current.SetSelectedGameObject(loseFirst);
+                // EventSystem.current.SetSelectedGameObject(loseFirst);
+               
 
                 mainMenu.SetActive(false);
                 lose.SetActive(true);
                 Levels.SetActive(false);
                 win.SetActive(false);
+
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
                 break;
             case "Win":
             //    EventSystem.current.SetSelectedGameObject(winFirst);
@@ -107,6 +120,9 @@ public class UI : MonoBehaviour
                 lose.SetActive(false);
                 Levels.SetActive(false);
                 win.SetActive(true);
+
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
                 break ;
             default:
                 mainMenu.SetActive(false);
@@ -189,6 +205,7 @@ public class UI : MonoBehaviour
         SceneManager.LoadScene("Lose");
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        Debug.Log("Cursor should be visible ");
     }
     public void Quit()
     {
