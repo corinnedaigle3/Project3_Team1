@@ -75,6 +75,7 @@ public class UI : MonoBehaviour
     void Update()
     {
         currentScene = SceneManager.GetActiveScene().name;
+        Debug.Log("Current Scene is " + currentScene);
         switch (currentScene)
         {
             case "MainMenu":
@@ -84,6 +85,14 @@ public class UI : MonoBehaviour
                 win.SetActive(false);
                 break;
             case "Lose":
+               // EventSystem.current.SetSelectedGameObject(loseFirst);
+
+                mainMenu.SetActive(false);
+                lose.SetActive(true);
+                Levels.SetActive(false);
+                win.SetActive(false);
+                break;
+            case "LOSE":
                // EventSystem.current.SetSelectedGameObject(loseFirst);
 
                 mainMenu.SetActive(false);
