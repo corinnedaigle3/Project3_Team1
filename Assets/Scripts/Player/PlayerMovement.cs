@@ -135,17 +135,29 @@ public class PlayerMovement : MonoBehaviour
         inputSystem.Player.Disable();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
         switch (state)
         {
             case State.Normal:
+                //read controller input for player
+                Vector2 inputVector = inputSystem.Player.Move.ReadValue<Vector2>();
+
+                // Convert it to camera-relative movement
+                Vector3 camRelativeMove = orientation.forward * inputVector.y + orientation.right * inputVector.x;
+                camRelativeMove.y = 0; // Ensure movement stays on the ground
+
+                //saving the vector info
+                moveDirection = camRelativeMove;
+
+                rb.AddForce(camRelativeMove.normalized * moveSpeed * 10f, ForceMode.Force);
+                transform.rotation = Quaternion.LookRotation(moveDirection);
+
                 grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGrounded);
 
-             //   MyInput();
+                //   MyInput();
                 SpeedControl();
-                
+
 
                 if (invisibleTimer <= 0)
                 {
@@ -164,12 +176,10 @@ public class PlayerMovement : MonoBehaviour
                 }
                 else
                 {
-                    rb.drag = 0;
-                    canDodge = false;   
+                    canDodge = false;
                 }
 
                 invisibleTimer -= Time.deltaTime;
-
                 break;
 
             case State.Rolling:
@@ -206,32 +216,6 @@ public class PlayerMovement : MonoBehaviour
                     rb.drag = 0;
                     canDodge = false;
                 }
-
-                break;
-        }
-    }
-
-    private void FixedUpdate()
-    {
-        switch (state)
-        {
-            case State.Normal:
-                //read controller input for player
-                Vector2 inputVector = inputSystem.Player.Move.ReadValue<Vector2>();
-
-                // Convert it to camera-relative movement
-                Vector3 camRelativeMove = orientation.forward * inputVector.y + orientation.right * inputVector.x;
-                camRelativeMove.y = 0; // Ensure movement stays on the ground
-
-                //saving the vector info
-                moveDirection = camRelativeMove;
-
-                rb.AddForce(camRelativeMove.normalized * moveSpeed * 10f, ForceMode.Force);
-                transform.rotation = Quaternion.LookRotation(moveDirection);
-                //MovePlayer();
-                break;
-
-            case State.Rolling:
                 break;
         }
     }
