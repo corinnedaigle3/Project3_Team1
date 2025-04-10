@@ -179,6 +179,7 @@ public class UI : MonoBehaviour
     public void LoadMain()
     {
         gameManager.playerDisable();
+        Destroy(gameManager.player);
         EventSystem.current.SetSelectedGameObject(mainMenuFirst);
 
         SceneManager.LoadScene("MainMenu");
@@ -241,6 +242,7 @@ public class UI : MonoBehaviour
 
     public void ResetGame()
     {
+        gameManager.resetData();
         gameManager.resetData();
         LoadMain();
         gameManager.resetData();
