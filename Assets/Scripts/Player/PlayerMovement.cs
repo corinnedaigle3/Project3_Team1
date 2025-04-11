@@ -165,7 +165,10 @@ public class PlayerMovement : MonoBehaviour
                 // rb.AddForce(camRelativeMove.normalized * moveSpeed * 10f, ForceMode.Force);
                 if (moveDirection != Vector3.zero)
                 {
-                    transform.rotation = Quaternion.LookRotation(moveDirection);
+                    // THIS IS HOW I FIXED THE ROTATION ISSUES (The rotation was instantanious and was causing the issue) 
+                    Quaternion toRotation = Quaternion.LookRotation(moveDirection);
+                    transform.rotation = Quaternion.Slerp(transform.rotation, toRotation, Time.deltaTime * 10f);
+                    //transform.rotation = Quaternion.LookRotation(moveDirection);
                 }
 
                 grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGrounded);
