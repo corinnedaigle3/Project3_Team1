@@ -124,6 +124,17 @@ public class UI : MonoBehaviour
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
                 break ;
+            case "WIN":
+            //    EventSystem.current.SetSelectedGameObject(winFirst);
+
+                mainMenu.SetActive(false);
+                lose.SetActive(false);
+                Levels.SetActive(false);
+                win.SetActive(true);
+
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+                break ;
             default:
                 mainMenu.SetActive(false);
                 lose.SetActive(false);

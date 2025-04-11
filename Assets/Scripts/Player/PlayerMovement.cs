@@ -97,7 +97,7 @@ public class PlayerMovement : MonoBehaviour
         inventoryManager = GameObject.Find("Canvas").GetComponent<InventoryManager>();
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
-        moveSpeed = 20f;
+        moveSpeed = 8f;
         canDash = false;
         Invisible = false;
         helmUsed = false;
@@ -152,7 +152,7 @@ public class PlayerMovement : MonoBehaviour
         {
             case State.Normal:
                 //read controller input for player
-                Vector2 inputVector = inputSystem.Player.Move.ReadValue<Vector2>();
+                Vector2 inputVector = inputSystem.Player.Move.ReadValue<Vector2>().normalized; 
 
                 // Convert it to camera-relative movement
                 Vector3 camRelativeMove = orientation.forward * inputVector.y + orientation.right * inputVector.x;
@@ -161,8 +161,12 @@ public class PlayerMovement : MonoBehaviour
                 //saving the vector info
                 moveDirection = camRelativeMove;
 
-                rb.AddForce(camRelativeMove.normalized * moveSpeed * 10f, ForceMode.Force);
-                transform.rotation = Quaternion.LookRotation(moveDirection);
+                rb.MovePosition(rb.position + moveDirection * moveSpeed * Time.fixedDeltaTime);
+                // rb.AddForce(camRelativeMove.normalized * moveSpeed * 10f, ForceMode.Force);
+                if (moveDirection != Vector3.zero)
+                {
+                    transform.rotation = Quaternion.LookRotation(moveDirection);
+                }
 
                 grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGrounded);
 
@@ -182,7 +186,7 @@ public class PlayerMovement : MonoBehaviour
                     canDash = false;
                     Invisible = false;
                     helmUsed = false;
-                    moveSpeed = 20f;
+                    moveSpeed = 8f;
                     inventoryManager.invisText.SetActive(false);
                 }
 
@@ -219,7 +223,7 @@ public class PlayerMovement : MonoBehaviour
                     canDash = false;
                     Invisible = false;
                     helmUsed = false;
-                    moveSpeed = 20f;
+                    moveSpeed = 8f;
                     inventoryManager.invisText.SetActive(false);
                 }
 
@@ -282,12 +286,12 @@ public class PlayerMovement : MonoBehaviour
         {
             if (context.performed)
             {
-                moveSpeed = 26f;
+                moveSpeed = 12f;
             }
 
             if (context.canceled)
             {
-                moveSpeed = 20f;
+                moveSpeed = 8f;
             }
         }
     }

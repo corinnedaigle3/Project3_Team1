@@ -1182,12 +1182,12 @@ MonoBehaviour:
   gemE: 0
   gemA: 0
   gemT: 0
-  moveSpeed: 20
+  moveSpeed: 10
   playerHeight: 2
   whatIsGrounded:
     serializedVersion: 2
     m_Bits: 64
-  groundDrag: 4
+  groundDrag: 0
   Invisible: 0
   asphodelCollectionItem: 0
   elysiumCollectionItem: 0
@@ -1202,12 +1202,14 @@ MonoBehaviour:
   inventoryManager: {fileID: 0}
   helmInInventory: 0
   helmUsed: 0
-  lose: 0
-  theGemChecker: {fileID: 0}
-  dashUnlocked: 0
   takeDownSound: {fileID: 8165690938175991352}
   pickupSound: {fileID: 4991499539717121548}
   caughtSound: {fileID: 4219634129425821181}
+  maxSlopeAngle: 0
+  minSlopeAngle: 0
+  lose: 0
+  theGemChecker: {fileID: 0}
+  dashUnlocked: 0
 --- !u!136 &2031590590646486855
 CapsuleCollider:
   m_ObjectHideFlags: 0
