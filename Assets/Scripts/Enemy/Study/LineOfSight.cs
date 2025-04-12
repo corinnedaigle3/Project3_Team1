@@ -17,7 +17,7 @@ public class LineOfSight : MonoBehaviour
 
     public float radius;
     [Range(0,360)]
-    public float angel; //meant to type "angle"
+    public float angle; //meant to type "angle"
 
     private void Start()
     {
@@ -27,6 +27,7 @@ public class LineOfSight : MonoBehaviour
     void Update()
     {
         FieldOfViewCheck();
+
     }
 
     private void FieldOfViewCheck()
@@ -39,11 +40,12 @@ public class LineOfSight : MonoBehaviour
             Transform target = rangeChecks[0].transform;
             Vector3 directionToTarget = (target.position - transform.position).normalized;
 
-            if(Vector3.Angle(transform.forward, directionToTarget) < angel / 2)
+            if(Vector3.Angle(transform.forward, directionToTarget) < angle / 2)
             {
                 float distanceToTarget = Vector3.Distance(transform.position, target.position);
+                Debug.DrawRay(transform.position, directionToTarget * distanceToTarget, Color.red);
 
-                if(!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstacleLayer))
+                if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstacleLayer, QueryTriggerInteraction.Collide))
                 {
                     canChase = true;
                    

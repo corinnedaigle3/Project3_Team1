@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8916667992691364273}
   - component: {fileID: 1847052860119057821}
   - component: {fileID: 4720131709456149520}
+  - component: {fileID: 929835557766990142}
   - component: {fileID: 1076616841925010735}
   - component: {fileID: 1194732855712170040}
   m_Layer: 0
@@ -163,6 +164,30 @@ MonoBehaviour:
   playerLose: 0
   gameManager: {fileID: 0}
   ui: {fileID: 0}
+  player: {fileID: 0}
+  lineOfSight: {fileID: 0}
+--- !u!114 &929835557766990142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 367192780633537303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ddb70aacc3ab704184482470d73605c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  canChase: 0
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 2560
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  radius: 50
+  angle: 180
 --- !u!82 &1076616841925010735
 AudioSource:
   m_ObjectHideFlags: 0
