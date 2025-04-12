@@ -13,13 +13,14 @@ public class PlayerMovement : MonoBehaviour
         Normal,
         Rolling,
     }
+    public static GameObject playerInstance;
+
 
     [Header("References")]
     public Transform orientation;
     public Transform player;
     public Transform playerObj;
     private Rigidbody rb;
-    public static GameObject playerInstance;
 
     [Header("Input Actions")]
     private PlayerInput playerInput;
@@ -118,6 +119,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
+
         if (playerInstance != null && playerInstance != this.gameObject)
         {
             Destroy(gameObject); // Destroy duplicate instance
@@ -127,7 +129,6 @@ public class PlayerMovement : MonoBehaviour
             playerInstance = this.gameObject;
             DontDestroyOnLoad(gameObject); // Persist across scenes
         }
-
         playerInput = GetComponent<PlayerInput>();
 
         inputSystem = new InputSystem();
