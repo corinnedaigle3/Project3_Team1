@@ -110,7 +110,7 @@ public class PlayerMovement : MonoBehaviour
         canDodge = false;
         dashUnlocked = false;
         maxSlopeAngle = 50f;
-        minSlopeAngle = 10f;
+        minSlopeAngle = 20f;
 
         rb.drag = groundDrag;
 
