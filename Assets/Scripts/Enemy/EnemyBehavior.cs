@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
-using UnityEditor.Purchasing;
+//using UnityEditor.Purchasing;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
@@ -23,6 +23,7 @@ public class EnemyBehavior : MonoBehaviour
     bool playerInNvav;
     bool isSearching;
     bool chasing;
+    private Vector3 playerLastPostion;
 
     // Start is called before the first frame update
     void Start()
@@ -42,6 +43,10 @@ public class EnemyBehavior : MonoBehaviour
     {
         //DieIfGemUsed();
         NavMeshHit hit;
+        if (player == null)
+        {
+            player = GameObject.Find("Player");
+        }
         playerInNvav = NavMesh.SamplePosition(player.transform.position, out hit, 1f, NavMesh.AllAreas);
 
         Debug.Log("Player in in navMesh" + playerInNvav);
@@ -70,8 +75,9 @@ public class EnemyBehavior : MonoBehaviour
     {
         if (player != null && lineOfSight.canChase)
         {
-            //gameMusic.GetComponent<MusicControlelr>().PChaseMusic();
-            //pSprite.SetBool("isChased", true);
+          
+         
+            playerLastPostion = player.transform.position; // save player postion
             // Chase Player
             agent.SetDestination(player.transform.position);
             transform.LookAt(player.transform.position);
@@ -82,10 +88,10 @@ public class EnemyBehavior : MonoBehaviour
             Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 10f);
 
-            isSearching = false;
+            isSearching = true;
             chasing = false;
         } 
-        if (isSearching)
+        if (isSearching && !chasing)
         {
             StartCoroutine(SearchArea());
         }
@@ -93,7 +99,7 @@ public class EnemyBehavior : MonoBehaviour
     private void Patrol()
     {
         // chose a new random waypoint when reach destination
-        if (agent.remainingDistance <= 0.1)
+        if (agent.remainingDistance <= 0.1f)
         {
             waypointIdnex = Random.Range(0, Waypoints.Length);
 
@@ -101,13 +107,13 @@ public class EnemyBehavior : MonoBehaviour
         }
     }
 
-    /*IEnumerator NewDesitnation (float waitTime)
+    IEnumerator NewDesitnation (float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
         waypointIdnex = Random.Range(0, Waypoints.Length);
 
         agent.SetDestination(Waypoints[waypointIdnex].position);
-    }*/
+    }
 
     IEnumerator LoseGame(float waitTime)
     {
@@ -118,16 +124,16 @@ public class EnemyBehavior : MonoBehaviour
     public IEnumerator SearchArea()
     {
         isSearching= true;
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 2; i++)
         {// look around random locations after chasing player
-            Vector3 randomSearchPos = player.transform.position + new Vector3(Random.Range(-3f, 3f), 0, Random.Range(-3f, 3f));
+            Vector3 randomSearchPos = playerLastPostion + new Vector3(Random.Range(-5f, 5f), 0, Random.Range(-5f, 5f));
             agent.SetDestination(randomSearchPos);
             transform.LookAt(randomSearchPos);
 
             Debug.Log("Searching area attempt: " + i);
 
           
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(1f);
         }
         isSearching = false ;
     }

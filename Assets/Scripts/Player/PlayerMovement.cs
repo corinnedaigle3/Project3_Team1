@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
         Normal,
         Rolling,
     }
-    public static GameObject playerInstance;
+    //public static GameObject playerInstance;
 
 
     [Header("References")]
@@ -119,7 +119,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
-
+/*
         if (playerInstance != null && playerInstance != this.gameObject)
         {
             Destroy(gameObject); // Destroy duplicate instance
@@ -129,6 +129,8 @@ public class PlayerMovement : MonoBehaviour
             playerInstance = this.gameObject;
             DontDestroyOnLoad(gameObject); // Persist across scenes
         }
+
+        */
         playerInput = GetComponent<PlayerInput>();
 
         inputSystem = new InputSystem();

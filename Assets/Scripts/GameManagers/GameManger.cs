@@ -42,7 +42,7 @@ public class GameManger : MonoBehaviour
         player = GameObject.Find("Player");
         data = GetComponent<SavingData>();
         ui = GameObject.Find("Canvas").GetComponent<UI>();
-        player.SetActive(false);
+        //player.SetActive(false);
 
     }
 
@@ -100,6 +100,7 @@ public class GameManger : MonoBehaviour
     public void resetData() // can be called 
     {
         data.LoadFromSafeFile();
+        Debug.Log("Loading Reset Data");
     }
 
    

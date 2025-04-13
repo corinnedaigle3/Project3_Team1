@@ -131,8 +131,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 424529453}
-  - component: {fileID: 424529454}
   - component: {fileID: 424529455}
+  - component: {fileID: 424529456}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -155,28 +155,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &424529454
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 424529452}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d62922c3be6db24e935ba177a7c2055, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data: {fileID: 0}
-  player: {fileID: 0}
-  currentScene: 
-  ui: {fileID: 0}
-  portalUsed: 0
-  spawnPoint: {fileID: 0}
-  furyE: 0
-  furyA: 0
-  furyT: 0
-  win: 0
 --- !u!114 &424529455
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,9 +167,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea7632dce7a401f4eacf7327c1ee03a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GameManger: {fileID: 0}
   inventoryManager: {fileID: 0}
   playerName: DefaultPlayer
   LevelNameNew: 
+--- !u!114 &424529456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 424529452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a15232b990648a4dbb42f8f35ae68e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 0}
+  player: {fileID: 0}
+  currentScene: 
+  ui: {fileID: 0}
+  portalUsed: 0
+  spawnPoint: {fileID: 0}
+  furyE: 0
+  furyA: 0
+  furyT: 0
+  win: 0
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0

@@ -190,7 +190,7 @@ public class UI : MonoBehaviour
     public void LoadMain()
     {
         gameManager.playerDisable();
-        Destroy(gameManager.player);
+        Destroy(GameObject.Find("NewPlayer"));
         EventSystem.current.SetSelectedGameObject(mainMenuFirst);
 
         SceneManager.LoadScene("MainMenu");
