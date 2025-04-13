@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 using TMPro;
 using Unity.VisualScripting;
 using System.Runtime.CompilerServices;
+using UnityEngine.UIElements;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -85,6 +86,7 @@ public class PlayerMovement : MonoBehaviour
     public float maxSlopeAngle;
     public float minSlopeAngle;
     public RaycastHit slopeHit;
+    private float angle;
 
     [Header("Other")]
     public bool lose;
@@ -108,7 +110,7 @@ public class PlayerMovement : MonoBehaviour
         canDodge = false;
         dashUnlocked = false;
         maxSlopeAngle = 50f;
-        minSlopeAngle = 30f;
+        minSlopeAngle = 10f;
 
         rb.drag = groundDrag;
 
@@ -148,6 +150,10 @@ public class PlayerMovement : MonoBehaviour
     {
         inputSystem.Player.Disable();
     }
+    private void Update()
+    {
+        OnSlopeNow();
+    }
 
     private void FixedUpdate()
     {
@@ -166,6 +172,7 @@ public class PlayerMovement : MonoBehaviour
 
                 rb.MovePosition(rb.position + moveDirection * moveSpeed * Time.fixedDeltaTime);
                 // rb.AddForce(camRelativeMove.normalized * moveSpeed * 10f, ForceMode.Force);
+
                 if (moveDirection != Vector3.zero)
                 {
                     // THIS IS HOW I FIXED THE ROTATION ISSUES (The rotation was instantanious and was causing the issue) 
@@ -178,14 +185,6 @@ public class PlayerMovement : MonoBehaviour
 
                 //   MyInput();
                 SpeedControl();
-
-                if (OnSlope())
-                {
-                    rb.MovePosition(rb.position + moveDirection * moveSpeed * Time.fixedDeltaTime);
-                    //rb.AddForce(GetSlopeMoveDirection() * moveSpeed * 20f, ForceMode.Force);
-                }
-
-                //rb.useGravity = !OnSlope();
 
                 if (invisibleTimer <= 0)
                 {
@@ -275,14 +274,50 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private void OnSlopeNow()
+    {
+        if (OnSlope())
+        {
+            if (rb.velocity.y > 0)
+            {
+                Debug.Log("DownForce Added");
+                rb.AddForce(Vector3.down * 800f, ForceMode.Force);
+                rb.AddForce(GetSlopeMoveDirection() * moveSpeed, ForceMode.Force);
+            }
+            else
+            {
+                //rb.MovePosition(GetSlopeMoveDirection() * moveSpeed * Time.fixedDeltaTime);
+                rb.AddForce(GetSlopeMoveDirection() * moveSpeed * 10f, ForceMode.Force);
+
+            }
+        }
+
+        rb.drag = groundDrag;
+
+        //turn off gravity when on slope
+        //rb.useGravity = !OnSlope();
+    }
+
     private void SpeedControl()
     {
-        Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
-
-        if (flatVel.magnitude > moveSpeed)
+        //limiting speed on slope
+        if (OnSlope())
         {
-            Vector3 limitedVel = flatVel.normalized * moveSpeed;
-            rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
+            if (rb.velocity.magnitude > moveSpeed)
+            {
+                rb.velocity = rb.velocity.normalized * moveSpeed;
+            }
+        }
+        //limiting speed on ground
+        else
+        { 
+            Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+
+            if (flatVel.magnitude > moveSpeed)
+            {
+                Vector3 limitedVel = flatVel.normalized * moveSpeed;
+                rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
+            }
         }
     }
 
@@ -331,7 +366,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight * 0.5f + 0.3f))
         {
-            float angle = Vector3.Angle (Vector3.up, slopeHit.normal);
+            angle = Vector3.Angle(Vector3.up, slopeHit.normal);
             return angle < maxSlopeAngle && angle > minSlopeAngle && angle != 0;
         }
 
@@ -366,7 +401,7 @@ public class PlayerMovement : MonoBehaviour
             inventoryManager.helmUseText.SetActive(false);
             other.gameObject.GetComponentInParent<EnemyBehavior>().playerLose = true;
             transform.LookAt(other.transform.position); // might remvoe it 
-            gameObject.SetActive(false);
+            //gameObject.SetActive(false);
         }
 
         if (other.tag == "DashUnlocked")

@@ -59,15 +59,13 @@ public class EnemyBehavior : MonoBehaviour
         } else
         {
             Patrol();
-
         }
 
 
 
         if (playerLose) // add all the logic for ending the game    
         {
-            StartCoroutine(LoseGame(1f));
-
+            StartCoroutine(LoseGame(.5f));
             agent.isStopped = true;
         }
     }
