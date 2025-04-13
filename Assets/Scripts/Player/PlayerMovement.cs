@@ -91,7 +91,8 @@ public class PlayerMovement : MonoBehaviour
     public gemsChecker theGemChecker;
     private bool canDodge;
     public bool dashUnlocked;
-   
+    public float caughtTimer;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -196,6 +197,12 @@ public class PlayerMovement : MonoBehaviour
                     inventoryManager.invisText.SetActive(false);
                 }
 
+                if (caughtTimer >= 0)
+                {
+                    lose = true;
+                    gameObject.SetActive(false);
+                }
+
                 //check if player is on ground
                 if (grounded && dashUnlocked == true)
                 {
@@ -208,6 +215,7 @@ public class PlayerMovement : MonoBehaviour
                 }
 
                 invisibleTimer -= Time.deltaTime;
+                caughtTimer -= Time.deltaTime;
                 break;
 
             case State.Rolling:
@@ -359,14 +367,13 @@ public class PlayerMovement : MonoBehaviour
         if (other.CompareTag("EnemyE") || other.CompareTag( "Fury") || other.CompareTag("EnemyA") || other.CompareTag("EnemyA"))
         {
             caughtSound.Play();
-            lose = true;
             inventoryManager.takeDowntext.SetActive(false);
             inventoryManager.invisText.SetActive(false);
             inventoryManager.dodgeText.SetActive(false);
             inventoryManager.helmUseText.SetActive(false);
+            caughtTimer = 1f;
             other.gameObject.GetComponentInParent<EnemyBehavior>().playerLose = true;
             transform.LookAt(other.transform.position); // might remvoe it 
-            gameObject.SetActive(false);
         }
 
         if (other.tag == "DashUnlocked")
