@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
+using JetBrains.Annotations;
 
 public class UI : MonoBehaviour
 {
@@ -35,6 +36,17 @@ public class UI : MonoBehaviour
     public GameObject pauseFirst;
     public GameObject controlsFirst;
     public GameObject creditsFirst;
+    public GameObject controlsInPauseFirst;
+    public GameObject howToWinFirst;
+
+    [Header("For Back buttons")]
+    public GameObject menu;
+    public GameObject contorlsMenu;
+    public GameObject creditsMenu;
+    public GameObject menuInPause;
+    public GameObject controlsInPause;
+    public GameObject howToWin;
+   
 
 
     // not sure yet 
@@ -249,6 +261,31 @@ public class UI : MonoBehaviour
         // Locks cursor
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+    }
+
+    public void OpenControls()
+    {
+        BackButton(menu, contorlsMenu, controlsFirst);
+    }
+    public void CloseControls()
+    {
+        BackButton(contorlsMenu, menu, mainMenuFirst);
+
+    }   public void OpenCredits()
+    {
+        BackButton(menu, creditsMenu, creditsFirst);
+    }
+    public void CloseCredits()
+    {
+        BackButton(creditsMenu, menu, mainMenuFirst);
+
+    }
+    public void BackButton(GameObject disable, GameObject enable, GameObject forEventSystem)
+    {
+        disable.SetActive(false);
+        enable.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(forEventSystem);
+
     }
 
     public void ResetGame()
