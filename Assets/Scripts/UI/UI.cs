@@ -19,7 +19,8 @@ public class UI : MonoBehaviour
     public GameManger gameManager;
 
     public TextMeshProUGUI txt;
-    public string textForPopUp;
+   // public string textForPopUp;
+    public GameObject popUpBar;
 
 
     [Header("Scene Based screen references ")]
@@ -41,7 +42,7 @@ public class UI : MonoBehaviour
 
     [Header("For Back buttons")]
     public GameObject menu;
-    public GameObject contorlsMenu;
+    public GameObject controlsMenu;
     public GameObject creditsMenu;
     public GameObject menuInPause;
     public GameObject controlsInPause;
@@ -64,7 +65,6 @@ public class UI : MonoBehaviour
             DontDestroyOnLoad(gameObject); // Persist across scenes
         }
     }
-
 
     void Start()
     {
@@ -238,6 +238,7 @@ public class UI : MonoBehaviour
 
     public void PauseGame()
     {
+        
         pauseMenu.SetActive(true);
         Time.timeScale = 0f;
         EventSystem.current.SetSelectedGameObject(pauseFirst);
@@ -265,13 +266,16 @@ public class UI : MonoBehaviour
 
     public void OpenControls()
     {
-        BackButton(menu, contorlsMenu, controlsFirst);
+        BackButton(menu, controlsMenu, controlsFirst);
     }
+
     public void CloseControls()
     {
-        BackButton(contorlsMenu, menu, mainMenuFirst);
+        BackButton(controlsMenu, menu, mainMenuFirst);
 
-    }   public void OpenCredits()
+    }   
+   
+    public void OpenCredits()
     {
         BackButton(menu, creditsMenu, creditsFirst);
     }
@@ -280,6 +284,28 @@ public class UI : MonoBehaviour
         BackButton(creditsMenu, menu, mainMenuFirst);
 
     }
+
+    // for pause menu
+    public void POpenControls()
+    {
+        BackButton(menuInPause, controlsInPause, controlsInPauseFirst);
+    }
+
+    public void PCloseControls()
+    {
+        BackButton(controlsInPause, menuInPause, pauseFirst);
+
+    }
+    public void POpenHowToWin()
+    {
+        BackButton(menuInPause, howToWin, howToWinFirst);
+    }
+    public void PCloseHowToWin()
+    {
+        BackButton(howToWin, menuInPause, pauseFirst);
+
+    }
+    // function that opens and closes menus in UI
     public void BackButton(GameObject disable, GameObject enable, GameObject forEventSystem)
     {
         disable.SetActive(false);

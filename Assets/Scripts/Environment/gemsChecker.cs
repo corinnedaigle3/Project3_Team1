@@ -14,12 +14,12 @@ public class gemsChecker : MonoBehaviour
     string gemCheckerName;
     public bool qPressed;
 
-    TextMeshProUGUI popUp;
+    //TextMeshProUGUI popUp;
     public string popUpText = "Press 'Q' to use Gem ";
     public string whichGem;
 
     [Header("UI pop up")]
-    public GameObject useEpopUp;
+    public UI ui;
 
     [Header("Statues")]
     public GameObject furyStatueE;
@@ -31,41 +31,41 @@ public class gemsChecker : MonoBehaviour
         playerInventory = GameObject.Find("Canvas").GetComponent<InventoryManager>();
         gemCheckerName = gameObject.name;
         manger =  GameObject.Find("GameManager").GetComponent<GameManger>();
+        ui = GameObject.Find("Canvas").GetComponent<UI>();
     }
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("It IS COLLIDING ");
-        other.gameObject.GetComponent<PlayerMovement>().theGemChecker = gameObject.GetComponent<gemsChecker>();
-        popUp.text = popUpText + whichGem;
-
-        if (useEpopUp != null)
+        if (other.CompareTag("Player"))
         {
-            useEpopUp.SetActive(true);
+            Debug.Log("It IS COLLIDING ");
+
+            other.gameObject.GetComponent<PlayerMovement>().theGemChecker = gameObject.GetComponent<gemsChecker>();
+            ui.txt.text = popUpText + whichGem;
+            ui.popUpBar.SetActive(true);
+            Debug.Log(ui.popUpBar);
         }
+       
+
 
         canPressQ = true;
     }
 
     private void OnTriggerExit(Collider other)
     {
-        canPressQ = false;
-        popUp.text = null;
-
-        if (useEpopUp != null)
+        if (other.CompareTag("Player"))
         {
-            useEpopUp.SetActive(false);
+            canPressQ = false;
+            ui.txt.text = "";
+
+            ui.popUpBar.SetActive(false);
+            other.gameObject.GetComponent<PlayerMovement>().theGemChecker = null;
         }
-        other.gameObject.GetComponent<PlayerMovement>().theGemChecker = null;
 
     }
 
     private void Update()
     {
-        if (popUp == null)
-        {
-            popUp = GameObject.Find("PopUp").GetComponent<TextMeshProUGUI>();
-
-        }
+     
         switch (gemCheckerName)
         {
             case "GemCheckT":
