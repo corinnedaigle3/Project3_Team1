@@ -4168,7 +4168,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4107607600738921566
 Transform:
   m_ObjectHideFlags: 0
@@ -14939,7 +14939,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3172660637713009999, guid: 1fc8a78fc50f15c44adc818fa13470f7, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 1017
+      value: 986
       objectReference: {fileID: 0}
     - target: {fileID: 3172660637713009999, guid: 1fc8a78fc50f15c44adc818fa13470f7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -14955,43 +14955,55 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6720127820971154359, guid: 1fc8a78fc50f15c44adc818fa13470f7, type: 3}
       propertyPath: m_text
-      value: Press Q to Take Down or Right Shoulder.
+      value: Press Q to Take Down or Right Shoulder
       objectReference: {fileID: 0}
     - target: {fileID: 6720127820971154359, guid: 1fc8a78fc50f15c44adc818fa13470f7, type: 3}
       propertyPath: m_fontSize
-      value: 36
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 6720127820971154359, guid: 1fc8a78fc50f15c44adc818fa13470f7, type: 3}
+      propertyPath: m_margin.x
+      value: -164.78094
+      objectReference: {fileID: 0}
+    - target: {fileID: 6720127820971154359, guid: 1fc8a78fc50f15c44adc818fa13470f7, type: 3}
+      propertyPath: m_margin.z
+      value: -151.52417
       objectReference: {fileID: 0}
     - target: {fileID: 6720127820971154359, guid: 1fc8a78fc50f15c44adc818fa13470f7, type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: 76d99f3fd0bb6a546a9587649e3fd43c, type: 2}
+      objectReference: {fileID: 11400000, guid: 24c497e9667c8584f8e1afdc5c9d7811, type: 2}
+    - target: {fileID: 6720127820971154359, guid: 1fc8a78fc50f15c44adc818fa13470f7, type: 3}
+      propertyPath: m_fontStyle
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6720127820971154359, guid: 1fc8a78fc50f15c44adc818fa13470f7, type: 3}
       propertyPath: m_fontColor.b
-      value: 0.19215688
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6720127820971154359, guid: 1fc8a78fc50f15c44adc818fa13470f7, type: 3}
       propertyPath: m_fontColor.g
-      value: 0.18823531
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6720127820971154359, guid: 1fc8a78fc50f15c44adc818fa13470f7, type: 3}
       propertyPath: m_fontColor.r
-      value: 0.19215688
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6720127820971154359, guid: 1fc8a78fc50f15c44adc818fa13470f7, type: 3}
       propertyPath: m_fontSizeBase
-      value: 36
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 6720127820971154359, guid: 1fc8a78fc50f15c44adc818fa13470f7, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 2101363779994489836, guid: 76d99f3fd0bb6a546a9587649e3fd43c, type: 2}
+      objectReference: {fileID: 8299497640844535026, guid: 24c497e9667c8584f8e1afdc5c9d7811, type: 2}
     - target: {fileID: 6720127820971154359, guid: 1fc8a78fc50f15c44adc818fa13470f7, type: 3}
       propertyPath: m_fontColor32.rgba
-      value: 4281413681
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 6720127820971154359, guid: 1fc8a78fc50f15c44adc818fa13470f7, type: 3}
       propertyPath: m_hasFontAssetChanged
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7737311235509381891, guid: 1fc8a78fc50f15c44adc818fa13470f7, type: 3}
       propertyPath: m_Name
