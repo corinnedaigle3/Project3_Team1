@@ -317,10 +317,15 @@ public class UI : MonoBehaviour
 
     public void ResetGame()
     {
-        gameManager.resetData();
+       // gameManager.resetData();
         gameManager.resetData();
         LoadMain();
         gameManager.resetData();
+        gameManager.resetData();
+        gameManager.resetData();
+        gameManager.resetData();
+        gameManager.resetData();
+
 
     }
 }
