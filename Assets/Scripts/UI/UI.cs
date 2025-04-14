@@ -21,6 +21,7 @@ public class UI : MonoBehaviour
     public TextMeshProUGUI txt;
    // public string textForPopUp;
     public GameObject popUpBar;
+    public GameObject popUpBar2;
 
 
     [Header("Scene Based screen references ")]

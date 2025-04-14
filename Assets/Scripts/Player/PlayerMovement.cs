@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour
         Rolling,
     }
     //public static GameObject playerInstance;
-
+    public UI ui;
 
     [Header("References")]
     public Transform orientation;
@@ -50,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Invisible")]
     private float invisibleTimer = 0;
     public bool Invisible;
-    private bool canDash;
+    private bool canRun;
 
     [Header("Collection")]
     public bool asphodelCollectionItem;
@@ -92,23 +92,24 @@ public class PlayerMovement : MonoBehaviour
     public bool lose;
     public gemsChecker theGemChecker;
     private bool canDodge;
-    public bool dashUnlocked;
+    public bool runUnlocked;
    
     // Start is called before the first frame update
     void Start()
     {
+        ui = GameObject.Find("Canvas").GetComponent<UI>();
         inventoryManager = GameObject.Find("Canvas").GetComponent<InventoryManager>();
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         moveSpeed = 8f;
-        canDash = false;
+        canRun = false;
         Invisible = false;
         helmUsed = false;
         asphodelCollectionItem = false;
         elysiumCollectionItem = false;
         tartarusCollectionItem = false;
         canDodge = false;
-        dashUnlocked = false;
+        runUnlocked = false;
         maxSlopeAngle = 50f;
         minSlopeAngle = 20f;
 
@@ -137,8 +138,8 @@ public class PlayerMovement : MonoBehaviour
 
         inputSystem = new InputSystem();
         inputSystem.Player.Enable();
-        inputSystem.Player.Dash.performed += DashPlayer;
-        inputSystem.Player.Dash.canceled += DashPlayer;
+        inputSystem.Player.Dash.performed += PlayerRun; // this means run 
+        inputSystem.Player.Dash.canceled += PlayerRun; // this means run
         inputSystem.Player.Invisible.performed += Invisibility;
         inputSystem.Player.Dodge.performed += DodgeEnemy;
         inputSystem.Player.TakeDown.performed += TakeDownAction;
@@ -188,7 +189,8 @@ public class PlayerMovement : MonoBehaviour
 
                 if (invisibleTimer <= 0)
                 {
-                    canDash = false;
+                    ui.popUpBar2.SetActive(false);
+                    canRun = false;
                     Invisible = false;
                     helmUsed = false;
                     moveSpeed = 8f;
@@ -196,7 +198,7 @@ public class PlayerMovement : MonoBehaviour
                 }
 
                 //check if player is on ground
-                if (grounded && dashUnlocked == true)
+                if (grounded && runUnlocked == true)
                 {
                     rb.drag = groundDrag;
                     canDodge = true;
@@ -225,7 +227,8 @@ public class PlayerMovement : MonoBehaviour
 
                 if (invisibleTimer <= 0)
                 {
-                    canDash = false;
+                    ui.popUpBar2.SetActive(false);
+                    canRun = false;
                     Invisible = false;
                     helmUsed = false;
                     moveSpeed = 8f;
@@ -268,9 +271,9 @@ public class PlayerMovement : MonoBehaviour
 
         // this is enabling to consume the item.
         // it is tied to the same game keybinds as take down 
-        if (theGemChecker.canPressQ)
+        if (theGemChecker != null && theGemChecker.canPressQ)
         {
-            theGemChecker.qPressed = true; // tje rest will happen in gemsCheker script 
+            theGemChecker.qPressed = true; // the rest will happen in gemsCheker script 
         }
     }
 
@@ -321,9 +324,9 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void DashPlayer(InputAction.CallbackContext context)
+    private void PlayerRun(InputAction.CallbackContext context)
     {
-        if (canDash == true)
+        if (canRun == true)
         {
             if (context.performed)
             {
@@ -339,7 +342,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void DodgeEnemy(InputAction.CallbackContext context) 
     {
-        if (context.performed && canDodge == true && dashUnlocked == true)
+        if (context.performed && canDodge == true && runUnlocked == true)
         {
             rollDirection = moveDirection;
             rollSpeed = 17f;
@@ -351,8 +354,9 @@ public class PlayerMovement : MonoBehaviour
     {
         if (context.performed && inventoryManager.hasHelm == true)
         {
+            ui.popUpBar2.SetActive(true);
             Invisible = true;
-            canDash = true;
+            canRun = true;
             inventoryManager.helmUseText.SetActive(false);
             inventoryManager.invisText.SetActive(true);
             invisibleTimer = 6f;
@@ -383,6 +387,7 @@ public class PlayerMovement : MonoBehaviour
         Debug.Log("colliding");
         if (other.tag == "Behind" && inventoryManager.hasE == true)
         {
+            ui.popUpBar.SetActive(true);
             inventoryManager.helmUseText.SetActive(false);
             inventoryManager.invisText.SetActive(false);
             inventoryManager.takeDowntext.SetActive(true);
@@ -391,7 +396,7 @@ public class PlayerMovement : MonoBehaviour
             takeDown = currentEnemy.GetComponent<TakeDown>();
         }
 
-        if (other.CompareTag("EnemyE") || other.CompareTag( "Fury") || other.CompareTag("EnemyA") || other.CompareTag("EnemyA"))
+        if (other.CompareTag("Catch"))
         {
             caughtSound.Play();
             lose = true;
@@ -404,11 +409,12 @@ public class PlayerMovement : MonoBehaviour
             //gameObject.SetActive(false);
         }
 
-        if (other.tag == "DashUnlocked")
+        if (other.tag == "DashUnlocked") // this refers to dodge 
         {
             canDodge = true;
-            dashUnlocked = true;
+            runUnlocked = true;
             inventoryManager.dodgeText.SetActive(true);
+
         }
 
         switch (other.tag)
@@ -540,13 +546,20 @@ public class PlayerMovement : MonoBehaviour
             
         }
     }
-
+    /*
+     * invisibility
+     * run: 
+     * dodge
+     * 
+  */
     private void OnTriggerExit(Collider other)
     {
         if (other.tag == "Behind")
         {
             //take down enemy text
             inventoryManager.takeDowntext.SetActive(false);
+            ui.popUpBar.SetActive(false);
+
             canKill = false;
             takeDown.dead = false;
             currentEnemy = null;
@@ -561,8 +574,10 @@ public class PlayerMovement : MonoBehaviour
         if (other.tag == "DashUnlocked")
         {
             canDodge = false;
-            dashUnlocked = false;
+            runUnlocked = false;
             inventoryManager.dodgeText.SetActive(false);
+            ui.popUpBar.SetActive(false);
+
         }
     }
 

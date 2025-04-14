@@ -11,10 +11,12 @@ public class TakeDown : MonoBehaviour
     public NavMeshAgent eAgent;
     public bool dead = false;
     public Transform dropItemPoint;
-    public Collider c;
+    public GameObject catchCollider;
+    public GameObject backCollider;
 
     public GameObject gem1;
     public string named;
+    public EnemyBehavior enemyBehavior;
 
 
     int gemCount = 0;
@@ -25,8 +27,10 @@ public class TakeDown : MonoBehaviour
         inventory = GameObject.FindWithTag("UI").GetComponent<InventoryManager>();
        eAgent = parent.GetComponent<NavMeshAgent>();
         named = parent.name;
+        enemyBehavior = parent.GetComponent<EnemyBehavior>();
 
-        
+
+
     }
 
     // Update is called once per frame
@@ -83,7 +87,13 @@ public class TakeDown : MonoBehaviour
                     Debug.Log("how much is in it " + inventory.takeDownItemCounterE);
 
                     eAgent.isStopped = true;
-                    c.enabled = false;
+                    Destroy(catchCollider);
+                   // Destroy(backCollider);
+                    eAgent.enabled = false;
+                    enemyBehavior.enabled = false;
+                    Debug.Log("Destroy colliders leave me alone");
+
+                    //backCollider.SetActive(false);
                 }
                 break;
 
@@ -92,7 +102,11 @@ public class TakeDown : MonoBehaviour
                 if (dead == true && inventory.takeDownItemCounterA >= 1)
                 {
                     eAgent.isStopped = true;
-                    c.enabled = false;
+                   
+                    Destroy(catchCollider);
+                    //Destroy(backCollider);
+                    eAgent.enabled = false;
+                    enemyBehavior.enabled = false;
                 }
                 break;
 
@@ -101,7 +115,10 @@ public class TakeDown : MonoBehaviour
                 if (dead == true && inventory.takeDownItemCounterT >= 1)
                 {
                     eAgent.isStopped = true;
-                    c.enabled = false;
+                    Destroy(catchCollider);
+                    //Destroy(backCollider);
+                    eAgent.enabled = false;
+                    enemyBehavior.enabled = false;
                 }
                 break;
 
@@ -115,8 +132,9 @@ public class TakeDown : MonoBehaviour
     IEnumerator furyTakeDown(float waitTime) // stop fury for waitTime seconds 
     {
         eAgent.isStopped = true;
-        c.enabled = false;
-       
+        catchCollider.SetActive(false);
+        backCollider.SetActive(false);
+
         if (gemCount < 1)
         {
             Instantiate(gem1, dropItemPoint.transform.position, Quaternion.identity);
@@ -124,7 +142,8 @@ public class TakeDown : MonoBehaviour
         }
         yield return new WaitForSeconds(waitTime);
         eAgent.isStopped = false;
-        c.enabled = true;
+        catchCollider.SetActive(true);
+        backCollider.SetActive(true); // can be removed depending if we want it to be able to be taken down again and again
     }
 
   

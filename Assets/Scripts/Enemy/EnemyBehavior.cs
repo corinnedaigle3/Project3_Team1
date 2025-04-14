@@ -24,6 +24,7 @@ public class EnemyBehavior : MonoBehaviour
     bool isSearching;
     bool chasing;
     private Vector3 playerLastPostion;
+    bool lookingNew;
 
     // Start is called before the first frame update
     void Start()
@@ -56,7 +57,7 @@ public class EnemyBehavior : MonoBehaviour
             isSearching = false;
             StopAllCoroutines();
             chase();
-        } else
+        } else if (!isSearching)
         {
             Patrol();
         }
@@ -99,16 +100,25 @@ public class EnemyBehavior : MonoBehaviour
         // chose a new random waypoint when reach destination
         if (agent.remainingDistance <= 0.1f)
         {
-            waypointIdnex = Random.Range(0, Waypoints.Length);
 
-            agent.SetDestination(Waypoints[waypointIdnex].position);
+            StartCoroutine(NewDesitnation(2f));
+           // waypointIdnex = Random.Range(0, Waypoints.Length);
+
+           // agent.SetDestination(Waypoints[waypointIdnex].position);
         }
     }
 
     IEnumerator NewDesitnation (float waitTime)
     {
+        if (lookingNew)
+        {
+            yield break;
+        } else { lookingNew = true; }
+        //agent.isStopped = true;
+      
         yield return new WaitForSeconds(waitTime);
         waypointIdnex = Random.Range(0, Waypoints.Length);
+        lookingNew = false;
 
         agent.SetDestination(Waypoints[waypointIdnex].position);
     }
