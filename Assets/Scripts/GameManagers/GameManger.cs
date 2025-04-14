@@ -74,7 +74,7 @@ public class GameManger : MonoBehaviour
 
     public void playerEnable()  // self explanatory 
     {
-      
+      if (player != null)
             player.SetActive(true);
         
 
