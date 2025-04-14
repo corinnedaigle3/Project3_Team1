@@ -219,6 +219,7 @@ public class UI : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(winFirst);
 
         SceneManager.LoadScene("Win");
+        SceneManager.LoadScene("WIN");
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }  
@@ -228,6 +229,7 @@ public class UI : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(loseFirst);
 
         SceneManager.LoadScene("Lose");
+        SceneManager.LoadScene("LOSE");
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         Debug.Log("Cursor should be visible ");

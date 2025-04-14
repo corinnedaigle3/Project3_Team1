@@ -13,9 +13,9 @@ public class EnemyBehavior : MonoBehaviour
     [SerializeField] Transform[] Waypoints;
     public NavMeshAgent agent;
     public string enemyType;
-    public bool playerLose = false;
+ 
     public GameManger gameManager;
-    public UI ui;
+
     int waypointIdnex;
     public GameObject player;
 
@@ -34,7 +34,7 @@ public class EnemyBehavior : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         agent.SetDestination(Waypoints[waypointIdnex].position);
         gameManager = GameObject.Find("GameManager").GetComponent<GameManger>();
-        ui = GameObject.Find("Canvas").GetComponent<UI>();
+      
         player = GameObject.Find("Player");
         lineOfSight = GetComponent<LineOfSight>();
     }
@@ -53,29 +53,31 @@ public class EnemyBehavior : MonoBehaviour
         Debug.Log("Player in in navMesh" + playerInNvav);
         if (playerInNvav && lineOfSight.canChase)
         {
+            StopAllCoroutines();
             chasing = true;
             isSearching = false;
-            StopAllCoroutines();
             chase();
-        } else if (!isSearching)
+        }
+        else if (chasing)
+        {
+            chasing = false;
+            isSearching = true;
+            StartCoroutine(SearchArea());
+        }
+        else if (!isSearching)
         {
             Patrol();
         }
 
 
 
-        if (playerLose) // add all the logic for ending the game    
-        {
-            StartCoroutine(LoseGame(.5f));
-            agent.isStopped = true;
-        }
     }
     void chase()
     {
         if (player != null && lineOfSight.canChase)
         {
-          
-         
+
+
             playerLastPostion = player.transform.position; // save player postion
             // Chase Player
             agent.SetDestination(player.transform.position);
@@ -87,13 +89,8 @@ public class EnemyBehavior : MonoBehaviour
             Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 10f);
 
-            isSearching = true;
-            chasing = false;
-        } 
-        if (isSearching && !chasing)
-        {
-            StartCoroutine(SearchArea());
         }
+       
     }
     private void Patrol()
     {
@@ -123,12 +120,7 @@ public class EnemyBehavior : MonoBehaviour
         agent.SetDestination(Waypoints[waypointIdnex].position);
     }
 
-    IEnumerator LoseGame(float waitTime)
-    {
-        yield return new WaitForSeconds(waitTime);
-        ui.LoadLose();
-
-    }
+  
     public IEnumerator SearchArea()
     {
         isSearching= true;

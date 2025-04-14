@@ -381,7 +381,12 @@ public class PlayerMovement : MonoBehaviour
     {
         return Vector3.ProjectOnPlane(moveDirection, slopeHit.normal).normalized;
     }
+    IEnumerator LoseGame(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        ui.LoadLose();
 
+    }
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("colliding");
@@ -404,8 +409,9 @@ public class PlayerMovement : MonoBehaviour
             inventoryManager.invisText.SetActive(false);
             inventoryManager.dodgeText.SetActive(false);
             inventoryManager.helmUseText.SetActive(false);
-            other.gameObject.GetComponentInParent<EnemyBehavior>().playerLose = true;
             transform.LookAt(other.transform.position); // might remvoe it 
+
+            StartCoroutine(LoseGame(.5f));
             //gameObject.SetActive(false);
         }
 
