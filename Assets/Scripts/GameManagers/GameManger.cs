@@ -69,7 +69,12 @@ public class GameManger : MonoBehaviour
         if (furyA && furyE && furyT)
         {
             win = true;
+        } else
+        {
+            win = false;
         }
+
+        
     }
 
     public void playerEnable()  // self explanatory 
@@ -84,11 +89,11 @@ public class GameManger : MonoBehaviour
         if (player == null)
         {
             player = GameObject.Find("Player");
-            player.SetActive(false);
+           // player.SetActive(false);
 
 
         }
-        else if (player != null)
+         if (player != null)
         {
             player.SetActive(false);
         }
