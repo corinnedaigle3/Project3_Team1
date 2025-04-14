@@ -311,6 +311,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fury_Tpose
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 72c82a65a28ab2f42bd54e5acf0e6680, type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 9000000, guid: 72c82a65a28ab2f42bd54e5acf0e6680, type: 3}
+    - target: {fileID: 5866666021909216657, guid: 72c82a65a28ab2f42bd54e5acf0e6680, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 23f2500b922a66e438f3427fb54767f7, type: 2}
+    - target: {fileID: 5866666021909216657, guid: 72c82a65a28ab2f42bd54e5acf0e6680, type: 3}
+      propertyPath: m_CullingMode
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
