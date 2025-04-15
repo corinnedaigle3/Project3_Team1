@@ -11059,6 +11059,73 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &230559156
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 230559159}
+  - component: {fileID: 230559158}
+  - component: {fileID: 230559157}
+  m_Layer: 0
+  m_Name: PlayerFell
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &230559157
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 230559156}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 171, y: 2.5622, z: 139.3}
+  m_Center: {x: 0, y: -1.2811, z: 0}
+--- !u!114 &230559158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 230559156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a90dc4f2d7f6634fb2fdedc43655f09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destination: {fileID: 844621903}
+--- !u!4 &230559159
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 230559156}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -109.4, y: 0.3, z: 5.323956}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &234310743
 GameObject:
   m_ObjectHideFlags: 0
@@ -35181,6 +35248,11 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &844621903 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1406406712118679936, guid: 119b19a79f50fcb47a7855528c9605a2, type: 3}
+  m_PrefabInstance: {fileID: 1799726628}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &848521344
 GameObject:
   m_ObjectHideFlags: 0
@@ -36494,6 +36566,10 @@ PrefabInstance:
     - target: {fileID: 7193522093634203741, guid: c47f29f4145815948a80e1f29a0a9fe1, type: 3}
       propertyPath: m_Name
       value: WinPortal
+      objectReference: {fileID: 0}
+    - target: {fileID: 7193522093634203741, guid: c47f29f4145815948a80e1f29a0a9fe1, type: 3}
+      propertyPath: m_TagString
+      value: win
       objectReference: {fileID: 0}
     - target: {fileID: 8569475165938568602, guid: c47f29f4145815948a80e1f29a0a9fe1, type: 3}
       propertyPath: m_Radius
@@ -101496,3 +101572,4 @@ SceneRoots:
   - {fileID: 1419025879}
   - {fileID: 1364138901}
   - {fileID: 342907221}
+  - {fileID: 230559159}

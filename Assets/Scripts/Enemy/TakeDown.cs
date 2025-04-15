@@ -43,6 +43,7 @@ public class TakeDown : MonoBehaviour
                 if (dead == true && inventory.takeDownItemCounterE >=1)
                 {
                     inventory.takeDownItemCounterE -= 1;
+                   
                     inventory.ShowAmount(inventory.takeDownItemTextE, inventory.takeDownItemCounterE, ref inventory.hasE);
                     StartCoroutine(furyTakeDown(1f));
                   
