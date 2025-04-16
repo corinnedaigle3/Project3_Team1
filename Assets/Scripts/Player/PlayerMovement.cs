@@ -2,9 +2,6 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using TMPro;
-using Unity.VisualScripting;
-using System.Runtime.CompilerServices;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -13,8 +10,8 @@ public class PlayerMovement : MonoBehaviour
         Normal,
         Rolling,
     }
-    public static GameObject playerInstance;
-
+    //public static GameObject playerInstance;
+    public UI ui;
 
     [Header("References")]
     public Transform orientation;
@@ -33,8 +30,6 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Movement")]
     public float moveSpeed;
-    private float horizontalInput;
-    private float verticalInput;
     Vector3 moveDirection; 
     private Vector3 rollDirection;
     private float rollSpeed;
@@ -49,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Invisible")]
     private float invisibleTimer = 0;
     public bool Invisible;
-    private bool canDash;
+    private bool canRun;
 
     [Header("Collection")]
     public bool asphodelCollectionItem;
@@ -85,30 +80,32 @@ public class PlayerMovement : MonoBehaviour
     public float maxSlopeAngle;
     public float minSlopeAngle;
     public RaycastHit slopeHit;
+    private float angle;
 
     [Header("Other")]
     public bool lose;
     public gemsChecker theGemChecker;
     private bool canDodge;
-    public bool dashUnlocked;
+    public bool runUnlocked;
    
     // Start is called before the first frame update
     void Start()
     {
+        ui = GameObject.Find("Canvas").GetComponent<UI>();
         inventoryManager = GameObject.Find("Canvas").GetComponent<InventoryManager>();
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         moveSpeed = 8f;
-        canDash = false;
+        canRun = false;
         Invisible = false;
         helmUsed = false;
         asphodelCollectionItem = false;
         elysiumCollectionItem = false;
         tartarusCollectionItem = false;
         canDodge = false;
-        dashUnlocked = false;
+        runUnlocked = false;
         maxSlopeAngle = 50f;
-        minSlopeAngle = 30f;
+        minSlopeAngle = 20f;
 
         rb.drag = groundDrag;
 
@@ -119,7 +116,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
-
+/*
         if (playerInstance != null && playerInstance != this.gameObject)
         {
             Destroy(gameObject); // Destroy duplicate instance
@@ -129,12 +126,14 @@ public class PlayerMovement : MonoBehaviour
             playerInstance = this.gameObject;
             DontDestroyOnLoad(gameObject); // Persist across scenes
         }
+
+        */
         playerInput = GetComponent<PlayerInput>();
 
         inputSystem = new InputSystem();
         inputSystem.Player.Enable();
-        inputSystem.Player.Dash.performed += DashPlayer;
-        inputSystem.Player.Dash.canceled += DashPlayer;
+        inputSystem.Player.Dash.performed += PlayerRun; // this means run 
+        inputSystem.Player.Dash.canceled += PlayerRun; // this means run
         inputSystem.Player.Invisible.performed += Invisibility;
         inputSystem.Player.Dodge.performed += DodgeEnemy;
         inputSystem.Player.TakeDown.performed += TakeDownAction;
@@ -145,6 +144,10 @@ public class PlayerMovement : MonoBehaviour
     private void OnDisable()
     {
         inputSystem.Player.Disable();
+    }
+    private void Update()
+    {
+        OnSlopeNow();
     }
 
     private void FixedUpdate()
@@ -162,32 +165,34 @@ public class PlayerMovement : MonoBehaviour
                 //saving the vector info
                 moveDirection = camRelativeMove;
 
-                rb.MovePosition(rb.position + moveDirection * moveSpeed * Time.fixedDeltaTime);
-                // rb.AddForce(camRelativeMove.normalized * moveSpeed * 10f, ForceMode.Force);
+                Vector3 moveDirToUse = moveDirection;
+
+                if (OnSlope())
+                {
+                    moveDirToUse = GetSlopeMoveDirection();
+                    rb.drag = groundDrag;
+                }
+
+                rb.MovePosition(rb.position + moveDirToUse * moveSpeed * Time.fixedDeltaTime);
+                //rb.MovePosition(rb.position + moveDirection * moveSpeed * Time.fixedDeltaTime);
+
                 if (moveDirection != Vector3.zero)
                 {
                     // THIS IS HOW I FIXED THE ROTATION ISSUES (The rotation was instantanious and was causing the issue) 
                     Quaternion toRotation = Quaternion.LookRotation(moveDirection);
                     transform.rotation = Quaternion.Slerp(transform.rotation, toRotation, Time.deltaTime * 10f);
-                    //transform.rotation = Quaternion.LookRotation(moveDirection);
                 }
 
                 grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGrounded);
 
                 //   MyInput();
                 SpeedControl();
-
-                if (OnSlope())
-                {
-                    rb.MovePosition(rb.position + moveDirection * moveSpeed * Time.fixedDeltaTime);
-                    //rb.AddForce(GetSlopeMoveDirection() * moveSpeed * 20f, ForceMode.Force);
-                }
-
-                //rb.useGravity = !OnSlope();
+                StickToGround();
 
                 if (invisibleTimer <= 0)
                 {
-                    canDash = false;
+                    ui.popUpBar2.SetActive(false);
+                    canRun = false;
                     Invisible = false;
                     helmUsed = false;
                     moveSpeed = 8f;
@@ -195,7 +200,7 @@ public class PlayerMovement : MonoBehaviour
                 }
 
                 //check if player is on ground
-                if (grounded && dashUnlocked == true)
+                if (grounded && runUnlocked == true)
                 {
                     rb.drag = groundDrag;
                     canDodge = true;
@@ -224,7 +229,8 @@ public class PlayerMovement : MonoBehaviour
 
                 if (invisibleTimer <= 0)
                 {
-                    canDash = false;
+                    ui.popUpBar2.SetActive(false);
+                    canRun = false;
                     Invisible = false;
                     helmUsed = false;
                     moveSpeed = 8f;
@@ -267,26 +273,38 @@ public class PlayerMovement : MonoBehaviour
 
         // this is enabling to consume the item.
         // it is tied to the same game keybinds as take down 
-        if (theGemChecker.canPressQ)
+        if (theGemChecker != null && theGemChecker.canPressQ)
         {
-            theGemChecker.qPressed = true; // tje rest will happen in gemsCheker script 
+            theGemChecker.qPressed = true; // the rest will happen in gemsCheker script 
         }
     }
 
     private void SpeedControl()
     {
-        Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
-
-        if (flatVel.magnitude > moveSpeed)
+        //limiting speed on slope
+        if (OnSlope())
         {
-            Vector3 limitedVel = flatVel.normalized * moveSpeed;
-            rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
+            if (rb.velocity.magnitude > moveSpeed)
+            {
+                rb.velocity = rb.velocity.normalized * moveSpeed;
+            }
+        }
+        //limiting speed on ground
+        else
+        { 
+            Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+
+            if (flatVel.magnitude > moveSpeed)
+            {
+                Vector3 limitedVel = flatVel.normalized * moveSpeed;
+                rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
+            }
         }
     }
 
-    private void DashPlayer(InputAction.CallbackContext context)
+    private void PlayerRun(InputAction.CallbackContext context)
     {
-        if (canDash == true)
+        if (canRun == true)
         {
             if (context.performed)
             {
@@ -302,7 +320,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void DodgeEnemy(InputAction.CallbackContext context) 
     {
-        if (context.performed && canDodge == true && dashUnlocked == true)
+        if (context.performed && canDodge == true && runUnlocked == true)
         {
             rollDirection = moveDirection;
             rollSpeed = 17f;
@@ -314,8 +332,9 @@ public class PlayerMovement : MonoBehaviour
     {
         if (context.performed && inventoryManager.hasHelm == true)
         {
+            ui.popUpBar2.SetActive(true);
             Invisible = true;
-            canDash = true;
+            canRun = true;
             inventoryManager.helmUseText.SetActive(false);
             inventoryManager.invisText.SetActive(true);
             invisibleTimer = 6f;
@@ -327,9 +346,13 @@ public class PlayerMovement : MonoBehaviour
 
     public bool OnSlope()
     {
-        if (Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight * 0.5f + 0.3f))
+        float sphereCastRadius = 0.3f; // Match this to your CapsuleCollider radius
+        float rayLength = playerHeight * 0.5f + 0.5f; // Add a little buffer
+        Vector3 origin = transform.position;
+
+        if (Physics.SphereCast(origin, sphereCastRadius, Vector3.down, out slopeHit, rayLength))
         {
-            float angle = Vector3.Angle (Vector3.up, slopeHit.normal);
+            angle = Vector3.Angle(Vector3.up, slopeHit.normal);
             return angle < maxSlopeAngle && angle > minSlopeAngle && angle != 0;
         }
 
@@ -341,11 +364,48 @@ public class PlayerMovement : MonoBehaviour
         return Vector3.ProjectOnPlane(moveDirection, slopeHit.normal).normalized;
     }
 
+    private void OnSlopeNow()
+    {
+        if (OnSlope())
+        {
+            Vector3 slopeMove = GetSlopeMoveDirection() * moveSpeed;
+            rb.AddForce(slopeMove, ForceMode.Acceleration);
+
+            // Small downward force to stick to slope
+            if (rb.velocity.y <= 0.1f)
+            {
+                rb.AddForce(-slopeHit.normal * 100f, ForceMode.Force);
+            }
+        }
+    }
+
+    void StickToGround()
+    {
+        if (!OnSlope())
+        {
+            if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 1.5f))
+            {
+                if (hit.distance > 0.05f)
+                {
+                    rb.AddForce(Vector3.down * 10f, ForceMode.Force);
+                }
+            }
+        }
+    }
+
+    IEnumerator LoseGame(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        ui.LoadLose();
+
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("colliding");
         if (other.tag == "Behind" && inventoryManager.hasE == true)
         {
+            ui.popUpBar.SetActive(true);
             inventoryManager.helmUseText.SetActive(false);
             inventoryManager.invisText.SetActive(false);
             inventoryManager.takeDowntext.SetActive(true);
@@ -354,7 +414,7 @@ public class PlayerMovement : MonoBehaviour
             takeDown = currentEnemy.GetComponent<TakeDown>();
         }
 
-        if (other.CompareTag("EnemyE") || other.CompareTag( "Fury") || other.CompareTag("EnemyA") || other.CompareTag("EnemyA"))
+        if (other.CompareTag("Catch"))
         {
             caughtSound.Play();
             lose = true;
@@ -362,16 +422,18 @@ public class PlayerMovement : MonoBehaviour
             inventoryManager.invisText.SetActive(false);
             inventoryManager.dodgeText.SetActive(false);
             inventoryManager.helmUseText.SetActive(false);
-            other.gameObject.GetComponentInParent<EnemyBehavior>().playerLose = true;
             transform.LookAt(other.transform.position); // might remvoe it 
-            gameObject.SetActive(false);
+
+            StartCoroutine(LoseGame(.5f));
+            //gameObject.SetActive(false);
         }
 
-        if (other.tag == "DashUnlocked")
+        if (other.tag == "DashUnlocked") // this refers to dodge 
         {
             canDodge = true;
-            dashUnlocked = true;
+            runUnlocked = true;
             inventoryManager.dodgeText.SetActive(true);
+
         }
 
         switch (other.tag)
@@ -503,13 +565,20 @@ public class PlayerMovement : MonoBehaviour
             
         }
     }
-
+    /*
+     * invisibility
+     * run: 
+     * dodge
+     * 
+  */
     private void OnTriggerExit(Collider other)
     {
         if (other.tag == "Behind")
         {
             //take down enemy text
             inventoryManager.takeDowntext.SetActive(false);
+            ui.popUpBar.SetActive(false);
+
             canKill = false;
             takeDown.dead = false;
             currentEnemy = null;
@@ -524,8 +593,10 @@ public class PlayerMovement : MonoBehaviour
         if (other.tag == "DashUnlocked")
         {
             canDodge = false;
-            dashUnlocked = false;
+            runUnlocked = false;
             inventoryManager.dodgeText.SetActive(false);
+            ui.popUpBar.SetActive(false);
+
         }
     }
 

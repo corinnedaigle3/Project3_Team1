@@ -17,15 +17,22 @@ public class Portal : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") && !gameManager.GetComponent<GameManger>().win)
+        if (gameObject.tag != "win")
         {
-            
-            SceneManager.LoadScene(writeNameOfScene);
+            if (other.CompareTag("Player"))
+            {
 
-        }else if (other.CompareTag("Player") && gameManager.GetComponent<GameManger>().win)
+                SceneManager.LoadScene(writeNameOfScene);
+
+            }
+
+        } else
         {
-            SceneManager.LoadScene("Win");
+            if (other.CompareTag("Player") && gameManager.GetComponent<GameManger>().win)
+            {
+                SceneManager.LoadScene("Win");
 
+            }
         }
     }
 }

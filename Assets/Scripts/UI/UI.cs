@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
+using JetBrains.Annotations;
 
 public class UI : MonoBehaviour
 {
@@ -18,7 +19,9 @@ public class UI : MonoBehaviour
     public GameManger gameManager;
 
     public TextMeshProUGUI txt;
-    public string textForPopUp;
+   // public string textForPopUp;
+    public GameObject popUpBar;
+    public GameObject popUpBar2;
 
 
     [Header("Scene Based screen references ")]
@@ -35,6 +38,17 @@ public class UI : MonoBehaviour
     public GameObject pauseFirst;
     public GameObject controlsFirst;
     public GameObject creditsFirst;
+    public GameObject controlsInPauseFirst;
+    public GameObject howToWinFirst;
+
+    [Header("For Back buttons")]
+    public GameObject menu;
+    public GameObject controlsMenu;
+    public GameObject creditsMenu;
+    public GameObject menuInPause;
+    public GameObject controlsInPause;
+    public GameObject howToWin;
+   
 
 
     // not sure yet 
@@ -52,7 +66,6 @@ public class UI : MonoBehaviour
             DontDestroyOnLoad(gameObject); // Persist across scenes
         }
     }
-
 
     void Start()
     {
@@ -190,7 +203,7 @@ public class UI : MonoBehaviour
     public void LoadMain()
     {
         gameManager.playerDisable();
-        Destroy(gameManager.player);
+        Destroy(GameObject.Find("NewPlayer"));
         EventSystem.current.SetSelectedGameObject(mainMenuFirst);
 
         SceneManager.LoadScene("MainMenu");
@@ -206,6 +219,7 @@ public class UI : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(winFirst);
 
         SceneManager.LoadScene("Win");
+        SceneManager.LoadScene("WIN");
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }  
@@ -215,6 +229,7 @@ public class UI : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(loseFirst);
 
         SceneManager.LoadScene("Lose");
+        SceneManager.LoadScene("LOSE");
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         Debug.Log("Cursor should be visible ");
@@ -226,6 +241,7 @@ public class UI : MonoBehaviour
 
     public void PauseGame()
     {
+        
         pauseMenu.SetActive(true);
         Time.timeScale = 0f;
         EventSystem.current.SetSelectedGameObject(pauseFirst);
@@ -251,12 +267,67 @@ public class UI : MonoBehaviour
         Cursor.visible = false;
     }
 
+    public void OpenControls()
+    {
+        BackButton(menu, controlsMenu, controlsFirst);
+    }
+
+    public void CloseControls()
+    {
+        BackButton(controlsMenu, menu, mainMenuFirst);
+
+    }   
+   
+    public void OpenCredits()
+    {
+        BackButton(menu, creditsMenu, creditsFirst);
+    }
+    public void CloseCredits()
+    {
+        BackButton(creditsMenu, menu, mainMenuFirst);
+
+    }
+
+    // for pause menu
+    public void POpenControls()
+    {
+        BackButton(menuInPause, controlsInPause, controlsInPauseFirst);
+    }
+
+    public void PCloseControls()
+    {
+        BackButton(controlsInPause, menuInPause, pauseFirst);
+
+    }
+    public void POpenHowToWin()
+    {
+        BackButton(menuInPause, howToWin, howToWinFirst);
+    }
+    public void PCloseHowToWin()
+    {
+        BackButton(howToWin, menuInPause, pauseFirst);
+
+    }
+    // function that opens and closes menus in UI
+    public void BackButton(GameObject disable, GameObject enable, GameObject forEventSystem)
+    {
+        disable.SetActive(false);
+        enable.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(forEventSystem);
+
+    }
+
     public void ResetGame()
     {
-        gameManager.resetData();
+       // gameManager.resetData();
         gameManager.resetData();
         LoadMain();
         gameManager.resetData();
+        gameManager.resetData();
+        gameManager.resetData();
+        gameManager.resetData();
+        gameManager.resetData();
+
 
     }
 }

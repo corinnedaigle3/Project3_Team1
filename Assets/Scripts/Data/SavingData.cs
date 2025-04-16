@@ -23,10 +23,15 @@ public class GameSaveData
     public int GemAcounter;
     public int GemTcounter;
     public int helmcounter;
+
+    public bool gemConsumedE;
+    public bool gemConsumedA;
+    public bool gemConsumedT;
 }
 
 public class SavingData : MonoBehaviour
 {
+    public GameManger GameManger;
     public InventoryManager inventoryManager;
     private string lastSavedLevelName;
 
@@ -46,6 +51,7 @@ public class SavingData : MonoBehaviour
         path = Application.persistentDataPath + "/gamesave.json";  //Initialize early
         safeFilePath = Application.persistentDataPath + "/safeStart.json";
         inventoryManager = FindObjectOfType<InventoryManager>();
+        GameManger = FindObjectOfType<GameManger>();
     }
 
     void Start()
@@ -104,7 +110,12 @@ public class SavingData : MonoBehaviour
             GemEcounter = inventoryManager.gemCounterE,
             GemAcounter = inventoryManager.gemCounterA,
             GemTcounter = inventoryManager.gemCounterT,
-            helmcounter = inventoryManager.helmcounter
+            helmcounter = inventoryManager.helmcounter,
+
+            gemConsumedE = GameManger.furyE,
+            gemConsumedA = GameManger.furyA,
+            gemConsumedT = GameManger.furyT,
+
         };
         string json = JsonUtility.ToJson(saveData);
         File.WriteAllText(path, json);
@@ -140,6 +151,10 @@ public class SavingData : MonoBehaviour
         inventoryManager.gemCounterT = loadedData.GemTcounter;
         inventoryManager.helmcounter = loadedData.helmcounter;
 
+        GameManger.furyE = loadedData.gemConsumedE;
+        GameManger.furyA = loadedData.gemConsumedA;
+        GameManger.furyT = loadedData.gemConsumedT;
+
         SaveData();
         // Debug.Log($"JSON Loaded: {playerName}, {LevelNameNew}");
 
@@ -166,7 +181,11 @@ public class SavingData : MonoBehaviour
             GemEcounter = 0,
             GemAcounter = 0,
             GemTcounter = 0,
-            helmcounter = 0
+            helmcounter = 0,
+
+            gemConsumedE = false,
+            gemConsumedA = false,
+            gemConsumedT = false,
         };
 
         string json = JsonUtility.ToJson(safeData);
@@ -189,6 +208,8 @@ public class SavingData : MonoBehaviour
         LevelNameNew = loadedData.levelName;
         lastSavedLevelName = loadedData.levelName;
 
+        Debug.Log(" level new " + LevelNameNew + ", LastsavedLevel " + lastSavedLevelName);
+
         if (inventoryManager == null)
             inventoryManager = FindObjectOfType<InventoryManager>();
 
@@ -207,6 +228,11 @@ public class SavingData : MonoBehaviour
         inventoryManager.gemCounterA = loadedData.GemAcounter;
         inventoryManager.gemCounterT = loadedData.GemTcounter;
         inventoryManager.helmcounter = loadedData.helmcounter;
+
+        GameManger.furyE = loadedData.gemConsumedE;
+        GameManger.furyA = loadedData.gemConsumedA;
+        GameManger.furyT = loadedData.gemConsumedT;
+
 
         SaveData();
         Debug.Log("Game reset to safe file.");

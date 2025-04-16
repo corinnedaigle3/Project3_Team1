@@ -128,7 +128,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 8.5
+  m_Speed: 5.5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -651,10 +651,12 @@ MonoBehaviour:
   parent: {fileID: 367192780633537303}
   eAgent: {fileID: 1847052860119057821}
   dead: 0
-  dropItemPoint: {fileID: 0}
-  c: {fileID: 5586503228735746450}
-  gem1: {fileID: 0}
+  dropItemPoint: {fileID: 4580884906535031233}
+  catchCollider: {fileID: 4960235521528684001}
+  backCollider: {fileID: 4867679921555613429}
+  gem1: {fileID: 1063064011511139428, guid: 97230342e7bae114e841e99092425185, type: 3}
   named: 
+  enemyBehavior: {fileID: 0}
 --- !u!1 &4960235521528684001
 GameObject:
   m_ObjectHideFlags: 0
@@ -667,7 +669,7 @@ GameObject:
   - component: {fileID: 5586503228735746450}
   m_Layer: 0
   m_Name: CatchCheck
-  m_TagString: EnemyE
+  m_TagString: Catch
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -681,7 +683,7 @@ Transform:
   m_GameObject: {fileID: 4960235521528684001}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.578}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -706,7 +708,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 2, z: 1}
+  m_Size: {x: 0.5, y: 0.92, z: 0.5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1583394175735371335
 PrefabInstance:

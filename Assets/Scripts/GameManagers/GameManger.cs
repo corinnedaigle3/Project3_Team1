@@ -42,7 +42,7 @@ public class GameManger : MonoBehaviour
         player = GameObject.Find("Player");
         data = GetComponent<SavingData>();
         ui = GameObject.Find("Canvas").GetComponent<UI>();
-        player.SetActive(false);
+        //player.SetActive(false);
 
     }
 
@@ -69,12 +69,17 @@ public class GameManger : MonoBehaviour
         if (furyA && furyE && furyT)
         {
             win = true;
+        } else
+        {
+            win = false;
         }
+
+        
     }
 
     public void playerEnable()  // self explanatory 
     {
-      
+      if (player != null)
             player.SetActive(true);
         
 
@@ -84,11 +89,11 @@ public class GameManger : MonoBehaviour
         if (player == null)
         {
             player = GameObject.Find("Player");
-            player.SetActive(false);
+           // player.SetActive(false);
 
 
         }
-        else if (player != null)
+         if (player != null)
         {
             player.SetActive(false);
         }
@@ -100,6 +105,7 @@ public class GameManger : MonoBehaviour
     public void resetData() // can be called 
     {
         data.LoadFromSafeFile();
+        Debug.Log("Loading Reset Data");
     }
 
    
