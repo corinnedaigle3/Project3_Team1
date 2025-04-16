@@ -337,7 +337,7 @@ public class PlayerMovement : MonoBehaviour
             canRun = true;
             inventoryManager.helmUseText.SetActive(false);
             inventoryManager.invisText.SetActive(true);
-            invisibleTimer = 6f;
+            invisibleTimer = 10f;
             helmUsed = true;
             inventoryManager.helmcounter -= 1;
             inventoryManager.ShowAmount(inventoryManager.helmText, inventoryManager.helmcounter, ref inventoryManager.hasHelm);
