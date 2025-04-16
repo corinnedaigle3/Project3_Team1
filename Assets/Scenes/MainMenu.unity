@@ -548,6 +548,38 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3943140192770209, guid: d0197d588056b9647b4828df4dc39000, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 633409670178599589, guid: d0197d588056b9647b4828df4dc39000, type: 3}
+      propertyPath: m_text
+      value: 'Invisibility: Ctrl or L Shoulder'
+      objectReference: {fileID: 0}
+    - target: {fileID: 709211132053260040, guid: d0197d588056b9647b4828df4dc39000, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 709211132053260040, guid: d0197d588056b9647b4828df4dc39000, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 709211132053260040, guid: d0197d588056b9647b4828df4dc39000, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 709211132053260040, guid: d0197d588056b9647b4828df4dc39000, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 525
+      objectReference: {fileID: 0}
+    - target: {fileID: 2662525730364220865, guid: d0197d588056b9647b4828df4dc39000, type: 3}
+      propertyPath: m_text
+      value: 'Take Down Enemy / Place: Q or R Shoulder
+
+
+
+'
+      objectReference: {fileID: 0}
     - target: {fileID: 2756047434866829334, guid: d0197d588056b9647b4828df4dc39000, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -628,9 +660,125 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3054719319982561044, guid: d0197d588056b9647b4828df4dc39000, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4049853550577067466, guid: d0197d588056b9647b4828df4dc39000, type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 4419496025451982220, guid: d0197d588056b9647b4828df4dc39000, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 4419496025451982220, guid: d0197d588056b9647b4828df4dc39000, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 4419496025451982220, guid: d0197d588056b9647b4828df4dc39000, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 775
+      objectReference: {fileID: 0}
+    - target: {fileID: 4419496025451982220, guid: d0197d588056b9647b4828df4dc39000, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 675
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584996102312194724, guid: d0197d588056b9647b4828df4dc39000, type: 3}
+      propertyPath: m_text
+      value: 'Move: WASD or L Stick'
+      objectReference: {fileID: 0}
+    - target: {fileID: 5632057097204820111, guid: d0197d588056b9647b4828df4dc39000, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5915271064186158908, guid: d0197d588056b9647b4828df4dc39000, type: 3}
+      propertyPath: m_text
+      value: 'Camera: Mouse or R Stick'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6573275191527153597, guid: d0197d588056b9647b4828df4dc39000, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6592439283670554453, guid: d0197d588056b9647b4828df4dc39000, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 6592439283670554453, guid: d0197d588056b9647b4828df4dc39000, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 6592439283670554453, guid: d0197d588056b9647b4828df4dc39000, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6592439283670554453, guid: d0197d588056b9647b4828df4dc39000, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 350
+      objectReference: {fileID: 0}
+    - target: {fileID: 7329743041807550023, guid: d0197d588056b9647b4828df4dc39000, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 7329743041807550023, guid: d0197d588056b9647b4828df4dc39000, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 7329743041807550023, guid: d0197d588056b9647b4828df4dc39000, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7329743041807550023, guid: d0197d588056b9647b4828df4dc39000, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 675
+      objectReference: {fileID: 0}
+    - target: {fileID: 8359191958366575411, guid: d0197d588056b9647b4828df4dc39000, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 8359191958366575411, guid: d0197d588056b9647b4828df4dc39000, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 8359191958366575411, guid: d0197d588056b9647b4828df4dc39000, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 775
+      objectReference: {fileID: 0}
+    - target: {fileID: 8359191958366575411, guid: d0197d588056b9647b4828df4dc39000, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 525
+      objectReference: {fileID: 0}
+    - target: {fileID: 8411384778163518719, guid: d0197d588056b9647b4828df4dc39000, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8604398486011379322, guid: d0197d588056b9647b4828df4dc39000, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 8604398486011379322, guid: d0197d588056b9647b4828df4dc39000, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 8604398486011379322, guid: d0197d588056b9647b4828df4dc39000, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 775
+      objectReference: {fileID: 0}
+    - target: {fileID: 8604398486011379322, guid: d0197d588056b9647b4828df4dc39000, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 8623653271118129393, guid: d0197d588056b9647b4828df4dc39000, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9041922145560978582, guid: d0197d588056b9647b4828df4dc39000, type: 3}
+      propertyPath: m_text
+      value: 'Dodge (Near Enemy): Space or R Trigger'
+      objectReference: {fileID: 0}
+    - target: {fileID: 9126224608736433491, guid: d0197d588056b9647b4828df4dc39000, type: 3}
+      propertyPath: m_text
+      value: 'Run (When Invisible): L Shift or  Trigger'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
