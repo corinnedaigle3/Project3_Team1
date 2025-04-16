@@ -554,7 +554,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 633409670178599589, guid: d0197d588056b9647b4828df4dc39000, type: 3}
       propertyPath: m_text
-      value: 'Invisibility: Ctrl or L Shoulder'
+      value: 'Invisibility (Need Item): Ctrl or L Shoulder'
       objectReference: {fileID: 0}
     - target: {fileID: 709211132053260040, guid: d0197d588056b9647b4828df4dc39000, type: 3}
       propertyPath: m_SizeDelta.x
@@ -572,9 +572,13 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 525
       objectReference: {fileID: 0}
+    - target: {fileID: 1546337283783635801, guid: d0197d588056b9647b4828df4dc39000, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2662525730364220865, guid: d0197d588056b9647b4828df4dc39000, type: 3}
       propertyPath: m_text
-      value: 'Take Down Enemy / Place: Q or R Shoulder
+      value: 'Take Down Enemy / Place (Need Item): Q or R Shoulder
 
 
 
@@ -662,7 +666,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3054719319982561044, guid: d0197d588056b9647b4828df4dc39000, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4049853550577067466, guid: d0197d588056b9647b4828df4dc39000, type: 3}
       propertyPath: m_Name
@@ -670,7 +674,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4419496025451982220, guid: d0197d588056b9647b4828df4dc39000, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 500
+      value: 600
       objectReference: {fileID: 0}
     - target: {fileID: 4419496025451982220, guid: d0197d588056b9647b4828df4dc39000, type: 3}
       propertyPath: m_SizeDelta.y
@@ -734,7 +738,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8359191958366575411, guid: d0197d588056b9647b4828df4dc39000, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 500
+      value: 600
       objectReference: {fileID: 0}
     - target: {fileID: 8359191958366575411, guid: d0197d588056b9647b4828df4dc39000, type: 3}
       propertyPath: m_SizeDelta.y
@@ -754,7 +758,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8604398486011379322, guid: d0197d588056b9647b4828df4dc39000, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 500
+      value: 600
       objectReference: {fileID: 0}
     - target: {fileID: 8604398486011379322, guid: d0197d588056b9647b4828df4dc39000, type: 3}
       propertyPath: m_SizeDelta.y
@@ -766,7 +770,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8604398486011379322, guid: d0197d588056b9647b4828df4dc39000, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 300
+      value: 370
       objectReference: {fileID: 0}
     - target: {fileID: 8623653271118129393, guid: d0197d588056b9647b4828df4dc39000, type: 3}
       propertyPath: m_IsActive
