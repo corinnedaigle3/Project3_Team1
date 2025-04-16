@@ -2,10 +2,6 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using TMPro;
-using Unity.VisualScripting;
-using System.Runtime.CompilerServices;
-using UnityEngine.UIElements;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -34,8 +30,6 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Movement")]
     public float moveSpeed;
-    private float horizontalInput;
-    private float verticalInput;
     Vector3 moveDirection; 
     private Vector3 rollDirection;
     private float rollSpeed;
@@ -171,21 +165,29 @@ public class PlayerMovement : MonoBehaviour
                 //saving the vector info
                 moveDirection = camRelativeMove;
 
-                rb.MovePosition(rb.position + moveDirection * moveSpeed * Time.fixedDeltaTime);
-                // rb.AddForce(camRelativeMove.normalized * moveSpeed * 10f, ForceMode.Force);
+                Vector3 moveDirToUse = moveDirection;
+
+                if (OnSlope())
+                {
+                    moveDirToUse = GetSlopeMoveDirection();
+                    rb.drag = groundDrag;
+                }
+
+                rb.MovePosition(rb.position + moveDirToUse * moveSpeed * Time.fixedDeltaTime);
+                //rb.MovePosition(rb.position + moveDirection * moveSpeed * Time.fixedDeltaTime);
 
                 if (moveDirection != Vector3.zero)
                 {
                     // THIS IS HOW I FIXED THE ROTATION ISSUES (The rotation was instantanious and was causing the issue) 
                     Quaternion toRotation = Quaternion.LookRotation(moveDirection);
                     transform.rotation = Quaternion.Slerp(transform.rotation, toRotation, Time.deltaTime * 10f);
-                    //transform.rotation = Quaternion.LookRotation(moveDirection);
                 }
 
                 grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGrounded);
 
                 //   MyInput();
                 SpeedControl();
+                StickToGround();
 
                 if (invisibleTimer <= 0)
                 {
@@ -277,30 +279,6 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void OnSlopeNow()
-    {
-        if (OnSlope())
-        {
-            if (rb.velocity.y > 0)
-            {
-                Debug.Log("DownForce Added");
-                rb.AddForce(Vector3.down * 800f, ForceMode.Force);
-                rb.AddForce(GetSlopeMoveDirection() * moveSpeed, ForceMode.Force);
-            }
-            else
-            {
-                //rb.MovePosition(GetSlopeMoveDirection() * moveSpeed * Time.fixedDeltaTime);
-                rb.AddForce(GetSlopeMoveDirection() * moveSpeed * 10f, ForceMode.Force);
-
-            }
-        }
-
-        rb.drag = groundDrag;
-
-        //turn off gravity when on slope
-        //rb.useGravity = !OnSlope();
-    }
-
     private void SpeedControl()
     {
         //limiting speed on slope
@@ -368,7 +346,11 @@ public class PlayerMovement : MonoBehaviour
 
     public bool OnSlope()
     {
-        if (Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight * 0.5f + 0.3f))
+        float sphereCastRadius = 0.3f; // Match this to your CapsuleCollider radius
+        float rayLength = playerHeight * 0.5f + 0.5f; // Add a little buffer
+        Vector3 origin = transform.position;
+
+        if (Physics.SphereCast(origin, sphereCastRadius, Vector3.down, out slopeHit, rayLength))
         {
             angle = Vector3.Angle(Vector3.up, slopeHit.normal);
             return angle < maxSlopeAngle && angle > minSlopeAngle && angle != 0;
@@ -381,12 +363,43 @@ public class PlayerMovement : MonoBehaviour
     {
         return Vector3.ProjectOnPlane(moveDirection, slopeHit.normal).normalized;
     }
+
+    private void OnSlopeNow()
+    {
+        if (OnSlope())
+        {
+            Vector3 slopeMove = GetSlopeMoveDirection() * moveSpeed;
+            rb.AddForce(slopeMove, ForceMode.Acceleration);
+
+            // Small downward force to stick to slope
+            if (rb.velocity.y <= 0.1f)
+            {
+                rb.AddForce(-slopeHit.normal * 100f, ForceMode.Force);
+            }
+        }
+    }
+
+    void StickToGround()
+    {
+        if (!OnSlope())
+        {
+            if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 1.5f))
+            {
+                if (hit.distance > 0.05f)
+                {
+                    rb.AddForce(Vector3.down * 10f, ForceMode.Force);
+                }
+            }
+        }
+    }
+
     IEnumerator LoseGame(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
         ui.LoadLose();
 
     }
+
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("colliding");
