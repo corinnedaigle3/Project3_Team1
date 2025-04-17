@@ -8,6 +8,7 @@ using UnityEngine.UIElements;
 public class LineOfSight : MonoBehaviour
 {
     public GameObject player;
+    public PlayerMovement playerMovement;
     public bool canChase;
 
 
@@ -21,12 +22,18 @@ public class LineOfSight : MonoBehaviour
 
     private void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.Find("Player");
+        playerMovement = player.GetComponent<PlayerMovement>();
     }
 
     void Update()
     {
-        FieldOfViewCheck();
+        if (!playerMovement.Invisible) {
+            FieldOfViewCheck();
+        }else
+        {
+            canChase = false;
+        }
 
     }
 
