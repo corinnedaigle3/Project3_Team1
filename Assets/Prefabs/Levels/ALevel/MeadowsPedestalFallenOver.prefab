@@ -1,0 +1,108 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3475787253665432257
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3046725988271956131}
+  m_Layer: 0
+  m_Name: MeadowsPedestalFallenOver
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3046725988271956131
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3475787253665432257}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 357.44736, y: 83.60811, z: 242.33507}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 3982873416856806672}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &3375932053499532231
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3046725988271956131}
+    m_Modifications:
+    - target: {fileID: 1846398975086261975, guid: 9b7f4d9d8d6515447a33697330c73513, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 4.3917184
+      objectReference: {fileID: 0}
+    - target: {fileID: 1846398975086261975, guid: 9b7f4d9d8d6515447a33697330c73513, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 4.3917184
+      objectReference: {fileID: 0}
+    - target: {fileID: 1846398975086261975, guid: 9b7f4d9d8d6515447a33697330c73513, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 4.3917184
+      objectReference: {fileID: 0}
+    - target: {fileID: 1846398975086261975, guid: 9b7f4d9d8d6515447a33697330c73513, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -8.907349
+      objectReference: {fileID: 0}
+    - target: {fileID: 1846398975086261975, guid: 9b7f4d9d8d6515447a33697330c73513, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.581894
+      objectReference: {fileID: 0}
+    - target: {fileID: 1846398975086261975, guid: 9b7f4d9d8d6515447a33697330c73513, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.3850708
+      objectReference: {fileID: 0}
+    - target: {fileID: 1846398975086261975, guid: 9b7f4d9d8d6515447a33697330c73513, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.8915579
+      objectReference: {fileID: 0}
+    - target: {fileID: 1846398975086261975, guid: 9b7f4d9d8d6515447a33697330c73513, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.4529069
+      objectReference: {fileID: 0}
+    - target: {fileID: 1846398975086261975, guid: 9b7f4d9d8d6515447a33697330c73513, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1846398975086261975, guid: 9b7f4d9d8d6515447a33697330c73513, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1846398975086261975, guid: 9b7f4d9d8d6515447a33697330c73513, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 53.861
+      objectReference: {fileID: 0}
+    - target: {fileID: 1846398975086261975, guid: 9b7f4d9d8d6515447a33697330c73513, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1846398975086261975, guid: 9b7f4d9d8d6515447a33697330c73513, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4736606937340680235, guid: 9b7f4d9d8d6515447a33697330c73513, type: 3}
+      propertyPath: m_Name
+      value: Meadows_Pedestal (3)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9b7f4d9d8d6515447a33697330c73513, type: 3}
+--- !u!4 &3982873416856806672 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1846398975086261975, guid: 9b7f4d9d8d6515447a33697330c73513, type: 3}
+  m_PrefabInstance: {fileID: 3375932053499532231}
+  m_PrefabAsset: {fileID: 0}
