@@ -598,9 +598,10 @@ GameObject:
   m_Component:
   - component: {fileID: 9036329914373542583}
   - component: {fileID: 5586503228735746450}
+  - component: {fileID: 6963839730150538244}
   m_Layer: 0
   m_Name: CatchCheck
-  m_TagString: Catch
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -641,6 +642,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.5, y: 0.5, z: 0.5}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6963839730150538244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4960235521528684001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a90dc4f2d7f6634fb2fdedc43655f09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destination: {fileID: 0}
 --- !u!1 &7948352420996606239
 GameObject:
   m_ObjectHideFlags: 0
