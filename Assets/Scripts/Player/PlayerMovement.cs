@@ -86,7 +86,9 @@ public class PlayerMovement : MonoBehaviour
     public bool lose;
     public gemsChecker theGemChecker;
     private bool canDodge;
-    public bool runUnlocked;
+    private bool unlockDodge;
+    public bool inDodgeRange;
+    private float dodgeTimer;
    
     // Start is called before the first frame update
     void Start()
@@ -103,11 +105,13 @@ public class PlayerMovement : MonoBehaviour
         elysiumCollectionItem = false;
         tartarusCollectionItem = false;
         canDodge = false;
-        runUnlocked = false;
+        unlockDodge = false;
         maxSlopeAngle = 50f;
         minSlopeAngle = 20f;
 
         rb.drag = groundDrag;
+        dodgeTimer = 0;
+        inDodgeRange = false;
 
         fury1 = false;
         fury2 = false;
@@ -199,10 +203,8 @@ public class PlayerMovement : MonoBehaviour
                     inventoryManager.invisText.SetActive(false);
                 }
 
-                //check if player is on ground
-                if (grounded && runUnlocked == true)
+                if (dodgeTimer <= 0)
                 {
-                    rb.drag = groundDrag;
                     canDodge = true;
                 }
                 else
@@ -210,7 +212,19 @@ public class PlayerMovement : MonoBehaviour
                     canDodge = false;
                 }
 
+                //check if player is on ground
+                if (grounded)
+                {
+                    rb.drag = groundDrag;
+                    unlockDodge = true;
+                }
+                else
+                {
+                    unlockDodge = false;
+                }
+
                 invisibleTimer -= Time.deltaTime;
+                dodgeTimer -= Time.deltaTime;
                 break;
 
             case State.Rolling:
@@ -237,16 +251,27 @@ public class PlayerMovement : MonoBehaviour
                     inventoryManager.invisText.SetActive(false);
                 }
 
-                //check if player is on ground
-                if (grounded)
+                dodgeTimer -= Time.deltaTime;
+
+                if (dodgeTimer <= 0)
                 {
-                    rb.drag = groundDrag;
                     canDodge = true;
                 }
                 else
                 {
-                    rb.drag = 0;
                     canDodge = false;
+                }
+
+                //check if player is on ground
+                if (grounded)
+                {
+                    rb.drag = groundDrag;
+                    unlockDodge = true;
+                }
+                else
+                {
+                    rb.drag = 0;
+                    unlockDodge = false;
                 }
                 break;
         }
@@ -320,11 +345,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void DodgeEnemy(InputAction.CallbackContext context) 
     {
-        if (context.performed && canDodge == true && runUnlocked == true)
+        if (context.performed && canDodge == true && unlockDodge == true && inDodgeRange == true)
         {
             rollDirection = moveDirection;
             rollSpeed = 17f;
             state = State.Rolling;
+            dodgeTimer = 3f;
         }
     }
 
@@ -402,7 +428,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("colliding");
+        //Debug.Log("colliding");
         if (other.tag == "Behind" && inventoryManager.hasE == true)
         {
             ui.popUpBar.SetActive(true);
@@ -428,12 +454,9 @@ public class PlayerMovement : MonoBehaviour
             //gameObject.SetActive(false);
         }
 
-        if (other.tag == "DashUnlocked") // this refers to dodge 
+        if (other.tag == "DodgeUnlocked")
         {
-            canDodge = true;
-            runUnlocked = true;
-            inventoryManager.dodgeText.SetActive(true);
-
+            inDodgeRange = true;
         }
 
         switch (other.tag)
@@ -590,13 +613,9 @@ public class PlayerMovement : MonoBehaviour
             Destroy(other.gameObject);
         }
 
-        if (other.tag == "DashUnlocked")
+        if (other.tag == "DodgeUnlocked")
         {
-            canDodge = false;
-            runUnlocked = false;
-            inventoryManager.dodgeText.SetActive(false);
-            ui.popUpBar.SetActive(false);
-
+            inDodgeRange = false;
         }
     }
 
