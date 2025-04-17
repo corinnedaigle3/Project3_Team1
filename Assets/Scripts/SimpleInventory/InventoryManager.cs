@@ -77,7 +77,7 @@ public class InventoryManager : MonoBehaviour
 
         invisText.SetActive(false);
 
-        dodgeText.SetActive(false);
+       // dodgeText.SetActive(false);
 
         helmUseText.SetActive(false);
     }

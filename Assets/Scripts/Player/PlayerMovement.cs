@@ -85,10 +85,10 @@ public class PlayerMovement : MonoBehaviour
     [Header("Other")]
     public bool lose;
     public gemsChecker theGemChecker;
-    private bool canDodge;
+    public bool canDodge;
     private bool unlockDodge;
     public bool inDodgeRange;
-    private float dodgeTimer;
+    public float dodgeTimer;
    
     // Start is called before the first frame update
     void Start()
@@ -350,7 +350,7 @@ public class PlayerMovement : MonoBehaviour
             rollDirection = moveDirection;
             rollSpeed = 17f;
             state = State.Rolling;
-            dodgeTimer = 3f;
+            dodgeTimer = 5f;
         }
     }
 

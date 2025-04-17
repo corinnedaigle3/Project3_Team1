@@ -59,8 +59,7 @@ public class GameManger : MonoBehaviour
         {
             player = GameObject.Find("Player");
         }
-        else
-            Debug.Log("No Player Found");
+    
 
 
         ui.goToScene = data.LevelNameNew;
