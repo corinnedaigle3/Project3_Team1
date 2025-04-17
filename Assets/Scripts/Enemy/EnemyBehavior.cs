@@ -37,6 +37,8 @@ public class EnemyBehavior : MonoBehaviour
       
         player = GameObject.Find("Player");
         lineOfSight = GetComponent<LineOfSight>();
+        // let navmesh handle rotation 
+        agent.updateRotation = true;
     }
 
     // Update is called once per frame
@@ -81,13 +83,15 @@ public class EnemyBehavior : MonoBehaviour
             playerLastPostion = player.transform.position; // save player postion
             // Chase Player
             agent.SetDestination(player.transform.position);
-            transform.LookAt(player.transform.position);
+            //transform.LookAt(player.transform.position);
 
             Debug.Log("this is chased");
             // increase rotation speed 
-            Vector3 direction = (player.transform.position - transform.position).normalized;
+           /* 
+            * Vector3 direction = (player.transform.position - transform.position).normalized;
             Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 10f);
+            */
 
         }
        
@@ -133,7 +137,7 @@ public class EnemyBehavior : MonoBehaviour
             {
 
                 agent.SetDestination(randomSearchPos);
-                transform.LookAt(randomSearchPos);
+                //transform.LookAt(randomSearchPos);
 
                 Debug.Log("Searching area attempt: " + i);
             }
