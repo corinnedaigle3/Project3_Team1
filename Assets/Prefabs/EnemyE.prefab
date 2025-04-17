@@ -119,6 +119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  playerMovement: {fileID: 0}
   canChase: 0
   obstacleLayer:
     serializedVersion: 2
@@ -467,8 +468,8 @@ GameObject:
   - component: {fileID: 2200861724433256280}
   - component: {fileID: 6019716755210692278}
   m_Layer: 0
-  m_Name: DashUnlocked
-  m_TagString: DashUnlocked
+  m_Name: DodgeUnlocked
+  m_TagString: DodgeUnlocked
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
