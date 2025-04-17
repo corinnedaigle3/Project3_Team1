@@ -128,7 +128,7 @@ public class EnemyBehavior : MonoBehaviour
             yield break;
         } else { lookingNew = true; }
         //agent.isStopped = true;
-        animator.SetBool("walking", false);// update animator
+       // animator.SetBool("walking", false);// update animator
 
 
         yield return new WaitForSeconds(waitTime);
@@ -136,7 +136,7 @@ public class EnemyBehavior : MonoBehaviour
         lookingNew = false;
         isSearching = false;
         agent.SetDestination(Waypoints[waypointIdnex].position);
-        animator.SetBool("walking", true); // update animator
+        //animator.SetBool("walking", true); // update animator
 
     }
 
