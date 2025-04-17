@@ -13,12 +13,12 @@ public class MainHubManager : MonoBehaviour
     private bool furySEPlaced3;
 
     public GameManger manager;
-    public PortalOutSFX portalOutSFX;
+    PortalOutSFX portalOutSFX;
 
     void Start()
     {
         manager = FindObjectOfType<GameManger>();
-        portalOutSFX = GetComponent<PortalOutSFX>();
+        //portalOutSFX = GameObject.FindGameObjectWithTag("PortalOut").GetComponent<PortalOutSFX>();
         furySEPlaced1 = false;
         furySEPlaced2 = false;
         furySEPlaced3 = false;
@@ -45,10 +45,10 @@ public class MainHubManager : MonoBehaviour
             furySEPlaced3 = true;
         }
 
-        if (furySEPlaced1 && furySEPlaced2 && furySEPlaced3)
+        /*if (furySEPlaced1 && furySEPlaced2 && furySEPlaced3)
         {
             portalOutSFX.portalOut1.Play();
             portalOutSFX.portalOut2.Play();
-        }
+        }*/
     }
 }
