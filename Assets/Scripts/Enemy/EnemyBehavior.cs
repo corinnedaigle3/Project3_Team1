@@ -116,7 +116,7 @@ public class EnemyBehavior : MonoBehaviour
         yield return new WaitForSeconds(waitTime);
         waypointIdnex = Random.Range(0, Waypoints.Length);
         lookingNew = false;
-
+        isSearching = false;
         agent.SetDestination(Waypoints[waypointIdnex].position);
     }
 
@@ -127,15 +127,27 @@ public class EnemyBehavior : MonoBehaviour
         for (int i = 0; i < 2; i++)
         {// look around random locations after chasing player
             Vector3 randomSearchPos = playerLastPostion + new Vector3(Random.Range(-5f, 5f), 0, Random.Range(-5f, 5f));
-            agent.SetDestination(randomSearchPos);
-            transform.LookAt(randomSearchPos);
 
-            Debug.Log("Searching area attempt: " + i);
+            NavMeshHit hit;
+            if (NavMesh.SamplePosition(randomSearchPos, out hit, 2f, NavMesh.AllAreas))
+            {
+
+                agent.SetDestination(randomSearchPos);
+                transform.LookAt(randomSearchPos);
+
+                Debug.Log("Searching area attempt: " + i);
+            }
+            else
+            {
+                continue;
+            }
+          
 
           
             yield return new WaitForSeconds(1f);
         }
         isSearching = false ;
+        Patrol();
     }
         /*
         void DieIfGemUsed()
