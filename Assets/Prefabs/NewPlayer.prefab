@@ -858,6 +858,7 @@ GameObject:
   - component: {fileID: 4527516388881723223}
   - component: {fileID: 3654397337822163727}
   - component: {fileID: 5830105663727444388}
+  - component: {fileID: 3110200486459309708}
   m_Layer: 0
   m_Name: ThirdPersonCam (1)
   m_TagString: Untagged
@@ -977,8 +978,8 @@ MonoBehaviour:
   m_BindingMode: 4
   m_SplineCurvature: 1
   m_Orbits:
-  - m_Height: 2
-    m_Radius: 6
+  - m_Height: 2.5
+    m_Radius: 4
   - m_Height: 1
     m_Radius: 5
   - m_Height: 0
@@ -1035,6 +1036,22 @@ MonoBehaviour:
   m_FocusTarget: {fileID: 0}
   m_FocusOffset: 0
   m_Profile: {fileID: 11400000, guid: 07ee9b2a53b77e64697c93c041b062cd, type: 2}
+--- !u!114 &3110200486459309708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8286511113826229674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d43ed63066a16424e8ead7be58e2b460, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volumeTartarus: {fileID: 11400000, guid: 07ee9b2a53b77e64697c93c041b062cd, type: 2}
+  volumeElysium: {fileID: 11400000, guid: 5970f6521a02c5e45b3ebfa415bc8889, type: 2}
+  volumeAsphodel: {fileID: 11400000, guid: 9405c590289ed6b4ab6795e8220ed356, type: 2}
+  volumeMianHub: {fileID: 11400000, guid: d43570410408da04fa725504f238f583, type: 2}
 --- !u!1001 &3281456653201022234
 PrefabInstance:
   m_ObjectHideFlags: 0
