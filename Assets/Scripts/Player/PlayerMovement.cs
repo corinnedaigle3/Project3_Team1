@@ -414,7 +414,7 @@ public class PlayerMovement : MonoBehaviour
             takeDown = currentEnemy.GetComponent<TakeDown>();
         }
 
-        if (other.CompareTag("Catch"))
+        if (other.CompareTag("Catch") && !Invisible)
         {
             caughtSound.Play();
             lose = true;
