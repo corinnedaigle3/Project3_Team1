@@ -13,6 +13,7 @@ public class EnemyBehavior : MonoBehaviour
     [SerializeField] Transform[] Waypoints;
     public NavMeshAgent agent;
     public string enemyType;
+    public Animator animator;
  
     public GameManger gameManager;
 
@@ -44,6 +45,16 @@ public class EnemyBehavior : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if(agent.remainingDistance < .2f && animator != null)
+        {
+            animator.SetBool("walking", false);// update animator
+
+        }
+        else if ( animator != null)
+        {
+            animator.SetBool("walking", true);// update animator
+        }
+
         //DieIfGemUsed();
         NavMeshHit hit;
         if (player == null)
@@ -78,6 +89,7 @@ public class EnemyBehavior : MonoBehaviour
     {
         if (player != null && lineOfSight.canChase)
         {
+
 
 
             playerLastPostion = player.transform.position; // save player postion
@@ -116,15 +128,19 @@ public class EnemyBehavior : MonoBehaviour
             yield break;
         } else { lookingNew = true; }
         //agent.isStopped = true;
-      
+        animator.SetBool("walking", false);// update animator
+
+
         yield return new WaitForSeconds(waitTime);
         waypointIdnex = Random.Range(0, Waypoints.Length);
         lookingNew = false;
         isSearching = false;
         agent.SetDestination(Waypoints[waypointIdnex].position);
+        animator.SetBool("walking", true); // update animator
+
     }
 
-  
+
     public IEnumerator SearchArea()
     {
         isSearching= true;
