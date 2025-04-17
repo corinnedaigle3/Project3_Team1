@@ -22,6 +22,10 @@ public class GameManger : MonoBehaviour
     public bool furyT;
     public bool win;
 
+    [Header("Audio")]
+    public AudioSource portalOut1;
+    public AudioSource portalOut2;
+
     private void Awake()
     {
         player = GameObject.Find("Player");
@@ -42,6 +46,8 @@ public class GameManger : MonoBehaviour
         player = GameObject.Find("Player");
         data = GetComponent<SavingData>();
         ui = GameObject.Find("Canvas").GetComponent<UI>();
+        portalOut1 = gameObject.GetComponent<AudioSource>();
+        portalOut2 = gameObject.GetComponent<AudioSource>();
         //player.SetActive(false);
 
     }
@@ -68,8 +74,11 @@ public class GameManger : MonoBehaviour
 
         if (furyA && furyE && furyT)
         {
+            portalOut1.Play();
+            portalOut2.Play();
             win = true;
-        } else
+        } 
+        else
         {
             win = false;
         }
