@@ -83,14 +83,17 @@ public class PlayerMovement : MonoBehaviour
     public RaycastHit slopeHit;
     private float angle;
 
+    [Header("Dodge")]
+    public bool canDodge;
+    public bool unlockDodge;
+    public bool inDodgeRange;
+    public float dodgeTimer;
+    public bool isDodging;
+
     [Header("Other")]
     public bool lose;
     public gemsChecker theGemChecker;
-    public bool canDodge;
-    private bool unlockDodge;
-    public bool inDodgeRange;
-    public float dodgeTimer;
-   
+
     // Start is called before the first frame update
     void Start()
     {
@@ -109,6 +112,7 @@ public class PlayerMovement : MonoBehaviour
         unlockDodge = false;
         maxSlopeAngle = 50f;
         minSlopeAngle = 20f;
+        isDodging = false;
 
         rb.drag = groundDrag;
         dodgeTimer = 0;
@@ -202,6 +206,11 @@ public class PlayerMovement : MonoBehaviour
                     helmUsed = false;
                     moveSpeed = 8f;
                     inventoryManager.invisText.SetActive(false);
+                }
+
+                if (dodgeTimer > 0)
+                {
+                    isDodging = false;
                 }
 
                 if (dodgeTimer <= 0)
@@ -353,6 +362,7 @@ public class PlayerMovement : MonoBehaviour
             state = State.Rolling;
             dodgeTimer = 5f;
             dodgeSound.Play();
+            isDodging = true;
         }
     }
 
