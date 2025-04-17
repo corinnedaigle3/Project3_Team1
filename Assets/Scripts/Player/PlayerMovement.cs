@@ -75,6 +75,7 @@ public class PlayerMovement : MonoBehaviour
     public AudioSource takeDownSound;
     public AudioSource pickupSound;
     public AudioSource caughtSound;
+    public AudioSource dodgeSound;
 
     [Header("Slope Handling")]
     public float maxSlopeAngle;
@@ -351,6 +352,7 @@ public class PlayerMovement : MonoBehaviour
             rollSpeed = 17f;
             state = State.Rolling;
             dodgeTimer = 5f;
+            dodgeSound.Play();
         }
     }
 
