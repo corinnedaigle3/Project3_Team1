@@ -37,6 +37,8 @@ public class EnemyBehavior : MonoBehaviour
       
         player = GameObject.Find("Player");
         lineOfSight = GetComponent<LineOfSight>();
+        // let navmesh handle rotation 
+        agent.updateRotation = true;
     }
 
     // Update is called once per frame
@@ -81,13 +83,15 @@ public class EnemyBehavior : MonoBehaviour
             playerLastPostion = player.transform.position; // save player postion
             // Chase Player
             agent.SetDestination(player.transform.position);
-            transform.LookAt(player.transform.position);
+            //transform.LookAt(player.transform.position);
 
             Debug.Log("this is chased");
             // increase rotation speed 
-            Vector3 direction = (player.transform.position - transform.position).normalized;
+           /* 
+            * Vector3 direction = (player.transform.position - transform.position).normalized;
             Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 10f);
+            */
 
         }
        
@@ -116,7 +120,7 @@ public class EnemyBehavior : MonoBehaviour
         yield return new WaitForSeconds(waitTime);
         waypointIdnex = Random.Range(0, Waypoints.Length);
         lookingNew = false;
-
+        isSearching = false;
         agent.SetDestination(Waypoints[waypointIdnex].position);
     }
 
@@ -127,15 +131,27 @@ public class EnemyBehavior : MonoBehaviour
         for (int i = 0; i < 2; i++)
         {// look around random locations after chasing player
             Vector3 randomSearchPos = playerLastPostion + new Vector3(Random.Range(-5f, 5f), 0, Random.Range(-5f, 5f));
-            agent.SetDestination(randomSearchPos);
-            transform.LookAt(randomSearchPos);
 
-            Debug.Log("Searching area attempt: " + i);
+            NavMeshHit hit;
+            if (NavMesh.SamplePosition(randomSearchPos, out hit, 2f, NavMesh.AllAreas))
+            {
+
+                agent.SetDestination(randomSearchPos);
+                //transform.LookAt(randomSearchPos);
+
+                Debug.Log("Searching area attempt: " + i);
+            }
+            else
+            {
+                continue;
+            }
+          
 
           
             yield return new WaitForSeconds(1f);
         }
         isSearching = false ;
+        Patrol();
     }
         /*
         void DieIfGemUsed()

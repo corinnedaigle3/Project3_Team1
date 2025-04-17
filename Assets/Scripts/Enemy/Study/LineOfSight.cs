@@ -52,15 +52,20 @@ public class LineOfSight : MonoBehaviour
                 float distanceToTarget = Vector3.Distance(transform.position, target.position);
                 Debug.DrawRay(transform.position, directionToTarget * distanceToTarget, Color.red);
 
-                if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstacleLayer, QueryTriggerInteraction.Collide))
+                // RaycastNonAlloc version
+                RaycastHit[] hits = new RaycastHit[10];
+
+                int hitCount = Physics.RaycastNonAlloc(transform.position,
+                    directionToTarget, hits, distanceToTarget, obstacleLayer,
+                    QueryTriggerInteraction.Collide);
+
+                if (hitCount == 0)
                 {
                     canChase = true;
-                   
                 }
                 else
                 {
                     canChase = false;
-               
                 }
             } 
             else
