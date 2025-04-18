@@ -3837,7 +3837,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: feecda882e0fb394693ab8f6f31b4162, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerMovement: {fileID: 0}
+  player: {fileID: 0}
   image: {fileID: 0}
 --- !u!1 &2893766914253294189
 GameObject:
@@ -7528,6 +7528,7 @@ GameObject:
   - component: {fileID: 9211599271416805881}
   - component: {fileID: 7505836529424258544}
   - component: {fileID: 37888553013554920}
+  - component: {fileID: 5010814039090873889}
   m_Layer: 0
   m_Name: Image
   m_TagString: Untagged
@@ -7593,6 +7594,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &5010814039090873889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5290175042959554898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fe1fd8e5c0120940836f89dc8317288, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  image: {fileID: 37888553013554920}
+  fadeTime: 1
+  targetFade: 0
 --- !u!1 &5456155478058267924
 GameObject:
   m_ObjectHideFlags: 0
