@@ -17,7 +17,7 @@ public class ElysiumManager : MonoBehaviour
         Instantiate(TakeDownItemE, new Vector3(156.02f, 8f, -129.34f), Quaternion.identity);
         Instantiate(TakeDownItemE, new Vector3(72.18f, 10.58f, 69.14f), Quaternion.identity);
 
-        Instantiate(Helm, new Vector3(153.38f, 9.87f, -69.08f), Quaternion.identity);
+        Instantiate(Helm, new Vector3(160.69f, 9.87f, -69.44f), Quaternion.identity);
         Instantiate(Helm, new Vector3(45.50719f, 4.5767f, -12.17f), Quaternion.identity);
         Instantiate(Helm, new Vector3(63.82953f, 10.98f, 80.2f), Quaternion.identity);
     }
