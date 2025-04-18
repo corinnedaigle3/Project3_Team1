@@ -13,12 +13,12 @@ public class MainHubManager : MonoBehaviour
     private bool furySEPlaced3;
 
     public GameManger manager;
-    public PortalOutSFX portalOutSFX;
+    PortalOutSFX portalOutSFX;
 
     void Start()
     {
         manager = FindObjectOfType<GameManger>();
-        portalOutSFX = GetComponent<PortalOutSFX>();
+        portalOutSFX = GameObject.FindGameObjectWithTag("PortalOut").GetComponent<PortalOutSFX>();
         furySEPlaced1 = false;
         furySEPlaced2 = false;
         furySEPlaced3 = false;
@@ -47,8 +47,12 @@ public class MainHubManager : MonoBehaviour
 
         if (furySEPlaced1 && furySEPlaced2 && furySEPlaced3)
         {
-            portalOutSFX.portalOut1.Play();
-            portalOutSFX.portalOut2.Play();
+            portalOutSFX.portalOut1.UnPause();
+            portalOutSFX.portalOut2.UnPause();
+        }else
+        {
+            portalOutSFX.portalOut1.Pause();
+            portalOutSFX.portalOut2.Pause();
         }
     }
 }

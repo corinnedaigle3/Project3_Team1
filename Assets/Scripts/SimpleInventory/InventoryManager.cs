@@ -13,10 +13,10 @@ public class InventoryManager : MonoBehaviour
     public GameObject spriteGemT;
     public GameObject spriteGemA;
     public GameObject spriteGemE;
-    public GameObject takeDowntext;
-    public GameObject invisText;
-    public GameObject dodgeText;
-    public GameObject helmUseText;
+  //  public GameObject takeDowntext;
+  //  public GameObject invisText;
+  //  public GameObject dodgeText;
+    //public GameObject helmUseText;
 
     public GameObject spriteHelm;
     public TextMeshProUGUI helmText;
@@ -73,13 +73,13 @@ public class InventoryManager : MonoBehaviour
         hasHelm = false;
         spriteHelm.SetActive(false);
 
-        takeDowntext.SetActive(false);
+       // takeDowntext.SetActive(false);
 
-        invisText.SetActive(false);
+        // invisText.SetActive(false);
 
        // dodgeText.SetActive(false);
 
-        helmUseText.SetActive(false);
+        // helmUseText.SetActive(false);
     }
 
     // Update is called once per frame
