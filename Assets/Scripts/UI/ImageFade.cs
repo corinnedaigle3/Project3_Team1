@@ -18,11 +18,11 @@ public class ImageFade : MonoBehaviour
     {
         if (playerMovement.isDodging == true)
         {
-            StartCoroutine(FadeOut());
+            StartCoroutine(FadeIn());
         }
         if (playerMovement.isDodging == false)
         {
-            StartCoroutine(FadeIn());
+            StartCoroutine(FadeOut());
         }
     }
 
