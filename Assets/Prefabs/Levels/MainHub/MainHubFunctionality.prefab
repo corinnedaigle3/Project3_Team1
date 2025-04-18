@@ -717,7 +717,6 @@ MonoBehaviour:
   furyStatueA: {fileID: 160392691799185891}
   furyStatueT: {fileID: 7161151800144055563}
   manager: {fileID: 0}
-  portalOutSFX: {fileID: 0}
 --- !u!1 &7161151800144055563
 GameObject:
   m_ObjectHideFlags: 0
@@ -1825,12 +1824,24 @@ PrefabInstance:
       value: MainHub
       objectReference: {fileID: 0}
     - target: {fileID: 4271467009604999438, guid: c47f29f4145815948a80e1f29a0a9fe1, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 5.1855087
+      objectReference: {fileID: 0}
+    - target: {fileID: 4271467009604999438, guid: c47f29f4145815948a80e1f29a0a9fe1, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 5.1855087
+      objectReference: {fileID: 0}
+    - target: {fileID: 4271467009604999438, guid: c47f29f4145815948a80e1f29a0a9fe1, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 5.1855087
+      objectReference: {fileID: 0}
+    - target: {fileID: 4271467009604999438, guid: c47f29f4145815948a80e1f29a0a9fe1, type: 3}
       propertyPath: m_LocalPosition.x
       value: -85.48
       objectReference: {fileID: 0}
     - target: {fileID: 4271467009604999438, guid: c47f29f4145815948a80e1f29a0a9fe1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.45
+      value: -21
       objectReference: {fileID: 0}
     - target: {fileID: 4271467009604999438, guid: c47f29f4145815948a80e1f29a0a9fe1, type: 3}
       propertyPath: m_LocalPosition.z

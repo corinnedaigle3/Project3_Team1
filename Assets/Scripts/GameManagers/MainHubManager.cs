@@ -18,7 +18,7 @@ public class MainHubManager : MonoBehaviour
     void Start()
     {
         manager = FindObjectOfType<GameManger>();
-        //portalOutSFX = GameObject.FindGameObjectWithTag("PortalOut").GetComponent<PortalOutSFX>();
+        portalOutSFX = GameObject.FindGameObjectWithTag("PortalOut").GetComponent<PortalOutSFX>();
         furySEPlaced1 = false;
         furySEPlaced2 = false;
         furySEPlaced3 = false;
@@ -45,10 +45,14 @@ public class MainHubManager : MonoBehaviour
             furySEPlaced3 = true;
         }
 
-        /*if (furySEPlaced1 && furySEPlaced2 && furySEPlaced3)
+        if (furySEPlaced1 && furySEPlaced2 && furySEPlaced3)
         {
-            portalOutSFX.portalOut1.Play();
-            portalOutSFX.portalOut2.Play();
-        }*/
+            portalOutSFX.portalOut1.UnPause();
+            portalOutSFX.portalOut2.UnPause();
+        }else
+        {
+            portalOutSFX.portalOut1.Pause();
+            portalOutSFX.portalOut2.Pause();
+        }
     }
 }
