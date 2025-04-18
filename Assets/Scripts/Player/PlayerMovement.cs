@@ -89,6 +89,7 @@ public class PlayerMovement : MonoBehaviour
     public bool inDodgeRange;
     public float dodgeTimer;
     public bool isDodging;
+    public float dodgeTimerFade;
 
     [Header("Other")]
     public bool lose;
@@ -208,6 +209,15 @@ public class PlayerMovement : MonoBehaviour
                    // inventoryManager.invisText.SetActive(false);
                 }
 
+                if (dodgeTimerFade <= 0)
+                {
+                    isDodging = true;
+                }
+                else
+                {
+                    isDodging = false;
+                }
+
                 if (dodgeTimer > 0)
                 {
                     isDodging = false;
@@ -235,6 +245,7 @@ public class PlayerMovement : MonoBehaviour
 
                 invisibleTimer -= Time.deltaTime;
                 dodgeTimer -= Time.deltaTime;
+                dodgeTimerFade -= Time.deltaTime;
                 break;
 
             case State.Rolling:
@@ -362,7 +373,7 @@ public class PlayerMovement : MonoBehaviour
             state = State.Rolling;
             dodgeTimer = 5f;
             dodgeSound.Play();
-            isDodging = true;
+            dodgeTimerFade = 1f;
         }
     }
 
@@ -375,7 +386,7 @@ public class PlayerMovement : MonoBehaviour
             canRun = true;
           //  inventoryManager.helmUseText.SetActive(false);
             //inventoryManager.invisText.SetActive(true);
-            invisibleTimer = 10f;
+            invisibleTimer = 5f;
             helmUsed = true;
             inventoryManager.helmcounter -= 1;
             inventoryManager.ShowAmount(inventoryManager.helmText, inventoryManager.helmcounter, ref inventoryManager.hasHelm);
