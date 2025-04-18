@@ -497,7 +497,7 @@ public class PlayerMovement : MonoBehaviour
             case "BehindA":
                 if (inventoryManager.hasA == true)
                 {
-                    ui.popUpBar.SetActive(true); // the pop up thing should change 
+                   // ui.popUpBar.SetActive(true); // the pop up thing should change 
                   //  inventoryManager.helmUseText.SetActive(false); // this will be removed later
                 //    inventoryManager.invisText.SetActive(false); // this will be removed later 
                   //  inventoryManager.takeDowntext.SetActive(true); // this will be change do game object (icon)
@@ -509,7 +509,7 @@ public class PlayerMovement : MonoBehaviour
             case "BehindE":
                if( inventoryManager.hasE == true)
                 {
-                    ui.popUpBar.SetActive(true); // the pop up thing should change 
+               //     ui.popUpBar.SetActive(true); // the pop up thing should change 
                //     inventoryManager.helmUseText.SetActive(false); // this will be removed later
                  //   inventoryManager.invisText.SetActive(false); // this will be removed later 
                    // inventoryManager.takeDowntext.SetActive(true); // this will be change do game object (icon)
@@ -521,7 +521,7 @@ public class PlayerMovement : MonoBehaviour
             case "BehindT":
                 if (inventoryManager.hasT == true)
                 {
-                    ui.popUpBar.SetActive(true); // the pop up thing should change 
+             //       ui.popUpBar.SetActive(true); // the pop up thing should change 
            //         inventoryManager.helmUseText.SetActive(false); // this will be removed later
              //       inventoryManager.invisText.SetActive(false); // this will be removed later 
                //     inventoryManager.takeDowntext.SetActive(true); // this will be change do game object (icon)
