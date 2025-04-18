@@ -327,6 +327,7 @@ public class UI : MonoBehaviour
         gameManager.resetData();
         gameManager.resetData();
         gameManager.resetData();
+       // Destroy(this.gameObject);
 
 
     }

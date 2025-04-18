@@ -205,7 +205,7 @@ public class PlayerMovement : MonoBehaviour
                     Invisible = false;
                     helmUsed = false;
                     moveSpeed = 8f;
-                    inventoryManager.invisText.SetActive(false);
+                   // inventoryManager.invisText.SetActive(false);
                 }
 
                 if (dodgeTimer > 0)
@@ -258,7 +258,7 @@ public class PlayerMovement : MonoBehaviour
                     Invisible = false;
                     helmUsed = false;
                     moveSpeed = 8f;
-                    inventoryManager.invisText.SetActive(false);
+                //    inventoryManager.invisText.SetActive(false);
                 }
 
                 dodgeTimer -= Time.deltaTime;
@@ -373,8 +373,8 @@ public class PlayerMovement : MonoBehaviour
             ui.popUpBar2.SetActive(true);
             Invisible = true;
             canRun = true;
-            inventoryManager.helmUseText.SetActive(false);
-            inventoryManager.invisText.SetActive(true);
+          //  inventoryManager.helmUseText.SetActive(false);
+            //inventoryManager.invisText.SetActive(true);
             invisibleTimer = 10f;
             helmUsed = true;
             inventoryManager.helmcounter -= 1;
@@ -441,26 +441,28 @@ public class PlayerMovement : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         //Debug.Log("colliding");
+        /*
         if (other.tag == "Behind" && inventoryManager.hasE == true)
         {
-            ui.popUpBar.SetActive(true);
-            inventoryManager.helmUseText.SetActive(false);
-            inventoryManager.invisText.SetActive(false);
-            inventoryManager.takeDowntext.SetActive(true);
+            ui.popUpBar.SetActive(true); // the pop up thing should change 
+            inventoryManager.helmUseText.SetActive(false); // this will be removed later
+            inventoryManager.invisText.SetActive(false); // this will be removed later 
+            inventoryManager.takeDowntext.SetActive(true); // this will be change do game object (icon)
             canKill = true;
             currentEnemy = other.gameObject;
             takeDown = currentEnemy.GetComponent<TakeDown>();
         }
+        */
 
         if (other.CompareTag("Catch") && !Invisible)
         {
             caughtSound.Play();
             lose = true;
-            inventoryManager.takeDowntext.SetActive(false);
-            inventoryManager.invisText.SetActive(false);
-            inventoryManager.dodgeText.SetActive(false);
-            inventoryManager.helmUseText.SetActive(false);
-            transform.LookAt(other.transform.position); // might remvoe it 
+            //inventoryManager.takeDowntext.SetActive(false);
+           // inventoryManager.invisText.SetActive(false);
+            //inventoryManager.dodgeText.SetActive(false);
+            // inventoryManager.helmUseText.SetActive(false);
+           
 
             StartCoroutine(LoseGame(.5f));
             //gameObject.SetActive(false);
@@ -473,6 +475,43 @@ public class PlayerMovement : MonoBehaviour
 
         switch (other.tag)
         {
+            case "BehindA":
+                if (inventoryManager.hasA == true)
+                {
+                    ui.popUpBar.SetActive(true); // the pop up thing should change 
+                  //  inventoryManager.helmUseText.SetActive(false); // this will be removed later
+                //    inventoryManager.invisText.SetActive(false); // this will be removed later 
+                  //  inventoryManager.takeDowntext.SetActive(true); // this will be change do game object (icon)
+                    canKill = true;
+                    currentEnemy = other.gameObject;
+                    takeDown = currentEnemy.GetComponent<TakeDown>();
+                }
+                break;    
+            case "BehindE":
+               if( inventoryManager.hasE == true)
+                {
+                    ui.popUpBar.SetActive(true); // the pop up thing should change 
+               //     inventoryManager.helmUseText.SetActive(false); // this will be removed later
+                 //   inventoryManager.invisText.SetActive(false); // this will be removed later 
+                   // inventoryManager.takeDowntext.SetActive(true); // this will be change do game object (icon)
+                    canKill = true;
+                    currentEnemy = other.gameObject;
+                    takeDown = currentEnemy.GetComponent<TakeDown>();
+                }
+                break;    
+            case "BehindT":
+                if (inventoryManager.hasT == true)
+                {
+                    ui.popUpBar.SetActive(true); // the pop up thing should change 
+           //         inventoryManager.helmUseText.SetActive(false); // this will be removed later
+             //       inventoryManager.invisText.SetActive(false); // this will be removed later 
+               //     inventoryManager.takeDowntext.SetActive(true); // this will be change do game object (icon)
+                    canKill = true;
+                    currentEnemy = other.gameObject;
+                    takeDown = currentEnemy.GetComponent<TakeDown>();
+                }
+                break;
+
             case "TakeDownItemE":
 
                 if (!hasPickedUpItem)
@@ -585,7 +624,7 @@ public class PlayerMovement : MonoBehaviour
                     hasPickedUpItem = true;
                     inventoryManager.hasHelm = true;
                     pickupSound.Play();
-                    inventoryManager.helmUseText.SetActive(true);
+                  //  inventoryManager.helmUseText.SetActive(true);
 
                     inventoryManager.helmcounter++;
                     inventoryManager.ShowAmount(inventoryManager.helmText, inventoryManager.helmcounter, ref inventoryManager.hasHelm);
@@ -611,7 +650,7 @@ public class PlayerMovement : MonoBehaviour
         if (other.tag == "Behind")
         {
             //take down enemy text
-            inventoryManager.takeDowntext.SetActive(false);
+           //inventoryManager.takeDowntext.SetActive(false);
             ui.popUpBar.SetActive(false);
 
             canKill = false;

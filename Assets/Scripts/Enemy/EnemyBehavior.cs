@@ -144,7 +144,7 @@ public class EnemyBehavior : MonoBehaviour
     public IEnumerator SearchArea()
     {
         isSearching= true;
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < 3; i++)
         {// look around random locations after chasing player
             Vector3 randomSearchPos = playerLastPostion + new Vector3(Random.Range(-5f, 5f), 0, Random.Range(-5f, 5f));
 
@@ -169,34 +169,5 @@ public class EnemyBehavior : MonoBehaviour
         isSearching = false ;
         Patrol();
     }
-        /*
-        void DieIfGemUsed()
-        {
-            // if enemy is one of the 3 fury and their respective gem is used they will no longer spawn. 
-            switch (enemyType)
-            {
-                case "FuryE":
-                    if (gameManager.furyE)
-                    {
-                        Destroy(gameObject);
-                    }
-                    break;
-                case "FuryA":
-                    if (gameManager.furyA)
-                    {
-                        Destroy(gameObject);
-                    }
-                    break;
-                case "FuryT":
-                    if (gameManager.furyT)
-                    {
-                        Destroy(gameObject);
-                    }
-                    break;
-                default:
-                    break;
 
-            }
-        }
-        */
     }
