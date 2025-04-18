@@ -17,6 +17,11 @@ public class UiAbilityIcon : MonoBehaviour
 
     void Update()
     {
+        if (player == null)
+        {
+            player = GameObject.Find("Player").GetComponent<PlayerMovement>();
+
+        }
         // If player CAN dodge, set fillAmount to 0 (ability ready)
         if (player.canDodge)
         {
