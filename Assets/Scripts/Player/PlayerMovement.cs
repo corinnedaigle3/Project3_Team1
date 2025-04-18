@@ -209,6 +209,7 @@ public class PlayerMovement : MonoBehaviour
                    // inventoryManager.invisText.SetActive(false);
                 }
 
+                //Dodge icon fade logic timer
                 if (dodgeTimerFade <= 0)
                 {
                     isDodging = true;
@@ -218,11 +219,7 @@ public class PlayerMovement : MonoBehaviour
                     isDodging = false;
                 }
 
-                if (dodgeTimer > 0)
-                {
-                    isDodging = false;
-                }
-
+                //Time allowed between dodge
                 if (dodgeTimer <= 0)
                 {
                     canDodge = true;
@@ -260,8 +257,6 @@ public class PlayerMovement : MonoBehaviour
                     state = State.Normal;
                 }
 
-                invisibleTimer -= Time.deltaTime;
-
                 if (invisibleTimer <= 0)
                 {
                     ui.popUpBar2.SetActive(false);
@@ -272,8 +267,17 @@ public class PlayerMovement : MonoBehaviour
                 //    inventoryManager.invisText.SetActive(false);
                 }
 
-                dodgeTimer -= Time.deltaTime;
+                //Dodge icon fade logic timer
+                if (dodgeTimerFade <= 0)
+                {
+                    isDodging = true;
+                }
+                else
+                {
+                    isDodging = false;
+                }
 
+                //Time allowed between dodge
                 if (dodgeTimer <= 0)
                 {
                     canDodge = true;
@@ -294,6 +298,10 @@ public class PlayerMovement : MonoBehaviour
                     rb.drag = 0;
                     unlockDodge = false;
                 }
+
+                invisibleTimer -= Time.deltaTime;
+                dodgeTimer -= Time.deltaTime;
+                dodgeTimerFade -= Time.deltaTime;
                 break;
         }
     }
@@ -373,7 +381,7 @@ public class PlayerMovement : MonoBehaviour
             state = State.Rolling;
             dodgeTimer = 5f;
             dodgeSound.Play();
-            dodgeTimerFade = 1f;
+            dodgeTimerFade = 4.8f;
         }
     }
 
