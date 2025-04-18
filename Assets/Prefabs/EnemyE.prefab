@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 1194732855712170040}
   m_Layer: 0
   m_Name: EnemyE
-  m_TagString: EnemyE
+  m_TagString: BehindE
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -103,6 +103,7 @@ MonoBehaviour:
   Waypoints: []
   agent: {fileID: 1847052860119057821}
   enemyType: 
+  animator: {fileID: 0}
   gameManager: {fileID: 0}
   player: {fileID: 0}
   lineOfSight: {fileID: 0}
@@ -525,7 +526,7 @@ GameObject:
   - component: {fileID: 8914603405870952620}
   m_Layer: 0
   m_Name: BehindEnemy
-  m_TagString: Behind
+  m_TagString: BehindE
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
