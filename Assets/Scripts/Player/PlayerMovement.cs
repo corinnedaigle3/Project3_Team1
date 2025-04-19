@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Movement")]
     public float moveSpeed;
-    Vector3 moveDirection; 
+    public Vector3 moveDirection; 
     private Vector3 rollDirection;
     private float rollSpeed;
     private State state;
