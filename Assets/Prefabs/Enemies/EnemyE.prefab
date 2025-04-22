@@ -32,7 +32,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.51241887, y: 1, z: -0.86}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2.8118536, y: 2.8118536, z: 2.8118536}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7526167829922182150}
@@ -100,7 +100,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a61d96e1642af5f40b4ff1a44d1347af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Waypoints: []
+  Waypoints:
+  - {fileID: 0}
+  - {fileID: 0}
   agent: {fileID: 1847052860119057821}
   enemyType: 
   animator: {fileID: 0}

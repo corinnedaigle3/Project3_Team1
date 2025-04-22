@@ -27,6 +27,7 @@ public class GameSaveData
     public bool gemConsumedE;
     public bool gemConsumedA;
     public bool gemConsumedT;
+    public bool tutorialCompleted;
 }
 
 public class SavingData : MonoBehaviour
@@ -115,7 +116,7 @@ public class SavingData : MonoBehaviour
             gemConsumedE = GameManger.furyE,
             gemConsumedA = GameManger.furyA,
             gemConsumedT = GameManger.furyT,
-
+            tutorialCompleted = GameManger.tutorialDone
         };
         string json = JsonUtility.ToJson(saveData);
         File.WriteAllText(path, json);
@@ -154,6 +155,7 @@ public class SavingData : MonoBehaviour
         GameManger.furyE = loadedData.gemConsumedE;
         GameManger.furyA = loadedData.gemConsumedA;
         GameManger.furyT = loadedData.gemConsumedT;
+        GameManger.tutorialDone = loadedData.tutorialCompleted;
 
         SaveData();
         // Debug.Log($"JSON Loaded: {playerName}, {LevelNameNew}");
@@ -186,6 +188,7 @@ public class SavingData : MonoBehaviour
             gemConsumedE = false,
             gemConsumedA = false,
             gemConsumedT = false,
+            tutorialCompleted = false
         };
 
         string json = JsonUtility.ToJson(safeData);
@@ -232,7 +235,7 @@ public class SavingData : MonoBehaviour
         GameManger.furyE = loadedData.gemConsumedE;
         GameManger.furyA = loadedData.gemConsumedA;
         GameManger.furyT = loadedData.gemConsumedT;
-
+        GameManger.tutorialDone = loadedData.tutorialCompleted;
 
         SaveData();
         Debug.Log("Game reset to safe file.");
