@@ -32,7 +32,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.51241887, y: 1, z: -0.86}
-  m_LocalScale: {x: 2.8118536, y: 2.8118536, z: 2.8118536}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7526167829922182150}
@@ -106,6 +106,7 @@ MonoBehaviour:
   agent: {fileID: 1847052860119057821}
   enemyType: 
   animator: {fileID: 0}
+  seeSFX: {fileID: 0}
   gameManager: {fileID: 0}
   player: {fileID: 0}
   lineOfSight: {fileID: 0}
@@ -602,6 +603,7 @@ GameObject:
   - component: {fileID: 9036329914373542583}
   - component: {fileID: 5586503228735746450}
   - component: {fileID: 4270842777305169316}
+  - component: {fileID: 7882428178917026386}
   m_Layer: 0
   m_Name: CatchCheck
   m_TagString: Untagged
@@ -658,6 +660,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destination: {fileID: 0}
+--- !u!114 &7882428178917026386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4960235521528684001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 938525dca35e9574d8d1f4151ffeb604, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  theCatch: {fileID: 0}
+  p: {fileID: 0}
 --- !u!1 &7948352420996606239
 GameObject:
   m_ObjectHideFlags: 0

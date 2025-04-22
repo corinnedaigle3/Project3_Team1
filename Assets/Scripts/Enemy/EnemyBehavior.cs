@@ -14,6 +14,8 @@ public class EnemyBehavior : MonoBehaviour
     public NavMeshAgent agent;
     public string enemyType;
     public Animator animator;
+    public AudioSource seeSFX;
+    bool sfxPlaying;
  
     public GameManger gameManager;
 
@@ -90,7 +92,11 @@ public class EnemyBehavior : MonoBehaviour
         if (player != null && lineOfSight.canChase)
         {
 
-
+            if (!sfxPlaying && seeSFX != null)
+            {
+                seeSFX.Play();
+                sfxPlaying = true;
+            }
 
             playerLastPostion = player.transform.position; // save player postion
             // Chase Player
@@ -98,23 +104,19 @@ public class EnemyBehavior : MonoBehaviour
             //transform.LookAt(player.transform.position);
 
             Debug.Log("this is chased");
-            // increase rotation speed 
-           /* 
-            * Vector3 direction = (player.transform.position - transform.position).normalized;
-            Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
-            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 10f);
-            */
 
         }
        
     }
     private void Patrol()
     {
+        sfxPlaying = false;
+
         // chose a new random waypoint when reach destination
         if (agent.remainingDistance <= 0.1f)
         {
 
-            StartCoroutine(NewDesitnation(2f));
+            StartCoroutine(NewDesitnation(1.5f));
            // waypointIdnex = Random.Range(0, Waypoints.Length);
 
            // agent.SetDestination(Waypoints[waypointIdnex].position);

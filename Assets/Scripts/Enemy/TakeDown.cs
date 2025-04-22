@@ -89,10 +89,10 @@ public class TakeDown : MonoBehaviour
 
                     eAgent.isStopped = true;
                     Destroy(catchCollider);
-                   // Destroy(backCollider);
                     eAgent.enabled = false;
                     enemyBehavior.enabled = false;
                     Debug.Log("Destroy colliders leave me alone");
+                    Destroy(backCollider);
 
                     //backCollider.SetActive(false);
                 }
@@ -105,9 +105,10 @@ public class TakeDown : MonoBehaviour
                     eAgent.isStopped = true;
                    
                     Destroy(catchCollider);
-                    //Destroy(backCollider);
                     eAgent.enabled = false;
                     enemyBehavior.enabled = false;
+                    Destroy(backCollider);
+
                 }
                 break;
 
@@ -117,9 +118,10 @@ public class TakeDown : MonoBehaviour
                 {
                     eAgent.isStopped = true;
                     Destroy(catchCollider);
-                    //Destroy(backCollider);
                     eAgent.enabled = false;
                     enemyBehavior.enabled = false;
+                    Destroy(backCollider);
+
                 }
                 break;
 
