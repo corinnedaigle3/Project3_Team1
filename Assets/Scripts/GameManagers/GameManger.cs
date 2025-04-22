@@ -21,6 +21,7 @@ public class GameManger : MonoBehaviour
     public bool furyA;
     public bool furyT;
     public bool win;
+    public bool tutorialDone;
 
     private void Awake()
     {

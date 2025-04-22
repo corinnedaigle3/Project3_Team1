@@ -5,12 +5,13 @@ using UnityEngine;
 public class CatchBehave : MonoBehaviour
 {
     public GameObject theCatch;
-    public bool playerBehind =false;
+    //public bool playerBehind =false;
     public PlayerMovement p;
     
     void Start()
     {
-        p = GetComponent<PlayerMovement>();
+        theCatch = this.gameObject;
+        p = GameObject.Find("Player").GetComponent<PlayerMovement>();
      
     }
 
@@ -21,12 +22,14 @@ public class CatchBehave : MonoBehaviour
 
         if (p.Invisible)
         {
-            theCatch.SetActive(false);
+            theCatch.GetComponent<Collider>().enabled = false;
           
         }
         else if (!p.Invisible)
         {
-            theCatch.SetActive(true);
+            theCatch.GetComponent<Collider>().enabled = true;
+
+           
         }
     }
 

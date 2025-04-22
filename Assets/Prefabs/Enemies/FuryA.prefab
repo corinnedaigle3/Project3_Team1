@@ -162,6 +162,7 @@ MonoBehaviour:
   agent: {fileID: 1847052860119057821}
   enemyType: 
   animator: {fileID: 4747043495048003587}
+  seeSFX: {fileID: 0}
   gameManager: {fileID: 0}
   player: {fileID: 0}
   lineOfSight: {fileID: 0}
@@ -524,7 +525,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1685914474735113914}
-  - {fileID: 1329654668914880940}
   m_Father: {fileID: 1144247894434008006}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4867679921555613429
@@ -613,6 +613,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9036329914373542583}
   - component: {fileID: 5586503228735746450}
+  - component: {fileID: 8917569493970396656}
   m_Layer: 0
   m_Name: CatchCheck
   m_TagString: Catch
@@ -656,6 +657,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.5, y: 0.92, z: 0.5}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8917569493970396656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4960235521528684001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 938525dca35e9574d8d1f4151ffeb604, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  theCatch: {fileID: 0}
+  p: {fileID: 0}
 --- !u!1 &6069327416756474849
 GameObject:
   m_ObjectHideFlags: 0
@@ -711,72 +726,6 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!1001 &1583394175735371335
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 8992015574049274107}
-    m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: 8534de3637ad84745b978e174954c0fd, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 8534de3637ad84745b978e174954c0fd, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 8534de3637ad84745b978e174954c0fd, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 8534de3637ad84745b978e174954c0fd, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 8534de3637ad84745b978e174954c0fd, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 8534de3637ad84745b978e174954c0fd, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 8534de3637ad84745b978e174954c0fd, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 8534de3637ad84745b978e174954c0fd, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 8534de3637ad84745b978e174954c0fd, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 8534de3637ad84745b978e174954c0fd, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 8534de3637ad84745b978e174954c0fd, type: 3}
-      propertyPath: m_Name
-      value: happyFURY_low
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 8534de3637ad84745b978e174954c0fd, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 8534de3637ad84745b978e174954c0fd, type: 3}
---- !u!4 &1329654668914880940 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8534de3637ad84745b978e174954c0fd, type: 3}
-  m_PrefabInstance: {fileID: 1583394175735371335}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4850975063196871646
 PrefabInstance:
   m_ObjectHideFlags: 0

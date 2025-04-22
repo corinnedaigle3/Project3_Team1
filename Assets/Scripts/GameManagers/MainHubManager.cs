@@ -7,10 +7,13 @@ public class MainHubManager : MonoBehaviour
     public GameObject furyStatueE;
     public GameObject furyStatueA;
     public GameObject furyStatueT;
+    public GameObject tutorial;
+    public GameObject tutorialPortal;
 
     private bool furySEPlaced1;
     private bool furySEPlaced2;
     private bool furySEPlaced3;
+    private bool tutorialDone;
 
     public GameManger manager;
     PortalOutSFX portalOutSFX;
@@ -27,6 +30,13 @@ public class MainHubManager : MonoBehaviour
     
     void Update()
     {
+        tutorialDone = manager.tutorialDone;
+        if (tutorialDone)
+        {
+            Debug.Log("Destroy tutorial");
+            Destroy(tutorial);
+            Destroy(tutorialPortal);
+        }
         if (manager.furyA)
         {
             furyStatueA.SetActive(true);
