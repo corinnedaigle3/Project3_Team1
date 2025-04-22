@@ -59,7 +59,7 @@ public class LineOfSight : MonoBehaviour
                     directionToTarget, hits, distanceToTarget, obstacleLayer,
                     QueryTriggerInteraction.Collide);
 
-                if (hitCount == 0)
+                if (hitCount == 0 && !playerMovement.Invisible)
                 {
                     canChase = true;
                 }

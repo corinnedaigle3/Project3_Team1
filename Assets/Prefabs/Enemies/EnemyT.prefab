@@ -104,6 +104,7 @@ MonoBehaviour:
   agent: {fileID: 1847052860119057821}
   enemyType: 
   animator: {fileID: 0}
+  seeSFX: {fileID: 0}
   gameManager: {fileID: 0}
   player: {fileID: 0}
   lineOfSight: {fileID: 0}
@@ -545,6 +546,7 @@ GameObject:
   - component: {fileID: 9036329914373542583}
   - component: {fileID: 5586503228735746450}
   - component: {fileID: 2557002458279142509}
+  - component: {fileID: 126712496354811170}
   m_Layer: 0
   m_Name: CatchCheck
   m_TagString: Untagged
@@ -601,6 +603,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destination: {fileID: 0}
+--- !u!114 &126712496354811170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4960235521528684001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 938525dca35e9574d8d1f4151ffeb604, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  theCatch: {fileID: 0}
+  p: {fileID: 0}
 --- !u!1 &7865965083974006698
 GameObject:
   m_ObjectHideFlags: 0
