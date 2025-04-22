@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class InventoryManager : MonoBehaviour
 {
+    public GameObject dodgeImage;
     public GameObject spriteApple;
     public GameObject spriteSkull;
     public GameObject spriteFireFlower;
@@ -43,7 +44,9 @@ public class InventoryManager : MonoBehaviour
     public int gemCounterT = 0;
     public int helmcounter = 0;
 
-   // UI ui;
+    
+
+    // UI ui;
     public bool inventory;
 
     //public int amount;
@@ -72,6 +75,8 @@ public class InventoryManager : MonoBehaviour
 
         hasHelm = false;
         spriteHelm.SetActive(false);
+
+        dodgeImage.SetActive(false);
 
        // takeDowntext.SetActive(false);
 

@@ -28,10 +28,6 @@ public class CatchBehave : MonoBehaviour
         else if (!p.Invisible)
         {
             theCatch.GetComponent<Collider>().enabled = true;
-
-           
         }
     }
-
-
 }

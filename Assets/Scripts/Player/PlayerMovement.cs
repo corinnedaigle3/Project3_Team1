@@ -389,7 +389,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (context.performed && inventoryManager.hasHelm == true)
         {
-            ui.popUpBar2.SetActive(true);
+            //ui.popUpBar2.SetActive(true);
             Invisible = true;
             canRun = true;
           //  inventoryManager.helmUseText.SetActive(false);
@@ -490,6 +490,7 @@ public class PlayerMovement : MonoBehaviour
         if (other.tag == "DodgeUnlocked")
         {
             inDodgeRange = true;
+            inventoryManager.dodgeImage.SetActive(true);
         }
 
         switch (other.tag)
@@ -686,6 +687,7 @@ public class PlayerMovement : MonoBehaviour
         if (other.tag == "DodgeUnlocked")
         {
             inDodgeRange = false;
+            inventoryManager.dodgeImage.SetActive(false);
         }
     }
 

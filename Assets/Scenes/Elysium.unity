@@ -137146,11 +137146,20 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5920624093863450929, guid: d0197d588056b9647b4828df4dc39000, type: 3}
+      propertyPath: dodgeImage
+      value: 
+      objectReference: {fileID: 1276257953}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d0197d588056b9647b4828df4dc39000, type: 3}
+--- !u!1 &1276257953 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5290175042959554898, guid: d0197d588056b9647b4828df4dc39000, type: 3}
+  m_PrefabInstance: {fileID: 1276257952}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1277482286
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -83,9 +83,6 @@ public class EnemyBehavior : MonoBehaviour
         {
             Patrol();
         }
-
-
-
     }
     void chase()
     {
