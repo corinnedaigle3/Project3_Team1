@@ -29950,6 +29950,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 969213140}
+    - target: {fileID: 480485166731746228, guid: 35de74a34c41dd54483e024dc4bad0f9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 686255571041795682, guid: 35de74a34c41dd54483e024dc4bad0f9, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -30843,6 +30847,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 437541030487942816, guid: 4acf6b5ee5b997e47b481df7b43e822b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 437541030487942816, guid: 4acf6b5ee5b997e47b481df7b43e822b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 63.48
+      objectReference: {fileID: 0}
     - target: {fileID: 3543903875988304733, guid: 4acf6b5ee5b997e47b481df7b43e822b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -30886,6 +30898,14 @@ PrefabInstance:
     - target: {fileID: 3775684709647668028, guid: 4acf6b5ee5b997e47b481df7b43e822b, type: 3}
       propertyPath: m_Name
       value: MainHubFunctionality
+      objectReference: {fileID: 0}
+    - target: {fileID: 4201698144972162873, guid: 4acf6b5ee5b997e47b481df7b43e822b, type: 3}
+      propertyPath: m_Size.x
+      value: 0.32476425
+      objectReference: {fileID: 0}
+    - target: {fileID: 4201698144972162873, guid: 4acf6b5ee5b997e47b481df7b43e822b, type: 3}
+      propertyPath: m_Center.x
+      value: 0.33761787
       objectReference: {fileID: 0}
     - target: {fileID: 6547808138696973239, guid: 4acf6b5ee5b997e47b481df7b43e822b, type: 3}
       propertyPath: m_NavMeshData
