@@ -1,18 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TeleportPlayerWaterE : MonoBehaviour
 {
     public GameObject destination;
     PlayerMovement player;
     Cam cam;
-
+    public TarturusManager levelManager;
+    
     private void Awake()
     {
         if (gameObject.tag == "EnemyT" || gameObject.tag == "EnemyA" || gameObject.tag == "EnemyE")
         {
             player = GameObject.Find("Player").GetComponent<PlayerMovement>();
+        }
+        if (SceneManager.GetActiveScene().name == "Tarturus")
+        {
+            levelManager = GameObject.Find("TarturusManager").GetComponent<TarturusManager>();
         }
     }
     private void OnTriggerEnter(Collider other)
@@ -21,6 +27,10 @@ public class TeleportPlayerWaterE : MonoBehaviour
         {
             //Delay the teleportation
             StartCoroutine(DelayedTeleport(other));
+            if (levelManager != null)
+            {
+                levelManager.playerFell = true;
+            }
         }
     }
 
