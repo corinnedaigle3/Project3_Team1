@@ -29,6 +29,7 @@ public class CinemachineVolumeBehavior : MonoBehaviour
     void Update()
     {
         currentScene = SceneManager.GetActiveScene().name;
+        Debug.Log("current scene is: " +  currentScene);
         switch (currentScene)
         {
             case "MainHub":
@@ -37,7 +38,7 @@ public class CinemachineVolumeBehavior : MonoBehaviour
             case "Elysium":
                 ChangeProfile(volumeElysium);
                 break;
-            case "Tartarus":
+            case "Tarturus":
                 ChangeProfile(volumeTartarus);
                 break;
             case "Asphodel":
