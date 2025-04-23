@@ -6,7 +6,6 @@ public class TeleportPlayerWaterE : MonoBehaviour
 {
     public GameObject destination;
     PlayerMovement player;
-    Cam cam;
 
     private void Awake()
     {
@@ -41,6 +40,11 @@ public class TeleportPlayerWaterE : MonoBehaviour
         {
             rb.velocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
+            rb.MovePosition(newPos);
+        }
+        else
+        {
+            other.transform.position = newPos;
         }
 
         //Cinemachine to snap to the player after teleport
