@@ -317510,6 +317510,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3267158415691700622, guid: 7980fbc2b7f420f45bb8a35bb412ca20, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1134859933}
+    - targetCorrespondingSourceObject: {fileID: 3267158415691700622, guid: 7980fbc2b7f420f45bb8a35bb412ca20, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1322354328}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7980fbc2b7f420f45bb8a35bb412ca20, type: 3}
 --- !u!1 &998077578
@@ -408684,7 +408687,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1322354328}
   - component: {fileID: 1322354329}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Background music
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -408700,11 +408703,11 @@ Transform:
   m_GameObject: {fileID: 1322354327}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 31.105108, y: -0.06367302, z: 93.697}
+  m_LocalPosition: {x: 23.5, y: -0.94580936, z: 83.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1884598596}
+  m_Father: {fileID: 302917396}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &1322354329
 AudioSource:
@@ -408716,15 +408719,15 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: ef168d5e74baa4e40a51dcb72a2f5120, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 7c7a7de51ae0fed478672952726c290e, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.2
+  m_Volume: 0.1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 90
+  Priority: 39
   DopplerLevel: 1
   MinDistance: 0.4
   MaxDistance: 5
@@ -408762,7 +408765,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.98
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -542831,7 +542834,6 @@ Transform:
   - {fileID: 1774481088}
   - {fileID: 1534577521}
   - {fileID: 573618247}
-  - {fileID: 1322354328}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1885607869 stripped
