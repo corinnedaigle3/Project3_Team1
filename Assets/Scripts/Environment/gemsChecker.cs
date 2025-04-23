@@ -26,6 +26,11 @@ public class gemsChecker : MonoBehaviour
     public GameObject furyStatueA;
     public GameObject furyStatueT;
 
+    [Header("Gems")]
+    public GameObject GemE;
+    public GameObject GemA;
+    public GameObject GemT;
+
     private void Start()
     {
         playerInventory = GameObject.Find("Canvas").GetComponent<InventoryManager>();
@@ -77,6 +82,8 @@ public class gemsChecker : MonoBehaviour
                 {
                     manger.furyT = true; // when ture, fury on said level will not spawn anymore 
                     furyStatueT.SetActive(true);
+                    GemT.SetActive(true);
+
                     playerInventory.gemCounterT--;
                     playerInventory.hasGemT = false;
                     playerInventory.ShowAmount(playerInventory.gemTextT, playerInventory.gemCounterT, ref playerInventory.hasGemT);
@@ -90,6 +97,7 @@ public class gemsChecker : MonoBehaviour
                 {
                     manger.furyE = true;
                     furyStatueE.SetActive(true);
+                    GemE.SetActive(true);
                     playerInventory.gemCounterE--;
                     playerInventory.hasGemE = false;
                     playerInventory.ShowAmount(playerInventory.gemTextE, playerInventory.gemCounterE, ref playerInventory.hasGemE);
@@ -104,6 +112,7 @@ public class gemsChecker : MonoBehaviour
                     manger.furyA = true; // when ture, fury on said level will not spawn anymore 
 
                     furyStatueA.SetActive(true);
+                    GemA.SetActive(true);
 
                     playerInventory.gemCounterA--;
                     playerInventory.hasGemA = false;
