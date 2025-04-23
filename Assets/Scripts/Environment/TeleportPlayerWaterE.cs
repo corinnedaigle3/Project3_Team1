@@ -19,17 +19,15 @@ public class TeleportPlayerWaterE : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            // Delay the teleportation
+            //Delay the teleportation
             StartCoroutine(DelayedTeleport(other));
         }
-
-        Cinemachine.CinemachineCore.Instance.GetActiveBrain(0).ActiveVirtualCamera.OnTargetObjectWarped(
-            player.transform, destination.transform.position - player.transform.position);
     }
 
     private IEnumerator DelayedTeleport(Collider other)
     {
-        yield return null; // Wait for one frame
+        //Wait for one frame
+        yield return null;
         other.transform.position = destination.transform.position;
     }
 }
