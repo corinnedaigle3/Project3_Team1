@@ -656,15 +656,9 @@ public class PlayerMovement : MonoBehaviour
 
              default:
                 break;
-            
         }
     }
-    /*
-     * invisibility
-     * run: 
-     * dodge
-     * 
-  */
+
     private void OnTriggerExit(Collider other)
     {
         if (other.tag == "Behind")
@@ -690,7 +684,6 @@ public class PlayerMovement : MonoBehaviour
             inventoryManager.dodgeImage.SetActive(false);
         }
     }
-
 
     IEnumerator waitToFalse(float waitTime)
     {
