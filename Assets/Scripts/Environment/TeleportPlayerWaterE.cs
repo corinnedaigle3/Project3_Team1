@@ -11,7 +11,7 @@ public class TeleportPlayerWaterE : MonoBehaviour
 
     private void Awake()
     {
-        if (gameObject.tag == "EnemyT"  gameObject.tag == "EnemyA"  gameObject.tag == "EnemyE")
+        if (gameObject.tag == "EnemyT" || gameObject.tag == "EnemyA" || gameObject.tag == "EnemyE")
         {
             player = GameObject.Find("Player").GetComponent<PlayerMovement>();
         }
