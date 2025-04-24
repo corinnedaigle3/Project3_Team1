@@ -383,7 +383,7 @@ public class PlayerMovement : MonoBehaviour
             rollDirection = moveDirection;
             rollSpeed = 17f;
             state = State.Rolling;
-            dodgeTimer = 5f;
+            dodgeTimer = 8.9f;
             dodgeSound.Play();
             dodgeTimerFade = 4.8f;
         }
