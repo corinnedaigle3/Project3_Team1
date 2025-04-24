@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     }
     //public static GameObject playerInstance;
     public UI ui;
+    public GameObject vfx;
 
     [Header("References")]
     public Transform orientation;
@@ -205,8 +206,9 @@ public class PlayerMovement : MonoBehaviour
                     canRun = false;
                     Invisible = false;
                     helmUsed = false;
-                    moveSpeed = 8f;
-                   // inventoryManager.invisText.SetActive(false);
+                    moveSpeed = 8f; 
+                    vfx.SetActive(false);
+                    // inventoryManager.invisText.SetActive(false);
                 }
 
                 //Dodge icon fade logic timer
@@ -262,10 +264,12 @@ public class PlayerMovement : MonoBehaviour
                     ui.popUpBar2.SetActive(false);
                     canRun = false;
                     Invisible = false;
+                    vfx.SetActive(false);
                     helmUsed = false;
                     moveSpeed = 8f;
                 //    inventoryManager.invisText.SetActive(false);
                 }
+             
 
                 //Dodge icon fade logic timer
                 if (dodgeTimerFade <= 0)
@@ -392,6 +396,7 @@ public class PlayerMovement : MonoBehaviour
             //ui.popUpBar2.SetActive(true);
             Invisible = true;
             canRun = true;
+            vfx.SetActive(true);
           //  inventoryManager.helmUseText.SetActive(false);
             //inventoryManager.invisText.SetActive(true);
             invisibleTimer = 5f;
