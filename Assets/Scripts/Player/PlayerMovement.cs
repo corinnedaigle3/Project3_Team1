@@ -77,6 +77,9 @@ public class PlayerMovement : MonoBehaviour
     public AudioSource pickupSound;
     public AudioSource caughtSound;
     public AudioSource dodgeSound;
+    public AudioSource gemSoundE;
+    public AudioSource gemSoundA;
+    public AudioSource gemSoundT;
 
     [Header("Slope Handling")]
     public float maxSlopeAngle;
@@ -593,6 +596,7 @@ public class PlayerMovement : MonoBehaviour
 
                 if (!hasPickedUpItem)
                 {
+                    gemSoundE.Play();
                     hasPickedUpItem = true;
                     inventoryManager.hasGemE = true;
                     pickupSound.Play();
@@ -611,6 +615,7 @@ public class PlayerMovement : MonoBehaviour
 
                 if (!hasPickedUpItem)
                 {
+                    gemSoundA.Play();
                     hasPickedUpItem = true;
                     inventoryManager.hasGemA = true;
                     pickupSound.Play();
@@ -628,6 +633,7 @@ public class PlayerMovement : MonoBehaviour
 
                 if (!hasPickedUpItem)
                 {
+                    gemSoundT.Play();
                     hasPickedUpItem = true;
                     inventoryManager.hasGemT = true;
                     pickupSound.Play();
