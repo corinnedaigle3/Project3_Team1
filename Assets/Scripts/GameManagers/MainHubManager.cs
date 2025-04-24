@@ -5,8 +5,11 @@ using UnityEngine;
 public class MainHubManager : MonoBehaviour
 {
     public GameObject furyStatueE;
+    public GameObject gemE;
     public GameObject furyStatueA;
+    public GameObject gemA;
     public GameObject furyStatueT;
+    public GameObject gemT;
     public GameObject tutorial;
     public GameObject tutorialPortal;
 
@@ -40,18 +43,21 @@ public class MainHubManager : MonoBehaviour
         if (manager.furyA)
         {
             furyStatueA.SetActive(true);
+            gemA.SetActive(true);
             furySEPlaced1 = true;
         }
             
         if (manager.furyT)
         {
             furyStatueT.SetActive(true); 
+            gemT.SetActive(true);
             furySEPlaced2 = true;
         } 
 
         if (manager.furyE)
         {
             furyStatueE.SetActive(true); 
+            gemE.SetActive(true);
             furySEPlaced3 = true;
         }
 

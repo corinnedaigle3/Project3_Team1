@@ -7,6 +7,7 @@ public class Portal : MonoBehaviour
 {
     public string writeNameOfScene;
     public GameObject gameManager;
+    public Light l;
 
 
     private void Awake()
@@ -14,6 +15,13 @@ public class Portal : MonoBehaviour
         gameManager = GameObject.Find("GameManager");
     }
 
+    private void Update()
+    {
+        if (l != null && gameManager.GetComponent<GameManger>().win)
+        {
+            l.enabled = true;
+        }
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -31,7 +39,7 @@ public class Portal : MonoBehaviour
             if (other.CompareTag("Player") && gameManager.GetComponent<GameManger>().win)
             {
                 SceneManager.LoadScene("Win");
-
+               
             }
         }
     }
