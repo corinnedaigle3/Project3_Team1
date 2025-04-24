@@ -94,7 +94,8 @@ public class EnemyBehavior : MonoBehaviour
                 seeSFX.Play();
                 sfxPlaying = true;
             }
-
+            agent.speed = 14;
+            agent.acceleration = 20;
             playerLastPostion = player.transform.position; // save player postion
             // Chase Player
             agent.SetDestination(player.transform.position);
@@ -108,6 +109,15 @@ public class EnemyBehavior : MonoBehaviour
     private void Patrol()
     {
         sfxPlaying = false;
+        if (gameObject.tag == "EnemyE" || gameObject.tag == "EnemyA" || gameObject.tag == "EnemyT")
+        {
+            agent.speed = 8f;
+            agent.acceleration = 10f;
+        } else
+        {
+            agent.speed = 5.5f;
+            agent.acceleration = 8f;
+        }
 
         // chose a new random waypoint when reach destination
         if (agent.remainingDistance <= 0.1f)

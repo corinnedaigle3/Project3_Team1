@@ -10,7 +10,7 @@ public class PillarDestroy : MonoBehaviour
 
     private void Awake()
     {
-        manager = GameObject.Find("TarturusManager").GetComponent<TarturusManager>();
+        manager = GameObject.Find("TartarusManager").GetComponent<TarturusManager>();
         originalPosition = transform.position;
     }
     private void OnTriggerEnter(Collider other)

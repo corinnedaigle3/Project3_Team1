@@ -17,7 +17,7 @@ public class TeleportPlayerWaterE : MonoBehaviour
         }
         if (SceneManager.GetActiveScene().name == "Tarturus")
         {
-            levelManager = GameObject.Find("TarturusManager").GetComponent<TarturusManager>();
+            levelManager = GameObject.Find("TartarusManager").GetComponent<TarturusManager>();
         }
     }
     private void OnTriggerEnter(Collider other)
@@ -28,6 +28,7 @@ public class TeleportPlayerWaterE : MonoBehaviour
             StartCoroutine(DelayedTeleport(other));
             if (levelManager != null)
             {
+                Debug.Log("Player fell is: ");
                 levelManager.playerFell = true;
             }
         }

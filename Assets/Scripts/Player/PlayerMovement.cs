@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     }
     //public static GameObject playerInstance;
     public UI ui;
+    public GameObject vfx;
 
     [Header("References")]
     public Transform orientation;
@@ -76,6 +77,9 @@ public class PlayerMovement : MonoBehaviour
     public AudioSource pickupSound;
     public AudioSource caughtSound;
     public AudioSource dodgeSound;
+    public AudioSource gemSoundE;
+    public AudioSource gemSoundA;
+    public AudioSource gemSoundT;
 
     [Header("Slope Handling")]
     public float maxSlopeAngle;
@@ -205,8 +209,9 @@ public class PlayerMovement : MonoBehaviour
                     canRun = false;
                     Invisible = false;
                     helmUsed = false;
-                    moveSpeed = 8f;
-                   // inventoryManager.invisText.SetActive(false);
+                    moveSpeed = 8f; 
+                    vfx.SetActive(false);
+                    // inventoryManager.invisText.SetActive(false);
                 }
 
                 //Dodge icon fade logic timer
@@ -262,10 +267,12 @@ public class PlayerMovement : MonoBehaviour
                     ui.popUpBar2.SetActive(false);
                     canRun = false;
                     Invisible = false;
+                    vfx.SetActive(false);
                     helmUsed = false;
                     moveSpeed = 8f;
                 //    inventoryManager.invisText.SetActive(false);
                 }
+             
 
                 //Dodge icon fade logic timer
                 if (dodgeTimerFade <= 0)
@@ -379,7 +386,7 @@ public class PlayerMovement : MonoBehaviour
             rollDirection = moveDirection;
             rollSpeed = 17f;
             state = State.Rolling;
-            dodgeTimer = 5f;
+            dodgeTimer = 8.9f;
             dodgeSound.Play();
             dodgeTimerFade = 4.8f;
         }
@@ -392,6 +399,7 @@ public class PlayerMovement : MonoBehaviour
             //ui.popUpBar2.SetActive(true);
             Invisible = true;
             canRun = true;
+            vfx.SetActive(true);
           //  inventoryManager.helmUseText.SetActive(false);
             //inventoryManager.invisText.SetActive(true);
             invisibleTimer = 5f;
@@ -588,6 +596,7 @@ public class PlayerMovement : MonoBehaviour
 
                 if (!hasPickedUpItem)
                 {
+                    gemSoundE.Play();
                     hasPickedUpItem = true;
                     inventoryManager.hasGemE = true;
                     pickupSound.Play();
@@ -606,6 +615,7 @@ public class PlayerMovement : MonoBehaviour
 
                 if (!hasPickedUpItem)
                 {
+                    gemSoundA.Play();
                     hasPickedUpItem = true;
                     inventoryManager.hasGemA = true;
                     pickupSound.Play();
@@ -623,6 +633,7 @@ public class PlayerMovement : MonoBehaviour
 
                 if (!hasPickedUpItem)
                 {
+                    gemSoundT.Play();
                     hasPickedUpItem = true;
                     inventoryManager.hasGemT = true;
                     pickupSound.Play();
