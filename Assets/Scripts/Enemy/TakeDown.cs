@@ -144,6 +144,7 @@ public class TakeDown : MonoBehaviour
             gemCount++;
         }
         yield return new WaitForSeconds(waitTime);
+        dead = false;   
         eAgent.isStopped = false;
         catchCollider.SetActive(true);
         backCollider.SetActive(true); // can be removed depending if we want it to be able to be taken down again and again
