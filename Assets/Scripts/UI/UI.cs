@@ -22,6 +22,7 @@ public class UI : MonoBehaviour
    // public string textForPopUp;
     public GameObject popUpBar;
     public GameObject popUpBar2;
+    public GameObject inventory;
 
 
     [Header("Scene Based screen references ")]
@@ -91,6 +92,13 @@ public class UI : MonoBehaviour
         Debug.Log("Current Scene is " + currentScene);
         switch (currentScene)
         {
+            case "CutScene":
+                mainMenu.SetActive(false);
+                lose.SetActive(false);
+                Levels.SetActive(true);
+                win.SetActive(false);
+                inventory.SetActive(false);
+                break;
             case "MainMenu":
              //   EventSystem.current.SetSelectedGameObject(mainMenuFirst);
 
@@ -153,6 +161,8 @@ public class UI : MonoBehaviour
                 lose.SetActive(false);
                 Levels.SetActive(true);
                 win.SetActive(false);
+                inventory.SetActive(true);
+
                 break;
 
         }
