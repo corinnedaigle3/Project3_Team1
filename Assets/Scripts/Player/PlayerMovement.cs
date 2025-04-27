@@ -214,7 +214,6 @@ public class PlayerMovement : MonoBehaviour
                     helmUsed = false;
                     moveSpeed = 8f; 
                     vfx.SetActive(false);
-                    // inventoryManager.invisText.SetActive(false);
                 }
 
                 //Dodge icon fade logic timer
@@ -254,7 +253,8 @@ public class PlayerMovement : MonoBehaviour
                 break;
 
             case State.Rolling:
-                rb.velocity = moveDirection * moveSpeed * rollSpeed;
+                Vector3 flatRollDirection = new Vector3(rollDirection.x, 0f, rollDirection.z).normalized;
+                rb.velocity = flatRollDirection * moveSpeed * rollSpeed;
 
                 float rollSpeedDropMultiplier = 5f;
                 rollSpeed -= rollSpeed * rollSpeedDropMultiplier * Time.deltaTime;
