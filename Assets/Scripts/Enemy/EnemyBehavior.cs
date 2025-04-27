@@ -141,10 +141,13 @@ public class EnemyBehavior : MonoBehaviour
 
 
         yield return new WaitForSeconds(waitTime);
-        waypointIdnex = Random.Range(0, Waypoints.Length);
-        lookingNew = false;
-        isSearching = false;
-        agent.SetDestination(Waypoints[waypointIdnex].position);
+        if (Waypoints != null)
+        {
+            waypointIdnex = Random.Range(0, Waypoints.Length);
+            lookingNew = false;
+            isSearching = false;
+            agent.SetDestination(Waypoints[waypointIdnex].position);
+        }
         //animator.SetBool("walking", true); // update animator
 
     }

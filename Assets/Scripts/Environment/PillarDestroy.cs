@@ -30,6 +30,7 @@ public class PillarDestroy : MonoBehaviour
     IEnumerator SelfDestuct()
     {
         yield return new WaitForSeconds(2f);
+
         Vector3 startPosition = transform.position;
         Vector3 targetPosition = new Vector3(startPosition.x, -6f, startPosition.z); // Keep X and Z, just change Y
         sfx.Play();
@@ -38,6 +39,11 @@ public class PillarDestroy : MonoBehaviour
         {
             transform.position = Vector3.Lerp(startPosition, targetPosition, elapsed / duration);
             elapsed += Time.deltaTime;
+            if (manager.playerFell)
+            {
+                transform.position = originalPosition;
+                yield break;
+            }
             yield return null;
         }
         transform.position = targetPosition;
