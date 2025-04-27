@@ -133,20 +133,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
-/*
-        if (playerInstance != null && playerInstance != this.gameObject)
-        {
-            Destroy(gameObject); // Destroy duplicate instance
-        }
-        else
-        {
-            playerInstance = this.gameObject;
-            DontDestroyOnLoad(gameObject); // Persist across scenes
-        }
-
-        */
         playerInput = GetComponent<PlayerInput>();
-
         inputSystem = new InputSystem();
         inputSystem.Player.Enable();
         inputSystem.Player.Dash.performed += PlayerRun; // this means run 
@@ -252,8 +239,11 @@ public class PlayerMovement : MonoBehaviour
                 break;
 
             case State.Rolling:
-                Vector3 flatRollDirection = new Vector3(rollDirection.x, 0f, rollDirection.z).normalized;
-                rb.velocity = flatRollDirection * moveSpeed * rollSpeed;
+                Vector3 dodgeDir = OnSlope() ? GetSlopeMoveDirection() : new Vector3(rollDirection.x, 0f, rollDirection.z).normalized;
+                float currentYVel = rb.velocity.y;
+
+                Vector3 dodgeMove = dodgeDir * moveSpeed * rollSpeed * Time.fixedDeltaTime;
+                rb.MovePosition(rb.position + dodgeMove);
 
                 float rollSpeedDropMultiplier = 5f;
                 rollSpeed -= rollSpeed * rollSpeedDropMultiplier * Time.deltaTime;
@@ -273,7 +263,6 @@ public class PlayerMovement : MonoBehaviour
                     helmUsed = false;
                     moveSpeed = 8f;
                 }
-             
 
                 //Dodge icon fade logic timer
                 if (dodgeTimerFade <= 0)
@@ -301,11 +290,18 @@ public class PlayerMovement : MonoBehaviour
                     rb.drag = groundDrag;
                     unlockDodge = true;
                 }
-                else
+                else if (!grounded && !OnSlope())
                 {
                     rb.drag = 0;
                     unlockDodge = false;
-                    rb.AddForce(Vector3.down * 30f, ForceMode.Acceleration);
+                    rb.AddForce(Vector3.down * 10f, ForceMode.Acceleration);
+                }
+
+                if (OnSlope())
+                {
+                    moveDirToUse = GetSlopeMoveDirection();
+                    rb.drag = groundDrag;
+                    rb.AddForce(-slopeHit.normal * 50f, ForceMode.Force);
                 }
 
                 invisibleTimer -= Time.deltaTime;
