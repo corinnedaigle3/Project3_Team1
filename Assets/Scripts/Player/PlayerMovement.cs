@@ -62,6 +62,7 @@ public class PlayerMovement : MonoBehaviour
     public bool fury3;
 
     [Header("Take down behavior")]
+    public bool isTakeDown;
     public bool canKill;
     public GameObject currentEnemy;
 
@@ -93,6 +94,7 @@ public class PlayerMovement : MonoBehaviour
     public bool inDodgeRange;
     public float dodgeTimer;
     public bool isDodging;
+    public bool playerIsDodging;
     public float dodgeTimerFade;
 
     [Header("Other")]
@@ -118,6 +120,7 @@ public class PlayerMovement : MonoBehaviour
         maxSlopeAngle = 50f;
         minSlopeAngle = 20f;
         isDodging = false;
+        playerIsDodging = false;
 
         rb.drag = groundDrag;
         dodgeTimer = 0;
@@ -318,6 +321,8 @@ public class PlayerMovement : MonoBehaviour
         // makes the enemy stop and destroys the collider when pressing Q
         if (canKill == true && currentEnemy != null && context.performed)
         {
+            isTakeDown = true;
+            
             Debug.Log("Q is pressed");
             if (takeDown != null) // Add a null check
             {
@@ -383,6 +388,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (context.performed && canDodge == true && unlockDodge == true && inDodgeRange == true)
         {
+            playerIsDodging = true;
             rollDirection = moveDirection;
             rollSpeed = 17f;
             state = State.Rolling;

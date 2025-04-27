@@ -36,6 +36,7 @@ public class TakeDown : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        Debug.Log("The name of the parent is: " + named);
         switch (named) // depending on the neame 
         {
             case "FuryE":
@@ -45,7 +46,7 @@ public class TakeDown : MonoBehaviour
                     inventory.takeDownItemCounterE -= 1;
                    
                     inventory.ShowAmount(inventory.takeDownItemTextE, inventory.takeDownItemCounterE, ref inventory.hasE);
-                    StartCoroutine(furyTakeDown(1f));
+                    StartCoroutine(furyTakeDown(2.5f));
                   
 
                 }
@@ -56,7 +57,7 @@ public class TakeDown : MonoBehaviour
                 {
                     inventory.takeDownItemCounterA -= 1;
                     inventory.ShowAmount(inventory.takeDownItemTextA, inventory.takeDownItemCounterA, ref inventory.hasA);
-                    StartCoroutine(furyTakeDown(1f));
+                    StartCoroutine(furyTakeDown(2.5f));
 
                 }
                 break; 
@@ -67,7 +68,7 @@ public class TakeDown : MonoBehaviour
                 {
                     inventory.takeDownItemCounterT -= 1;
                     inventory.ShowAmount(inventory.takeDownItemTextT, inventory.takeDownItemCounterT,ref inventory.hasT);
-                    StartCoroutine(furyTakeDown(1f));
+                    StartCoroutine(furyTakeDown(2f));
                 }
                 break;
 
@@ -136,7 +137,7 @@ public class TakeDown : MonoBehaviour
     {
         eAgent.isStopped = true;
         catchCollider.SetActive(false);
-        backCollider.SetActive(false);
+        //backCollider.SetActive(false);
 
         if (gemCount < 1)
         {
@@ -147,7 +148,7 @@ public class TakeDown : MonoBehaviour
         dead = false;   
         eAgent.isStopped = false;
         catchCollider.SetActive(true);
-        backCollider.SetActive(true); // can be removed depending if we want it to be able to be taken down again and again
+        //backCollider.SetActive(true); // can be removed depending if we want it to be able to be taken down again and again
     }
 
   

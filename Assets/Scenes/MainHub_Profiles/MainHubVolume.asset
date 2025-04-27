@@ -23,7 +23,7 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: {r: 0.3137255, g: 0.6313726, b: 0.83137256, a: 1}
   hueShift:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 0
   saturation:
     m_OverrideState: 1
@@ -47,6 +47,28 @@ MonoBehaviour:
   tint:
     m_OverrideState: 1
     m_Value: -52
+--- !u!114 &-1811347274759323780
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70afe9e12c7a7ed47911bb608a23a8ff, type: 3}
+  m_Name: SplitToning
+  m_EditorClassIdentifier: 
+  active: 1
+  shadows:
+    m_OverrideState: 1
+    m_Value: {r: 0.6509434, g: 0.6509434, b: 0.6509434, a: 1}
+  highlights:
+    m_OverrideState: 1
+    m_Value: {r: 0.6320754, g: 0.6320754, b: 0.6320754, a: 1}
+  balance:
+    m_OverrideState: 1
+    m_Value: 100
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64,6 +86,8 @@ MonoBehaviour:
   - {fileID: 6478706313821541693}
   - {fileID: 893774923223322640}
   - {fileID: -6759441222015453169}
+  - {fileID: 6961372092437713200}
+  - {fileID: -1811347274759323780}
 --- !u!114 &893774923223322640
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -128,7 +152,7 @@ MonoBehaviour:
     m_Value: 65472
   tint:
     m_OverrideState: 0
-    m_Value: {r: 0.14150941, g: 0.14150941, b: 0.14150941, a: 1}
+    m_Value: {r: 1, g: 1, b: 1, a: 1}
   highQualityFiltering:
     m_OverrideState: 0
     m_Value: 0
@@ -145,3 +169,19 @@ MonoBehaviour:
   dirtIntensity:
     m_OverrideState: 0
     m_Value: 0
+--- !u!114 &6961372092437713200
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81180773991d8724ab7f2d216912b564, type: 3}
+  m_Name: ChromaticAberration
+  m_EditorClassIdentifier: 
+  active: 1
+  intensity:
+    m_OverrideState: 1
+    m_Value: 0.3

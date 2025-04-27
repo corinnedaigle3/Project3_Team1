@@ -24,7 +24,10 @@ public class pSpawn : MonoBehaviour
         if (!playerIsHere)
         {
             playerIsHere = true;
-            player.transform.position = transform.position;
+            if (player != null)
+            {
+                player.transform.position = transform.position;
+            }
         }
     }
    

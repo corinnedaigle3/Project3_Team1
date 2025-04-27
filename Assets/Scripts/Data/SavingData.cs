@@ -63,7 +63,7 @@ public class SavingData : MonoBehaviour
 
         }else
         {
-            LevelNameNew = "MainHub";
+            LevelNameNew = "CutScene";
 
         }
         SaveSafeStart();
@@ -71,15 +71,22 @@ public class SavingData : MonoBehaviour
 
     void Update()
     {
-        if(SceneManager.GetActiveScene().name != "MainMenu")
+        string currentScene = SceneManager.GetActiveScene().name;
+        Debug.Log("What is the go to Scene " + LevelNameNew);
+        if(currentScene != "MainMenu")
         {
-            LevelNameNew = SceneManager.GetActiveScene().name;
+            if (SceneManager.GetActiveScene().rootCount != 0)
+            {
+                LevelNameNew = currentScene;
+            }
+
+            if (lastSavedLevelName != LevelNameNew)
+            {
+                SaveData();
+            }
         }
 
-        if (lastSavedLevelName != LevelNameNew)
-        {
-            SaveData();
-        }
+      
      
     }
 
@@ -166,7 +173,7 @@ public class SavingData : MonoBehaviour
         GameSaveData safeData = new GameSaveData
         {
             playerName = playerName,
-            levelName = "MainHub", // or whatever your start level is
+            levelName = "CutScene", // or whatever your start level is
 
             // Inventory base state (reset)
             hasApple = false,
