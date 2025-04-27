@@ -200,9 +200,6 @@ public class PlayerMovement : MonoBehaviour
                     transform.rotation = Quaternion.Slerp(transform.rotation, toRotation, Time.deltaTime * 10f);
                 }
 
-                grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGrounded);
-
-                //   MyInput();
                 SpeedControl();
                 StickToGround();
 
@@ -234,7 +231,9 @@ public class PlayerMovement : MonoBehaviour
                 else
                 {
                     canDodge = false;
-                }
+                } 
+                
+                grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGrounded);
 
                 //check if player is on ground
                 if (grounded)
@@ -273,7 +272,6 @@ public class PlayerMovement : MonoBehaviour
                     vfx.SetActive(false);
                     helmUsed = false;
                     moveSpeed = 8f;
-                //    inventoryManager.invisText.SetActive(false);
                 }
              
 
@@ -307,6 +305,7 @@ public class PlayerMovement : MonoBehaviour
                 {
                     rb.drag = 0;
                     unlockDodge = false;
+                    rb.AddForce(Vector3.down * 30f, ForceMode.Acceleration);
                 }
 
                 invisibleTimer -= Time.deltaTime;
@@ -402,12 +401,9 @@ public class PlayerMovement : MonoBehaviour
     {
         if (context.performed && inventoryManager.hasHelm == true)
         {
-            //ui.popUpBar2.SetActive(true);
             Invisible = true;
             canRun = true;
             vfx.SetActive(true);
-          //  inventoryManager.helmUseText.SetActive(false);
-            //inventoryManager.invisText.SetActive(true);
             invisibleTimer = 5f;
             helmUsed = true;
             inventoryManager.helmcounter -= 1;
@@ -473,32 +469,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //Debug.Log("colliding");
-        /*
-        if (other.tag == "Behind" && inventoryManager.hasE == true)
-        {
-            ui.popUpBar.SetActive(true); // the pop up thing should change 
-            inventoryManager.helmUseText.SetActive(false); // this will be removed later
-            inventoryManager.invisText.SetActive(false); // this will be removed later 
-            inventoryManager.takeDowntext.SetActive(true); // this will be change do game object (icon)
-            canKill = true;
-            currentEnemy = other.gameObject;
-            takeDown = currentEnemy.GetComponent<TakeDown>();
-        }
-        */
-
         if (other.CompareTag("Catch") && !Invisible)
         {
             caughtSound.Play();
             lose = true;
-            //inventoryManager.takeDowntext.SetActive(false);
-           // inventoryManager.invisText.SetActive(false);
-            //inventoryManager.dodgeText.SetActive(false);
-            // inventoryManager.helmUseText.SetActive(false);
-           
-
             StartCoroutine(LoseGame(.5f));
-            //gameObject.SetActive(false);
         }
 
         if (other.tag == "DodgeUnlocked")
@@ -512,10 +487,6 @@ public class PlayerMovement : MonoBehaviour
             case "BehindA":
                 if (inventoryManager.hasA == true)
                 {
-                   // ui.popUpBar.SetActive(true); // the pop up thing should change 
-                  //  inventoryManager.helmUseText.SetActive(false); // this will be removed later
-                //    inventoryManager.invisText.SetActive(false); // this will be removed later 
-                  //  inventoryManager.takeDowntext.SetActive(true); // this will be change do game object (icon)
                     canKill = true;
                     currentEnemy = other.gameObject;
                     takeDown = currentEnemy.GetComponent<TakeDown>();
@@ -524,10 +495,6 @@ public class PlayerMovement : MonoBehaviour
             case "BehindE":
                if( inventoryManager.hasE == true)
                 {
-               //     ui.popUpBar.SetActive(true); // the pop up thing should change 
-               //     inventoryManager.helmUseText.SetActive(false); // this will be removed later
-                 //   inventoryManager.invisText.SetActive(false); // this will be removed later 
-                   // inventoryManager.takeDowntext.SetActive(true); // this will be change do game object (icon)
                     canKill = true;
                     currentEnemy = other.gameObject;
                     takeDown = currentEnemy.GetComponent<TakeDown>();
@@ -536,10 +503,6 @@ public class PlayerMovement : MonoBehaviour
             case "BehindT":
                 if (inventoryManager.hasT == true)
                 {
-             //       ui.popUpBar.SetActive(true); // the pop up thing should change 
-           //         inventoryManager.helmUseText.SetActive(false); // this will be removed later
-             //       inventoryManager.invisText.SetActive(false); // this will be removed later 
-               //     inventoryManager.takeDowntext.SetActive(true); // this will be change do game object (icon)
                     canKill = true;
                     currentEnemy = other.gameObject;
                     takeDown = currentEnemy.GetComponent<TakeDown>();
@@ -661,7 +624,6 @@ public class PlayerMovement : MonoBehaviour
                     hasPickedUpItem = true;
                     inventoryManager.hasHelm = true;
                     pickupSound.Play();
-                  //  inventoryManager.helmUseText.SetActive(true);
 
                     inventoryManager.helmcounter++;
                     inventoryManager.ShowAmount(inventoryManager.helmText, inventoryManager.helmcounter, ref inventoryManager.hasHelm);
