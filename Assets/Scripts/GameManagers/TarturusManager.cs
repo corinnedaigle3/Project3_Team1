@@ -14,11 +14,13 @@ public class TarturusManager : MonoBehaviour
         {
             foreach (GameObject pillar in fallingPillars)
             {
-               
+                Debug.Log("Enable all the pillars again");
+
                 pillar.SetActive(true); // Re-enable the pillar
             }
+            Debug.Log("Player fell is now " + playerFell);
             playerFell = false;
-            Debug.Log("Player Fell and all pillars restored");
+            Debug.Log("Player fell is now " + playerFell);
         }
     }
 }

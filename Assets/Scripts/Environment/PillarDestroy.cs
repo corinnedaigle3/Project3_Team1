@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PillarDestroy : MonoBehaviour
@@ -7,7 +8,7 @@ public class PillarDestroy : MonoBehaviour
     public float duration = 5f;
     public TarturusManager manager;
     private Vector3 originalPosition;
-
+    private Coroutine selfDestructCoroutine; // save reference
     private void Awake()
     {
         manager = GameObject.Find("TartarusManager").GetComponent<TarturusManager>();
@@ -17,8 +18,10 @@ public class PillarDestroy : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-           
-            StartCoroutine(SelfDestuct());
+            if (selfDestructCoroutine == null)
+            {
+                selfDestructCoroutine = StartCoroutine(SelfDestuct());
+            }
         }
     }
     private void OnEnable()
@@ -26,14 +29,18 @@ public class PillarDestroy : MonoBehaviour
         Debug.Log("Object enabled");
         transform.position = originalPosition;
     }
-
+    private void Update() 
+    {
+        if (manager.playerFell && selfDestructCoroutine != null)
+        {
+            StopCoroutine(selfDestructCoroutine);
+            selfDestructCoroutine = null;
+            transform.position = originalPosition;
+        }
+    }
     IEnumerator SelfDestuct()
     {
-        if (manager.playerFell)
-        {
-            transform.position = originalPosition;
-            yield break;
-        }
+ 
         yield return new WaitForSeconds(2f);
 
         Vector3 startPosition = transform.position;
@@ -44,11 +51,7 @@ public class PillarDestroy : MonoBehaviour
         {
             transform.position = Vector3.Lerp(startPosition, targetPosition, elapsed / duration);
             elapsed += Time.deltaTime;
-            if (manager.playerFell)
-            {
-                transform.position = originalPosition;
-                yield break;
-            }
+            
             yield return null;
         }
         transform.position = targetPosition;

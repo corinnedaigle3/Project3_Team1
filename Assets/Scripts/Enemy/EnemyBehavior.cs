@@ -50,7 +50,7 @@ public class EnemyBehavior : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(agent.remainingDistance < .2f && animator != null && !shouldNotMove)
+        if((agent.remainingDistance < .2f || agent.isStopped == true) && animator != null && !shouldNotMove)
         {
             animator.SetBool("walking", false);// update animator
 
