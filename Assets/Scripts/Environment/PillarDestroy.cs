@@ -29,6 +29,11 @@ public class PillarDestroy : MonoBehaviour
 
     IEnumerator SelfDestuct()
     {
+        if (manager.playerFell)
+        {
+            transform.position = originalPosition;
+            yield break;
+        }
         yield return new WaitForSeconds(2f);
 
         Vector3 startPosition = transform.position;

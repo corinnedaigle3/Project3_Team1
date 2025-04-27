@@ -9,7 +9,7 @@ using UnityEngine.UIElements.Experimental;
 
 public class EnemyBehavior : MonoBehaviour
 {
-
+    [SerializeField] bool shouldNotMove;
     [SerializeField] Transform[] Waypoints;
     public NavMeshAgent agent;
     public string enemyType;
@@ -35,7 +35,10 @@ public class EnemyBehavior : MonoBehaviour
         enemyType = gameObject.name;
         waypointIdnex = Random.Range(0, Waypoints.Length);
         agent = GetComponent<NavMeshAgent>();
-        agent.SetDestination(Waypoints[waypointIdnex].position);
+        if (!shouldNotMove)
+        {
+            agent.SetDestination(Waypoints[waypointIdnex].position);
+        }
         gameManager = GameObject.Find("GameManager").GetComponent<GameManger>();
       
         player = GameObject.Find("Player");
@@ -47,7 +50,7 @@ public class EnemyBehavior : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(agent.remainingDistance < .2f && animator != null)
+        if(agent.remainingDistance < .2f && animator != null && !shouldNotMove)
         {
             animator.SetBool("walking", false);// update animator
 
@@ -66,20 +69,20 @@ public class EnemyBehavior : MonoBehaviour
         playerInNvav = NavMesh.SamplePosition(player.transform.position, out hit, 1f, NavMesh.AllAreas);
 
         Debug.Log("Player in in navMesh" + playerInNvav);
-        if (playerInNvav && lineOfSight.canChase)
+        if (playerInNvav && lineOfSight.canChase && !shouldNotMove)
         {
             StopAllCoroutines();
             chasing = true;
             isSearching = false;
             chase();
         }
-        else if (chasing)
+        else if (chasing && !shouldNotMove)
         {
             chasing = false;
             isSearching = true;
             StartCoroutine(SearchArea());
         }
-        else if (!isSearching)
+        else if (!isSearching && !shouldNotMove)
         {
             Patrol();
         }
@@ -141,7 +144,7 @@ public class EnemyBehavior : MonoBehaviour
 
 
         yield return new WaitForSeconds(waitTime);
-        if (Waypoints != null)
+        if (!shouldNotMove)
         {
             waypointIdnex = Random.Range(0, Waypoints.Length);
             lookingNew = false;
