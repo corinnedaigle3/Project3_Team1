@@ -478,7 +478,7 @@ public class PlayerMovement : MonoBehaviour
             inventoryManager.dodgeImage.SetActive(true);
         }
 
-        switch (other.tag)
+        switch (other.tag) // pick up item logic and take down from behind logic 
         {
             case "BehindA":
                 if (inventoryManager.hasA == true)
@@ -514,7 +514,7 @@ public class PlayerMovement : MonoBehaviour
                     pickupSound.Play();
 
                     Debug.Log("Take down item picked up");
-                    inventoryManager.takeDownItemCounterE++;
+                    inventoryManager.takeDownItemCounterE = 1;
                     inventoryManager.takeDownItemTextE.gameObject.SetActive(true);
                     inventoryManager.ShowAmount(inventoryManager.takeDownItemTextE, inventoryManager.takeDownItemCounterE, ref inventoryManager.hasE);
                     Destroy(other.gameObject);
@@ -533,7 +533,7 @@ public class PlayerMovement : MonoBehaviour
                     inventoryManager.hasA = true;
                     pickupSound.Play();
 
-                    inventoryManager.takeDownItemCounterA++;
+                    inventoryManager.takeDownItemCounterA = 1;
                     inventoryManager.ShowAmount(inventoryManager.takeDownItemTextA, inventoryManager.takeDownItemCounterA, ref inventoryManager.hasA);
                     Destroy(other.gameObject);
                     StartCoroutine(waitToFalse(0.5f));
@@ -549,7 +549,8 @@ public class PlayerMovement : MonoBehaviour
                     inventoryManager.hasT = true;
                     pickupSound.Play();
 
-                    inventoryManager.takeDownItemCounterT++;
+                    inventoryManager.takeDownItemCounterT = 1;
+
                     inventoryManager.ShowAmount(inventoryManager.takeDownItemTextT, inventoryManager.takeDownItemCounterT, ref inventoryManager.hasT);
                     Destroy(other.gameObject);
                     StartCoroutine(waitToFalse(0.5f));

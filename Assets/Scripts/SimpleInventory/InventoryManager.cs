@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.ProBuilder.MeshOperations;
 using UnityEngine.UI;
@@ -92,27 +93,40 @@ public class InventoryManager : MonoBehaviour
     {
         //apple
         spriteApple.SetActive(hasE);
+        takeDownItemTextE.gameObject.SetActive(hasE);
+        if (!hasE) takeDownItemCounterE = 0;
 
         //skull
         spriteSkull.SetActive(hasA);
+        takeDownItemTextA.gameObject.SetActive(hasA);
+        if (!hasA) takeDownItemCounterA = 0;
 
         //fireFlower
         spriteFireFlower.SetActive(hasT);
+        takeDownItemTextT.gameObject.SetActive(hasT);
+        if (!hasT) takeDownItemCounterT = 0;
 
         //Gem1
         spriteGemE.SetActive(hasGemE);
-
+        gemTextE.gameObject.SetActive(hasGemE);
+        if (!hasGemE) gemCounterE = 0;
         //Gem2
         spriteGemA.SetActive(hasGemA);
+        gemTextA.gameObject.SetActive(hasGemA);
+        if (!hasGemA) gemCounterA = 0;
 
         //Gem3
         spriteGemT.SetActive(hasGemT);
+        gemTextT.gameObject.SetActive(hasGemT);
+        if (!hasGemT) gemCounterT = 0;
 
         //helm
         spriteHelm.SetActive(hasHelm);
+        helmText.gameObject.SetActive(hasHelm);
+        if (!hasHelm) helmcounter = 0;
     }
 
-    
+
 
     public void ShowAmount(TextMeshProUGUI textChange, int amount, ref bool hasItemName)
     {

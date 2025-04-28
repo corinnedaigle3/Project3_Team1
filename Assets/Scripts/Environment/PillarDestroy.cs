@@ -49,6 +49,7 @@ public class PillarDestroy : MonoBehaviour
         float elapsed = 0f;
         while (elapsed < duration)
         {
+            Debug.Log("Going down ");
             transform.position = Vector3.Lerp(startPosition, targetPosition, elapsed / duration);
             elapsed += Time.deltaTime;
             
