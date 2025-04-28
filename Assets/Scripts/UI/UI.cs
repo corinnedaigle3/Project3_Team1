@@ -222,7 +222,11 @@ public class UI : MonoBehaviour
         Cursor.visible = true;
     }
 
-
+    public void LoadHub()
+    {
+        SceneManager.LoadScene("MainHub");
+        ResumeGame();
+    }
     public void LoadWin()
     {
         gameManager.playerDisable();
