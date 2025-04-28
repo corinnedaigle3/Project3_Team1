@@ -5,16 +5,19 @@ using UnityEngine;
 public class TarturusManager : MonoBehaviour
 {
     public GameObject[] fallingPillars;
-    public bool playerFell;
+    public bool playerFell = false;
+    int i = 0;
 
 
     void Update()
     {
         if (playerFell)
         {
+            i = 0;  
             foreach (GameObject pillar in fallingPillars)
             {
-                Debug.Log("Enable all the pillars again");
+                i++;
+                Debug.Log("Enable all the pillars again " + i);
 
                 pillar.SetActive(true); // Re-enable the pillar
             }
