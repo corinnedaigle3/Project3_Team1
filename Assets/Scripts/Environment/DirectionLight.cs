@@ -18,7 +18,7 @@ public class DirectionLight : MonoBehaviour
     {
         RenderSettings.fogColor = new Color(1f, 0.7450980392156863f, 0.35294117647058826f);
         RenderSettings.fog = enabled;
-        RenderSettings.fogDensity = 0.001f;
+        RenderSettings.fogDensity = 0.002f;
 
     }
 
@@ -47,7 +47,7 @@ public class DirectionLight : MonoBehaviour
 
 
             RenderSettings.fogColor = new Color(1f, 0.7450980392156863f, 0.35294117647058826f);
-            RenderSettings.fogDensity = 0.001f;
+            RenderSettings.fogDensity = 0.002f;
 
         }
     }
