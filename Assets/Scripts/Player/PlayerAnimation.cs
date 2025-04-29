@@ -6,6 +6,7 @@ public class PlayerAnimation : MonoBehaviour
 {  
     PlayerMovement playerMovement;
     public Animator animator;
+    private float delay = 1f;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,7 +32,7 @@ public class PlayerAnimation : MonoBehaviour
             animator.SetBool("walking", false);
             animator.SetBool("dodge", false);
             animator.SetBool("takedown", true);
-            return;
+            Invoke("resetAnimation", delay);
         }
         if(playerMovement.moveDirection != Vector3.zero) 
         {
@@ -45,8 +46,11 @@ public class PlayerAnimation : MonoBehaviour
             Debug.Log("Player not moving");
             animator.SetBool("walking", false);
             animator.SetBool("dodge", false);
-            animator.SetBool("takedown", false);
         }
+    }
+    private void resetAnimation()
+    {
+        animator.SetBool("takedown", false);
     }
 }
 
