@@ -3,13 +3,12 @@
 
 Team: Ghost Knights!!
 
-WHAT IS IN EACH FOLDER:
+About
 
-    Art Test Prototype:
-        Build showcasing the art style of the game. 
+You carry the weight of the dead… will you rise, or will you become the FALLEN?
 
-    Gameplay Test Prototype: 
-        Functional gameplay prototype.
+You are trapped in the depths of the underworld. To escape, you partake in a quest organized by Hermes, journeying through three mythological realms—Elysium, Asphodel Meadows, and Tartarus—each with its dangers and mysteries.
+Your goal is to gather powerful relics with the abilities to take down the guardians of the Underworld. Wreak havoc in your wake and make your way back to the world of the living!
 
     HOW TO PLAY:
 WASD - Player Movement
@@ -32,47 +31,29 @@ Game Project: Fate of the Fallen
 
 Creators: Ghost Knights - Zachary Ball, Andres Benavente, Corinne Daigle, Kim Thao Nguyen, Miguel Pineda, Sze Hiu Yeung
 
-Version: 0.1
+Version: 1.0
 
 Date: 4/2/2025
 
 New features: 
 
 
-Take Down: When the player has a take down item in their inventory (found in random locations on each level) and has successfully sneaked behind an enemy, they can press Q to freeze the enemy in place. If the enemy is a Fury, the freeze is temporary, and a gem will be dropped.
-
-
-Dodge: When the spacebar is pressed, the player dodges in the direction they are moving.
-
-
--Invisible: When the player has a helm in their inventory, they can press the left control to become invisible to all enemies, and unlock dash for the same duration.
-Dash: While invisible and holding down the left shift, the player can continuously dash.
-
-
-Collect Items: When an item is on the ground, the player can walk into the item to pick it up and add it to their inventory.
-
-
-Portals: Archways act as portals that will take you to different parts of the Underworld. (Go to the archway lit up with a green light to access the test level in the Vertical Slice Prototype)
-
+New features: 
+Player animations implemented
+Vengeful Spirit model implemented.
+Cutscenes for starting and winning.
+Player in enemy sight SFX
+Water SFX. 
 
 Fixes: 
-    - Sound manager adjustments. 
-- portals are working as intended 
-
+The take-down of enemy behavior is improved 
+Fury enemies only get stunned for 2 seconds and go back to chasing or patrolling 
+Weird collisions on the tutorial and the Asphodel level.
+Updated UI Assets: Menu Background, Win Background, Lose Background, Dodge Button, Select Buttons
+Credits updated with new team members.
+The tutorial has been reworked to be more forgiving and have a better player experience. 
 
 Known Issues:
-Colliders are sometimes janky or missing on certain props and items
-
-Water shader incomplete/nonfunctional
-
-Weird collisions on levels that give spasms to the player
-
-The enemy is not chasing the player properly
-
-Not all menus are hooked up
-
-Not all graphics/designs are fully complete
-
-The take-down item does not work
+None 
 
 
