@@ -12,14 +12,23 @@ Your goal is to gather powerful relics with the abilities to take down the guard
 
     HOW TO PLAY:
 WASD / LS (Stick) - Player Movement
+
 Mouse / RS (Stick) - Camera
+
 Space / RT - Dodge
+
 Hold LeftShift / LT - Run
+
 Left Control / LS (Shoulder) - Invisibility
+
 Q / RS (Stick) - Take Down
+
 LeftControl / LS (Shoulder) - Invisible
+
 P / Start - Pause
+
 Esc - Quit Game
+
 
 GITHUB: https://github.com/corinnedaigle3/Project3_Team1
 
