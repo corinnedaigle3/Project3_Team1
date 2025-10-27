@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ItemAssets : MonoBehaviour
 {
+    // gets and sets the sprites
     public static ItemAssets Instance { get; private set; }
 
     private void Awake()
@@ -11,6 +12,7 @@ public class ItemAssets : MonoBehaviour
         Instance = this;
     }
 
+    //Sets-up / holds the sprite images
     public Sprite appleSprite;
     public Sprite skullSprite;
     public Sprite fireFlowerSprite;
