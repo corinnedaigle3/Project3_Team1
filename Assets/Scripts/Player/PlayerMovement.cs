@@ -5,75 +5,89 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-   private enum State 
+    // Defines the player's movement states
+    private enum State
     {
         Normal,
         Rolling,
     }
-    //public static GameObject playerInstance;
+
+    // Core UI and visual references
     public UI ui;
     public GameObject vfx;
 
     [Header("References")]
+    // References for player orientation, object transforms, and Rigidbody
     public Transform orientation;
     public Transform player;
     public Transform playerObj;
     private Rigidbody rb;
 
     [Header("Input Actions")]
+    // Input system for player actions and movement
     private PlayerInput playerInput;
     private InputSystem inputSystem;
 
     [Header("BeatTheGame")]
-    public int gemE; // just counter for how many fury gems we have 
-    public int gemA; // just counter for how many fury gems we have 
-    public int gemT; // just counter for how many fury gems we have 
+    // Counters for Fury Gems collected (E, A, T)
+    public int gemE;
+    public int gemA;
+    public int gemT;
 
     [Header("Movement")]
+    // Controls player speed, direction, and rolling behavior
     public float moveSpeed;
-    public Vector3 moveDirection; 
+    public Vector3 moveDirection;
     private Vector3 rollDirection;
     private float rollSpeed;
     private State state;
 
     [Header("Ground Check")]
+    // Ground detection settings for movement and physics
     public float playerHeight;
     public LayerMask whatIsGrounded;
     private bool grounded;
     public float groundDrag;
 
     [Header("Invisible")]
+    // Controls player invisibility and timing logic
     private float invisibleTimer = 0;
     public bool Invisible;
     private bool canRun;
 
     [Header("Collection")]
+    // Tracks which realm items have been collected
     public bool asphodelCollectionItem;
     public bool elysiumCollectionItem;
     public bool tartarusCollectionItem;
 
     [Header("TakeDown")]
+    // TakeDown and enemy-related references
     EnemyBehavior enemyBehavior;
     [HideInInspector] public TakeDown takeDown;
     public bool dead;
 
+    // Fury status tracking
     public bool fury1;
     public bool fury2;
     public bool fury3;
 
     [Header("Take down behavior")]
+    // Tracks kill permissions and enemy references for takedowns
     public bool isTakeDown;
     public bool canKill;
     public GameObject currentEnemy;
 
     [Header("Inventory")]
+    // Player inventory references and item usage flags
     public InventoryManager inventoryManager;
     public bool helmInInventory;
     private bool triggerEnter;
     private bool hasPickedUpItem = false;
     public bool helmUsed;
 
-    [Header("Music")] 
+    [Header("Music")]
+    // Audio sources for player actions and events
     public AudioSource takeDownSound;
     public AudioSource pickupSound;
     public AudioSource caughtSound;
@@ -83,12 +97,14 @@ public class PlayerMovement : MonoBehaviour
     public AudioSource gemSoundT;
 
     [Header("Slope Handling")]
+    // Used for controlling movement on slopes and adjusting drag
     public float maxSlopeAngle;
     public float minSlopeAngle;
     public RaycastHit slopeHit;
     private float angle;
 
     [Header("Dodge")]
+    // Dodge system logic and cooldown timers
     public bool canDodge;
     public bool unlockDodge;
     public bool inDodgeRange;
@@ -98,12 +114,14 @@ public class PlayerMovement : MonoBehaviour
     public float dodgeTimerFade;
 
     [Header("Other")]
+    // Miscellaneous state variables
     public bool lose;
     public gemsChecker theGemChecker;
 
     // Start is called before the first frame update
     void Start()
     {
+        // Initialize references and default values
         ui = GameObject.Find("Canvas").GetComponent<UI>();
         inventoryManager = GameObject.Find("Canvas").GetComponent<InventoryManager>();
         rb = GetComponent<Rigidbody>();
@@ -133,11 +151,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
+        // Set up Input System bindings
         playerInput = GetComponent<PlayerInput>();
         inputSystem = new InputSystem();
         inputSystem.Player.Enable();
-        inputSystem.Player.Dash.performed += PlayerRun; // this means run 
-        inputSystem.Player.Dash.canceled += PlayerRun; // this means run
+        inputSystem.Player.Dash.performed += PlayerRun;
+        inputSystem.Player.Dash.canceled += PlayerRun;
         inputSystem.Player.Invisible.performed += Invisibility;
         inputSystem.Player.Dodge.performed += DodgeEnemy;
         inputSystem.Player.TakeDown.performed += TakeDownAction;
@@ -147,26 +166,26 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnDisable()
     {
+        // Disable input when the object is disabled
         inputSystem.Player.Disable();
     }
+
     private void Update()
     {
+        // Constantly check for slope movement
         OnSlopeNow();
     }
 
     private void FixedUpdate()
     {
+        // Handles player physics-based movement
         switch (state)
         {
             case State.Normal:
-                //read controller input for player
-                Vector2 inputVector = inputSystem.Player.Move.ReadValue<Vector2>().normalized; 
-
-                // Convert it to camera-relative movement
+                // Standard movement and input handling
+                Vector2 inputVector = inputSystem.Player.Move.ReadValue<Vector2>().normalized;
                 Vector3 camRelativeMove = orientation.forward * inputVector.y + orientation.right * inputVector.x;
-                camRelativeMove.y = 0; // Ensure movement stays on the ground
-
-                //saving the vector info
+                camRelativeMove.y = 0;
                 moveDirection = camRelativeMove;
 
                 Vector3 moveDirToUse = moveDirection;
@@ -178,11 +197,10 @@ public class PlayerMovement : MonoBehaviour
                 }
 
                 rb.MovePosition(rb.position + moveDirToUse * moveSpeed * Time.fixedDeltaTime);
-                //rb.MovePosition(rb.position + moveDirection * moveSpeed * Time.fixedDeltaTime);
 
+                // Smooth rotation toward movement direction
                 if (moveDirection != Vector3.zero)
                 {
-                    // THIS IS HOW I FIXED THE ROTATION ISSUES (The rotation was instantanious and was causing the issue) 
                     Quaternion toRotation = Quaternion.LookRotation(moveDirection);
                     transform.rotation = Quaternion.Slerp(transform.rotation, toRotation, Time.deltaTime * 10f);
                 }
@@ -190,17 +208,18 @@ public class PlayerMovement : MonoBehaviour
                 SpeedControl();
                 StickToGround();
 
+                // Handle invisibility expiration
                 if (invisibleTimer <= 0)
                 {
                     ui.popUpBar2.SetActive(false);
                     canRun = false;
                     Invisible = false;
                     helmUsed = false;
-                    moveSpeed = 8f; 
+                    moveSpeed = 8f;
                     vfx.SetActive(false);
                 }
 
-                //Dodge icon fade logic timer
+                // Dodge cooldown logic
                 if (dodgeTimerFade <= 0)
                 {
                     isDodging = true;
@@ -210,7 +229,6 @@ public class PlayerMovement : MonoBehaviour
                     isDodging = false;
                 }
 
-                //Time allowed between dodge
                 if (dodgeTimer <= 0)
                 {
                     canDodge = true;
@@ -218,11 +236,11 @@ public class PlayerMovement : MonoBehaviour
                 else
                 {
                     canDodge = false;
-                } 
-                
+                }
+
                 grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGrounded);
 
-                //check if player is on ground
+                // Ground and dodge unlock logic
                 if (grounded)
                 {
                     rb.drag = groundDrag;
@@ -239,9 +257,9 @@ public class PlayerMovement : MonoBehaviour
                 break;
 
             case State.Rolling:
+                // Handles dodge roll motion and deceleration
                 Vector3 dodgeDir = OnSlope() ? GetSlopeMoveDirection() : new Vector3(rollDirection.x, 0f, rollDirection.z).normalized;
                 float currentYVel = rb.velocity.y;
-
                 Vector3 dodgeMove = dodgeDir * moveSpeed * rollSpeed * Time.fixedDeltaTime;
                 rb.MovePosition(rb.position + dodgeMove);
 
@@ -254,6 +272,7 @@ public class PlayerMovement : MonoBehaviour
                     state = State.Normal;
                 }
 
+                // Revert invisibility when timer runs out
                 if (invisibleTimer <= 0)
                 {
                     ui.popUpBar2.SetActive(false);
@@ -264,7 +283,7 @@ public class PlayerMovement : MonoBehaviour
                     moveSpeed = 8f;
                 }
 
-                //Dodge icon fade logic timer
+                // Dodge cooldown logic
                 if (dodgeTimerFade <= 0)
                 {
                     isDodging = true;
@@ -274,7 +293,6 @@ public class PlayerMovement : MonoBehaviour
                     isDodging = false;
                 }
 
-                //Time allowed between dodge
                 if (dodgeTimer <= 0)
                 {
                     canDodge = true;
@@ -284,7 +302,7 @@ public class PlayerMovement : MonoBehaviour
                     canDodge = false;
                 }
 
-                //check if player is on ground
+                // Ground and slope physics while rolling
                 if (grounded)
                 {
                     rb.drag = groundDrag;
@@ -311,19 +329,17 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    // Handles player takedown and gem-related "Q" actions
     public void TakeDownAction(InputAction.CallbackContext context)
     {
-        // makes the enemy stop and destroys the collider when pressing Q
         if (canKill == true && currentEnemy != null && context.performed)
         {
             isTakeDown = true;
-            
             Debug.Log("Q is pressed");
-            if (takeDown != null) // Add a null check
+            if (takeDown != null)
             {
                 takeDown.dead = true;
                 takeDownSound.Play();
-
                 Debug.Log("is it dead " + takeDown.dead);
             }
             else
@@ -332,17 +348,15 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        // this is enabling to consume the item.
-        // it is tied to the same game keybinds as take down 
         if (theGemChecker != null && theGemChecker.canPressQ)
         {
-            theGemChecker.qPressed = true; // the rest will happen in gemsCheker script 
+            theGemChecker.qPressed = true;
         }
     }
 
+    // Controls overall player movement speed
     private void SpeedControl()
     {
-        //limiting speed on slope
         if (OnSlope())
         {
             if (rb.velocity.magnitude > moveSpeed)
@@ -350,9 +364,8 @@ public class PlayerMovement : MonoBehaviour
                 rb.velocity = rb.velocity.normalized * moveSpeed;
             }
         }
-        //limiting speed on ground
         else
-        { 
+        {
             Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
             if (flatVel.magnitude > moveSpeed)
@@ -363,6 +376,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    // Handles sprinting input
     private void PlayerRun(InputAction.CallbackContext context)
     {
         if (canRun == true)
@@ -379,7 +393,8 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void DodgeEnemy(InputAction.CallbackContext context) 
+    // Handles dodge/roll behavior when dodge key is pressed
+    private void DodgeEnemy(InputAction.CallbackContext context)
     {
         if (context.performed && canDodge == true && unlockDodge == true && inDodgeRange == true)
         {
@@ -393,6 +408,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    // Activates invisibility if the player has a helm
     private void Invisibility(InputAction.CallbackContext context)
     {
         if (context.performed && inventoryManager.hasHelm == true)
@@ -407,10 +423,11 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    // Checks if the player is on a slope
     public bool OnSlope()
     {
-        float sphereCastRadius = 0.3f; // Match this to your CapsuleCollider radius
-        float rayLength = playerHeight * 0.5f + 0.5f; // Add a little buffer
+        float sphereCastRadius = 0.3f;
+        float rayLength = playerHeight * 0.5f + 0.5f;
         Vector3 origin = transform.position;
 
         if (Physics.SphereCast(origin, sphereCastRadius, Vector3.down, out slopeHit, rayLength))
@@ -422,11 +439,13 @@ public class PlayerMovement : MonoBehaviour
         return false;
     }
 
+    // Calculates correct slope movement direction
     public Vector3 GetSlopeMoveDirection()
     {
         return Vector3.ProjectOnPlane(moveDirection, slopeHit.normal).normalized;
     }
 
+    // Adds extra downward force when on slope to maintain ground contact
     private void OnSlopeNow()
     {
         if (OnSlope())
@@ -434,7 +453,6 @@ public class PlayerMovement : MonoBehaviour
             Vector3 slopeMove = GetSlopeMoveDirection() * moveSpeed;
             rb.AddForce(slopeMove, ForceMode.Acceleration);
 
-            // Small downward force to stick to slope
             if (rb.velocity.y <= 0.1f)
             {
                 rb.AddForce(-slopeHit.normal * 100f, ForceMode.Force);
@@ -442,6 +460,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    // Keeps player grounded with downward force when not on slope
     void StickToGround()
     {
         if (!OnSlope())
@@ -456,13 +475,14 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    // Coroutine to trigger lose screen after delay
     IEnumerator LoseGame(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
         ui.LoadLose();
-
     }
 
+    // Handles all item pickups, takedowns, and collisions
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Catch") && !Invisible)
@@ -478,8 +498,9 @@ public class PlayerMovement : MonoBehaviour
             inventoryManager.dodgeImage.SetActive(true);
         }
 
-        switch (other.tag) // pick up item logic and take down from behind logic 
+        switch (other.tag)
         {
+            // Takedown zone detection per fury type
             case "BehindA":
                 if (inventoryManager.hasA == true)
                 {
@@ -487,15 +508,15 @@ public class PlayerMovement : MonoBehaviour
                     currentEnemy = other.gameObject;
                     takeDown = currentEnemy.GetComponent<TakeDown>();
                 }
-                break;    
+                break;
             case "BehindE":
-               if( inventoryManager.hasE == true)
+                if (inventoryManager.hasE == true)
                 {
                     canKill = true;
                     currentEnemy = other.gameObject;
                     takeDown = currentEnemy.GetComponent<TakeDown>();
                 }
-                break;    
+                break;
             case "BehindT":
                 if (inventoryManager.hasT == true)
                 {
@@ -505,162 +526,110 @@ public class PlayerMovement : MonoBehaviour
                 }
                 break;
 
+            // Item pickups for takedown items and gems
             case "TakeDownItemE":
-
                 if (!hasPickedUpItem)
                 {
                     hasPickedUpItem = true;
                     inventoryManager.hasE = true;
                     pickupSound.Play();
-
                     Debug.Log("Take down item picked up");
                     inventoryManager.takeDownItemCounterE = 1;
                     inventoryManager.takeDownItemTextE.gameObject.SetActive(true);
                     inventoryManager.ShowAmount(inventoryManager.takeDownItemTextE, inventoryManager.takeDownItemCounterE, ref inventoryManager.hasE);
                     Destroy(other.gameObject);
                     StartCoroutine(waitToFalse(0.5f));
-
                     Debug.Log("Has picked up item " + hasPickedUpItem);
                 }
-
                 break;
 
             case "TakeDownItemA":
-
                 if (!hasPickedUpItem)
                 {
                     hasPickedUpItem = true;
                     inventoryManager.hasA = true;
                     pickupSound.Play();
-
                     inventoryManager.takeDownItemCounterA = 1;
                     inventoryManager.ShowAmount(inventoryManager.takeDownItemTextA, inventoryManager.takeDownItemCounterA, ref inventoryManager.hasA);
                     Destroy(other.gameObject);
                     StartCoroutine(waitToFalse(0.5f));
                 }
-
                 break;
 
             case "TakeDownItemT":
-
                 if (!hasPickedUpItem)
                 {
                     hasPickedUpItem = true;
                     inventoryManager.hasT = true;
                     pickupSound.Play();
-
                     inventoryManager.takeDownItemCounterT = 1;
-
                     inventoryManager.ShowAmount(inventoryManager.takeDownItemTextT, inventoryManager.takeDownItemCounterT, ref inventoryManager.hasT);
                     Destroy(other.gameObject);
                     StartCoroutine(waitToFalse(0.5f));
                 }
-
                 break;
 
             case "GemE":
-
                 if (!hasPickedUpItem)
                 {
                     gemSoundE.Play();
                     hasPickedUpItem = true;
                     inventoryManager.hasGemE = true;
                     pickupSound.Play();
-
                     inventoryManager.gemCounterE++;
                     inventoryManager.ShowAmount(inventoryManager.gemTextE, inventoryManager.gemCounterE, ref inventoryManager.hasGemE);
                     Destroy(other.gameObject);
-                    
                     StartCoroutine(waitToFalse(0.5f));
-
                 }
-
                 break;
 
             case "GemA":
-
                 if (!hasPickedUpItem)
                 {
                     gemSoundA.Play();
                     hasPickedUpItem = true;
                     inventoryManager.hasGemA = true;
                     pickupSound.Play();
-
                     inventoryManager.gemCounterA++;
                     inventoryManager.ShowAmount(inventoryManager.gemTextA, inventoryManager.gemCounterA, ref inventoryManager.hasGemA);
                     Destroy(other.gameObject);
-                   
                     StartCoroutine(waitToFalse(0.5f));
                 }
-
                 break;
 
             case "GemT":
-
                 if (!hasPickedUpItem)
                 {
                     gemSoundT.Play();
                     hasPickedUpItem = true;
                     inventoryManager.hasGemT = true;
                     pickupSound.Play();
-
                     inventoryManager.gemCounterT++;
                     inventoryManager.ShowAmount(inventoryManager.gemTextT, inventoryManager.gemCounterT, ref inventoryManager.hasGemT);
                     Destroy(other.gameObject);
-                   
                     StartCoroutine(waitToFalse(0.5f));
                 }
-
                 break;
 
             case "Helm":
-
-                if (!hasPickedUpItem) // Check if the Helm was already picked up
-                if (!hasPickedUpItem) // Check if the Helm was already picked up
+                if (!hasPickedUpItem)
                 {
                     hasPickedUpItem = true;
                     inventoryManager.hasHelm = true;
                     pickupSound.Play();
-
                     inventoryManager.helmcounter++;
                     inventoryManager.ShowAmount(inventoryManager.helmText, inventoryManager.helmcounter, ref inventoryManager.hasHelm);
                     Destroy(other.gameObject);
-                   
                     StartCoroutine(waitToFalse(0.5f));
                 }
                 break;
 
-             default:
+            default:
                 break;
         }
     }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.tag == "Behind")
-        {
-            //take down enemy text
-           //inventoryManager.takeDowntext.SetActive(false);
-            ui.popUpBar.SetActive(false);
-
-            canKill = false;
-            takeDown.dead = false;
-            currentEnemy = null;
-        }
-
-        if(other.gameObject.layer == LayerMask.NameToLayer("Item"))
-        {
-            hasPickedUpItem = false; // Reset flag when leaving
-            Destroy(other.gameObject);
-        }
-
-        if (other.tag == "DodgeUnlocked")
-        {
-            inDodgeRange = false;
-            inventoryManager.dodgeImage.SetActive(false);
-        }
-    }
-
+    // Resets states and UI when exiting triggers
     IEnumerator waitToFalse(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
