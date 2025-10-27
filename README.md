@@ -11,14 +11,14 @@ You are trapped in the depths of the underworld. To escape, you partake in a que
 Your goal is to gather powerful relics with the abilities to take down the guardians of the Underworld. Wreak havoc in your wake and make your way back to the world of the living!
 
     HOW TO PLAY:
-WASD - Player Movement
-Mouse - Camera
-Space - Dodge
-Hold LeftShift - Dash
-Left Control - Invisibility
-Q - Take Down
-LeftControl - Invisible
-P - Pause
+WASD / LS (Stick) - Player Movement
+Mouse / RS (Stick) - Camera
+Space / RT - Dodge
+Hold LeftShift / LT - Run
+Left Control / LS (Shoulder) - Invisibility
+Q / RS (Stick) - Take Down
+LeftControl / LS (Shoulder) - Invisible
+P / Start - Pause
 Esc - Quit Game
 
 GITHUB: https://github.com/corinnedaigle3/Project3_Team1
