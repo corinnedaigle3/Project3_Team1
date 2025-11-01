@@ -9,14 +9,14 @@ public class pSpawn : MonoBehaviour
 
     private void Awake()
     {
-        player = GameObject.Find("Player");
-        player.transform.position = transform.position;
-        player.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
-        player.GetComponent<Rigidbody>().velocity = Vector3.zero;
-       
+        if (player != null)
+        {
+            player = GameObject.Find("Player");
+            player.transform.position = transform.position;
+            player.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+            player.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        }
     }
-  
-
  
     private void FixedUpdate()
     {
@@ -30,6 +30,4 @@ public class pSpawn : MonoBehaviour
             }
         }
     }
-   
-
 }

@@ -33,11 +33,6 @@ public class ImageFade : MonoBehaviour
         {
             StartCoroutine(FadeOut());
         }
-
-        if (playerMovement.canDodge == false)
-        {
-            SetInvisible();
-        }
     }
 
     // Coroutine to gradually fade the image in (increase alpha)
@@ -63,13 +58,6 @@ public class ImageFade : MonoBehaviour
 
         // Ensure the final color is fully visible
         image.color = endColor;
-    }
-
-    private void SetInvisible()
-    {
-        Color color = image.color;
-        color.a = 0f;
-        image.color = color;
     }
 
     // Coroutine to gradually fade the image out (decrease alpha)

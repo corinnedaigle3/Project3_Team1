@@ -127,26 +127,12 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         moveSpeed = 8f;
-        canRun = false;
-        Invisible = false;
-        helmUsed = false;
-        asphodelCollectionItem = false;
-        elysiumCollectionItem = false;
-        tartarusCollectionItem = false;
-        canDodge = false;
-        unlockDodge = false;
         maxSlopeAngle = 50f;
         minSlopeAngle = 20f;
-        isDodging = false;
-        playerIsDodging = false;
 
         rb.drag = groundDrag;
         dodgeTimer = 0;
-        inDodgeRange = false;
 
-        fury1 = false;
-        fury2 = false;
-        fury3 = false;
     }
 
     private void Awake()
@@ -626,6 +612,15 @@ public class PlayerMovement : MonoBehaviour
 
             default:
                 break;
+        }
+    }
+
+    public void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "DodgeUnlocked")
+        {
+            inDodgeRange = false;
+            inventoryManager.dodgeImage.SetActive(false);
         }
     }
 
