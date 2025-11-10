@@ -56,8 +56,11 @@ public class GameManger : MonoBehaviour
         }
     
 
+        if (data != null)
+        {
 
         ui.goToScene = data.LevelNameNew;
+        }
         Debug.Log("Scene name " + ui.goToScene);
 
         // This is reseting the information so when you lose you have to start all over again from the sstart  
