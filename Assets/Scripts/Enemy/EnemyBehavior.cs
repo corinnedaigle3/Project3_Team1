@@ -1,12 +1,10 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.SceneManagement;
-using UnityEngine.UIElements.Experimental;
 
+
+// Handles enemy AI behavior including patrol, chase, and search routines.
+// Enemy will chase player when in line of sight, then search area if player escapes.
 public class EnemyBehavior : MonoBehaviour
 {
     [SerializeField] bool shouldNotMove;
@@ -23,8 +21,8 @@ public class EnemyBehavior : MonoBehaviour
     public GameObject player;
 
     public LineOfSight lineOfSight;
-    bool playerInNvav;
-    bool isSearching;
+    bool playerInNvav; // True if the player is within the navigable area (NavMesh)
+    bool isSearching;  // True while enemy is looking for the player’s last known position
     bool chasing;
     private Vector3 playerLastPostion;
     bool lookingNew;
@@ -47,32 +45,35 @@ public class EnemyBehavior : MonoBehaviour
         agent.updateRotation = true;
     }
 
-    // Update is called once per frame
+    
     void FixedUpdate()
     {
-        if((agent.remainingDistance < .2f || agent.isStopped == true) && animator != null && !shouldNotMove)
+        // Stop walking animation when the enemy reaches its destination
+        if ((agent.remainingDistance < .2f || agent.isStopped == true) && animator != null && !shouldNotMove)
         {
-            animator.SetBool("walking", false);// update animator
-
+            animator.SetBool("walking", false);
         }
-        else if ( animator != null)
+        else if (animator != null)
         {
-            animator.SetBool("walking", true);// update animator
+            animator.SetBool("walking", true);
         }
 
-        //DieIfGemUsed();
-        NavMeshHit hit;
+        // Ensure player reference is valid
         if (player == null)
         {
             player = GameObject.Find("Player");
         }
-        // updates the bool to see if player is inside the nav mesh to avoid runtime errors 
-        playerInNvav = NavMesh.SamplePosition(player.transform.position, out hit, 1f, NavMesh.AllAreas);
 
-        Debug.Log("Player in in navMesh" + playerInNvav);
+        // Check if the player is within the NavMesh to prevent invalid path errors
+        playerInNvav = NavMesh.SamplePosition(player.transform.position, out NavMeshHit hit, 1f, NavMesh.AllAreas);
+
+        // Enemy logic:
+        // - If player is visible and inside NavMesh, start chasing
+        // - If player was being chased but is now lost, search last known area
+        // - Otherwise, continue patrolling
         if (playerInNvav && lineOfSight.canChase && !shouldNotMove)
         {
-            StopAllCoroutines();
+            StopAllCoroutines(); // Stop any active search or patrol routines
             chasing = true;
             isSearching = false;
             chase();
@@ -88,6 +89,9 @@ public class EnemyBehavior : MonoBehaviour
             Patrol();
         }
     }
+
+    // Starts chasing the player using their current position.
+    // Plays sound effect once when chase begins.
     void chase()
     {
         if (player != null && lineOfSight.canChase)
@@ -112,6 +116,8 @@ public class EnemyBehavior : MonoBehaviour
     }
     private void Patrol()
     {
+        // Set higher speed for smaller enemies 
+        // (EnemyE, EnemyA, and EnemyT are faster units)
         sfxPlaying = false;
         if (gameObject.tag == "EnemyE" || gameObject.tag == "EnemyA" || gameObject.tag == "EnemyT")
         {
@@ -132,6 +138,7 @@ public class EnemyBehavior : MonoBehaviour
         }
     }
 
+   // Chooses a new random waypoint for the enemy to patrol to after waiting.
     IEnumerator NewDesitnation (float waitTime)
     {
         if (lookingNew) // avid running again 
@@ -152,7 +159,7 @@ public class EnemyBehavior : MonoBehaviour
 
     }
 
-
+    // Searches around the player's last known position after losing sight.
     public IEnumerator SearchArea()
     {
         isSearching= true;

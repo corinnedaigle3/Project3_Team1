@@ -1,16 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Controls the catchable object's behavior when interacting with the player.
+/// Disables its collider if the player becomes invisible to prevent being detected or caught.
+/// </summary>
 public class CatchBehave : MonoBehaviour
 {
-    public GameObject theCatch;
-   
-    public PlayerMovement p;
-    
+    public Collider theCatch;  // Reference to this catchable object
+
+    public PlayerMovement p;    // Reference to the player's movement/ability script
+
     void Start()
     {
-        theCatch = this.gameObject;
+        // Cache references for efficiency
+        theCatch = GetComponent<Collider>();
         p = GameObject.Find("Player").GetComponent<PlayerMovement>();
      
     }
@@ -20,14 +23,7 @@ public class CatchBehave : MonoBehaviour
     {
         GameObject.Find("Player");
 
-        if (p.Invisible) // if player uses invisibility ability it can't catch player
-        {
-            theCatch.GetComponent<Collider>().enabled = false;
-          
-        }
-        else if (!p.Invisible)
-        {
-            theCatch.GetComponent<Collider>().enabled = true;
-        }
+        // Disable collider if the player is invisible (so this object can't detect or interact with them)
+        theCatch.enabled = !p.Invisible;
     }
 }
