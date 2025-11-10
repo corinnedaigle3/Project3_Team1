@@ -21,7 +21,7 @@ public class TakeDown : MonoBehaviour
 
     int gemCount = 0;
 
-    // Start is called before the first frame update
+   
     void Start()
     {
         inventory = GameObject.FindWithTag("UI").GetComponent<InventoryManager>();
@@ -33,14 +33,13 @@ public class TakeDown : MonoBehaviour
 
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         Debug.Log("The name of the parent is: " + named);
         switch (named) // depending on the neame 
         {
-            case "FuryE":
-
+            case "FuryE": // Depending on which fury it is, the player will be able to take them down using an unique item
+                // Taking down the furies will only disable them for few seconds 
                 if (dead == true && inventory.takeDownItemCounterE >=1)
                 {
                     inventory.takeDownItemCounterE -= 1;
@@ -82,7 +81,7 @@ public class TakeDown : MonoBehaviour
        // Debug.Log("the tag " + gameObject.tag);
         switch (parent.tag) // deoending on the tag
         {
-            case "EnemyE":
+            case "EnemyE": // taking down the enmey will deactivate it's functionality until level is loaded again 
 
                 if (dead == true && inventory.takeDownItemCounterE >= 1)
                 {
@@ -95,7 +94,7 @@ public class TakeDown : MonoBehaviour
                     Debug.Log("Destroy colliders leave me alone");
                     Destroy(backCollider);
 
-                    //backCollider.SetActive(false);
+                   
                 }
                 break;
 
@@ -137,7 +136,7 @@ public class TakeDown : MonoBehaviour
     {
         eAgent.isStopped = true;
         catchCollider.SetActive(false);
-        //backCollider.SetActive(false);
+       
 
         if (gemCount < 1)
         {

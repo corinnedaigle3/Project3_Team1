@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
-//using UnityEditor.Purchasing;
+
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
@@ -66,6 +66,7 @@ public class EnemyBehavior : MonoBehaviour
         {
             player = GameObject.Find("Player");
         }
+        // updates the bool to see if player is inside the nav mesh to avoid runtime errors 
         playerInNvav = NavMesh.SamplePosition(player.transform.position, out hit, 1f, NavMesh.AllAreas);
 
         Debug.Log("Player in in navMesh" + playerInNvav);
@@ -102,7 +103,7 @@ public class EnemyBehavior : MonoBehaviour
             playerLastPostion = player.transform.position; // save player postion
             // Chase Player
             agent.SetDestination(player.transform.position);
-            //transform.LookAt(player.transform.position);
+            
 
             Debug.Log("this is chased");
 
@@ -127,20 +128,17 @@ public class EnemyBehavior : MonoBehaviour
         {
 
             StartCoroutine(NewDesitnation(1.5f));
-           // waypointIdnex = Random.Range(0, Waypoints.Length);
-
-           // agent.SetDestination(Waypoints[waypointIdnex].position);
+        
         }
     }
 
     IEnumerator NewDesitnation (float waitTime)
     {
-        if (lookingNew)
+        if (lookingNew) // avid running again 
         {
             yield break;
         } else { lookingNew = true; }
-        //agent.isStopped = true;
-       // animator.SetBool("walking", false);// update animator
+       
 
 
         yield return new WaitForSeconds(waitTime);
@@ -151,7 +149,6 @@ public class EnemyBehavior : MonoBehaviour
             isSearching = false;
             agent.SetDestination(Waypoints[waypointIdnex].position);
         }
-        //animator.SetBool("walking", true); // update animator
 
     }
 
@@ -168,7 +165,7 @@ public class EnemyBehavior : MonoBehaviour
             {
 
                 agent.SetDestination(randomSearchPos);
-                //transform.LookAt(randomSearchPos);
+               
 
                 Debug.Log("Searching area attempt: " + i);
             }

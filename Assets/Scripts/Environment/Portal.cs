@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Portal : MonoBehaviour
 {
-    public string writeNameOfScene;
+    public string writeNameOfScene; 
     public GameObject gameManager;
     public Light l;
 

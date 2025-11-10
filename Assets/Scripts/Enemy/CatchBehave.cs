@@ -5,7 +5,7 @@ using UnityEngine;
 public class CatchBehave : MonoBehaviour
 {
     public GameObject theCatch;
-    //public bool playerBehind =false;
+   
     public PlayerMovement p;
     
     void Start()
@@ -15,12 +15,12 @@ public class CatchBehave : MonoBehaviour
      
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         GameObject.Find("Player");
 
-        if (p.Invisible)
+        if (p.Invisible) // if player uses invisibility ability it can't catch player
         {
             theCatch.GetComponent<Collider>().enabled = false;
           
