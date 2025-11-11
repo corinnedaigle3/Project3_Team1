@@ -5,8 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class Portal : MonoBehaviour
 {
-    public string writeNameOfScene; 
-    public GameObject gameManager;
+    public string writeNameOfScene; // user should type the scene to load  
+    public GameObject gameManager; // game manager reference 
     public Light l;
 
 
@@ -19,7 +19,7 @@ public class Portal : MonoBehaviour
     {
         if (l != null && gameManager.GetComponent<GameManger>().win)
         {
-            l.enabled = true;
+            l.enabled = true; 
         }
     }
 

@@ -13,7 +13,6 @@ public class GameManger : MonoBehaviour
     public string currentScene;
     public UI ui;
 
-    public bool portalUsed;
     public GameObject spawnPoint;
 
     [Header("ConsumedG Gems")]

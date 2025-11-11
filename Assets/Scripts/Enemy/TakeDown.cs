@@ -4,9 +4,10 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Rendering;
 
+// Whole objective is to handle the take down behavior when player interacts with them
 public class TakeDown : MonoBehaviour
 {
-    public InventoryManager inventory;
+    public InventoryManager inventory; // Inventry reference
     public GameObject parent;
     public NavMeshAgent eAgent;
     public bool dead = false;
@@ -147,7 +148,7 @@ public class TakeDown : MonoBehaviour
         dead = false;   
         eAgent.isStopped = false;
         catchCollider.SetActive(true);
-        //backCollider.SetActive(true); // can be removed depending if we want it to be able to be taken down again and again
+        
     }
 
   
